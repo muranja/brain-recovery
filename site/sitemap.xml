@@ -81,6 +81,10 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://muranja.github.io/brain-recovery/games/custom/galaxy.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://muranja.github.io/brain-recovery/games/custom/memory-match.html</loc>
     <priority>0.7</priority>
   </url>
@@ -183,6 +187,10 @@
   <url>
     <loc>https://muranja.github.io/brain-recovery/games/sleep.html</loc>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/games/solitaire.html</loc>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://muranja.github.io/brain-recovery/games/trauma.html</loc>
@@ -350,6 +358,10 @@
   </url>
   <url>
     <loc>https://muranja.github.io/brain-recovery/worklist/brain-dump.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/calculator.html</loc>
     <priority>0.7</priority>
   </url>
   <url>

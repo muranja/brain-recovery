@@ -201,4 +201,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+  // GoatCounter analytics — sign up at https://www.goatcounter.com and replace 'neuroreboot' with your code
+  var gc = document.createElement('script');
+  gc.setAttribute('data-goatcounter', 'https://neuroreboot.goatcounter.com/count');
+  gc.setAttribute('async', '');
+  gc.src = '//gc.zgo.at/count.js';
+  document.head.appendChild(gc);
 });

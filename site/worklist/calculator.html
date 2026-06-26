@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator — NeuroReboot Worklist</title>
+<meta name="description" content="Dedicated calculator for supplement math, sleep tracking, and cognitive scoring.">
+<meta property="og:title" content="Calculator — NeuroReboot Worklist">
+<meta property="og:description" content="Dedicated calculator for supplement math, sleep tracking, and cognitive scoring.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculator — NeuroReboot Worklist">
+<meta name="twitter:description" content="Dedicated calculator for supplement math, sleep tracking, and cognitive scoring.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/calculator.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Calculator — NeuroReboot Worklist",
+  "description": "Dedicated calculator for supplement math, sleep tracking, and cognitive scoring.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/calculator.html"
+}
+</script>
+<style>
+*, *::before, *::after { border-radius: 0 !important; }
+
+.calc-mode-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.calc-mode-tab {
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  color: var(--neutral-600);
+}
+
+.calc-mode-tab:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+
+.calc-mode-tab.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.calc-mode {
+  display: none;
+}
+
+.calc-mode.active {
+  display: block;
+}
+
+.calc-display {
+  background: var(--neutral-900);
+  color: white;
+  padding: 1.5rem 1rem;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  min-height: 4rem;
+  word-break: break-all;
+}
+
+.calc-history {
+  font-size: 0.85rem;
+  color: var(--neutral-400);
+  min-height: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.calc-current {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--neutral-200);
+  border: 1px solid var(--neutral-200);
+}
+
+.calc-btn {
+  padding: 1rem;
+  border: none;
+  background: white;
+  font-family: var(--font);
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.1s;
+  color: var(--neutral-900);
+}
+
+.calc-btn:hover {
+  background: var(--neutral-100);
+}
+
+.calc-btn:active {
+  background: var(--neutral-200);
+}
+
+.calc-btn.op {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.calc-btn.op:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.calc-btn.op:active {
+  background: var(--primary-dark);
+}
+
+.calc-btn.equals {
+  background: var(--primary);
+  color: white;
+}
+
+.calc-btn.equals:hover {
+  background: var(--primary-hover);
+}
+
+.calc-btn.equals:active {
+  background: var(--primary-dark);
+}
+
+.calc-btn.clear {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.calc-btn.clear:hover {
+  background: #fee2e2;
+}
+
+.calc-btn.span-2 {
+  grid-column: span 2;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--neutral-700);
+  margin-bottom: 0.25rem;
+}
+
+.input-group input, .input-group select {
+  font-family: var(--font);
+  font-size: 0.9rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+  color: var(--neutral-900);
+  width: 100%;
+  transition: border-color 0.15s;
+}
+
+.input-group input:focus, .input-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 127, 0.15);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.preset-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.preset-btn {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  color: var(--neutral-700);
+}
+
+.preset-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+
+.preset-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.results-box {
+  background: white;
+  padding: 1.5rem;
+  border: 1px solid var(--neutral-200);
+  margin-top: 1.5rem;
+}
+
+.results-box h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 0.75rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--neutral-200);
+  font-size: 0.9rem;
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: var(--neutral-500);
+}
+
+.stat-value {
+  font-weight: 600;
+  color: var(--neutral-900);
+}
+
+.sleep-option {
+  background: white;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--neutral-200);
+  margin-bottom: 0.75rem;
+}
+
+.sleep-option h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.sleep-option p {
+  font-size: 0.85rem;
+  color: var(--neutral-600);
+  margin-top: 0.25rem;
+}
+
+.inline-group {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.mood-summary {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border: 1px solid var(--neutral-200);
+  margin-bottom: 1.5rem;
+}
+
+.mood-percentage {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1;
+}
+
+.mood-label {
+  font-size: 1rem;
+  color: var(--neutral-500);
+  margin-top: 0.5rem;
+}
+
+.mood-canvas-wrap {
+  border: 1px solid var(--neutral-200);
+  background: white;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.mood-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .calc-btn {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <h1>Calculator</h1>
+    <p>Supplement dosage math, sleep cycle timing, and cognitive mood scoring — all in one tool.</p>
+  </div>
+
+  <div class="container">
+    <section aria-labelledby="calculator-heading">
+      <h2 id="calculator-heading" class="section-title">Choose a Calculator</h2>
+      <p class="section-subtitle">Four tools to help with recovery math and tracking.</p>
+
+      <div class="calc-mode-tabs" role="tablist" aria-label="Calculator modes">
+        <button class="calc-mode-tab active" role="tab" aria-selected="true" aria-controls="mode-standard" id="tab-standard" data-mode="standard">Standard</button>
+        <button class="calc-mode-tab" role="tab" aria-selected="false" aria-controls="mode-supplement" id="tab-supplement" data-mode="supplement">Supplement Dosage</button>
+        <button class="calc-mode-tab" role="tab" aria-selected="false" aria-controls="mode-sleep" id="tab-sleep" data-mode="sleep">Sleep Calculator</button>
+        <button class="calc-mode-tab" role="tab" aria-selected="false" aria-controls="mode-mood" id="tab-mood" data-mode="mood">Mood Score</button>
+      </div>
+
+      <!-- Mode 1: Standard Calculator -->
+      <div class="calc-mode active" id="mode-standard" role="tabpanel" aria-labelledby="tab-standard">
+        <div class="calc-display">
+          <div class="calc-history" id="calc-history"></div>
+          <div class="calc-current" id="calc-current">0</div>
+        </div>
+        <div class="calc-grid" id="calc-grid">
+          <button class="calc-btn clear" data-action="ac">AC</button>
+          <button class="calc-btn clear" data-action="c">C</button>
+          <button class="calc-btn op" data-action="percent">%</button>
+          <button class="calc-btn op" data-action="divide">÷</button>
+          <button class="calc-btn" data-action="7">7</button>
+          <button class="calc-btn" data-action="8">8</button>
+          <button class="calc-btn" data-action="9">9</button>
+          <button class="calc-btn op" data-action="multiply">×</button>
+          <button class="calc-btn" data-action="4">4</button>
+          <button class="calc-btn" data-action="5">5</button>
+          <button class="calc-btn" data-action="6">6</button>
+          <button class="calc-btn op" data-action="subtract">−</button>
+          <button class="calc-btn" data-action="1">1</button>
+          <button class="calc-btn" data-action="2">2</button>
+          <button class="calc-btn" data-action="3">3</button>
+          <button class="calc-btn op" data-action="add">+</button>
+          <button class="calc-btn span-2" data-action="0">0</button>
+          <button class="calc-btn" data-action="decimal">.</button>
+          <button class="calc-btn equals" data-action="equals">=</button>
+        </div>
+      </div>
+
+      <!-- Mode 2: Supplement Dosage Calculator -->
+      <div class="calc-mode" id="mode-supplement" role="tabpanel" aria-labelledby="tab-supplement">
+        <div class="tracker-form">
+          <h3>Supplement Taper Calculator</h3>
+          <p class="text-sm text-light mb-1">Select a preset or enter custom supplement info.</p>
+          <div class="preset-btns" id="supplement-presets">
+            <button class="preset-btn" data-supplement="BPC-157" data-current="500" data-target="0" data-days="30">BPC-157</button>
+            <button class="preset-btn" data-supplement="TB-500" data-current="1000" data-target="0" data-days="28">TB-500</button>
+            <button class="preset-btn" data-supplement="Cerebrolysin" data-current="5000" data-target="0" data-days="21">Cerebrolysin</button>
+            <button class="preset-btn" data-supplement="Semax" data-current="600" data-target="0" data-days="21">Semax</button>
+            <button class="preset-btn" data-supplement="Selank" data-current="800" data-target="0" data-days="21">Selank</button>
+            <button class="preset-btn" data-supplement="Piracetam" data-current="4800" data-target="0" data-days="28">Piracetam</button>
+            <button class="preset-btn" data-supplement="Noopept" data-current="30" data-target="0" data-days="21">Noopept</button>
+          </div>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="supplement-name">Supplement Name</label>
+              <input type="text" id="supplement-name" placeholder="e.g. BPC-157">
+            </div>
+            <div class="input-group">
+              <label for="supplement-current">Current Dose (mg)</label>
+              <input type="number" id="supplement-current" min="0" step="0.1" placeholder="500">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="supplement-target">Target Dose (mg)</label>
+              <input type="number" id="supplement-target" min="0" step="0.1" placeholder="0">
+            </div>
+            <div class="input-group">
+              <label for="supplement-days">Taper Period (days)</label>
+              <input type="number" id="supplement-days" min="1" step="1" placeholder="30">
+            </div>
+          </div>
+          <button class="btn btn-primary" id="supplement-calc-btn">Calculate Taper</button>
+          <div id="supplement-results" class="results-box" style="display:none;">
+            <h3>Taper Schedule</h3>
+            <div id="supplement-stats"></div>
+            <div class="table-wrap mt-1">
+              <table id="supplement-table">
+                <thead>
+                  <tr>
+                    <th>Day</th>
+                    <th>Dose (mg)</th>
+                    <th>Reduction (mg)</th>
+                  </tr>
+                </thead>
+                <tbody id="supplement-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode 3: Sleep Calculator -->
+      <div class="calc-mode" id="mode-sleep" role="tabpanel" aria-labelledby="tab-sleep">
+        <div class="tracker-form">
+          <h3>Sleep Cycle Calculator</h3>
+          <p class="text-sm text-light mb-1">Based on ~90-minute sleep cycles. Enter a wake time or bed time.</p>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="sleep-wake">Wake Time (e.g. 7:00)</label>
+              <input type="time" id="sleep-wake">
+            </div>
+            <div class="input-group">
+              <label for="sleep-bed">Bed Time (e.g. 23:00)</label>
+              <input type="time" id="sleep-bed">
+            </div>
+          </div>
+          <div class="inline-group">
+            <button class="btn btn-primary" id="sleep-calc-btn">Calculate</button>
+            <button class="btn btn-ghost" id="sleep-now-btn">Sleep Now</button>
+          </div>
+          <div id="sleep-results" class="results-box" style="display:none;">
+            <h3>Sleep Schedule Options</h3>
+            <div id="sleep-options"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode 4: Mood Score Calculator -->
+      <div class="calc-mode" id="mode-mood" role="tabpanel" aria-labelledby="tab-mood">
+        <div class="tracker-form">
+          <h3>Daily Mood Score</h3>
+          <p class="text-sm text-light mb-1">Rate each factor to calculate your overall cognitive well-being score.</p>
+          <div class="mood-row">
+            <label for="mood-energy">Energy</label>
+            <input type="range" id="mood-energy" min="1" max="10" value="5">
+            <span class="slider-value" id="mood-energy-val">5</span>
+          </div>
+          <div class="mood-row">
+            <label for="mood-focus">Focus</label>
+            <input type="range" id="mood-focus" min="1" max="10" value="5">
+            <span class="slider-value" id="mood-focus-val">5</span>
+          </div>
+          <div class="mood-row">
+            <label for="mood-anxiety">Anxiety (inverted)</label>
+            <input type="range" id="mood-anxiety" min="1" max="10" value="5">
+            <span class="slider-value" id="mood-anxiety-val">5</span>
+          </div>
+          <div class="mood-row">
+            <label for="mood-sleep">Sleep Quality</label>
+            <input type="range" id="mood-sleep" min="1" max="10" value="5">
+            <span class="slider-value" id="mood-sleep-val">5</span>
+          </div>
+          <div class="mood-row">
+            <label for="mood-pain">Pain / Discomfort (inverted)</label>
+            <input type="range" id="mood-pain" min="1" max="10" value="5">
+            <span class="slider-value" id="mood-pain-val">5</span>
+          </div>
+          <div class="mood-summary">
+            <div class="mood-percentage" id="mood-percentage">0%</div>
+            <div class="mood-label">Overall Mood Score</div>
+          </div>
+          <button class="btn btn-primary" id="mood-save-btn">Save Today's Score</button>
+          <div class="mood-canvas-wrap" id="mood-chart-wrap" style="display:none;">
+            <h3 style="margin-bottom:0.5rem;font-size:0.95rem;color:var(--primary-dark);">Trend</h3>
+            <canvas id="mood-chart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script>
+(function(){
+  /*** Nav Toggle ***/
+  const toggle = document.querySelector('.nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  if (toggle && navLinks) {
+    toggle.addEventListener('click', function() {
+      const expanded = this.getAttribute('aria-expanded') === 'true' ? false : true;
+      this.setAttribute('aria-expanded', expanded);
+      navLinks.setAttribute('aria-hidden', !expanded);
+    });
+  }
+
+  /*** Tab Switching ***/
+  const tabs = document.querySelectorAll('.calc-mode-tab');
+  const modes = {
+    standard: document.getElementById('mode-standard'),
+    supplement: document.getElementById('mode-supplement'),
+    sleep: document.getElementById('mode-sleep'),
+    mood: document.getElementById('mode-mood')
+  };
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      Object.keys(modes).forEach(function(key) {
+        modes[key].classList.remove('active');
+      });
+      var mode = this.getAttribute('data-mode');
+      if (modes[mode]) modes[mode].classList.add('active');
+      if (mode === 'mood') drawMoodChart();
+    });
+  });
+
+  /*** ========== MODE 1: STANDARD CALCULATOR ========== ***/
+  (function(){
+    var history = '';
+    var current = '0';
+    var operator = null;
+    var previous = null;
+    var resetNext = false;
+
+    var historyEl = document.getElementById('calc-history');
+    var currentEl = document.getElementById('calc-current');
+
+    function updateDisplay() {
+      currentEl.textContent = current;
+      historyEl.textContent = history;
+    }
+
+    function inputDigit(digit) {
+      if (resetNext) {
+        current = digit;
+        resetNext = false;
+      } else {
+        if (current === '0' && digit !== '.') {
+          current = digit;
+        } else {
+          if (current.length < 15) current += digit;
+        }
+      }
+      updateDisplay();
+    }
+
+    function inputDecimal() {
+      if (resetNext) {
+        current = '0.';
+        resetNext = false;
+        updateDisplay();
+        return;
+      }
+      if (current.indexOf('.') === -1) {
+        current += '.';
+      }
+      updateDisplay();
+    }
+
+    function doClear() {
+      current = '0';
+      history = '';
+      operator = null;
+      previous = null;
+      resetNext = false;
+      updateDisplay();
+    }
+
+    function doBackspace() {
+      if (current.length > 1) {
+        current = current.slice(0, -1);
+      } else {
+        current = '0';
+      }
+      updateDisplay();
+    }
+
+    function doPercent() {
+      var num = parseFloat(current);
+      if (!isNaN(num)) {
+        current = String(num / 100);
+        updateDisplay();
+      }
+    }
+
+    function setOperator(op) {
+      if (operator && !resetNext) {
+        doEquals();
+      }
+      previous = current;
+      operator = op;
+      history = current + ' ' + opSymbol(op) + ' ';
+      resetNext = true;
+      updateDisplay();
+    }
+
+    function opSymbol(op) {
+      switch (op) {
+        case 'add': return '+';
+        case 'subtract': return '−';
+        case 'multiply': return '×';
+        case 'divide': return '÷';
+        default: return op;
+      }
+    }
+
+    function doEquals() {
+      if (operator === null || previous === null) return;
+      var a = parseFloat(previous);
+      var b = parseFloat(current);
+      if (isNaN(a) || isNaN(b)) return;
+      var result;
+      switch (operator) {
+        case 'add': result = a + b; break;
+        case 'subtract': result = a - b; break;
+        case 'multiply': result = a * b; break;
+        case 'divide': result = b !== 0 ? a / b : 'Error'; break;
+        default: return;
+      }
+      history = previous + ' ' + opSymbol(operator) + ' ' + current + ' =';
+      if (result === 'Error') {
+        current = 'Error';
+      } else {
+        current = String(parseFloat(result.toFixed(10)));
+      }
+      operator = null;
+      previous = null;
+      resetNext = true;
+      updateDisplay();
+    }
+
+    var grid = document.getElementById('calc-grid');
+    if (grid) {
+      grid.addEventListener('click', function(e) {
+        var btn = e.target.closest('.calc-btn');
+        if (!btn) return;
+        var action = btn.getAttribute('data-action');
+        switch (action) {
+          case 'ac': doClear(); break;
+          case 'c': doBackspace(); break;
+          case 'percent': doPercent(); break;
+          case 'add': case 'subtract': case 'multiply': case 'divide':
+            setOperator(action); break;
+          case 'equals': doEquals(); break;
+          case 'decimal': inputDecimal(); break;
+          default:
+            if (/^\d$/.test(action)) inputDigit(action);
+        }
+      });
+    }
+
+    document.addEventListener('keydown', function(e) {
+      var activeMode = document.getElementById('mode-standard');
+      if (!activeMode || !activeMode.classList.contains('active')) return;
+      var key = e.key;
+      if (/^\d$/.test(key)) { inputDigit(key); e.preventDefault(); }
+      else if (key === '.') { inputDecimal(); e.preventDefault(); }
+      else if (key === 'Backspace') { doBackspace(); e.preventDefault(); }
+      else if (key === 'Escape') { doClear(); e.preventDefault(); }
+      else if (key === 'Enter' || key === '=') { doEquals(); e.preventDefault(); }
+      else if (key === '+') { setOperator('add'); e.preventDefault(); }
+      else if (key === '-') { setOperator('subtract'); e.preventDefault(); }
+      else if (key === '*') { setOperator('multiply'); e.preventDefault(); }
+      else if (key === '/') { setOperator('divide'); e.preventDefault(); }
+      else if (key === '%') { doPercent(); e.preventDefault(); }
+    });
+  })();
+
+  /*** ========== MODE 2: SUPPLEMENT DOSAGE ========== ***/
+  (function(){
+    var presetBtns = document.querySelectorAll('#supplement-presets .preset-btn');
+    var nameInput = document.getElementById('supplement-name');
+    var currentInput = document.getElementById('supplement-current');
+    var targetInput = document.getElementById('supplement-target');
+    var daysInput = document.getElementById('supplement-days');
+    var calcBtn = document.getElementById('supplement-calc-btn');
+    var resultsDiv = document.getElementById('supplement-results');
+    var statsDiv = document.getElementById('supplement-stats');
+    var tbody = document.getElementById('supplement-tbody');
+
+    presetBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        presetBtns.forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        nameInput.value = this.getAttribute('data-supplement');
+        currentInput.value = this.getAttribute('data-current');
+        targetInput.value = this.getAttribute('data-target');
+        daysInput.value = this.getAttribute('data-days');
+      });
+    });
+
+    calcBtn.addEventListener('click', function() {
+      var name = nameInput.value.trim();
+      var currentDose = parseFloat(currentInput.value);
+      var targetDose = parseFloat(targetInput.value);
+      var days = parseInt(daysInput.value, 10);
+
+      if (!name || isNaN(currentDose) || isNaN(targetDose) || isNaN(days) || days < 1) {
+        alert('Please fill in all fields with valid values.');
+        return;
+      }
+
+      var totalReduction = currentDose - targetDose;
+      if (totalReduction < 0) {
+        alert('Target dose must be less than or equal to current dose.');
+        return;
+      }
+      var dailyReduction = totalReduction / days;
+
+      statsDiv.innerHTML = '';
+      var stats = [
+        { label: 'Supplement', value: name },
+        { label: 'Current Dose', value: currentDose + ' mg' },
+        { label: 'Target Dose', value: targetDose + ' mg' },
+        { label: 'Taper Period', value: days + ' days' },
+        { label: 'Total Reduction', value: totalReduction.toFixed(1) + ' mg' },
+        { label: 'Daily Reduction', value: dailyReduction.toFixed(2) + ' mg' }
+      ];
+      stats.forEach(function(s) {
+        var row = document.createElement('div');
+        row.className = 'stat-row';
+        row.innerHTML = '<span class="stat-label">' + s.label + '</span><span class="stat-value">' + s.value + '</span>';
+        statsDiv.appendChild(row);
+      });
+
+      tbody.innerHTML = '';
+      for (var d = 1; d <= days; d++) {
+        var dose = currentDose - dailyReduction * d;
+        if (dose < 0) dose = 0;
+        if (d === days) dose = targetDose;
+        var reduction = dailyReduction;
+        if (d === 1) reduction = currentDose - (currentDose - dailyReduction);
+        var tr = document.createElement('tr');
+        tr.innerHTML = '<td>Day ' + d + '</td><td>' + dose.toFixed(1) + '</td><td>' + (d === 1 ? '-' : reduction.toFixed(2)) + '</td>';
+        tbody.appendChild(tr);
+      }
+
+      resultsDiv.style.display = 'block';
+    });
+  })();
+
+  /*** ========== MODE 3: SLEEP CALCULATOR ========== ***/
+  (function(){
+    var wakeInput = document.getElementById('sleep-wake');
+    var bedInput = document.getElementById('sleep-bed');
+    var calcBtn = document.getElementById('sleep-calc-btn');
+    var nowBtn = document.getElementById('sleep-now-btn');
+    var resultsDiv = document.getElementById('sleep-results');
+    var optionsDiv = document.getElementById('sleep-options');
+
+    function timeToMinutes(val) {
+      if (!val) return null;
+      var parts = val.split(':');
+      if (parts.length !== 2) return null;
+      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+    }
+
+    function minutesToTime(min) {
+      min = Math.round(min);
+      if (min < 0) min += 1440;
+      if (min >= 1440) min -= 1440;
+      var h = Math.floor(min / 60);
+      var m = min % 60;
+      return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+    }
+
+    function addMinutes(time, mins) {
+      return (time + mins) % 1440;
+    }
+
+    function subtractMinutes(time, mins) {
+      var r = time - mins;
+      while (r < 0) r += 1440;
+      return r;
+    }
+
+    function displayOptions(title, times) {
+      optionsDiv.innerHTML = '';
+      var h = document.createElement('h4');
+      h.textContent = title;
+      h.style.marginBottom = '0.75rem';
+      optionsDiv.appendChild(h);
+      times.forEach(function(t) {
+        var opt = document.createElement('div');
+        opt.className = 'sleep-option';
+        opt.innerHTML = '<h4>' + t.label + '</h4><p>' + t.desc + '</p>';
+        optionsDiv.appendChild(opt);
+      });
+      resultsDiv.style.display = 'block';
+    }
+
+    calcBtn.addEventListener('click', function() {
+      var wake = timeToMinutes(wakeInput.value);
+      var bed = timeToMinutes(bedInput.value);
+
+      if (wake !== null && bed !== null) {
+        // Both entered: show info
+        displayOptions('Both entered — options based on wake time:', []);
+        // calculate based on wake
+        var opts = [];
+        for (var cycles = 4; cycles <= 6; cycles++) {
+          var cycleMins = cycles * 90 + 15; // 15 min to fall asleep
+          var bedTime = subtractMinutes(wake, cycleMins);
+          opts.push({ label: cycles + ' cycles (' + (cycles * 1.5).toFixed(1) + 'h)', desc: 'Go to bed at ' + minutesToTime(bedTime) });
+        }
+        displayOptions('Calculated from wake time ' + wakeInput.value + ':', opts);
+      } else if (wake !== null) {
+        var opts = [];
+        for (var cycles = 4; cycles <= 6; cycles++) {
+          var cycleMins = cycles * 90 + 15;
+          var bedTime = subtractMinutes(wake, cycleMins);
+          opts.push({ label: cycles + ' cycles — ' + (cycles * 1.5).toFixed(1) + ' hours', desc: 'Go to bed at ' + minutesToTime(bedTime) + ' to wake at ' + wakeInput.value });
+        }
+        displayOptions('If waking at ' + wakeInput.value + ':', opts);
+      } else if (bed !== null) {
+        var opts = [];
+        for (var cycles = 4; cycles <= 6; cycles++) {
+          var cycleMins = cycles * 90 + 15;
+          var wakeTime = addMinutes(bed, cycleMins);
+          opts.push({ label: cycles + ' cycles — ' + (cycles * 1.5).toFixed(1) + ' hours', desc: 'Wake at ' + minutesToTime(wakeTime) + ' if sleeping at ' + bedInput.value });
+        }
+        displayOptions('If sleeping at ' + bedInput.value + ':', opts);
+      } else {
+        alert('Please enter a wake time or a bed time.');
+      }
+    });
+
+    nowBtn.addEventListener('click', function() {
+      var now = new Date();
+      var nowMin = now.getHours() * 60 + now.getMinutes();
+      bedInput.value = minutesToTime(nowMin);
+      wakeInput.value = '';
+      var opts = [];
+      for (var cycles = 4; cycles <= 6; cycles++) {
+        var cycleMins = cycles * 90 + 15;
+        var wakeTime = addMinutes(nowMin, cycleMins);
+        opts.push({ label: cycles + ' cycles — ' + (cycles * 1.5).toFixed(1) + ' hours', desc: 'Wake at ' + minutesToTime(wakeTime) });
+      }
+      displayOptions('If you sleep now (' + minutesToTime(nowMin) + '):', opts);
+    });
+  })();
+
+  /*** ========== MODE 4: MOOD SCORE CALCULATOR ========== ***/
+  (function(){
+    var sliders = {
+      energy: document.getElementById('mood-energy'),
+      focus: document.getElementById('mood-focus'),
+      anxiety: document.getElementById('mood-anxiety'),
+      sleep: document.getElementById('mood-sleep'),
+      pain: document.getElementById('mood-pain')
+    };
+    var vals = {
+      energy: document.getElementById('mood-energy-val'),
+      focus: document.getElementById('mood-focus-val'),
+      anxiety: document.getElementById('mood-anxiety-val'),
+      sleep: document.getElementById('mood-sleep-val'),
+      pain: document.getElementById('mood-pain-val')
+    };
+    var percentageEl = document.getElementById('mood-percentage');
+    var saveBtn = document.getElementById('mood-save-btn');
+    var chartWrap = document.getElementById('mood-chart-wrap');
+    var canvas = document.getElementById('mood-chart');
+    var ctx = canvas.getContext('2d');
+    var STORAGE_KEY = 'neuroreboot_mood_scores';
+
+    function updateScore() {
+      var energy = parseInt(sliders.energy.value, 10);
+      var focus = parseInt(sliders.focus.value, 10);
+      var anxiety = parseInt(sliders.anxiety.value, 10);
+      var sleep = parseInt(sliders.sleep.value, 10);
+      var pain = parseInt(sliders.pain.value, 10);
+
+      var anxietyInv = 11 - anxiety;
+      var painInv = 11 - pain;
+
+      var total = energy + focus + anxietyInv + sleep + painInv;
+      var max = 50;
+      var pct = Math.round((total / max) * 100);
+      percentageEl.textContent = pct + '%';
+      return pct;
+    }
+
+    Object.keys(sliders).forEach(function(key) {
+      sliders[key].addEventListener('input', function() {
+        vals[key].textContent = this.value;
+        updateScore();
+      });
+    });
+
+    function getScores() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch(e) { return []; }
+    }
+
+    function drawMoodChart() {
+      var scores = getScores();
+      if (scores.length < 1) {
+        chartWrap.style.display = 'none';
+        return;
+      }
+      chartWrap.style.display = 'block';
+
+      var w = canvas.parentElement.clientWidth - 2;
+      var h = 200;
+      canvas.width = w * 2;
+      canvas.height = h * 2;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.scale(2, 2);
+      ctx.clearRect(0, 0, w, h);
+
+      var pad = { top: 20, bottom: 30, left: 40, right: 20 };
+      var chartW = w - pad.left - pad.right;
+      var chartH = h - pad.top - pad.bottom;
+
+      var minScore = 0, maxScore = 100;
+      var latest = scores.slice(-14);
+      var n = latest.length;
+
+      // grid lines
+      ctx.strokeStyle = '#e7e5e4';
+      ctx.lineWidth = 1;
+      for (var i = 0; i <= 4; i++) {
+        var y = pad.top + (chartH / 4) * i;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, y);
+        ctx.lineTo(w - pad.right, y);
+        ctx.stroke();
+        ctx.fillStyle = '#a8a29e';
+        ctx.font = '11px Space Grotesk, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(Math.round(maxScore - (maxScore / 4) * i) + '%', pad.left - 6, y + 4);
+      }
+
+      if (n < 2) {
+        // single point
+        var x = pad.left + chartW / 2;
+        var y = pad.top + chartH - (latest[0].score / maxScore) * chartH;
+        ctx.fillStyle = '#4a7c7f';
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fill();
+        return;
+      }
+
+      // line
+      ctx.beginPath();
+      ctx.strokeStyle = '#4a7c7f';
+      ctx.lineWidth = 2;
+      ctx.lineJoin = 'round';
+
+      for (var i = 0; i < n; i++) {
+        var x = pad.left + (i / (n - 1)) * chartW;
+        var y = pad.top + chartH - (latest[i].score / maxScore) * chartH;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // dots
+      ctx.fillStyle = '#4a7c7f';
+      for (var i = 0; i < n; i++) {
+        var x = pad.left + (i / (n - 1)) * chartW;
+        var y = pad.top + chartH - (latest[i].score / maxScore) * chartH;
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    saveBtn.addEventListener('click', function() {
+      var pct = updateScore();
+      var scores = getScores();
+      var today = new Date().toISOString().split('T')[0];
+
+      // check if today already saved
+      var found = false;
+      scores.forEach(function(s) {
+        if (s.date === today) { s.score = pct; found = true; }
+      });
+      if (!found) {
+        scores.push({ date: today, score: pct });
+      }
+      scores.sort(function(a, b) { return a.date.localeCompare(b.date); });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+      drawMoodChart();
+      saveBtn.textContent = 'Saved!';
+      setTimeout(function() { saveBtn.textContent = 'Save Today\'s Score'; }, 2000);
+    });
+
+    // initial score
+    updateScore();
+
+    // expose for tab switch
+    window.drawMoodChart = drawMoodChart;
+  })();
+})();
+</script>
+<script src="../js/main.js"></script>
+</body>
+</html>
