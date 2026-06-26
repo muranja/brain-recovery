@@ -249,7 +249,7 @@
     <h1>Cognitive Load Reducer</h1>
     <p>Reduce overwhelm by removing the clutter.</p>
   </div>
-
+  <p id="cog-status" style="font-size:0.85rem;color:var(--neutral-500);text-align:center;margin:-1.5rem 0 1rem;"></p>
   <div class="container">
     <p class="cl-tagline">Reduce overwhelm by removing the clutter.</p>
 
@@ -322,6 +322,9 @@
 
 <script src="../js/main.js"></script>
 <script>
+(function(){try{var m=localStorage.getItem("cog-mode");if(m==="points"){document.getElementById("tab-chunk").classList.remove("active");document.getElementById("tab-chunk").setAttribute("aria-selected","false");document.getElementById("tab-points").classList.add("active");document.getElementById("tab-points").setAttribute("aria-selected","true");document.getElementById("cl-mode-chunk").classList.remove("active");document.getElementById("cl-mode-points").classList.add("active")}}catch(e){}})();
+</script>
+<script>
 (function() {
   // Quick read words to strip
   var QUICK_READ_WORDS = [
@@ -383,6 +386,7 @@
       });
       var mode = this.getAttribute('data-mode');
       if (modes[mode]) modes[mode].classList.add('active');
+      try { localStorage.setItem('cog-mode', mode); } catch(e) {}
     });
   });
 
@@ -394,6 +398,7 @@
   document.getElementById('cl-chunk-btn').addEventListener('click', function() {
     var text = document.getElementById('cl-textarea').value.trim();
     if (!text) { alert('Please paste some text first.'); return; }
+    try { var c = parseInt(localStorage.getItem('cog-processed') || '0', 10); localStorage.setItem('cog-processed', String(c + 1)); } catch(e) {}
 
     chunkSentences = splitSentences(text);
     if (isQuickReadEnabled()) {
@@ -465,6 +470,7 @@
   document.getElementById('cl-extract-btn').addEventListener('click', function() {
     var text = document.getElementById('cl-textarea').value.trim();
     if (!text) { alert('Please paste some text first.'); return; }
+    try { var c = parseInt(localStorage.getItem('cog-processed') || '0', 10); localStorage.setItem('cog-processed', String(c + 1)); } catch(e) {}
 
     var sentences = splitSentences(text);
     var applyQuick = isQuickReadEnabled();
@@ -495,6 +501,9 @@
     document.getElementById('cl-points-output').style.display = 'block';
   });
 })();
+</script>
+<script>
+(function(){var e=document.getElementById("cog-status");try{var c=parseInt(localStorage.getItem("cog-processed")||"0",10);var l=localStorage.getItem("cog-last-visit");var p=[];if(c>0)p.push("Processed "+c+" text"+(c!==1?"s":""));if(l)p.push("Last visit: "+l);if(e)e.textContent=p.join(" \u00b7 ");localStorage.setItem("cog-last-visit",new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}))}catch(t){}})();
 </script>
 </body>
 </html>

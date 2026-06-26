@@ -82,6 +82,7 @@ body { font-family: 'Space Grotesk', sans-serif; display: flex; flex-direction: 
 <main id="panic-main" style="padding-top:4rem;">
   <h1 style="font-size:2rem;margin-bottom:0.5rem;">Panic Button</h1>
   <p style="font-size:1.125rem;color:var(--neutral-500);margin-bottom:1rem;">Emergency Grounding Tool</p>
+  <p id="panic-status" style="font-size:0.85rem;color:var(--neutral-500);margin-bottom:1rem;"></p>
   <p style="max-width:500px;margin-bottom:2rem;color:var(--neutral-500);">Click the button below when you need immediate grounding. A guided 4-7-8 breathing exercise will begin automatically, followed by crisis resources.</p>
   <button id="panic-btn">I NEED<br>HELP NOW</button>
   <p style="margin-top:2rem;font-size:0.85rem;color:var(--neutral-400);max-width:400px;">This tool is not a substitute for professional mental health care. If you are in immediate danger, call 911.</p>
@@ -131,6 +132,7 @@ body { font-family: 'Space Grotesk', sans-serif; display: flex; flex-direction: 
     // 3 cycles = 57s
     var cycle = 0;
     var maxCycles = 3;
+    try { var pc = localStorage.getItem('panic-cycles'); if (pc) { var n = parseInt(pc, 10); if (n > 0) if (n < 20) maxCycles = n; } } catch(e) {}
     var phase = 'inhale';
     var phases = ['inhale', 'hold', 'exhale'];
 
@@ -214,5 +216,9 @@ body { font-family: 'Space Grotesk', sans-serif; display: flex; flex-direction: 
 </script>
 
 <script src="../js/main.js"></script>
+<script>
+(function(){var e=document.getElementById("panic-status");try{var u=parseInt(localStorage.getItem("panic-uses")||"0",10);var l=localStorage.getItem("panic-last-visit");var p=[];if(u>0)p.push("Used "+u+" time"+(u!==1?"s":""));if(l)p.push("Last visit: "+l);if(e)e.textContent=p.join(" \u00b7 ");localStorage.setItem("panic-last-visit",new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}))}catch(t){}
+var b=document.getElementById("panic-btn");if(b)b.addEventListener("click",function(){try{var x=parseInt(localStorage.getItem("panic-uses")||"0",10);localStorage.setItem("panic-uses",String(x+1))}catch(e){}})})();
+</script>
 </body>
 </html>

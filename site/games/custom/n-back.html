@@ -97,6 +97,7 @@ footer a{color:#4a7c7f}
     <p>The gold-standard working memory training task. Track spatial positions and sounds simultaneously.</p>
   </div>
   <div class="container">
+    <p id="nback-stats" style="font-size:0.85rem;color:#78716c;margin-bottom:0.5rem;text-align:center;"></p>
     <div class="controls">
       <label for="n-level">N =</label>
       <select id="n-level"><option>1</option><option selected>2</option><option>3</option><option>4</option></select>
@@ -135,6 +136,32 @@ footer a{color:#4a7c7f}
 (function(){
 var grid, nVal, history = [], round = 0, correct = 0, incorrect = 0, streak = 0, active = false, timer = null;
 var letters = ['A','B','C','D','E','F','G','H'];
+
+function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('nback-' + k)); localStorage.setItem('nback-' + k, JSON.stringify(v)); } catch(e) {} }
+
+function saveNbackStats() {
+  var highlevel = parseInt(document.getElementById('n-level').value);
+  var prevHigh = ls('highlevel') || 0;
+  if (highlevel > prevHigh) ls('highlevel', highlevel);
+  var prevScore = ls('highscore') || 0;
+  if (correct > prevScore) ls('highscore', correct);
+  ls('games', (ls('games') || 0) + 1);
+  var total = correct + incorrect;
+  if (total > 0) {
+    var acc = Math.round(correct / total * 100);
+    var prevAcc = ls('accuracy') || 0;
+    ls('accuracy', prevAcc ? Math.round((prevAcc + acc) / 2) : acc);
+  }
+  ls('last-visit', new Date().toISOString());
+  updateNbackStats();
+}
+
+function updateNbackStats() {
+  var el = document.getElementById('nback-stats');
+  if (!el) return;
+  var hl = ls('highlevel') || 0;
+  el.textContent = hl ? 'Best N-back level: N=' + hl : '';
+}
 
 function updateStats() {
   document.getElementById('correct').textContent = correct;
@@ -235,6 +262,7 @@ function stopGame() {
   document.getElementById('pos-btn').disabled = true;
   document.getElementById('sound-btn').disabled = true;
   grid.querySelectorAll('.cell').forEach(function(c) { c.classList.remove('active'); });
+  saveNbackStats();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -243,6 +271,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('stop-btn').addEventListener('click', stopGame);
   document.getElementById('pos-btn').addEventListener('click', function() { handleResponse('pos'); });
   document.getElementById('sound-btn').addEventListener('click', function() { handleResponse('sound'); });
+  updateNbackStats();
+  ls('last-visit', new Date().toISOString());
 });
 })();
 </script>

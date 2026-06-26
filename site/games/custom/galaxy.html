@@ -360,7 +360,8 @@ main {
 <div class="overlay-info" id="infoOverlay" aria-live="polite">
 Stars: <span id="starCount">0</span><br>
 Zoom: <span id="zoomLevel">100</span>%<br>
-Rotation: <span id="rotationSpeed">0</span>&deg;/s
+Rotation: <span id="rotationSpeed">0</span>&deg;/s<br>
+<span id="visit-message" style="font-size:10px;color:#4a5a5a;"></span>
 </div>
 
 <div class="fps-counter" id="fpsCounter">0 FPS</div>
@@ -452,6 +453,28 @@ var config = {
   rotationSpeed: 0.0004,
   showFps: false,
 };
+
+function gs(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('galaxy-' + k)); localStorage.setItem('galaxy-' + k, JSON.stringify(v)); } catch(e) {} }
+
+function loadGalaxySettings() {
+  var theme = gs('theme');
+  if (theme) { config.theme = theme; document.getElementById('themeSelect').value = theme; applyTheme(); }
+  var speed = gs('speed');
+  if (speed !== null) { config.rotationSpeed = (speed / 100) * 0.002; document.getElementById('speedSlider').value = speed; document.getElementById('speedValue').textContent = speed + '%'; }
+  var density = gs('density');
+  if (density !== null) { setStarCount(density); document.getElementById('densitySlider').value = density; document.getElementById('densityValue').textContent = density; }
+  var auto = gs('autorotate');
+  if (auto !== null) { config.autoRotate = auto; var btn = document.getElementById('autoRotateToggle'); btn.classList.toggle('active', auto); btn.setAttribute('aria-pressed', auto); btn.textContent = auto ? 'On' : 'Off'; }
+  var visits = gs('visits') || 0;
+  gs('visits', visits + 1);
+  var last = gs('last-visit');
+  gs('last-visit', new Date().toISOString());
+  var msg = document.getElementById('visit-message');
+  if (msg) {
+    if (visits === 0) msg.textContent = 'Welcome!';
+    else msg.textContent = 'Welcome back! Last visit: ' + new Date(last).toLocaleDateString();
+  }
+}
 
 var themes = {
   'milky-way': {
@@ -752,6 +775,7 @@ function init() {
   stars = generateStars(config.starCount);
   nebulaParticles = generateNebula();
   lastTime = 0;
+  loadGalaxySettings();
   loop(0);
 }
 
@@ -862,6 +886,7 @@ var themeSelect = document.getElementById('themeSelect');
 themeSelect.addEventListener('change', function() {
   config.theme = this.value;
   applyTheme();
+  gs('theme', this.value);
 });
 
 var speedSlider = document.getElementById('speedSlider');
@@ -870,6 +895,7 @@ speedSlider.addEventListener('input', function() {
   var val = parseInt(this.value);
   config.rotationSpeed = (val / 100) * 0.002;
   speedValue.textContent = val + '%';
+  gs('speed', val);
 });
 
 var densitySlider = document.getElementById('densitySlider');
@@ -878,6 +904,7 @@ densitySlider.addEventListener('input', function() {
   var val = parseInt(this.value);
   densityValue.textContent = val;
   setStarCount(val);
+  gs('density', val);
 });
 
 var autoRotateBtn = document.getElementById('autoRotateToggle');
@@ -886,6 +913,7 @@ autoRotateBtn.addEventListener('click', function() {
   this.classList.toggle('active', config.autoRotate);
   this.setAttribute('aria-pressed', config.autoRotate);
   this.textContent = config.autoRotate ? 'On' : 'Off';
+  gs('autorotate', config.autoRotate);
 });
 
 function resetView() {

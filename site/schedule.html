@@ -55,6 +55,7 @@
     <section aria-labelledby="schedule-heading">
       <h1 id="schedule-heading" class="section-title">Daily Recovery Schedule</h1>
       <p class="section-subtitle">A rhythm designed to stabilize your nervous system, rebuild neural pathways, and reduce anxiety, brain fog, and energy crashes.</p>
+      <p id="schedule-status" style="font-size:0.85rem;color:var(--neutral-500);margin-top:-0.5rem;"></p>
     </section>
 
     <section aria-labelledby="morning-heading">
@@ -217,5 +218,9 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+(function(){var e=document.getElementById("schedule-status");try{var v=parseInt(localStorage.getItem("schedule-visits")||"0",10);var l=localStorage.getItem("schedule-last-visit");var ls=localStorage.getItem("schedule-last-section");localStorage.setItem("schedule-visits",String(v+1));var p=[];if(ls)p.push("Last: "+ls);if(l)p.push("Last visit: "+l);if(e)e.textContent=p.join(" \u00b7 ");localStorage.setItem("schedule-last-visit",new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}))}catch(t){}
+try{var ss=document.querySelectorAll("section[id]");if(ss.length){window.addEventListener("scroll",function(){var y=window.scrollY;var c="";ss.forEach(function(s){if(s.offsetTop<=y+100){var h=s.querySelector("h2");if(h)c=h.textContent}});if(c)localStorage.setItem("schedule-last-section",c)},{passive:true})}}catch(t){}})();
+</script>
 </body>
 </html>

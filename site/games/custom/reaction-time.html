@@ -91,6 +91,7 @@ footer a{color:#4a7c7f}
     <p>Click when the screen turns green. 10 trials to measure your response speed.</p>
   </div>
   <div class="container">
+    <p id="rt-stats" style="font-size:0.85rem;color:#78716c;margin-bottom:0.5rem;text-align:center;"></p>
     <div style="text-align:center;margin-bottom:1rem">
       <button id="start-btn" class="btn btn-primary">Start Test</button>
     </div>
@@ -123,6 +124,28 @@ footer a{color:#4a7c7f}
 var trials = [], currentTrial = -1, maxTrials = 10;
 var phase = 'idle', timeoutId = null, startTime = 0;
 var active = false;
+
+function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('rt-' + k)); localStorage.setItem('rt-' + k, JSON.stringify(v)); } catch(e) {} }
+
+function saveRtStats() {
+  if (!trials.length) return;
+  var sum = trials.reduce(function(a,b){return a+b;},0);
+  var avg = Math.round(sum / trials.length);
+  var fastest = Math.min.apply(null, trials);
+  var prevBest = ls('best');
+  if (!prevBest || fastest < prevBest) ls('best', fastest);
+  ls('average', avg);
+  ls('tests', (ls('tests') || 0) + 1);
+  ls('last-visit', new Date().toISOString());
+  updateRtStats();
+}
+
+function updateRtStats() {
+  var el = document.getElementById('rt-stats');
+  if (!el) return;
+  var best = ls('best');
+  el.textContent = best ? 'Best time: ' + best + 'ms' : '';
+}
 
 function setPhase(p) {
   phase = p;
@@ -200,11 +223,14 @@ function endTest() {
   document.getElementById('slowest-rt').textContent = slowest + 'ms';
   document.getElementById('std-rt').textContent = std + 'ms';
   document.getElementById('results').style.display = 'block';
+  saveRtStats();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('start-btn').addEventListener('click', startTest);
   document.getElementById('screen').addEventListener('click', handleClick);
+  updateRtStats();
+  ls('last-visit', new Date().toISOString());
 });
 })();
 </script>

@@ -193,6 +193,7 @@ body {
   <div class="timer-container">
     <h1 style="font-size:1.5rem;font-weight:700;color:var(--primary-dark);margin-bottom:0.25rem;">Focus Timer</h1>
     <p style="font-size:0.9rem;color:var(--neutral-500);margin-bottom:0.5rem;">Pomodoro: 25 min focus &middot; 5 min break &middot; 15 min long break</p>
+    <p id="focus-stats" style="font-size:0.85rem;color:var(--neutral-400);margin-bottom:0.5rem;"></p>
 
     <div class="task-input-wrap">
       <label for="task-input">What are you working on?</label>
@@ -261,6 +262,37 @@ body {
   var cycleCount = 0;
   var isPaused = false;
   var isRunning = false;
+
+  function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('focus-' + k)); localStorage.setItem('focus-' + k, JSON.stringify(v)); } catch(e) {} }
+
+  function saveFocusData() {
+    var sessions = (ls('sessions') || 0) + 1;
+    ls('sessions', sessions);
+    ls('minutes', (ls('minutes') || 0) + 25);
+    ls('last-visit', new Date().toISOString());
+    var task = taskInput.value.trim();
+    if (task) {
+      var tasks = ls('tasks') || [];
+      tasks.unshift({ task: task, date: new Date().toISOString() });
+      if (tasks.length > 10) tasks = tasks.slice(0, 10);
+      ls('tasks', tasks);
+    }
+    updateFocusStats();
+  }
+
+  function loadFocusData() {
+    var lastTask = ls('last-task');
+    if (lastTask) taskInput.value = lastTask;
+    updateFocusStats();
+  }
+
+  function updateFocusStats() {
+    var el = document.getElementById('focus-stats');
+    if (!el) return;
+    var s = ls('sessions') || 0;
+    var m = ls('minutes') || 0;
+    el.textContent = s ? 'Completed ' + s + ' focus session' + (s !== 1 ? 's' : '') + ' (' + m + ' total minutes)' : '';
+  }
 
   function formatTime(seconds) {
     var m = Math.floor(seconds / 60);
@@ -336,6 +368,8 @@ body {
     if (phase === 'focus') {
       sessionsCompleted++;
       cycleCount++;
+      ls('last-task', taskInput.value.trim());
+      saveFocusData();
       updateSessionCount();
 
       if (cycleCount >= 4) {
@@ -382,6 +416,7 @@ body {
 
   updateDisplay();
   updateSessionCount();
+  loadFocusData();
 })();
 </script>
 <script src="../../js/main.js"></script>

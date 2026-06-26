@@ -57,6 +57,7 @@
     <section aria-labelledby="crisis-heading">
       <h1 id="crisis-heading" class="section-title">Crisis Resources</h1>
       <p class="section-subtitle">If you are in crisis, you are not alone. Help is available. These resources are here when you need them.</p>
+      <p id="crisis-status" style="font-size:0.85rem;color:var(--neutral-500);margin-top:-0.5rem;"></p>
     </section>
 
     <section aria-labelledby="immediate-danger-heading" style="margin-top:2rem;padding:1.5rem;background:var(--danger-bg, #fef2f2);border:1px solid var(--danger-border, #fecaca);">
@@ -137,5 +138,8 @@
 </footer>
 
 <script src="../js/main.js"></script>
+<script>
+(function(){var e=document.getElementById("crisis-status");try{var v=parseInt(localStorage.getItem("crisis-visits")||"0",10);var l=localStorage.getItem("crisis-last-visit");localStorage.setItem("crisis-visits",String(v+1));var p=[];p.push("You've visited this page "+(v+1)+" time"+(v+1!==1?"s":"")+". We're glad you're here.");if(l)p.push("Last visit: "+l);if(e)e.textContent=p.join(" \u00b7 ");localStorage.setItem("crisis-last-visit",new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}))}catch(t){}})();
+</script>
 </body>
 </html>

@@ -202,6 +202,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Global last-visit tracking — runs on every page
+  try {
+    var now = new Date();
+    var last = localStorage.getItem('neuro-last-visit');
+    if (last) {
+      var lastDate = new Date(parseInt(last, 10));
+      var diff = Math.floor((now - lastDate) / 1000);
+      var msg = '';
+      if (diff < 60) msg = 'just now';
+      else if (diff < 3600) msg = Math.floor(diff / 60) + ' minutes ago';
+      else if (diff < 86400) msg = Math.floor(diff / 3600) + ' hours ago';
+      else msg = 'on ' + lastDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      var el = document.querySelector('.last-visit');
+      if (el) el.textContent = 'Last visit: ' + msg;
+    }
+    localStorage.setItem('neuro-last-visit', String(now.getTime()));
+    var visits = parseInt(localStorage.getItem('neuro-visits') || '0', 10);
+    localStorage.setItem('neuro-visits', String(visits + 1));
+  } catch(e) {}
+
   // GoatCounter analytics — sign up at https://www.goatcounter.com and replace 'neuroreboot' with your code
   var gc = document.createElement('script');
   gc.setAttribute('data-goatcounter', 'https://neuroreboot.goatcounter.com/count');

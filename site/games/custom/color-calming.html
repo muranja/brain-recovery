@@ -94,6 +94,7 @@ footer a{color:rgba(255,255,255,.6)}
   <div class="color-ui">
     <h1>Color Calming</h1>
     <p>Choose a color and let it fill the screen. Gentle pulse for deep relaxation. Great for anxiety and overwhelm.</p>
+    <p id="color-stats" style="font-size:0.85rem;opacity:0.5;margin-bottom:1rem;"></p>
 
     <div class="picker-area" id="preset-colors">
       <div class="color-swatch" style="background:#4a7c7f" data-color="#4a7c7f"></div>
@@ -150,12 +151,15 @@ var active = false, remaining = 0, totalDuration = 0;
 var timerInterval = null, pulseInterval = null;
 var pulseSpeeds = [0, 3000, 1500];
 
+function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('color-' + k)); localStorage.setItem('color-' + k, JSON.stringify(v)); } catch(e) {} }
+
 function setColor(color) {
   currentColor = color;
   overlay.style.background = color;
   document.querySelectorAll('.color-swatch').forEach(function(b) {
     b.classList.toggle('active', b.getAttribute('data-color') === color);
   });
+  ls('last', color);
 }
 
 function startPulse(speed) {
@@ -209,6 +213,11 @@ function endSession() {
   document.getElementById('stop-session').style.display = 'none';
   document.getElementById('status-text').textContent = 'Session complete. Breathe slowly.';
   document.getElementById('timer-display').textContent = '00:00';
+  var mins = ls('minutes') || 0;
+  ls('minutes', mins + Math.floor(totalDuration / 60));
+  ls('last-visit', new Date().toISOString());
+  var el = document.getElementById('color-stats');
+  if (el) el.textContent = 'Total relaxation time: ' + (ls('minutes') || 0) + ' minutes';
 }
 
 function stopSession() {
@@ -229,7 +238,12 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   document.getElementById('start-session').addEventListener('click', startSession);
   document.getElementById('stop-session').addEventListener('click', stopSession);
-  setColor('#4a7c7f');
+  var savedColor = ls('last');
+  if (savedColor) { setColor(savedColor); document.getElementById('custom-color').value = savedColor; }
+  else { setColor('#4a7c7f'); }
+  ls('last-visit', new Date().toISOString());
+  var el = document.getElementById('color-stats');
+  if (el) el.textContent = 'Total relaxation time: ' + (ls('minutes') || 0) + ' minutes';
 });
 })();
 </script>

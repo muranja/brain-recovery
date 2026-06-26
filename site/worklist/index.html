@@ -61,7 +61,7 @@
   <div class="container">
     <section aria-labelledby="tools-heading">
       <h2 id="tools-heading" class="section-title">Choose a Tool</h2>
-      <p class="section-subtitle">All data stays in your browser. No accounts, no servers.</p>
+      <p class="section-subtitle">All data stays in your browser. No accounts, no servers. <span class="last-visit" style="font-size:0.85rem;color:var(--neutral-500);"></span></p>
 
       <h3 class="section-title" style="font-size:1.1rem;margin-top:2rem;">Emergency &amp; Grounding</h3>
       <div class="card-grid">
@@ -168,6 +168,7 @@
       </div>
     </section>
   </div>
+<p id="worklist-status" style="text-align:center;font-size:0.85rem;color:var(--neutral-400);margin-top:2rem;"></p>
 </main>
 
 <footer>
@@ -176,5 +177,8 @@
 </footer>
 
 <script src="../js/main.js"></script>
+<script>
+(function(){var e=document.getElementById("worklist-status");try{var v=parseInt(localStorage.getItem("worklist-visits")||"0",10);var l=localStorage.getItem("worklist-last-visit");localStorage.setItem("worklist-visits",String(v+1));var p=[];p.push("You've visited "+(v+1)+" time"+(v+1!==1?"s":"")+"");if(l)p.push("Last visit: "+l);if(e)e.textContent=p.join(" \u00b7 ");localStorage.setItem("worklist-last-visit",new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}))}catch(t){}})();
+</script>
 </body>
 </html>

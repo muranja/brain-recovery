@@ -91,6 +91,7 @@ footer a{color:#4a7c7f}
     <p>Name the ink color, not the word. Measures cognitive inhibition and executive function.</p>
   </div>
   <div class="container">
+    <p id="stroop-stats" style="font-size:0.85rem;color:#78716c;margin-bottom:0.5rem;text-align:center;"></p>
     <div style="text-align:center;margin-bottom:1rem">
       <button id="start-btn" class="btn btn-primary">Start Game</button>
     </div>
@@ -128,6 +129,31 @@ var COLOR_VALS = {Red:'#dc2626',Blue:'#2563eb',Green:'#16a34a',Yellow:'#ca8a04',
 var colorNames = COLORS;
 var round = 0, totalRounds = 30, correct = 0, responseTimes = [];
 var active = false, startTime = 0, currentTrial = null;
+
+function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('stroop-' + k)); localStorage.setItem('stroop-' + k, JSON.stringify(v)); } catch(e) {} }
+
+function saveStroopStats() {
+  var pct = Math.round((correct / totalRounds) * 100);
+  var avg = responseTimes.length ? Math.round(responseTimes.reduce(function(a,b){return a+b;},0) / responseTimes.length) : 0;
+  var prevAcc = ls('accuracy') || 0;
+  var prevRt = ls('rt') || 0;
+  if (pct > prevAcc) ls('accuracy', pct);
+  if (!prevRt || (avg > 0 && avg < prevRt)) ls('rt', avg);
+  ls('games', (ls('games') || 0) + 1);
+  ls('last-visit', new Date().toISOString());
+  updateStroopStats();
+}
+
+function updateStroopStats() {
+  var el = document.getElementById('stroop-stats');
+  if (!el) return;
+  var acc = ls('accuracy');
+  var rt = ls('rt');
+  var parts = [];
+  if (acc) parts.push('Best accuracy: ' + acc + '%');
+  if (rt) parts.push('Best avg: ' + rt + 'ms');
+  el.textContent = parts.length ? 'Personal best: ' + parts.join(', ') : '';
+}
 
 function shuffle(arr) {
   for (var i = arr.length - 1; i > 0; i--) {
@@ -210,11 +236,14 @@ function endGame() {
   document.getElementById('fastest-rt').textContent = fastest + 'ms';
   document.getElementById('correct-count').textContent = correct + '/30';
   document.getElementById('results').style.display = 'block';
+  saveStroopStats();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   renderColorButtons();
   document.getElementById('start-btn').addEventListener('click', startGame);
+  updateStroopStats();
+  ls('last-visit', new Date().toISOString());
 });
 })();
 </script>

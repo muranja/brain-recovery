@@ -83,7 +83,7 @@
       <h1 id="scan-heading" class="section-title">Body Scan Meditation</h1>
       <p class="section-subtitle">Bring awareness to each part of your body. Notice sensations without judgment.</p>
     </section>
-
+    <p id="body-scan-status" style="font-size:0.85rem;color:var(--neutral-500);margin-bottom:1rem;"></p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
       <div>
         <div id="body-figure" role="img" aria-label="Human body diagram with clickable zones">
@@ -176,6 +176,7 @@
   var isFullScan = false;
   var fullScanIndex = 0;
   var selectedSound = 'bell';
+  try { var ss = localStorage.getItem('bodyscan-sound'); if (ss) { selectedSound = ss; soundOptions.forEach(function(e) { var m = e.dataset.sound === ss; e.classList.toggle('selected', m); var r = e.querySelector('input[type="radio"]'); if (r) r.checked = m; }); } } catch(e) {}
 
   var prompts = {
     head: 'Bring your awareness to your head. Notice any sensations in your scalp, face, jaw, or neck. Soften your forehead. Relax your jaw. No judgment, just noticing.',
@@ -320,6 +321,7 @@
           playSound(selectedSound);
           setDone(part);
           prompt.textContent = part.charAt(0).toUpperCase() + part.slice(1) + ' scan complete.';
+          try { var S = parseInt(localStorage.getItem('bodyscan-sessions') || '0', 10); localStorage.setItem('bodyscan-sessions', String(S + 1)); localStorage.setItem('bodyscan-lastpart', part); } catch(e) {}
           btnStart.disabled = false;
           btnPause.disabled = true;
           btnStop.disabled = true;
@@ -435,8 +437,12 @@
       selectedSound = el.dataset.sound;
       var radio = el.querySelector('input[type="radio"]');
       if (radio) radio.checked = true;
+      try { localStorage.setItem('bodyscan-sound', selectedSound); } catch(e) {}
     });
   });
+
+  try { var st = document.getElementById('body-scan-status'); if (st) { var ts = parseInt(localStorage.getItem('bodyscan-sessions') || '0', 10); var lv = localStorage.getItem('bodyscan-last-visit'); var sp = []; if (ts > 0) sp.push('Completed ' + ts + ' body scan' + (ts !== 1 ? 's' : '')); if (lv) sp.push('Last visit: ' + lv); if (sp.length) st.textContent = sp.join(' \u00b7 '); } } catch(e) {}
+  try { localStorage.setItem('bodyscan-last-visit', new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })); } catch(e) {}
 })();
 </script>
 </body>

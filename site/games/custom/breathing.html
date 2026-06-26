@@ -181,6 +181,7 @@ body {
   <div class="breath-container" id="breath-bg">
     <h1 style="font-size:1.5rem;font-weight:700;color:var(--primary-dark);margin-bottom:0.25rem;">4-7-8 Breathing</h1>
     <p style="font-size:0.9rem;color:var(--neutral-500);margin-bottom:1.5rem;">Inhale 4s &middot; Hold 7s &middot; Exhale 8s</p>
+    <p id="breath-stats" style="font-size:0.85rem;color:var(--neutral-400);margin-bottom:0.5rem;"></p>
 
     <div class="breath-select">
       <label for="cycle-count">Cycles</label>
@@ -246,6 +247,23 @@ body {
   var timer = null;
   var phaseTime = 0;
   var isPaused = false;
+
+  function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('breathing-' + k)); localStorage.setItem('breathing-' + k, JSON.stringify(v)); } catch(e) {} }
+  function saveStats() {
+    var s = (ls('sessions') || 0) + 1;
+    ls('sessions', s);
+    ls('cycles', totalCycles);
+    ls('last', new Date().toISOString());
+    var el = document.getElementById('breath-stats');
+    if (el) el.textContent = 'Breathing sessions: ' + s + (ls('last') ? ' | Last session: ' + new Date(ls('last')).toLocaleDateString() : '');
+  }
+  function loadStats() {
+    var c = ls('cycles');
+    if (c && c >= 3 && c <= 10) cycleSelect.value = c;
+    var s = ls('sessions') || 0;
+    var el = document.getElementById('breath-stats');
+    if (el) el.textContent = s ? 'Breathing sessions: ' + s + (ls('last') ? ' | Last session: ' + new Date(ls('last')).toLocaleDateString() : '') : '';
+  }
 
   function stopTimer() {
     if (timer) {
@@ -362,6 +380,7 @@ body {
     pauseBtn.disabled = true;
     cycleSelect.disabled = false;
     currentPhase = 'idle';
+    saveStats();
   }
 
   function pauseBreathing() {
@@ -394,6 +413,7 @@ body {
   resetBtn.addEventListener('click', resetState);
 
   resetState();
+  loadStats();
 })();
 </script>
 <script src="../../js/main.js"></script>

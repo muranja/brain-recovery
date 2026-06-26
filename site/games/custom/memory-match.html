@@ -100,6 +100,7 @@ footer a{color:#4a7c7f}
     <p>Flip cards and find matching pairs. Classic concentration game for cognitive training.</p>
   </div>
   <div class="container">
+    <p id="memory-stats" style="font-size:0.85rem;color:#78716c;margin-bottom:0.5rem;text-align:center;"></p>
     <div class="theme-selector">
       <button class="theme-btn active" data-theme="animals">Animals</button>
       <button class="theme-btn" data-theme="emojis">Emojis</button>
@@ -141,6 +142,30 @@ var matchCount = 0;
 var timerInterval = null;
 var seconds = 0;
 var gameActive = false;
+
+function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('memory-' + k)); localStorage.setItem('memory-' + k, JSON.stringify(v)); } catch(e) {} }
+
+function saveMemoryStats(moves, seconds) {
+  var highscore = ls('highscore');
+  var besttime = ls('besttime');
+  if (!highscore || moves < highscore) ls('highscore', moves);
+  if (!besttime || seconds < besttime) ls('besttime', seconds);
+  ls('games', (ls('games') || 0) + 1);
+  ls('matches', (ls('matches') || 0) + matchCount);
+  ls('last-visit', new Date().toISOString());
+  updateMemoryStats();
+}
+
+function updateMemoryStats() {
+  var el = document.getElementById('memory-stats');
+  if (!el) return;
+  var parts = [];
+  var hs = ls('highscore');
+  var bt = ls('besttime');
+  if (hs) parts.push('Best: ' + hs + ' moves');
+  if (bt) parts.push('Fastest: ' + bt + 's');
+  el.textContent = parts.length ? parts.join(' | ') : '';
+}
 
 function startGame() {
   var emojis = THEMES[currentTheme];
@@ -210,6 +235,7 @@ function checkMatch() {
       if (timerInterval) clearInterval(timerInterval);
       document.getElementById('victory-screen').style.display = 'block';
       document.getElementById('victory-text').textContent = 'Completed in ' + moveCount + ' moves and ' + seconds + ' seconds.';
+      saveMemoryStats(moveCount, seconds);
     }
   } else {
     setTimeout(function() {
@@ -232,6 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('new-game-btn').addEventListener('click', startGame);
   document.getElementById('play-again-btn').addEventListener('click', startGame);
   startGame();
+  updateMemoryStats();
 })();
 </script>
 <script src="../../js/main.js"></script>

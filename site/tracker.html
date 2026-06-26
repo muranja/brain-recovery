@@ -55,6 +55,7 @@
     <section aria-labelledby="tracker-heading">
       <h1 id="tracker-heading" class="section-title">Daily Tracker</h1>
       <p class="section-subtitle">Log your mood, symptoms, supplements, and notes. Data stays in your browser &mdash; no server, no accounts.</p>
+      <p id="tracker-status" style="font-size:0.85rem;color:var(--neutral-500);margin-top:-0.5rem;"></p>
     </section>
 
     <section aria-label="Daily log form">
@@ -178,5 +179,8 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+(function(){var e=document.getElementById("tracker-status");try{var ld="";for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf("tracker-")===0){var d=k.replace("tracker-","");if(d>ld)ld=d}}if(ld&&e){var dt=new Date(ld+"T00:00:00");e.textContent="Last logged: "+dt.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}}catch(t){}})();
+</script>
 </body>
 </html>
