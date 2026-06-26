@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus Timer (Pomodoro) — NeuroReboot Games</title>
+<meta name="description" content="Interactive Pomodoro focus timer with 25/5/15 min intervals, circular progress ring, and session tracking. Builds concentration endurance for ADHD and brain fog.">
+<meta property="og:title" content="Focus Timer (Pomodoro) — NeuroReboot Games">
+<meta property="og:description" content="Interactive Pomodoro focus timer with 25/5/15 min intervals, circular progress ring, and session tracking. Builds concentration endurance for ADHD and brain fog.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/games/custom/focus-timer.html">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Focus Timer (Pomodoro) — NeuroReboot Games">
+<meta name="twitter:description" content="Interactive Pomodoro focus timer with 25/5/15 min intervals, circular progress ring, and session tracking. Builds concentration endurance for ADHD and brain fog.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/games/custom/focus-timer.html">
+<link rel="stylesheet" href="../../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Focus Timer (Pomodoro) — NeuroReboot Games",
+  "description": "Interactive Pomodoro focus timer with 25/5/15 min intervals, circular progress ring, and session tracking.",
+  "url": "https://muranja.github.io/brain-recovery/games/custom/focus-timer.html"
+}
+</script>
+<style>
+:root {
+  --primary: #4a7c7f;
+  --primary-dark: #2d5557;
+  --primary-hover: #3d6b6e;
+  --neutral-50: #fafaf9;
+  --neutral-100: #f5f5f4;
+  --neutral-200: #e7e5e4;
+  --neutral-300: #d6d3d1;
+  --neutral-400: #a8a29e;
+  --neutral-500: #78716c;
+  --neutral-600: #57534e;
+  --neutral-700: #44403c;
+  --neutral-800: #292524;
+  --neutral-900: #1c1917;
+  --success: #7fb685;
+  --font: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+body {
+  font-family: var(--font);
+  margin: 0;
+  background: var(--neutral-50);
+  color: var(--neutral-900);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 450;
+}
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.timer-ring-wrapper {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 1rem auto;
+}
+.timer-ring-bg {
+  fill: none;
+  stroke: var(--neutral-200);
+  stroke-width: 6;
+}
+.timer-ring-progress {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.3s ease;
+}
+.timer-display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.timer-time {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.timer-phase {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neutral-500);
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.timer-controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.session-count {
+  font-size: 0.9rem;
+  color: var(--neutral-500);
+  margin-top: 0.75rem;
+}
+.task-input-wrap {
+  max-width: 400px;
+  margin: 1rem auto;
+}
+.task-input-wrap label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neutral-700);
+  margin-bottom: 0.25rem;
+}
+.task-input-wrap input {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+  color: var(--neutral-900);
+}
+.task-input-wrap input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 127, 0.15);
+}
+.science-section {
+  max-width: 680px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+.science-section h2 {
+  color: var(--primary-dark);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.science-section p {
+  color: var(--neutral-600);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../../index.html">Home</a>
+      <a href="../../blog/index.html">Blog</a>
+      <a href="../../schedule.html">Schedule</a>
+      <a href="../../nutrients.html">Nutrients</a>
+      <a href="../../exercises.html">Exercises</a>
+      <a href="../../phases.html">Phases</a>
+      <a href="../../tracker.html">Tracker</a>
+      <a href="../index.html">Games</a>
+      <a href="../../worklist/index.html">Worklist</a>
+      <a href="../../remember/index.html">Remember</a>
+      <a href="../../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+
+  <div class="timer-container">
+    <h1 style="font-size:1.5rem;font-weight:700;color:var(--primary-dark);margin-bottom:0.25rem;">Focus Timer</h1>
+    <p style="font-size:0.9rem;color:var(--neutral-500);margin-bottom:0.5rem;">Pomodoro: 25 min focus &middot; 5 min break &middot; 15 min long break</p>
+
+    <div class="task-input-wrap">
+      <label for="task-input">What are you working on?</label>
+      <input type="text" id="task-input" placeholder="e.g. Writing, coding, reading..." aria-describedby="task-hint">
+      <p id="task-hint" style="font-size:0.75rem;color:var(--neutral-400);margin-top:0.15rem;">Optional: name your current focus session</p>
+    </div>
+
+    <div class="timer-ring-wrapper">
+      <svg width="240" height="240" viewBox="0 0 240 240">
+        <circle class="timer-ring-bg" cx="120" cy="120" r="110"/>
+        <circle class="timer-ring-progress" id="timer-ring" cx="120" cy="120" r="110"
+          stroke-dasharray="691.15" stroke-dashoffset="0"/>
+      </svg>
+      <div class="timer-display">
+        <div class="timer-time" id="timer-time">25:00</div>
+        <div class="timer-phase" id="timer-phase">Focus</div>
+      </div>
+    </div>
+
+    <div class="timer-controls">
+      <button class="btn btn-primary" id="btn-start" aria-label="Start timer">Start</button>
+      <button class="btn btn-ghost" id="btn-pause" aria-label="Pause timer" disabled>Pause</button>
+      <button class="btn btn-ghost" id="btn-reset" aria-label="Reset timer">Reset</button>
+    </div>
+
+    <div class="session-count" id="session-count">Focus sessions completed: 0</div>
+  </div>
+
+  <div class="science-section">
+    <h2>Why Structured Focus Intervals Help ADHD</h2>
+    <p>The Pomodoro Technique, developed by Francesco Cirillo in the late 1980s, is one of the most effective productivity methods for ADHD brains. The technique works by breaking work into short, manageable intervals with enforced breaks, which solves two core ADHD challenges: task initiation (getting started) and sustained attention (staying on task).</p>
+    <p>For individuals with ADHD, the 25-minute focus window aligns with the brain's natural attention span limitations. The countdown timer creates external accountability and urgency, while the promise of a break provides immediate reward motivation. Over time, regular use of structured intervals can improve attention endurance, reduce procrastination, and build executive function capacity.</p>
+    <p>The 15-minute long break after 4 sessions allows for mental recovery and prevents burnout, making it sustainable for daily use.</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../index.html">Games</a></p>
+</footer>
+
+<script src="../../js/main.js"></script>
+<script>
+(function() {
+  var FOCUS = 25 * 60;
+  var BREAK = 5 * 60;
+  var LONG_BREAK = 15 * 60;
+
+  var timerTime = document.getElementById('timer-time');
+  var timerPhase = document.getElementById('timer-phase');
+  var timerRing = document.getElementById('timer-ring');
+  var sessionCountEl = document.getElementById('session-count');
+  var taskInput = document.getElementById('task-input');
+  var startBtn = document.getElementById('btn-start');
+  var pauseBtn = document.getElementById('btn-pause');
+  var resetBtn = document.getElementById('btn-reset');
+
+  var CIRCUMFERENCE = 691.15;
+
+  var timer = null;
+  var remaining = FOCUS;
+  var totalDuration = FOCUS;
+  var phase = 'focus';
+  var sessionsCompleted = 0;
+  var cycleCount = 0;
+  var isPaused = false;
+  var isRunning = false;
+
+  function formatTime(seconds) {
+    var m = Math.floor(seconds / 60);
+    var s = seconds % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function updateDisplay() {
+    timerTime.textContent = formatTime(remaining);
+    var phaseName = phase === 'focus' ? 'Focus' : (phase === 'break' ? 'Break' : 'Long Break');
+    timerPhase.textContent = phaseName;
+
+    var progress = totalDuration > 0 ? (remaining / totalDuration) : 0;
+    var offset = CIRCUMFERENCE * (1 - progress);
+    timerRing.style.strokeDashoffset = offset;
+  }
+
+  function updateSessionCount() {
+    sessionCountEl.textContent = 'Focus sessions completed: ' + sessionsCompleted;
+  }
+
+  function stopTimer() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  function resetTimer() {
+    stopTimer();
+    isRunning = false;
+    isPaused = false;
+    phase = 'focus';
+    totalDuration = FOCUS;
+    remaining = FOCUS;
+    cycleCount = 0;
+    updateDisplay();
+    startBtn.disabled = false;
+    pauseBtn.disabled = true;
+    pauseBtn.textContent = 'Pause';
+  }
+
+  function startTimer() {
+    if (isRunning && !isPaused) return;
+    if (isPaused) {
+      isPaused = false;
+      pauseBtn.textContent = 'Pause';
+      runTimer();
+      return;
+    }
+    if (remaining <= 0) return;
+    isRunning = true;
+    isPaused = false;
+    startBtn.disabled = true;
+    pauseBtn.disabled = false;
+    runTimer();
+  }
+
+  function runTimer() {
+    stopTimer();
+    timer = setInterval(function() {
+      remaining--;
+      updateDisplay();
+
+      if (remaining <= 0) {
+        stopTimer();
+        handlePhaseComplete();
+      }
+    }, 1000);
+  }
+
+  function handlePhaseComplete() {
+    if (phase === 'focus') {
+      sessionsCompleted++;
+      cycleCount++;
+      updateSessionCount();
+
+      if (cycleCount >= 4) {
+        phase = 'longbreak';
+        totalDuration = LONG_BREAK;
+        remaining = LONG_BREAK;
+        cycleCount = 0;
+      } else {
+        phase = 'break';
+        totalDuration = BREAK;
+        remaining = BREAK;
+      }
+    } else {
+      phase = 'focus';
+      totalDuration = FOCUS;
+      remaining = FOCUS;
+    }
+
+    updateDisplay();
+    isRunning = false;
+    startBtn.disabled = false;
+    pauseBtn.disabled = true;
+    pauseBtn.textContent = 'Pause';
+  }
+
+  function pauseTimer() {
+    if (!isRunning) return;
+    if (isPaused) {
+      isPaused = false;
+      pauseBtn.textContent = 'Pause';
+      runTimer();
+    } else {
+      isPaused = true;
+      pauseBtn.textContent = 'Resume';
+      stopTimer();
+    }
+  }
+
+  startBtn.addEventListener('click', startTimer);
+
+  pauseBtn.addEventListener('click', pauseTimer);
+
+  resetBtn.addEventListener('click', resetTimer);
+
+  updateDisplay();
+  updateSessionCount();
+})();
+</script>
+</body>
+</html>

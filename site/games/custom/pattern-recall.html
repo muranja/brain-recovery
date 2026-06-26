@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pattern Recall &mdash; Brain Games &mdash; NeuroReboot</title>
+<meta name="description" content="Simon-says style pattern recall game. Watch the sequence, repeat it back. Gets harder each round.">
+<meta property="og:title" content="Pattern Recall &mdash; Brain Games &mdash; NeuroReboot">
+<meta property="og:description" content="Simon-says style pattern recall game. Watch the sequence, repeat it back.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/games/custom/pattern-recall.html">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Pattern Recall &mdash; Brain Games",
+  "description": "Simon-says style pattern recall game.",
+  "url": "https://muranja.github.io/brain-recovery/games/custom/pattern-recall.html"
+}
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Space Grotesk',sans-serif;background:#fafaf9;color:#1c1917;line-height:1.7}
+nav{background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:0 1.5rem;position:sticky;top:0;z-index:50}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{font-weight:700;font-size:1.125rem;color:#2d5557;text-decoration:none}
+.nav-links{display:flex;gap:.25rem}
+.nav-links a{color:#57534e;text-decoration:none;font-size:.875rem;padding:.5rem .75rem;transition:background .15s,color .15s;font-weight:500}
+.nav-links a:hover{background:#e8f0f0;color:#2d5557}
+.nav-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#1c1917;padding:.25rem}
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);z-index:20}
+.nav-links[aria-hidden="false"]{display:flex}
+.nav-toggle{display:block}
+}
+.hero{text-align:center;padding:3rem 1.5rem 2rem;background:#2d5557;color:white;margin-bottom:2rem}
+.hero h1{font-size:2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem}
+.hero p{font-size:1rem;opacity:.9;max-width:500px;margin:0 auto}
+.container{max-width:500px;margin:0 auto;padding:0 1.5rem 2rem}
+.status-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.status-item{text-align:center}
+.status-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#78716c;font-weight:600}
+.status-value{font-size:1.3rem;font-weight:700;color:#2d5557}
+.pad-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;max-width:320px;margin:1.5rem auto}
+.pad{aspect-ratio:1;border:4px solid #d6d3d1;cursor:pointer;transition:opacity .1s,transform .1s;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.8)}
+.pad:active{transform:scale(.95)}
+.pad.lit{opacity:1 !important;border-color:white !important;transform:scale(1.05)}
+.pad:disabled{cursor:default}
+#sequence-info{text-align:center;font-size:.9rem;color:#78716c;margin-bottom:.5rem;min-height:1.5rem}
+.btn{padding:.6rem 1.5rem;border:none;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.4}
+.btn-primary{background:#4a7c7f;color:white;transition:background .15s}
+.btn-primary:hover{background:#3d6b6e}
+footer{text-align:center;padding:2rem 1.5rem;color:#78716c;font-size:.85rem;border-top:1px solid #e7e5e4;margin-top:3rem}
+footer a{color:#4a7c7f}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:#2d5557;color:white;padding:.5rem 1rem;z-index:100;font-size:.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../../index.html">Home</a>
+      <a href="../../blog/index.html">Blog</a>
+      <a href="../../schedule.html">Schedule</a>
+      <a href="../../nutrients.html">Nutrients</a>
+      <a href="../../exercises.html">Exercises</a>
+      <a href="../../phases.html">Phases</a>
+      <a href="../../tracker.html">Tracker</a>
+      <a href="../index.html">Games</a>
+      <a href="../../worklist/index.html">Worklist</a>
+      <a href="../../remember/index.html">Remember</a>
+      <a href="../../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <h1>Pattern Recall</h1>
+    <p>Watch the sequence, repeat it back. Each round adds one more step.</p>
+  </div>
+  <div class="container">
+    <div class="status-bar">
+      <div class="status-item"><div class="status-label">Level</div><div class="status-value" id="level">0</div></div>
+      <div class="status-item"><div class="status-label">Longest</div><div class="status-value" id="longest">0</div></div>
+      <div class="status-item"><div class="status-label">High Score</div><div class="status-value" id="high-score">0</div></div>
+    </div>
+    <div style="text-align:center;margin-bottom:.5rem">
+      <button id="start-btn" class="btn btn-primary">Start Game</button>
+    </div>
+    <div id="sequence-info">Press Start to begin</div>
+    <div class="pad-grid" id="pad-grid">
+      <div class="pad" data-pad="0" style="background:#dc2626"></div>
+      <div class="pad" data-pad="1" style="background:#2563eb"></div>
+      <div class="pad" data-pad="2" style="background:#ca8a04"></div>
+      <div class="pad" data-pad="3" style="background:#16a34a"></div>
+    </div>
+    <div id="game-over" style="display:none;text-align:center;padding:1.5rem;background:white;border:1px solid #e7e5e4;margin-top:1rem">
+      <h3 style="color:#2d5557;margin-bottom:.5rem">Game Over</h3>
+      <p id="final-level" style="color:#57534e"></p>
+      <button id="play-again-btn" class="btn btn-primary" style="margin-top:1rem">Play Again</button>
+    </div>
+    <section style="margin-top:2rem;padding:1.5rem;background:white;border:1px solid #e7e5e4">
+      <h2 style="font-size:1.1rem;color:#2d5557;margin-bottom:.5rem">Memory Training</h2>
+      <p style="font-size:.9rem;color:#57534e">Pattern recall (Simon-say) trains <strong>visuospatial working memory</strong> and <strong>sequential memory</strong>. Maintaining a growing sequence in memory activates the dorsolateral prefrontal cortex and hippocampus. This is the same neural circuitry that supports learning new procedures, following directions, and navigating unfamiliar environments. Research shows that structured sequence memory training can improve cognitive flexibility and attention span in individuals with brain fog.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../../blog/index.html">Blog</a></p>
+</footer>
+
+<script>
+(function(){
+var STORAGE_KEY = 'pattern-recall';
+var sequence = [], playerIdx = 0, level = 0, longest = 0, highScore = 0;
+var showing = false, active = false;
+
+function load() {
+  try { var d = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (d) highScore = d.highScore || 0; } catch(e) {}
+}
+function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify({highScore: highScore})); }
+
+function playTone(pad) {
+  try {
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    var freqs = [330, 440, 550, 660];
+    osc.frequency.value = freqs[pad];
+    osc.type = 'sine';
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.3);
+  } catch(e) {}
+}
+
+function updateDisplay() {
+  document.getElementById('level').textContent = level;
+  document.getElementById('longest').textContent = longest;
+  document.getElementById('high-score').textContent = highScore;
+}
+
+function startGame() {
+  sequence = []; level = 0; playerIdx = 0; active = true;
+  document.getElementById('start-btn').disabled = true;
+  document.getElementById('game-over').style.display = 'none';
+  document.getElementById('sequence-info').textContent = 'Watch...';
+  updateDisplay();
+  nextRound();
+}
+
+function nextRound() {
+  level++;
+  sequence.push(Math.floor(Math.random() * 4));
+  playerIdx = 0;
+  if (level > longest) { longest = level; if (longest > highScore) { highScore = longest; save(); } }
+  updateDisplay();
+  showSequence();
+}
+
+function showSequence() {
+  showing = true;
+  document.getElementById('pad-grid').querySelectorAll('.pad').forEach(function(p) { p.style.opacity = '.4'; });
+  document.getElementById('sequence-info').textContent = 'Watch the sequence...';
+  var i = 0;
+  function showNext() {
+    if (i >= sequence.length) {
+      showing = false;
+      document.getElementById('pad-grid').querySelectorAll('.pad').forEach(function(p) { p.style.opacity = '1'; });
+      document.getElementById('pad-grid').querySelectorAll('.pad').forEach(function(p) { p.disabled = false; });
+      document.getElementById('sequence-info').textContent = 'Your turn!';
+      return;
+    }
+    var pad = sequence[i];
+    var el = document.querySelector('.pad[data-pad="' + pad + '"]');
+    el.classList.add('lit');
+    playTone(pad);
+    setTimeout(function() {
+      el.classList.remove('lit');
+      i++;
+      setTimeout(showNext, 200);
+    }, 400);
+  }
+  showNext();
+}
+
+function handlePadClick(pad) {
+  if (showing || !active) return;
+  if (pad !== sequence[playerIdx]) {
+    gameOver();
+    return;
+  }
+  var el = document.querySelector('.pad[data-pad="' + pad + '"]');
+  el.classList.add('lit');
+  playTone(pad);
+  setTimeout(function() { el.classList.remove('lit'); }, 200);
+  playerIdx++;
+  if (playerIdx >= sequence.length) {
+    document.getElementById('pad-grid').querySelectorAll('.pad').forEach(function(p) { p.disabled = true; });
+    setTimeout(nextRound, 600);
+  }
+}
+
+function gameOver() {
+  active = false;
+  var el = document.querySelector('.pad[data-pad="' + sequence[playerIdx] + '"]');
+  if (el) { el.classList.add('lit'); setTimeout(function() { el.classList.remove('lit'); }, 300); }
+  document.getElementById('pad-grid').querySelectorAll('.pad').forEach(function(p) { p.disabled = true; });
+  document.getElementById('sequence-info').textContent = 'Game Over!';
+  document.getElementById('final-level').textContent = 'You reached level ' + level + ' with a sequence of ' + level + ' steps.';
+  document.getElementById('game-over').style.display = 'block';
+  document.getElementById('start-btn').disabled = false;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  load();
+  updateDisplay();
+  document.getElementById('start-btn').addEventListener('click', startGame);
+  document.getElementById('play-again-btn').addEventListener('click', startGame);
+  document.getElementById('pad-grid').querySelectorAll('.pad').forEach(function(el) {
+    el.addEventListener('click', function() {
+      handlePadClick(parseInt(this.getAttribute('data-pad')));
+    });
+  });
+});
+})();
+</script>
+</body>
+</html>

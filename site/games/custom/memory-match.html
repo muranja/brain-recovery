@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Match &mdash; Brain Games &mdash; NeuroReboot</title>
+<meta name="description" content="Classic memory card matching game. Flip cards to find matching pairs. Track your moves and time.">
+<meta property="og:title" content="Memory Match &mdash; Brain Games &mdash; NeuroReboot">
+<meta property="og:description" content="Classic memory card matching game. Flip cards to find matching pairs.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/games/custom/memory-match.html">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Memory Match &mdash; Brain Games",
+  "description": "Classic memory card matching game.",
+  "url": "https://muranja.github.io/brain-recovery/games/custom/memory-match.html"
+}
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Space Grotesk',sans-serif;background:#fafaf9;color:#1c1917;line-height:1.7}
+nav{background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:0 1.5rem;position:sticky;top:0;z-index:50}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{font-weight:700;font-size:1.125rem;color:#2d5557;text-decoration:none}
+.nav-links{display:flex;gap:0.25rem}
+.nav-links a{color:#57534e;text-decoration:none;font-size:0.875rem;padding:0.5rem 0.75rem;transition:background .15s,color .15s;font-weight:500}
+.nav-links a:hover{background:#e8f0f0;color:#2d5557}
+.nav-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#1c1917;padding:.25rem}
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);z-index:20}
+.nav-links[aria-hidden="false"]{display:flex}
+.nav-toggle{display:block}
+}
+.hero{text-align:center;padding:3rem 1.5rem 2rem;background:#2d5557;color:white;margin-bottom:2rem}
+.hero h1{font-size:2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem}
+.hero p{font-size:1rem;opacity:.9;max-width:500px;margin:0 auto}
+.container{max-width:800px;margin:0 auto;padding:0 1.5rem 2rem}
+.game-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem}
+.game-stats{display:flex;gap:1.5rem;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:#78716c;font-weight:600}
+.stat-value{font-size:1.5rem;font-weight:700;color:#2d5557}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;max-width:480px;margin:0 auto}
+.card{aspect-ratio:1;background:#4a7c7f;display:flex;align-items:center;justify-content:center;font-size:2.5rem;cursor:pointer;transition:transform .2s,background .15s;user-select:none;border:2px solid #3d6b6e}
+.card:hover{transform:scale(1.03)}
+.card.flipped{background:white;border-color:#e7e5e4;cursor:default}
+.card.matched{background:#e8f0f0;border-color:#7fb686;cursor:default;opacity:.8}
+.card .emoji{display:none}
+.card.flipped .emoji,.card.matched .emoji{display:block}
+.theme-selector{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.5rem}
+.theme-btn{padding:.4rem 1rem;border:1px solid #d6d3d1;background:white;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:.85rem;transition:all .15s}
+.theme-btn:hover{border-color:#4a7c7f}
+.theme-btn.active{background:#4a7c7f;color:white;border-color:#4a7c7f}
+.btn{padding:.6rem 1.5rem;border:none;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.4}
+.btn-primary{background:#4a7c7f;color:white;transition:background .15s}
+.btn-primary:hover{background:#3d6b6e}
+.btn-ghost{background:transparent;border:1px solid #d6d3d1;color:#44403c}
+.btn-ghost:hover{background:#f5f5f4}
+.victory{text-align:center;padding:2rem;background:white;border:1px solid #e7e5e4;margin-top:1.5rem}
+.victory h2{color:#2d5557;margin-bottom:.5rem}
+.victory p{color:#78716c;margin-bottom:1rem}
+footer{text-align:center;padding:2rem 1.5rem;color:#78716c;font-size:.85rem;border-top:1px solid #e7e5e4;margin-top:3rem}
+footer a{color:#4a7c7f}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:#2d5557;color:white;padding:.5rem 1rem;z-index:100;font-size:.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../../index.html">Home</a>
+      <a href="../../blog/index.html">Blog</a>
+      <a href="../../schedule.html">Schedule</a>
+      <a href="../../nutrients.html">Nutrients</a>
+      <a href="../../exercises.html">Exercises</a>
+      <a href="../../phases.html">Phases</a>
+      <a href="../../tracker.html">Tracker</a>
+      <a href="../index.html" aria-current="page">Games</a>
+      <a href="../../worklist/index.html">Worklist</a>
+      <a href="../../remember/index.html">Remember</a>
+      <a href="../../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <h1>Memory Match</h1>
+    <p>Flip cards and find matching pairs. Classic concentration game for cognitive training.</p>
+  </div>
+  <div class="container">
+    <div class="theme-selector">
+      <button class="theme-btn active" data-theme="animals">Animals</button>
+      <button class="theme-btn" data-theme="emojis">Emojis</button>
+    </div>
+    <div class="game-header">
+      <div class="game-stats">
+        <div class="stat"><div class="stat-label">Moves</div><div class="stat-value" id="moves">0</div></div>
+        <div class="stat"><div class="stat-label">Matches</div><div class="stat-value" id="matches">0</div></div>
+        <div class="stat"><div class="stat-label">Time</div><div class="stat-value" id="timer-display">0s</div></div>
+      </div>
+      <button id="new-game-btn" class="btn btn-primary">New Game</button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div id="victory-screen" class="victory" style="display:none;">
+      <h2>Congratulations!</h2>
+      <p id="victory-text"></p>
+      <button id="play-again-btn" class="btn btn-primary">Play Again</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../../blog/index.html">Blog</a></p>
+</footer>
+
+<script>
+(function(){
+var THEMES = {
+  animals: ['&#x1f436;','&#x1f431;','&#x1f42d;','&#x1f430;','&#x1f430;','&#x1f42e;','&#x1f437;','&#x1f43c;'],
+  emojis: ['&#x2b50;','&#x1f4a1;','&#x1f308;','&#x1f48e;','&#x1f3b5;','&#x1f4f1;','&#x1f4dd;','&#x2600;']
+};
+var currentTheme = 'animals';
+var cards = [];
+var flipped = [];
+var locked = false;
+var moveCount = 0;
+var matchCount = 0;
+var timerInterval = null;
+var seconds = 0;
+var gameActive = false;
+
+function startGame() {
+  var emojis = THEMES[currentTheme];
+  var pairs = emojis.slice();
+  cards = pairs.concat(pairs);
+  for (var i = cards.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
+  }
+  moveCount = 0;
+  matchCount = 0;
+  seconds = 0;
+  flipped = [];
+  locked = false;
+  gameActive = true;
+  document.getElementById('victory-screen').style.display = 'none';
+  document.getElementById('moves').textContent = '0';
+  document.getElementById('matches').textContent = '0';
+  document.getElementById('timer-display').textContent = '0s';
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(function(){ seconds++; document.getElementById('timer-display').textContent = seconds + 's'; }, 1000);
+  renderGrid();
+}
+
+function renderGrid() {
+  var grid = document.getElementById('grid');
+  grid.innerHTML = cards.map(function(emoji, idx) {
+    return '<div class="card" data-index="' + idx + '"><span class="emoji">' + emoji + '</span></div>';
+  }).join('');
+  grid.querySelectorAll('.card').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var idx = parseInt(this.getAttribute('data-index'));
+      flipCard(idx);
+    });
+  });
+}
+
+function flipCard(idx) {
+  if (!gameActive || locked) return;
+  var cardEl = document.querySelector('.card[data-index="' + idx + '"]');
+  if (!cardEl || cardEl.classList.contains('flipped') || cardEl.classList.contains('matched')) return;
+  if (flipped.length === 2) return;
+
+  cardEl.classList.add('flipped');
+  flipped.push(idx);
+  if (flipped.length === 2) {
+    moveCount++;
+    document.getElementById('moves').textContent = moveCount;
+    checkMatch();
+  }
+}
+
+function checkMatch() {
+  locked = true;
+  var idx1 = flipped[0], idx2 = flipped[1];
+  if (cards[idx1] === cards[idx2] && idx1 !== idx2) {
+    matchCount++;
+    document.getElementById('matches').textContent = matchCount;
+    document.querySelectorAll('.card.flipped').forEach(function(el) {
+      el.classList.remove('flipped');
+      el.classList.add('matched');
+    });
+    flipped = [];
+    locked = false;
+    if (matchCount === 8) {
+      gameActive = false;
+      if (timerInterval) clearInterval(timerInterval);
+      document.getElementById('victory-screen').style.display = 'block';
+      document.getElementById('victory-text').textContent = 'Completed in ' + moveCount + ' moves and ' + seconds + ' seconds.';
+    }
+  } else {
+    setTimeout(function() {
+      document.querySelectorAll('.card.flipped').forEach(function(el) { el.classList.remove('flipped'); });
+      flipped = [];
+      locked = false;
+    }, 800);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.theme-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.theme-btn').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      currentTheme = this.getAttribute('data-theme');
+      startGame();
+    });
+  });
+  document.getElementById('new-game-btn').addEventListener('click', startGame);
+  document.getElementById('play-again-btn').addEventListener('click', startGame);
+  startGame();
+})();
+</script>
+</body>
+</html>

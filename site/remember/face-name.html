@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Face-Name Recall — Memory Tools — NeuroReboot</title>
+<meta name="description" content="Never forget a name again. Practice face-to-name associations with visual cues and systematic review.">
+<meta property="og:title" content="Face-Name Recall — Memory Tools — NeuroReboot">
+<meta property="og:description" content="Never forget a name again. Practice face-to-name associations with visual cues.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/remember/face-name.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Face-Name Recall — Memory Tools",
+  "description": "Practice face-to-name associations with visual cues.",
+  "url": "https://muranja.github.io/brain-recovery/remember/face-name.html"
+}
+</script>
+<style>
+.fn-list { list-style:none;padding:0; }
+.fn-list li { display:flex;justify-content:space-between;align-items:center;padding:0.75rem;border-bottom:1px solid var(--neutral-200);font-size:0.9rem;flex-wrap:wrap;gap:0.5rem; }
+.fn-list li:last-child { border-bottom:none; }
+.fn-list .name { font-weight:600;color:var(--primary-dark); }
+.fn-list .cue { color:var(--neutral-600);font-style:italic; }
+.feature-chips { display:flex;flex-wrap:wrap;gap:0.35rem;margin:0.5rem 0; }
+.feature-chip { padding:0.25rem 0.6rem;border:1px solid var(--neutral-300);background:white;cursor:pointer;font-size:0.8rem;font-family:var(--font); }
+.feature-chip:hover { border-color:var(--primary);background:var(--primary-light); }
+.feature-chip.selected { background:var(--primary);color:white;border-color:var(--primary); }
+.review-card { background:white;border:1px solid var(--neutral-200);padding:2rem;text-align:center;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center; }
+.review-card .cue-display { font-size:1.3rem;color:var(--neutral-600);margin-bottom:1rem;font-style:italic; }
+.review-card .name-display { font-size:1.5rem;font-weight:700;color:var(--primary-dark);margin-bottom:1rem; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <div class="hero-badge">Memory Technique</div>
+    <h1>Face-Name Recall</h1>
+    <p>Never forget a name again. Build vivid visual associations between faces and names using proven mnemonic techniques.</p>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <h2 class="section-title">The Technique</h2>
+      <p>The face-name problem is universal: we see a face, we know we know the person, but the name won't come. The fix is to <strong>pre-encode</strong> an association between a distinctive facial feature and a visual pun on the name.</p>
+      <ol style="padding-left:1.25rem;margin-top:0.75rem;">
+        <li><strong>Notice a distinctive feature</strong> — big nose, curly hair, dimples, glasses</li>
+        <li><strong>Convert the name to an image</strong> — Baker → loaf of bread, Wolf → wolf ears</li>
+        <li><strong>Combine them in a mental scene</strong> — a loaf of bread balanced on that big nose</li>
+        <li><strong>Review</strong> — mentally rehearse the association within 24 hours</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2 class="section-title">Add People</h2>
+      <p>Enter names you want to remember and describe a visual cue or facial feature to associate.</p>
+
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+        <input type="text" id="fn-name" placeholder="Name..." style="flex:1;min-width:140px;">
+        <input type="text" id="fn-cue" placeholder="Visual cue or feature..." style="flex:2;min-width:200px;">
+        <button id="fn-add-btn" class="btn btn-primary">Save</button>
+      </div>
+
+      <div class="feature-chips" id="feature-chips"></div>
+
+      <button id="fn-review-btn" class="btn btn-ghost">Review Mode</button>
+      <button id="fn-clear-btn" class="btn btn-ghost" style="color:var(--danger);">Clear All</button>
+
+      <div id="fn-review-area" class="review-card" style="display:none;margin-top:1rem;">
+        <div class="cue-display" id="fn-review-cue"></div>
+        <div class="name-display" id="fn-review-name" style="display:none;"></div>
+        <div style="display:flex;gap:0.5rem;">
+          <button id="fn-reveal-btn" class="btn btn-primary">Reveal Name</button>
+          <button id="fn-next-btn" class="btn btn-ghost">Next</button>
+          <button id="fn-stop-btn" class="btn btn-ghost">Stop</button>
+        </div>
+      </div>
+
+      <ul class="fn-list" id="fn-list" style="margin-top:1rem;"></ul>
+      <div id="fn-empty" class="empty-state"><p>No entries yet. Add a name above.</p></div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Why Names Are Hard</h2>
+      <p>Names are <strong>arbitrary labels</strong> — unlike "apple" which has a sensory referent, "Sarah" has no inherent meaning. The brain's default encoding for names is weak. By creating a vivid visual association, you give the name a sensory anchor. This is why face-name techniques work dramatically better than repetition alone.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../phases.html">Phases</a>
+      <a href="../donate.html">Donate</a> &middot; <a href="https://github.com/sponsors/muranja">Sponsor</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'face-name';
+  var entries = [];
+  var reviewOrder = [];
+  var reviewIndex = 0;
+  var reviewActive = false;
+
+  var features = ['glasses', 'beard', 'curly hair', 'dimples', 'freckles', 'bald', 'mustache', 'hat', 'earrings', 'scarf', 'smile', 'blue eyes', 'brown eyes', 'ponytail', 'wrinkles'];
+
+  function load() {
+    try { var d = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (d) entries = d; } catch(e) {}
+  }
+  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(entries)); }
+
+  function render() {
+    var list = document.getElementById('fn-list');
+    var empty = document.getElementById('fn-empty');
+    if (!entries.length) {
+      list.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    list.innerHTML = entries.map(function(e, idx) {
+      return '<li>' +
+        '<span><span class="name">' + e.name.replace(/</g, '&lt;') + '</span> &mdash; <span class="cue">' + e.cue.replace(/</g, '&lt;') + '</span></span>' +
+        '<button class="fn-del-btn btn btn-ghost" data-index="' + idx + '" style="padding:0.25rem 0.5rem;font-size:0.75rem;color:var(--danger);">&times;</button>' +
+        '</li>';
+    }).join('');
+    list.querySelectorAll('.fn-del-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = parseInt(this.getAttribute('data-index'));
+        entries.splice(idx, 1);
+        save();
+        render();
+      });
+    });
+  }
+
+  function renderFeatureChips() {
+    var container = document.getElementById('feature-chips');
+    container.innerHTML = features.map(function(f) {
+      return '<button class="feature-chip" data-feature="' + f.replace(/"/g, '&quot;') + '">' + f + '</button>';
+    }).join('');
+    container.querySelectorAll('.feature-chip').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var input = document.getElementById('fn-cue');
+        input.value = this.getAttribute('data-feature');
+        input.focus();
+      });
+    });
+  }
+
+  function addEntry() {
+    var name = document.getElementById('fn-name').value.trim();
+    var cue = document.getElementById('fn-cue').value.trim();
+    if (!name || !cue) { alert('Enter both a name and a visual cue.'); return; }
+    entries.push({ name: name, cue: cue });
+    document.getElementById('fn-name').value = '';
+    document.getElementById('fn-cue').value = '';
+    save();
+    render();
+  }
+
+  function startReview() {
+    if (!entries.length) { alert('Add some entries first.'); return; }
+    reviewOrder = entries.map(function(_, idx) { return idx; });
+    reviewOrder.sort(function() { return Math.random() - 0.5; });
+    reviewIndex = 0;
+    reviewActive = true;
+    document.getElementById('fn-review-area').style.display = 'flex';
+    showReview();
+  }
+
+  function showReview() {
+    if (reviewIndex >= reviewOrder.length) {
+      document.getElementById('fn-review-cue').textContent = 'Review complete!';
+      document.getElementById('fn-review-name').style.display = 'none';
+      document.getElementById('fn-reveal-btn').style.display = 'none';
+      document.getElementById('fn-next-btn').textContent = 'Finish';
+      document.getElementById('fn-stop-btn').style.display = 'none';
+      return;
+    }
+    var idx = reviewOrder[reviewIndex];
+    var e = entries[idx];
+    if (!e) { reviewIndex++; showReview(); return; }
+    document.getElementById('fn-review-cue').textContent = e.cue;
+    document.getElementById('fn-review-name').textContent = e.name;
+    document.getElementById('fn-review-name').style.display = 'none';
+    document.getElementById('fn-reveal-btn').style.display = 'inline-block';
+    document.getElementById('fn-next-btn').textContent = 'Next';
+    document.getElementById('fn-stop-btn').style.display = 'inline-block';
+  }
+
+  function revealName() {
+    document.getElementById('fn-review-name').style.display = 'block';
+    document.getElementById('fn-reveal-btn').style.display = 'none';
+  }
+
+  function nextReview() {
+    if (reviewIndex >= reviewOrder.length) { stopReview(); return; }
+    reviewIndex++;
+    showReview();
+  }
+
+  function stopReview() {
+    reviewActive = false;
+    document.getElementById('fn-review-area').style.display = 'none';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    load();
+    render();
+    renderFeatureChips();
+
+    document.getElementById('fn-add-btn').addEventListener('click', addEntry);
+    document.getElementById('fn-cue').addEventListener('keydown', function(e) { if (e.key === 'Enter') addEntry(); });
+    document.getElementById('fn-review-btn').addEventListener('click', startReview);
+    document.getElementById('fn-clear-btn').addEventListener('click', function() {
+      if (!confirm('Delete all entries?')) return;
+      entries = [];
+      save();
+      render();
+      if (reviewActive) stopReview();
+    });
+    document.getElementById('fn-reveal-btn').addEventListener('click', revealName);
+    document.getElementById('fn-next-btn').addEventListener('click', nextReview);
+    document.getElementById('fn-stop-btn').addEventListener('click', stopReview);
+  });
+})();
+</script>
+</body>
+</html>

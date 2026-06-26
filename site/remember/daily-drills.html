@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Word Drills — Memory Tools — NeuroReboot</title>
+<meta name="description" content="Practice with structured word lists. Recall after timed intervals to strengthen retention and combat brain fog.">
+<meta property="og:title" content="Daily Word Drills — Memory Tools — NeuroReboot">
+<meta property="og:description" content="Practice with structured word lists. Recall after timed intervals to strengthen retention.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/remember/daily-drills.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Daily Word Drills — Memory Tools",
+  "description": "Interactive daily word drill for memory practice.",
+  "url": "https://muranja.github.io/brain-recovery/remember/daily-drills.html"
+}
+</script>
+<style>
+.word-bank { display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin:1rem 0; }
+.word-chip { background:var(--primary-light);border:1px solid var(--primary);padding:0.5rem 1rem;font-size:1.1rem;font-weight:500;color:var(--primary-dark); }
+.drill-status { text-align:center;padding:1rem;margin:1rem 0; }
+.drill-status .timer { font-size:2.5rem;font-weight:700;color:var(--primary-dark); }
+.drill-status .phase { font-size:0.9rem;color:var(--neutral-500);margin-bottom:0.5rem; }
+.input-group { display:flex;gap:0.5rem;flex-wrap:wrap;max-width:500px;margin:1rem auto; }
+.input-group input { flex:1;min-width:150px; }
+.input-group button { flex-shrink:0; }
+.result-list { list-style:none;padding:0; }
+.result-list li { display:flex;justify-content:space-between;padding:0.5rem 0.75rem;border-bottom:1px solid var(--neutral-200);font-size:0.9rem; }
+.result-list li.correct { color:var(--success); }
+.result-list li.missed { color:var(--danger);text-decoration:line-through; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <div class="hero-badge">Daily Drills</div>
+    <h1>Daily Word Drills</h1>
+    <p>Train your short-term and long-term memory with structured word recall at increasing intervals.</p>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <h2 class="section-title">Today's Drill</h2>
+      <p>You will be shown 5 random words. Study them, then recall them after 1 minute, 5 minutes, and 30 minutes (you can leave the page open).</p>
+
+      <div style="text-align:center;margin:1.5rem 0;">
+        <button id="start-drill-btn" class="btn btn-primary">Start New Drill</button>
+        <span id="stats-display" style="margin-left:1rem;font-size:0.85rem;color:var(--neutral-500);"></span>
+      </div>
+
+      <div id="phase-study" style="display:none;">
+        <h3 style="text-align:center;color:var(--primary-dark);">Study These Words</h3>
+        <div class="word-bank" id="study-words"></div>
+        <p style="text-align:center;font-size:0.85rem;color:var(--neutral-500);">You have 30 seconds to study. The words will be hidden automatically.</p>
+        <div style="text-align:center;margin-top:0.75rem;">
+          <button id="hide-words-btn" class="btn btn-ghost">Hide Words Now</button>
+        </div>
+      </div>
+
+      <div id="phase-recall" style="display:none;">
+        <div class="drill-status">
+          <div class="phase" id="recall-phase-label">Recall Phase 1</div>
+          <div class="timer" id="recall-timer">--:--</div>
+          <div style="font-size:0.85rem;color:var(--neutral-500);" id="recall-progress">0 / 5 words recalled</div>
+        </div>
+        <div class="input-group">
+          <input type="text" id="recall-input" placeholder="Type a word from the list..." autocomplete="off">
+          <button id="recall-submit-btn" class="btn btn-primary">Submit</button>
+        </div>
+        <ul class="result-list" id="recall-results"></ul>
+        <div style="text-align:center;margin-top:1rem;">
+          <button id="finish-recall-btn" class="btn btn-ghost">Finish This Phase</button>
+        </div>
+      </div>
+
+      <div id="phase-complete" style="display:none;">
+        <div style="text-align:center;padding:2rem;background:white;border:1px solid var(--neutral-200);">
+          <h3 style="color:var(--primary-dark);margin-bottom:0.5rem;">Drill Complete!</h3>
+          <div id="final-stats"></div>
+          <button id="restart-drill-btn" class="btn btn-primary" style="margin-top:1rem;">New Drill</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Why It Works</h2>
+      <p>Word list recall tests your <strong>episodic memory</strong> — memory for specific events and information. Practicing recall at increasing intervals trains your brain to consolidate information more efficiently. This is particularly helpful for brain fog, where the feeling of "knowing but not finding" the word is caused by impaired retrieval pathways.</p>
+      <p style="margin-top:1rem;">Research shows that the act of retrieval itself strengthens the memory trace — each successful recall makes future recall more likely. This is called the <strong>testing effect</strong> or <strong>retrieval-induced strengthening</strong>.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../phases.html">Phases</a>
+      <a href="../donate.html">Donate</a> &middot; <a href="https://github.com/sponsors/muranja">Sponsor</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'daily-drills';
+  var WORD_BANK = [
+    'apple', 'bridge', 'candle', 'desert', 'eagle', 'forest', 'garden', 'harbor', 'island', 'jacket',
+    'kettle', 'ladder', 'mountain', 'notebook', 'ocean', 'pencil', 'quartz', 'river', 'silver', 'tunnel',
+    'umbrella', 'valley', 'window', 'anchor', 'basket', 'castle', 'dragon', 'engine', 'feather', 'gravel',
+    'hammer', 'igloo', 'jigsaw', 'kitten', 'lantern', 'mirror', 'napkin', 'orbit', 'puzzle', 'raccoon',
+    'saddle', 'temple', 'violet', 'waffle', 'yogurt', 'zephyr', 'breeze', 'canyon', 'dolphin', 'ember'
+  ];
+  var PHASES = [
+    { name: '1 Minute', delay: 60000 },
+    { name: '5 Minutes', delay: 300000 },
+    { name: '30 Minutes', delay: 1800000 }
+  ];
+
+  var state = { active: false, words: [], phase: -1, recalled: [], correct: [], startedAt: null, phaseStartedAt: null };
+  var timerInterval = null;
+
+  function getDayKey() {
+    var d = new Date();
+    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  }
+
+  function loadStats() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+  }
+  function saveStats(stats) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
+  }
+
+  function updateStatsDisplay() {
+    var stats = loadStats();
+    var day = getDayKey();
+    var today = stats[day];
+    var el = document.getElementById('stats-display');
+    if (today) {
+      var p = today.phase || 0;
+      el.textContent = 'Today: ' + p + ' phases completed';
+    } else {
+      el.textContent = '';
+    }
+  }
+
+  function pickWords(n) {
+    var shuffled = WORD_BANK.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = shuffled[i]; shuffled[i] = shuffled[j]; shuffled[j] = tmp;
+    }
+    return shuffled.slice(0, n);
+  }
+
+  function startDrill() {
+    state.active = true;
+    state.words = pickWords(5);
+    state.phase = -1;
+    state.recalled = [];
+    state.correct = [];
+    state.startedAt = Date.now();
+
+    document.getElementById('start-drill-btn').style.display = 'none';
+    document.getElementById('phase-study').style.display = 'block';
+    document.getElementById('phase-recall').style.display = 'none';
+    document.getElementById('phase-complete').style.display = 'none';
+
+    var container = document.getElementById('study-words');
+    container.innerHTML = state.words.map(function(w) {
+      return '<span class="word-chip">' + w + '</span>';
+    }).join('');
+
+    setTimeout(function() {
+      if (state.active && state.phase === -1) {
+        hideWords();
+      }
+    }, 30000);
+  }
+
+  function hideWords() {
+    if (state.phase !== -1) return;
+    document.getElementById('phase-study').style.display = 'none';
+    startPhase(0);
+  }
+
+  function startPhase(idx) {
+    state.phase = idx;
+    state.recalled = [];
+    state.correct = state.words.map(function() { return false; });
+    state.phaseStartedAt = Date.now();
+
+    document.getElementById('phase-recall').style.display = 'block';
+    document.getElementById('recall-input').value = '';
+    document.getElementById('recall-input').disabled = false;
+    document.getElementById('recall-input').focus();
+    document.getElementById('recall-submit-btn').disabled = false;
+
+    document.getElementById('recall-phase-label').textContent = 'Recall Phase: ' + PHASES[idx].name;
+    document.getElementById('recall-progress').textContent = '0 / ' + state.words.length + ' words recalled';
+    document.getElementById('recall-results').innerHTML = '';
+
+    var endTime = Date.now() + PHASES[idx].delay;
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(function() {
+      var remaining = Math.max(0, endTime - Date.now());
+      var minutes = Math.floor(remaining / 60000);
+      var seconds = Math.floor((remaining % 60000) / 1000);
+      document.getElementById('recall-timer').textContent =
+        (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+        finishPhase();
+      }
+    }, 100);
+  }
+
+  function submitRecall() {
+    var input = document.getElementById('recall-input');
+    var word = input.value.trim().toLowerCase();
+    input.value = '';
+    if (!word) return;
+
+    var idx = -1;
+    for (var i = 0; i < state.words.length; i++) {
+      if (state.words[i].toLowerCase() === word && !state.correct[i]) {
+        idx = i;
+        break;
+      }
+    }
+    if (idx >= 0) {
+      state.correct[idx] = true;
+      state.recalled.push({ word: state.words[idx], correct: true });
+    } else {
+      state.recalled.push({ word: word, correct: false });
+    }
+    renderRecallResults();
+  }
+
+  function finishPhase() {
+    if (timerInterval) clearInterval(timerInterval);
+    document.getElementById('recall-input').disabled = true;
+    document.getElementById('recall-submit-btn').disabled = true;
+
+    var correctCount = state.correct.filter(Boolean).length;
+
+    var stats = loadStats();
+    var day = getDayKey();
+    if (!stats[day]) stats[day] = { phases: 0, scores: [] };
+    stats[day].phases = Math.max(stats[day].phases, state.phase + 1);
+    stats[day].scores.push(correctCount);
+    saveStats(stats);
+    updateStatsDisplay();
+
+    if (state.phase < PHASES.length - 1) {
+      var nextPhase = state.phase + 1;
+      var delay = PHASES[nextPhase].delay;
+      document.getElementById('recall-phase-label').textContent = 'Next phase in ' + PHASES[nextPhase].name + '...';
+      document.getElementById('recall-timer').textContent = '--:--';
+      setTimeout(function() {
+        if (state.active) startPhase(nextPhase);
+      }, Math.min(delay, 5000));
+    } else {
+      showComplete();
+    }
+  }
+
+  function renderRecallResults() {
+    var container = document.getElementById('recall-results');
+    var found = {};
+    state.recalled.forEach(function(r) {
+      found[r.word] = true;
+    });
+    var html = state.words.map(function(w) {
+      var correct = state.correct[state.words.indexOf(w)];
+      var r = state.recalled.filter(function(rr) { return rr.word === w; });
+      var isCorrect = correct;
+      return '<li class="' + (isCorrect ? 'correct' : 'missed') + '">' +
+        '<span>' + w + '</span>' +
+        '<span>' + (isCorrect ? '&#10003;' : '--') + '</span></li>';
+    }).join('');
+    container.innerHTML = html;
+    var count = state.correct.filter(Boolean).length;
+    document.getElementById('recall-progress').textContent = count + ' / ' + state.words.length + ' words recalled';
+  }
+
+  function showComplete() {
+    state.active = false;
+    document.getElementById('phase-recall').style.display = 'none';
+    document.getElementById('phase-complete').style.display = 'block';
+
+    var correctCount = state.correct.filter(Boolean).length;
+    var pct = Math.round((correctCount / state.words.length) * 100);
+    document.getElementById('final-stats').innerHTML =
+      '<p>You recalled <strong>' + correctCount + ' of ' + state.words.length + '</strong> words (' + pct + '%).</p>' +
+      '<p style="color:var(--neutral-500);font-size:0.85rem;">Each drill strengthens your memory pathways. Consistency is key.</p>';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    updateStatsDisplay();
+
+    document.getElementById('start-drill-btn').addEventListener('click', startDrill);
+    document.getElementById('hide-words-btn').addEventListener('click', hideWords);
+    document.getElementById('recall-submit-btn').addEventListener('click', submitRecall);
+    document.getElementById('recall-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') submitRecall();
+    });
+    document.getElementById('finish-recall-btn').addEventListener('click', finishPhase);
+    document.getElementById('restart-drill-btn').addEventListener('click', function() {
+      document.getElementById('phase-complete').style.display = 'none';
+      document.getElementById('start-drill-btn').style.display = 'inline-block';
+    });
+  });
+})();
+</script>
+</body>
+</html>

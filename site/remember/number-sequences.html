@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Sequences — Memory Tools — NeuroReboot</title>
+<meta name="description" content="Train working memory with digits. Progressive digit span trainer that adapts to your level.">
+<meta property="og:title" content="Number Sequences — Memory Tools — NeuroReboot">
+<meta property="og:description" content="Train working memory with digits. Progressive digit span trainer.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/remember/number-sequences.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Number Sequences — Memory Tools",
+  "description": "Train working memory with digit span exercises.",
+  "url": "https://muranja.github.io/brain-recovery/remember/number-sequences.html"
+}
+</script>
+<style>
+.sequence-display { background:white;border:1px solid var(--neutral-200);padding:3rem 2rem;text-align:center;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center; }
+.sequence-digits { font-size:3rem;font-weight:700;color:var(--primary-dark);letter-spacing:0.3em;font-family:var(--font-mono, monospace); }
+.sequence-status { font-size:1rem;color:var(--neutral-500);margin-top:1rem; }
+.sequence-input-group { display:flex;gap:0.5rem;max-width:400px;margin:1rem auto;flex-wrap:wrap;justify-content:center; }
+.sequence-input-group input { flex:1;min-width:150px;font-family:var(--font-mono, monospace);font-size:1.2rem;letter-spacing:0.2em;text-align:center; }
+.stats-row { display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0; }
+.stat-card { background:white;border:1px solid var(--neutral-200);padding:1rem;text-align:center;min-width:100px;flex:1; }
+.stat-card .stat-label { font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--neutral-500);font-weight:600; }
+.stat-card .stat-value { font-size:1.75rem;font-weight:700;color:var(--primary-dark);margin-top:0.25rem; }
+.level-indicator { display:flex;align-items:center;gap:0.5rem;justify-content:center;margin-bottom:1rem; }
+.level-indicator .lbl { font-size:0.9rem;color:var(--neutral-500); }
+.level-indicator .lvl { font-size:2rem;font-weight:700;color:var(--primary-dark); }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <div class="hero-badge">Working Memory</div>
+    <h1>Number Sequences</h1>
+    <p>Train your digit span — the classic measure of working memory capacity. Progressive difficulty adapts to your performance.</p>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-label">High Score</div><div class="stat-value" id="high-score">0</div></div>
+        <div class="stat-card"><div class="stat-label">Current Level</div><div class="stat-value" id="current-level">4</div></div>
+        <div class="stat-card"><div class="stat-label">Games Played</div><div class="stat-value" id="games-played">0</div></div>
+      </div>
+
+      <div style="text-align:center;margin-bottom:1rem;">
+        <button id="new-game-btn" class="btn btn-primary">New Game</button>
+      </div>
+
+      <div class="level-indicator">
+        <span class="lbl">Digits:</span>
+        <span class="lvl" id="digit-count-label">4</span>
+      </div>
+
+      <div id="game-area">
+        <div class="sequence-display" id="sequence-display">
+          <div id="seq-phase-label" style="font-size:1.1rem;margin-bottom:1rem;color:var(--neutral-500);">Press "New Game" to start</div>
+          <div id="seq-digits" class="sequence-digits" style="display:none;"></div>
+          <div id="seq-status" class="sequence-status"></div>
+        </div>
+
+        <div id="input-phase" style="display:none;">
+          <div class="sequence-input-group">
+            <input type="text" id="seq-input" placeholder="Enter the digits..." autocomplete="off" inputmode="numeric">
+            <button id="seq-submit" class="btn btn-primary">Submit</button>
+          </div>
+          <div style="text-align:center;margin-top:0.5rem;">
+            <button id="seq-skip" class="btn btn-ghost" style="font-size:0.85rem;">Skip / Don't Know</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="result-area" style="display:none;margin-top:1rem;text-align:center;padding:2rem;background:white;border:1px solid var(--neutral-200);">
+        <h3 id="result-heading" style="color:var(--primary-dark);"></h3>
+        <p id="result-detail" style="color:var(--neutral-600);margin-top:0.5rem;"></p>
+        <button id="play-again-btn" class="btn btn-primary" style="margin-top:1rem;">Play Again</button>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">What Is Digit Span?</h2>
+      <p>Digit span is a classic neuropsychological test of <strong>working memory</strong>. The average adult can hold 5-9 digits in short-term memory (Miller's Law). Brain fog, cognitive fatigue, and neurological injury can reduce this capacity. Training with digit span exercises has been shown to improve working memory capacity through neural plasticity.</p>
+      <p style="margin-top:1rem;">The adaptive algorithm here uses <strong>staircase procedure</strong>: succeed twice at a level to advance, fail once to decrease. This ensures you are always training at the edge of your capacity — the optimal point for neuroplastic change.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../phases.html">Phases</a>
+      <a href="../donate.html">Donate</a> &middot; <a href="https://github.com/sponsors/muranja">Sponsor</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'number-sequences';
+  var state = {
+    level: 4,
+    highScore: 0,
+    gamesPlayed: 0,
+    successesAtLevel: 0,
+    sequence: [],
+    phase: 'idle',
+    active: false
+  };
+
+  function load() {
+    try { var d = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (d) { state.highScore = d.highScore || 0; state.gamesPlayed = d.gamesPlayed || 0; } } catch(e) {}
+  }
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ highScore: state.highScore, gamesPlayed: state.gamesPlayed }));
+  }
+
+  function updateStats() {
+    document.getElementById('high-score').textContent = state.highScore;
+    document.getElementById('current-level').textContent = state.level;
+    document.getElementById('games-played').textContent = state.gamesPlayed;
+    document.getElementById('digit-count-label').textContent = state.level;
+  }
+
+  function generateSequence(len) {
+    var seq = [];
+    for (var i = 0; i < len; i++) seq.push(Math.floor(Math.random() * 10));
+    return seq;
+  }
+
+  function newGame() {
+    state.active = true;
+    state.level = 4;
+    state.successesAtLevel = 0;
+    state.phase = 'show';
+    state.sequence = generateSequence(state.level);
+
+    document.getElementById('result-area').style.display = 'none';
+    document.getElementById('new-game-btn').style.display = 'none';
+
+    var display = document.getElementById('sequence-display');
+    display.style.display = 'flex';
+    document.getElementById('seq-phase-label').style.display = 'none';
+    document.getElementById('seq-digits').style.display = 'block';
+    document.getElementById('input-phase').style.display = 'none';
+    document.getElementById('seq-status').textContent = '';
+
+    showSequence();
+  }
+
+  function showSequence() {
+    var digitsEl = document.getElementById('seq-digits');
+    digitsEl.textContent = state.sequence.join(' ');
+    digitsEl.style.display = 'block';
+    document.getElementById('seq-status').textContent = 'Memorize this sequence...';
+    document.getElementById('input-phase').style.display = 'none';
+
+    setTimeout(function() {
+      if (!state.active) return;
+      digitsEl.style.display = 'none';
+      document.getElementById('seq-status').textContent = 'Now enter the digits in order.';
+      document.getElementById('input-phase').style.display = 'block';
+      document.getElementById('seq-input').value = '';
+      document.getElementById('seq-input').focus();
+      state.phase = 'input';
+    }, 1000 + state.sequence.length * 300);
+  }
+
+  function submitSequence() {
+    if (state.phase !== 'input' || !state.active) return;
+    var input = document.getElementById('seq-input').value.trim();
+    if (!input) return;
+    var nums = input.replace(/\s/g, '').split('').map(function(c) { return parseInt(c); });
+    var correct = true;
+    if (nums.length !== state.sequence.length) { correct = false; }
+    else {
+      for (var i = 0; i < nums.length; i++) {
+        if (nums[i] !== state.sequence[i]) { correct = false; break; }
+      }
+    }
+
+    if (correct) {
+      state.successesAtLevel++;
+      if (state.successesAtLevel >= 2) {
+        state.level++;
+        state.successesAtLevel = 0;
+        if (state.level > state.highScore) {
+          state.highScore = state.level;
+          save();
+        }
+        showResult('Correct!', 'Advancing to ' + state.level + ' digits.', true);
+      } else {
+        showResult('Correct!', 'One more correct to advance.', true);
+      }
+    } else {
+      state.level = Math.max(3, state.level - 1);
+      state.successesAtLevel = 0;
+      var expected = state.sequence.join('');
+      showResult('Not quite', 'The sequence was: ' + expected, false);
+    }
+    state.gamesPlayed++;
+    save();
+    updateStats();
+  }
+
+  function showResult(heading, detail, isSuccess) {
+    state.active = false;
+    document.getElementById('input-phase').style.display = 'none';
+    document.getElementById('new-game-btn').style.display = 'inline-block';
+    document.getElementById('seq-digits').style.display = 'none';
+    document.getElementById('seq-phase-label').style.display = 'block';
+    document.getElementById('seq-phase-label').textContent = heading;
+
+    if (isSuccess && state.level > state.highScore) {
+      document.getElementById('result-heading').textContent = 'New High Score: ' + state.level + ' digits!';
+    } else {
+      document.getElementById('result-heading').textContent = heading;
+    }
+    document.getElementById('result-detail').textContent = detail;
+    document.getElementById('result-area').style.display = 'block';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    load();
+    updateStats();
+
+    document.getElementById('new-game-btn').addEventListener('click', newGame);
+    document.getElementById('play-again-btn').addEventListener('click', newGame);
+    document.getElementById('seq-submit').addEventListener('click', submitSequence);
+    document.getElementById('seq-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') submitSequence(); });
+    document.getElementById('seq-skip').addEventListener('click', function() {
+      if (state.phase !== 'input') return;
+      var expected = state.sequence.join('');
+      showResult('Skipped', 'The sequence was: ' + expected, false);
+    });
+  });
+})();
+</script>
+</body>
+</html>

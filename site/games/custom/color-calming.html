@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Calming &mdash; Brain Games &mdash; NeuroReboot</title>
+<meta name="description" content="Color-based relaxation tool. Fill the screen with a calming color for anxiety and overwhelm relief.">
+<meta property="og:title" content="Color Calming &mdash; Brain Games &mdash; NeuroReboot">
+<meta property="og:description" content="Color-based relaxation tool for anxiety and overwhelm relief.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/games/custom/color-calming.html">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Color Calming &mdash; Brain Games",
+  "description": "Color-based relaxation tool for anxiety relief.",
+  "url": "https://muranja.github.io/brain-recovery/games/custom/color-calming.html"
+}
+</style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Space Grotesk',sans-serif;background:#1c1917;color:white;line-height:1.7;overflow-x:hidden}
+nav{background:rgba(0,0,0,.3);backdrop-filter:blur(8px);padding:0 1.5rem;position:sticky;top:0;z-index:50}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{font-weight:700;font-size:1.125rem;color:white;text-decoration:none}
+.nav-links{display:flex;gap:.25rem}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.875rem;padding:.5rem .75rem;transition:background .15s,color .15s;font-weight:500}
+.nav-links a:hover{background:rgba(255,255,255,.1);color:white}
+.nav-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:white;padding:.25rem}
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:rgba(0,0,0,.9);padding:.5rem;z-index:20}
+.nav-links[aria-hidden="false"]{display:flex}
+.nav-toggle{display:block}
+}
+#color-overlay{position:fixed;top:60px;left:0;right:0;bottom:0;z-index:1;background:#1c1917;transition:background .5s}
+.color-ui{position:relative;z-index:2;max-width:500px;margin:0 auto;padding:2rem 1.5rem}
+.color-ui h1{font-size:1.5rem;font-weight:700;margin-bottom:.25rem;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.color-ui p{font-size:.9rem;opacity:.7;margin-bottom:1.5rem;text-shadow:0 1px 4px rgba(0,0,0,.3)}
+.picker-area{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem;justify-content:center}
+.color-swatch{width:48px;height:48px;border:3px solid transparent;cursor:pointer;transition:transform .15s,border-color .15s;display:inline-block}
+.color-swatch:hover{transform:scale(1.15)}
+.color-swatch.active{border-color:white}
+.custom-row{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.custom-row input[type="color"]{width:48px;height:48px;border:2px solid rgba(255,255,255,.3);cursor:pointer;background:none}
+.custom-row input[type="color"]:hover{border-color:rgba(255,255,255,.6)}
+.control-row{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
+.control-row label{font-size:.85rem;opacity:.7}
+.control-row select{padding:.4rem .6rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:white;font-family:'Space Grotesk',sans-serif;font-size:.9rem;backdrop-filter:blur(4px)}
+.control-row select option{color:#1c1917;background:white}
+.timer-display{font-size:3rem;font-weight:700;text-align:center;margin:1rem 0;text-shadow:0 2px 12px rgba(0,0,0,.3)}
+.status-text{text-align:center;font-size:.9rem;opacity:.6;margin-bottom:1rem}
+.btn{padding:.6rem 1.5rem;border:none;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.4;backdrop-filter:blur(4px)}
+.btn-start{background:rgba(255,255,255,.15);color:white;border:1px solid rgba(255,255,255,.3);transition:background .15s}
+.btn-start:hover{background:rgba(255,255,255,.25)}
+.btn-stop{background:rgba(220,38,38,.3);color:white;border:1px solid rgba(220,38,38,.4);transition:background .15s}
+.btn-stop:hover{background:rgba(220,38,38,.5)}
+.btn-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+footer{position:relative;z-index:2;text-align:center;padding:2rem 1.5rem;font-size:.85rem;border-top:1px solid rgba(255,255,255,.1);margin-top:2rem}
+footer a{color:rgba(255,255,255,.6)}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:rgba(0,0,0,.5);color:white;padding:.5rem 1rem;z-index:100;font-size:.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../../index.html">Home</a>
+      <a href="../../blog/index.html">Blog</a>
+      <a href="../../schedule.html">Schedule</a>
+      <a href="../../nutrients.html">Nutrients</a>
+      <a href="../../exercises.html">Exercises</a>
+      <a href="../../phases.html">Phases</a>
+      <a href="../../tracker.html">Tracker</a>
+      <a href="../index.html">Games</a>
+      <a href="../../worklist/index.html">Worklist</a>
+      <a href="../../remember/index.html">Remember</a>
+      <a href="../../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div id="color-overlay"></div>
+  <div class="color-ui">
+    <h1>Color Calming</h1>
+    <p>Choose a color and let it fill the screen. Gentle pulse for deep relaxation. Great for anxiety and overwhelm.</p>
+
+    <div class="picker-area" id="preset-colors">
+      <div class="color-swatch" style="background:#4a7c7f" data-color="#4a7c7f"></div>
+      <div class="color-swatch" style="background:#2563eb" data-color="#2563eb"></div>
+      <div class="color-swatch" style="background:#16a34a" data-color="#16a34a"></div>
+      <div class="color-swatch" style="background:#7c3aed" data-color="#7c3aed"></div>
+      <div class="color-swatch" style="background:#db2777" data-color="#db2777"></div>
+      <div class="color-swatch" style="background:#ea580c" data-color="#ea580c"></div>
+      <div class="color-swatch" style="background:#0891b2" data-color="#0891b2"></div>
+      <div class="color-swatch" style="background:#1c1917" data-color="#1c1917"></div>
+    </div>
+
+    <div class="custom-row">
+      <label style="font-size:.85rem;opacity:.7">Custom:</label>
+      <input type="color" id="custom-color" value="#4a7c7f">
+    </div>
+
+    <div class="control-row">
+      <label for="duration">Duration:</label>
+      <select id="duration">
+        <option value="1">1 min</option>
+        <option value="2">2 min</option>
+        <option value="5" selected>5 min</option>
+        <option value="10">10 min</option>
+      </select>
+      <label for="pulse">Pulse:</label>
+      <select id="pulse">
+        <option value="0">Off</option>
+        <option value="1" selected>Slow</option>
+        <option value="2">Medium</option>
+      </select>
+    </div>
+
+    <div class="timer-display" id="timer-display">--:--</div>
+    <div class="status-text" id="status-text">Choose a color and press Start</div>
+
+    <div class="btn-row">
+      <button id="start-session" class="btn btn-start">Start Session</button>
+      <button id="stop-session" class="btn btn-stop" style="display:none">Stop</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../../blog/index.html">Blog</a></p>
+</footer>
+
+<script>
+(function(){
+var overlay = document.getElementById('color-overlay');
+var currentColor = '#4a7c7f';
+var active = false, remaining = 0, totalDuration = 0;
+var timerInterval = null, pulseInterval = null;
+var pulseSpeeds = [0, 3000, 1500];
+
+function setColor(color) {
+  currentColor = color;
+  overlay.style.background = color;
+  document.querySelectorAll('.color-swatch').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-color') === color);
+  });
+}
+
+function startPulse(speed) {
+  if (speed === 0) return;
+  var bright = true;
+  pulseInterval = setInterval(function() {
+    bright = !bright;
+    overlay.style.opacity = bright ? '1' : '0.85';
+  }, speed);
+}
+
+function stopPulse() {
+  if (pulseInterval) { clearInterval(pulseInterval); pulseInterval = null; }
+  overlay.style.opacity = '1';
+}
+
+function startSession() {
+  var mins = parseInt(document.getElementById('duration').value);
+  var pulseSpeed = pulseSpeeds[parseInt(document.getElementById('pulse').value)];
+  totalDuration = mins * 60;
+  remaining = totalDuration;
+  active = true;
+
+  document.getElementById('start-session').style.display = 'none';
+  document.getElementById('stop-session').style.display = 'inline-block';
+  document.getElementById('status-text').textContent = 'Session in progress...';
+
+  setColor(currentColor);
+  startPulse(pulseSpeed);
+  updateTimer();
+
+  timerInterval = setInterval(function() {
+    remaining--;
+    updateTimer();
+    if (remaining <= 0) { endSession(); }
+  }, 1000);
+}
+
+function updateTimer() {
+  var m = Math.floor(remaining / 60);
+  var s = remaining % 60;
+  document.getElementById('timer-display').textContent =
+    (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function endSession() {
+  active = false;
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  stopPulse();
+  document.getElementById('start-session').style.display = 'inline-block';
+  document.getElementById('stop-session').style.display = 'none';
+  document.getElementById('status-text').textContent = 'Session complete. Breathe slowly.';
+  document.getElementById('timer-display').textContent = '00:00';
+}
+
+function stopSession() {
+  if (!active) return;
+  endSession();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.color-swatch').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var color = this.getAttribute('data-color');
+      setColor(color);
+      document.getElementById('custom-color').value = color;
+    });
+  });
+  document.getElementById('custom-color').addEventListener('input', function() {
+    setColor(this.value);
+  });
+  document.getElementById('start-session').addEventListener('click', startSession);
+  document.getElementById('stop-session').addEventListener('click', stopSession);
+  setColor('#4a7c7f');
+});
+})();
+</script>
+</body>
+</html>

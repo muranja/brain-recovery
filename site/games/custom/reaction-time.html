@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reaction Time &mdash; Brain Games &mdash; NeuroReboot</title>
+<meta name="description" content="Simple reaction time test. Measure your response speed with 10 trials. Compare to population norms.">
+<meta property="og:title" content="Reaction Time &mdash; Brain Games &mdash; NeuroReboot">
+<meta property="og:description" content="Simple reaction time test. Measure your response speed with 10 trials.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/games/custom/reaction-time.html">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Reaction Time &mdash; Brain Games",
+  "description": "Simple reaction time test.",
+  "url": "https://muranja.github.io/brain-recovery/games/custom/reaction-time.html"
+}
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Space Grotesk',sans-serif;background:#fafaf9;color:#1c1917;line-height:1.7}
+nav{background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:0 1.5rem;position:sticky;top:0;z-index:50}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{font-weight:700;font-size:1.125rem;color:#2d5557;text-decoration:none}
+.nav-links{display:flex;gap:.25rem}
+.nav-links a{color:#57534e;text-decoration:none;font-size:.875rem;padding:.5rem .75rem;transition:background .15s,color .15s;font-weight:500}
+.nav-links a:hover{background:#e8f0f0;color:#2d5557}
+.nav-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#1c1917;padding:.25rem}
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);z-index:20}
+.nav-links[aria-hidden="false"]{display:flex}
+.nav-toggle{display:block}
+}
+.hero{text-align:center;padding:3rem 1.5rem 2rem;background:#2d5557;color:white;margin-bottom:2rem}
+.hero h1{font-size:2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem}
+.hero p{font-size:1rem;opacity:.9;max-width:500px;margin:0 auto}
+.container{max-width:600px;margin:0 auto;padding:0 1.5rem 2rem}
+.reaction-screen{width:100%;height:350px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:background .05s;text-align:center;padding:1rem;margin-bottom:1rem;border:2px solid #e7e5e4}
+.reaction-screen.waiting{background:#dc2626;color:white}
+.reaction-screen.ready{background:#16a34a;color:white}
+.reaction-screen.hold{background:#ca8a04;color:white}
+.reaction-screen .rt-text{font-size:1.5rem;font-weight:600}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1rem 0}
+.stat-box{background:white;border:1px solid #e7e5e4;padding:.75rem;text-align:center}
+.stat-box .s-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#78716c;font-weight:600}
+.stat-box .s-value{font-size:1.2rem;font-weight:700;color:#2d5557;margin-top:.15rem}
+.trial-bar{display:flex;gap:4px;justify-content:center;margin:.5rem 0;flex-wrap:wrap}
+.trial-dot{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:600;border:1px solid #d6d3d1}
+.trial-dot.done{background:#e8f0f0;border-color:#4a7c7f;color:#2d5557}
+.btn{padding:.6rem 1.5rem;border:none;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.4}
+.btn-primary{background:#4a7c7f;color:white;transition:background .15s}
+.btn-primary:hover{background:#3d6b6e}
+footer{text-align:center;padding:2rem 1.5rem;color:#78716c;font-size:.85rem;border-top:1px solid #e7e5e4;margin-top:3rem}
+footer a{color:#4a7c7f}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:#2d5557;color:white;padding:.5rem 1rem;z-index:100;font-size:.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../../index.html">Home</a>
+      <a href="../../blog/index.html">Blog</a>
+      <a href="../../schedule.html">Schedule</a>
+      <a href="../../nutrients.html">Nutrients</a>
+      <a href="../../exercises.html">Exercises</a>
+      <a href="../../phases.html">Phases</a>
+      <a href="../../tracker.html">Tracker</a>
+      <a href="../index.html">Games</a>
+      <a href="../../worklist/index.html">Worklist</a>
+      <a href="../../remember/index.html">Remember</a>
+      <a href="../../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <h1>Reaction Time Test</h1>
+    <p>Click when the screen turns green. 10 trials to measure your response speed.</p>
+  </div>
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem">
+      <button id="start-btn" class="btn btn-primary">Start Test</button>
+    </div>
+    <div class="reaction-screen waiting" id="screen">
+      <div class="rt-text" id="screen-text">Wait for green...</div>
+    </div>
+    <div class="trial-bar" id="trial-bar"></div>
+    <div id="results" style="display:none">
+      <div class="stats-grid">
+        <div class="stat-box"><div class="s-label">Average</div><div class="s-value" id="avg-rt">0ms</div></div>
+        <div class="stat-box"><div class="s-label">Fastest</div><div class="s-value" id="fastest-rt">0ms</div></div>
+        <div class="stat-box"><div class="s-label">Slowest</div><div class="s-value" id="slowest-rt">0ms</div></div>
+        <div class="stat-box"><div class="s-label">Std Dev</div><div class="s-value" id="std-rt">0ms</div></div>
+      </div>
+      <div style="padding:1.5rem;background:white;border:1px solid #e7e5e4;font-size:.9rem;color:#57534e">
+        <h3 style="color:#2d5557;margin-bottom:.5rem;font-size:1rem">Population Norms</h3>
+        <p>Average simple reaction time: <strong>200-250ms</strong> (young adults), <strong>250-300ms</strong> (middle age), <strong>300-400ms</strong> (older adults). Reaction time is affected by sleep, fatigue, caffeine, and neurological state. Consistent slowing may indicate cognitive fatigue or need for recovery. This test measures <strong>processing speed</strong> and <strong>vigilance attention</strong> &mdash; key components of cognitive function that improve with practice and adequate rest.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../../blog/index.html">Blog</a></p>
+</footer>
+
+<script>
+(function(){
+var trials = [], currentTrial = -1, maxTrials = 10;
+var phase = 'idle', timeoutId = null, startTime = 0;
+var active = false;
+
+function setPhase(p) {
+  phase = p;
+  var screen = document.getElementById('screen');
+  var text = document.getElementById('screen-text');
+  screen.className = 'reaction-screen';
+  if (p === 'waiting') { screen.classList.add('waiting'); text.textContent = 'Wait for green...'; }
+  else if (p === 'ready') { screen.classList.add('ready'); text.textContent = 'CLICK!'; }
+  else if (p === 'hold') { screen.classList.add('hold'); text.textContent = 'Too soon! Wait for green.'; }
+}
+
+function renderTrials() {
+  var bar = document.getElementById('trial-bar');
+  var html = '';
+  for (var i = 0; i < maxTrials; i++) {
+    var cls = 'trial-dot';
+    if (i < trials.length) cls += ' done';
+    html += '<div class="' + cls + '">' + (i + 1) + '</div>';
+  }
+  bar.innerHTML = html;
+}
+
+function startTest() {
+  trials = []; currentTrial = 0; active = true;
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('start-btn').disabled = true;
+  renderTrials();
+  beginTrial();
+}
+
+function beginTrial() {
+  if (currentTrial >= maxTrials) { endTest(); return; }
+  setPhase('waiting');
+  var delay = 1000 + Math.random() * 3000;
+  timeoutId = setTimeout(function() {
+    if (active) {
+      setPhase('ready');
+      startTime = Date.now();
+    }
+  }, delay);
+}
+
+function handleClick() {
+  if (phase === 'waiting') {
+    if (timeoutId) clearTimeout(timeoutId);
+    setPhase('hold');
+    setTimeout(function() { if (active) beginTrial(); }, 1000);
+  } else if (phase === 'ready') {
+    var rt = Date.now() - startTime;
+    trials.push(rt);
+    renderTrials();
+    currentTrial++;
+    if (currentTrial >= maxTrials) { endTest(); }
+    else { setTimeout(beginTrial, 500); }
+  }
+}
+
+function endTest() {
+  active = false;
+  document.getElementById('start-btn').disabled = false;
+  setPhase('waiting');
+  document.getElementById('screen-text').textContent = 'Test complete';
+  document.getElementById('screen').style.cursor = 'default';
+
+  if (!trials.length) return;
+  var sum = trials.reduce(function(a,b){return a+b;},0);
+  var avg = Math.round(sum / trials.length);
+  var fastest = Math.min.apply(null, trials);
+  var slowest = Math.max.apply(null, trials);
+  var variance = trials.reduce(function(a,b){return a + Math.pow(b - avg, 2);},0) / trials.length;
+  var std = Math.round(Math.sqrt(variance));
+
+  document.getElementById('avg-rt').textContent = avg + 'ms';
+  document.getElementById('fastest-rt').textContent = fastest + 'ms';
+  document.getElementById('slowest-rt').textContent = slowest + 'ms';
+  document.getElementById('std-rt').textContent = std + 'ms';
+  document.getElementById('results').style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('start-btn').addEventListener('click', startTest);
+  document.getElementById('screen').addEventListener('click', handleClick);
+});
+})();
+</script>
+</body>
+</html>

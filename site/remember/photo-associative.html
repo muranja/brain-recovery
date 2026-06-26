@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo-Associative Method — Memory Tools — NeuroReboot</title>
+<meta name="description" content="Link names to images for instant recall. Practice associating names with vivid mental images for better memory.">
+<meta property="og:title" content="Photo-Associative Method — Memory Tools — NeuroReboot">
+<meta property="og:description" content="Link names to images for instant recall. Practice associating names with vivid mental images.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/remember/photo-associative.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Photo-Associative Method — Memory Tools",
+  "description": "Practice associating names with vivid mental images.",
+  "url": "https://muranja.github.io/brain-recovery/remember/photo-associative.html"
+}
+</script>
+<style>
+.assoc-list { list-style:none;padding:0; }
+.assoc-list li { display:flex;justify-content:space-between;align-items:center;padding:0.75rem;border-bottom:1px solid var(--neutral-200);font-size:0.9rem;flex-wrap:wrap;gap:0.5rem; }
+.assoc-list li:last-child { border-bottom:none; }
+.assoc-list .name { font-weight:600;color:var(--primary-dark); }
+.assoc-list .image { color:var(--neutral-600); }
+.assoc-list .actions { display:flex;gap:0.5rem; }
+.review-card { background:white;border:1px solid var(--neutral-200);padding:2rem;text-align:center;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center; }
+.review-card .prompt { font-size:1.3rem;font-weight:600;color:var(--primary-dark);margin-bottom:1rem; }
+.suggestion-list { display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 1rem; }
+.suggestion-btn { padding:0.35rem 0.75rem;border:1px solid var(--neutral-300);background:white;cursor:pointer;font-size:0.8rem;font-family:var(--font); }
+.suggestion-btn:hover { border-color:var(--primary);background:var(--primary-light); }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <div class="hero-badge">Memory Technique</div>
+    <h1>Photo-Associative Method</h1>
+    <p>Transform abstract names into vivid, unforgettable images. One of the most powerful techniques for remembering people's names.</p>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <h2 class="section-title">How It Works</h2>
+      <p>The brain remembers images far better than words — this is called the <strong>picture superiority effect</strong>. To remember a name, convert it into a visual image and associate that image with a distinctive feature of the person.</p>
+      <p style="margin-top:0.5rem;"><strong>Example:</strong> "Mr. Baker" → imagine him holding a giant loaf of bread. "Ms. Hill" → picture her standing on top of a hill. "Dr. Fox" → see her with fox ears.</p>
+      <p style="margin-top:0.5rem;">The more bizarre, vivid, and emotionally charged the image, the stronger the memory.</p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Practice: Name to Image</h2>
+      <p>Enter a name and type the first visual image that comes to mind. Be creative and specific.</p>
+
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+        <input type="text" id="name-input" placeholder="Enter a name..." style="flex:1;min-width:150px;">
+        <input type="text" id="image-input" placeholder="Visual association..." style="flex:2;min-width:200px;">
+        <button id="save-assoc-btn" class="btn btn-primary">Save</button>
+      </div>
+      <div class="suggestion-list" id="suggestion-list"></div>
+      <button id="start-review-btn" class="btn btn-ghost">Review Mode</button>
+      <button id="clear-all-btn" class="btn btn-ghost" style="color:var(--danger);">Clear All</button>
+
+      <div id="review-area" class="review-card" style="display:none;margin-top:1rem;">
+        <div class="prompt" id="review-prompt"></div>
+        <div id="review-reveal" style="display:none;font-size:1.1rem;padding:0.75rem;background:var(--primary-light);width:100%;max-width:400px;margin-bottom:0.75rem;color:var(--primary-dark);"></div>
+        <div style="display:flex;gap:0.5rem;">
+          <button id="reveal-btn" class="btn btn-primary">Reveal</button>
+          <button id="next-review-btn" class="btn btn-ghost">Next</button>
+          <button id="stop-review-btn" class="btn btn-ghost">Stop</button>
+        </div>
+      </div>
+
+      <ul class="assoc-list" id="assoc-list" style="margin-top:1rem;"></ul>
+      <div id="empty-state" class="empty-state"><p>No associations saved yet. Add one above.</p></div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Tips for Strong Associations</h2>
+      <ul style="padding-left:1.25rem;">
+        <li><strong>Exaggerate size</strong> — make the image giant or tiny</li>
+        <li><strong>Add motion</strong> — animate the image (running, dancing, exploding)</li>
+        <li><strong>Use humor</strong> — absurd associations are most memorable</li>
+        <li><strong>Engage senses</strong> — what does it smell like? Sound like? Feel like?</li>
+        <li><strong>Connect to a feature</strong> — link the image to a distinctive nose, hairstyle, or accessory</li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../phases.html">Phases</a>
+      <a href="../donate.html">Donate</a> &middot; <a href="https://github.com/sponsors/muranja">Sponsor</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'photo-assoc';
+  var associations = [];
+  var reviewQueue = [];
+  var reviewIndex = 0;
+  var reviewActive = false;
+
+  var suggestions = ['Sarah', 'Michael', 'Emily', 'James', 'Olivia', 'William', 'Sophia', 'Benjamin', 'Isabella', 'Henry', 'Mia', 'Alexander', 'Charlotte', 'Daniel', 'Amelia', 'Matthew', 'Harper', 'David', 'Evelyn', 'Joseph'];
+
+  function load() {
+    try { var d = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (d) associations = d; } catch(e) {}
+  }
+  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(associations)); }
+
+  function render() {
+    var list = document.getElementById('assoc-list');
+    var empty = document.getElementById('empty-state');
+    if (!associations.length) {
+      list.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    list.innerHTML = associations.map(function(a, idx) {
+      return '<li>' +
+        '<span><span class="name">' + a.name.replace(/</g, '&lt;') + '</span> &rarr; <span class="image">' + a.image.replace(/</g, '&lt;') + '</span></span>' +
+        '<span class="actions"><button class="edit-btn btn btn-ghost" data-index="' + idx + '" style="padding:0.25rem 0.5rem;font-size:0.75rem;">Edit</button>' +
+        ' <button class="delete-btn btn btn-ghost" data-index="' + idx + '" style="padding:0.25rem 0.5rem;font-size:0.75rem;color:var(--danger);">&times;</button></span>' +
+        '</li>';
+    }).join('');
+    list.querySelectorAll('.delete-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = parseInt(this.getAttribute('data-index'));
+        associations.splice(idx, 1);
+        save();
+        render();
+      });
+    });
+    list.querySelectorAll('.edit-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = parseInt(this.getAttribute('data-index'));
+        var a = associations[idx];
+        document.getElementById('name-input').value = a.name;
+        document.getElementById('image-input').value = a.image;
+        associations.splice(idx, 1);
+        save();
+        render();
+      });
+    });
+  }
+
+  function renderSuggestions() {
+    var container = document.getElementById('suggestion-list');
+    container.innerHTML = suggestions.map(function(s) {
+      return '<button class="suggestion-btn" data-name="' + s.replace(/"/g, '&quot;') + '">' + s + '</button>';
+    }).join('');
+    container.querySelectorAll('.suggestion-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.getElementById('name-input').value = this.getAttribute('data-name');
+        document.getElementById('image-input').focus();
+      });
+    });
+  }
+
+  function saveAssociation() {
+    var name = document.getElementById('name-input').value.trim();
+    var image = document.getElementById('image-input').value.trim();
+    if (!name || !image) { alert('Enter both a name and an image.'); return; }
+    associations.push({ name: name, image: image });
+    document.getElementById('name-input').value = '';
+    document.getElementById('image-input').value = '';
+    save();
+    render();
+  }
+
+  function startReview() {
+    if (!associations.length) { alert('Add some associations first.'); return; }
+    reviewQueue = associations.map(function(_, idx) { return idx; });
+    reviewQueue.sort(function() { return Math.random() - 0.5; });
+    reviewIndex = 0;
+    reviewActive = true;
+    document.getElementById('review-area').style.display = 'flex';
+    showReview();
+  }
+
+  function showReview() {
+    if (reviewIndex >= reviewQueue.length) {
+      document.getElementById('review-prompt').textContent = 'Review complete!';
+      document.getElementById('review-reveal').style.display = 'none';
+      document.getElementById('review-reveal').textContent = '';
+      document.getElementById('reveal-btn').style.display = 'none';
+      document.getElementById('next-review-btn').textContent = 'Finish';
+      return;
+    }
+    var idx = reviewQueue[reviewIndex];
+    var a = associations[idx];
+    if (!a) { reviewIndex++; showReview(); return; }
+    document.getElementById('review-prompt').textContent = a.name;
+    document.getElementById('review-reveal').textContent = a.image;
+    document.getElementById('review-reveal').style.display = 'none';
+    document.getElementById('reveal-btn').style.display = 'inline-block';
+    document.getElementById('next-review-btn').textContent = 'Next';
+  }
+
+  function reveal() {
+    document.getElementById('review-reveal').style.display = 'block';
+    document.getElementById('reveal-btn').style.display = 'none';
+  }
+
+  function nextReview() {
+    if (reviewIndex >= reviewQueue.length) { stopReview(); return; }
+    reviewIndex++;
+    showReview();
+  }
+
+  function stopReview() {
+    reviewActive = false;
+    document.getElementById('review-area').style.display = 'none';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    load();
+    render();
+    renderSuggestions();
+
+    document.getElementById('save-assoc-btn').addEventListener('click', saveAssociation);
+    document.getElementById('image-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') saveAssociation(); });
+    document.getElementById('start-review-btn').addEventListener('click', startReview);
+    document.getElementById('clear-all-btn').addEventListener('click', function() {
+      if (!confirm('Delete all associations?')) return;
+      associations = [];
+      save();
+      render();
+      if (reviewActive) stopReview();
+    });
+    document.getElementById('reveal-btn').addEventListener('click', reveal);
+    document.getElementById('next-review-btn').addEventListener('click', nextReview);
+    document.getElementById('stop-review-btn').addEventListener('click', stopReview);
+  });
+})();
+</script>
+</body>
+</html>

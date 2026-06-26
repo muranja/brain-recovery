@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Palace — Memory Tools — NeuroReboot</title>
+<meta name="description" content="Ancient technique for encoding information spatially. Use familiar locations as mental scaffolding for recall. Build your virtual memory palace.">
+<meta property="og:title" content="Memory Palace — Memory Tools — NeuroReboot">
+<meta property="og:description" content="Ancient technique for encoding information spatially. Build your virtual memory palace.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/remember/memory-palace.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Memory Palace — Memory Tools",
+  "description": "Guide and interactive tool for building memory palaces.",
+  "url": "https://muranja.github.io/brain-recovery/remember/memory-palace.html"
+}
+</script>
+<style>
+.palace-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin:1.5rem 0; }
+.palace-slot { background:white;border:1px solid var(--neutral-200);padding:1rem;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s; }
+.palace-slot:hover { border-color:var(--primary);box-shadow:var(--shadow-md); }
+.palace-slot .slot-number { font-size:0.75rem;color:var(--neutral-400);font-weight:600;margin-bottom:0.25rem; }
+.palace-slot .slot-item { font-size:0.9rem;font-weight:500;color:var(--primary-dark);word-break:break-word; }
+.palace-slot .slot-image { font-size:2rem;margin-bottom:0.25rem; }
+.palace-slot.filled { background:var(--primary-light);border-color:var(--primary); }
+.room-selector { display:flex;gap:0.5rem;flex-wrap:wrap;margin:1rem 0; }
+.room-btn { padding:0.5rem 1rem;border:1px solid var(--neutral-300);background:white;cursor:pointer;font-family:var(--font);font-size:0.85rem;transition:all 0.15s; }
+.room-btn:hover { border-color:var(--primary); }
+.room-btn.active { background:var(--primary);color:white;border-color:var(--primary); }
+.modal-overlay { position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:100; }
+.modal { background:white;padding:2rem;max-width:400px;width:90%; }
+.modal h3 { margin-bottom:1rem;color:var(--primary-dark); }
+.modal input { width:100%;margin-bottom:0.75rem; }
+.step-list { counter-reset:step;list-style:none;padding:0; }
+.step-list li { counter-increment:step;padding:0.75rem 0;border-bottom:1px solid var(--neutral-200);display:flex;gap:0.75rem;align-items:flex-start;font-size:0.95rem; }
+.step-list li::before { content:counter(step);background:var(--primary);color:white;font-weight:700;width:1.5rem;height:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <div class="hero-badge">Memory Technique</div>
+    <h1>Memory Palace</h1>
+    <p>Also known as the Method of Loci — use spatial memory to encode and retrieve information with extraordinary reliability.</p>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <h2 class="section-title">How to Build a Memory Palace</h2>
+      <ol class="step-list">
+        <li><strong>Choose a familiar space</strong> — your home, a childhood house, your daily commute route. The more vivid your mental image, the better.</li>
+        <li><strong>Define a fixed path</strong> — walk through the space in the same order every time. Each stop along the path is a "locus" (slot).</li>
+        <li><strong>Place information at each locus</strong> — convert what you want to remember into a vivid, bizarre, or emotionally charged image. Place it at that location.</li>
+        <li><strong>Walk the path to recall</strong> — mentally walk through the space. Each locus triggers the image you placed there, which triggers the associated information.</li>
+        <li><strong>Reuse and refresh</strong> — you can clear a palace and reuse it, or build multiple palaces for different subjects.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2 class="section-title">Build Your Virtual Palace</h2>
+      <p>Create rooms (categories) and add memory slots to each room. Assign an image and item to each slot.</p>
+
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+        <input type="text" id="new-room-input" placeholder="New room name..." style="flex:1;min-width:150px;">
+        <button id="add-room-btn" class="btn btn-primary">Add Room</button>
+        <button id="clear-palace-btn" class="btn btn-ghost" style="color:var(--danger);">Clear Palace</button>
+      </div>
+
+      <div id="room-selector" class="room-selector"></div>
+
+      <div id="current-room-info" style="margin-bottom:0.5rem;">
+        <strong id="current-room-name">Select a room above</strong>
+        <span id="slot-count" style="color:var(--neutral-500);font-size:0.85rem;margin-left:0.5rem;"></span>
+      </div>
+
+      <div id="palace-grid" class="palace-grid"></div>
+
+      <div id="empty-palace" class="empty-state">
+        <p>Select a room or create one to start building your palace.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Why It Works</h2>
+      <p>The memory palace exploits the brain's <strong>spatial navigation system</strong> — the hippocampus and entorhinal cortex, which evolved for remembering locations and routes. These structures are remarkably resilient and often function well even when other memory systems are compromised. By piggybacking new information onto spatial memory, you bypass damaged encoding pathways.</p>
+      <p style="margin-top:1rem;">Research shows that memory palace training produces significant improvements in memory performance, with effect sizes comparable to pharmaceutical interventions. World memory champions almost exclusively use spatial techniques.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../phases.html">Phases</a>
+      <a href="../donate.html">Donate</a> &middot; <a href="https://github.com/sponsors/muranja">Sponsor</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'memory-palace';
+  var rooms = {};
+  var currentRoom = null;
+
+  function load() {
+    try { var d = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (d) { rooms = d.rooms; currentRoom = d.currentRoom; } } catch(e) {}
+    if (!rooms || typeof rooms !== 'object') rooms = {};
+  }
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ rooms: rooms, currentRoom: currentRoom }));
+  }
+
+  function renderRooms() {
+    var container = document.getElementById('room-selector');
+    var names = Object.keys(rooms);
+    if (!names.length) {
+      container.innerHTML = '<span style="color:var(--neutral-500);font-size:0.85rem;">No rooms yet. Create one above.</span>';
+      return;
+    }
+    container.innerHTML = names.map(function(name) {
+      var count = (rooms[name] || []).length;
+      return '<button class="room-btn' + (name === currentRoom ? ' active' : '') + '" data-room="' + name.replace(/"/g, '&quot;') + '">' + name + ' (' + count + ')</button>';
+    }).join('');
+    container.querySelectorAll('.room-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        currentRoom = this.getAttribute('data-room');
+        save();
+        renderRooms();
+        renderGrid();
+      });
+    });
+  }
+
+  function renderGrid() {
+    var grid = document.getElementById('palace-grid');
+    var empty = document.getElementById('empty-palace');
+    var nameEl = document.getElementById('current-room-name');
+    var countEl = document.getElementById('slot-count');
+
+    if (!currentRoom || !rooms[currentRoom]) {
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      nameEl.textContent = 'Select a room above';
+      countEl.textContent = '';
+      return;
+    }
+    empty.style.display = 'none';
+    var slots = rooms[currentRoom] || [];
+    nameEl.textContent = currentRoom;
+    countEl.textContent = slots.length + ' slots';
+
+    var html = '';
+    if (!slots.length) {
+      html = '<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--neutral-500);">Empty room. Click to add your first slot.</div>';
+    } else {
+      slots.forEach(function(slot, idx) {
+        html += '<div class="palace-slot filled" data-index="' + idx + '" data-room="' + currentRoom.replace(/"/g, '&quot;') + '">' +
+          '<div class="slot-number">Slot ' + (idx + 1) + '</div>' +
+          (slot.image ? '<div class="slot-image">' + slot.image + '</div>' : '') +
+          '<div class="slot-item">' + (slot.item || '(empty)') + '</div>' +
+          '</div>';
+      });
+    }
+    html += '<div class="palace-slot" id="add-slot-btn" style="border-style:dashed;cursor:pointer;"><div style="font-size:2rem;color:var(--primary);">+</div><div style="font-size:0.8rem;color:var(--neutral-500);">Add Slot</div></div>';
+    grid.innerHTML = html;
+
+    grid.querySelectorAll('.palace-slot.filled').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var roomName = this.getAttribute('data-room');
+        var idx = parseInt(this.getAttribute('data-index'));
+        editSlot(roomName, idx);
+      });
+    });
+    document.getElementById('add-slot-btn').addEventListener('click', function() {
+      addSlot(currentRoom);
+    });
+  }
+
+  function addSlot(roomName) {
+    showModal('Add Memory Slot', '', '', function(image, item) {
+      if (!rooms[roomName]) rooms[roomName] = [];
+      rooms[roomName].push({ image: image || '', item: item || '' });
+      save();
+      renderRooms();
+      renderGrid();
+    });
+  }
+
+  function editSlot(roomName, idx) {
+    var slot = rooms[roomName][idx];
+    showModal('Edit Slot', slot.image, slot.item, function(image, item) {
+      rooms[roomName][idx] = { image: image || '', item: item || '' };
+      save();
+      renderRooms();
+      renderGrid();
+    }, function() {
+      if (confirm('Delete this slot?')) {
+        rooms[roomName].splice(idx, 1);
+        if (!rooms[roomName].length) {
+          delete rooms[roomName];
+          if (currentRoom === roomName) currentRoom = null;
+        }
+        save();
+        renderRooms();
+        renderGrid();
+      }
+    });
+  }
+
+  function showModal(title, imageVal, itemVal, onSave, onDelete) {
+    var overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = '<div class="modal">' +
+      '<h3>' + title + '</h3>' +
+      '<label style="font-size:0.85rem;font-weight:600;color:var(--neutral-600);">Image/Emoji</label>' +
+      '<input type="text" id="modal-image" placeholder="e.g. 🌟 or a mental image description" value="' + imageVal.replace(/"/g, '&quot;') + '">' +
+      '<label style="font-size:0.85rem;font-weight:600;color:var(--neutral-600);">Item to remember</label>' +
+      '<input type="text" id="modal-item" placeholder="What you want to recall..." value="' + itemVal.replace(/"/g, '&quot;') + '">' +
+      '<div style="display:flex;gap:0.5rem;margin-top:1rem;">' +
+      '<button id="modal-save" class="btn btn-primary">Save</button>' +
+      (onDelete ? '<button id="modal-delete" class="btn btn-ghost" style="color:var(--danger);">Delete</button>' : '') +
+      '<button id="modal-cancel" class="btn btn-ghost">Cancel</button>' +
+      '</div></div>';
+    document.body.appendChild(overlay);
+
+    overlay.querySelector('#modal-save').addEventListener('click', function() {
+      var img = overlay.querySelector('#modal-image').value.trim();
+      var item = overlay.querySelector('#modal-item').value.trim();
+      onSave(img, item);
+      document.body.removeChild(overlay);
+    });
+    var cancel = overlay.querySelector('#modal-cancel');
+    if (cancel) cancel.addEventListener('click', function() { document.body.removeChild(overlay); });
+    var del = overlay.querySelector('#modal-delete');
+    if (del) del.addEventListener('click', function() { onDelete(); document.body.removeChild(overlay); });
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) document.body.removeChild(overlay); });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    load();
+    renderRooms();
+    renderGrid();
+
+    document.getElementById('add-room-btn').addEventListener('click', function() {
+      var input = document.getElementById('new-room-input');
+      var name = input.value.trim();
+      if (!name) return;
+      if (rooms[name]) { alert('Room already exists.'); return; }
+      rooms[name] = [];
+      currentRoom = name;
+      input.value = '';
+      save();
+      renderRooms();
+      renderGrid();
+    });
+    document.getElementById('new-room-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('add-room-btn').click(); });
+    document.getElementById('clear-palace-btn').addEventListener('click', function() {
+      if (!confirm('Clear all rooms and slots?')) return;
+      rooms = {};
+      currentRoom = null;
+      save();
+      renderRooms();
+      renderGrid();
+    });
+  });
+})();
+</script>
+</body>
+</html>

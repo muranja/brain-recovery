@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Category Naming &mdash; Memory Tools &mdash; NeuroReboot</title>
+<meta name="description" content="Rapid retrieval practice by category. Race the clock to generate words from 20+ categories.">
+<meta property="og:title" content="Category Naming &mdash; Memory Tools &mdash; NeuroReboot">
+<meta property="og:description" content="Rapid retrieval practice by category. Race the clock to generate words.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/remember/category-naming.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Category Naming &mdash; Memory Tools",
+  "description": "Rapid retrieval practice by category.",
+  "url": "https://muranja.github.io/brain-recovery/remember/category-naming.html"
+}
+</script>
+<style>
+.cat-display { background:white;border:1px solid var(--neutral-200);padding:2rem;text-align:center;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center; }
+.cat-name { font-size:2rem;font-weight:700;color:var(--primary-dark);margin-bottom:0.5rem; }
+.cat-timer { font-size:3rem;font-weight:700;color:var(--primary-dark);margin-bottom:1rem; }
+.cat-score { font-size:1.1rem;color:var(--neutral-600);margin-bottom:1rem; }
+.cat-input-group { display:flex;gap:0.5rem;max-width:400px;margin:0.5rem auto;flex-wrap:wrap;justify-content:center; }
+.cat-input-group input { flex:1;min-width:150px; }
+.word-cloud { display:flex;flex-wrap:wrap;gap:0.35rem;justify-content:center;margin-top:1rem;max-height:200px;overflow-y:auto;padding:0.5rem; }
+.word-cloud .word-pill { background:var(--primary-light);color:var(--primary-dark);padding:0.25rem 0.6rem;font-size:0.85rem;font-weight:500; }
+.history-list { list-style:none;padding:0; }
+.history-list li { display:flex;justify-content:space-between;padding:0.5rem 0.75rem;border-bottom:1px solid var(--neutral-200);font-size:0.85rem;color:var(--neutral-600); }
+.history-list li:last-child { border-bottom:none; }
+.history-list .h-score { font-weight:600;color:var(--primary-dark); }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <div class="hero-badge">Retrieval Practice</div>
+    <h1>Category Naming</h1>
+    <p>Race the clock to name as many items as possible in a given category. Builds verbal fluency and retrieval speed.</p>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <div style="text-align:center;margin-bottom:1rem;">
+        <button id="start-btn" class="btn btn-primary">Start 30-Second Round</button>
+        <span style="margin-left:0.75rem;font-size:0.85rem;color:var(--neutral-500);" id="high-score-display">Best: 0</span>
+      </div>
+
+      <div id="game-area">
+        <div class="cat-display">
+          <div id="cat-phase" style="font-size:0.9rem;color:var(--neutral-500);margin-bottom:0.5rem;">Press start when ready</div>
+          <div class="cat-name" id="cat-name">---</div>
+          <div class="cat-timer" id="cat-timer">30</div>
+          <div class="cat-score" id="cat-score">Words: 0</div>
+          <div class="cat-input-group" id="cat-input-group" style="display:none;">
+            <input type="text" id="cat-input" placeholder="Type a word..." autocomplete="off">
+            <button id="cat-submit" class="btn btn-primary">Add</button>
+          </div>
+          <div class="word-cloud" id="word-cloud"></div>
+        </div>
+      </div>
+
+      <div id="result-box" style="display:none;margin-top:1rem;text-align:center;padding:2rem;background:white;border:1px solid var(--neutral-200);">
+        <h3 id="result-title" style="color:var(--primary-dark);">Time's Up!</h3>
+        <p id="result-words" style="font-size:1.2rem;color:var(--neutral-600);margin:0.5rem 0;"></p>
+        <p id="result-best" style="font-size:0.9rem;color:var(--neutral-500);"></p>
+        <button id="play-again-result" class="btn btn-primary" style="margin-top:1rem;">Play Again</button>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Past Results</h2>
+      <ul class="history-list" id="history-list">
+        <li style="color:var(--neutral-400);">No sessions yet.</li>
+      </ul>
+      <button id="clear-history-btn" class="btn btn-ghost" style="margin-top:0.5rem;font-size:0.85rem;color:var(--danger);">Clear History</button>
+    </section>
+
+    <section>
+      <h2 class="section-title">Why Category Naming?</h2>
+      <p>Category naming (also called <strong>semantic fluency</strong>) is a sensitive measure of cognitive function. It tests your ability to efficiently search your mental lexicon &mdash; a process that relies on the prefrontal cortex and temporal lobes. Brain fog often manifests as tip-of-the-tongue states and slowed retrieval. Regular practice rebuilds the speed and reliability of these neural networks.</p>
+      <p style="margin-top:0.75rem;">The 30-second format pushes you past your initial burst of easy answers into deeper, more creative retrieval &mdash; this is where neuroplastic gains happen.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../phases.html">Phases</a>
+      <a href="../donate.html">Donate</a> &middot; <a href="https://github.com/sponsors/muranja">Sponsor</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'cat-naming';
+  var CATEGORIES = [
+    'Fruits', 'Vegetables', 'Countries', 'Cities', 'Animals', 'Birds', 'Fish', 'Trees',
+    'Flowers', 'Colors', 'Emotions', 'Professions', 'Sports', 'Musical Instruments',
+    'Vehicles', 'Furniture', 'Clothing', 'Tools', 'Kitchen Items', 'School Subjects',
+    'Drinks', 'Desserts', 'Hobbies', 'Weather Phenomena', 'Body Parts', 'Gemstones'
+  ];
+  var state = { active: false, category: '', words: [], timeLeft: 30, timer: null, highScore: 0, history: [] };
+
+  function load() {
+    try { var d = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (d) { state.highScore = d.highScore || 0; state.history = d.history || []; } } catch(e) {}
+  }
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ highScore: state.highScore, history: state.history }));
+  }
+
+  function updateDisplay() {
+    document.getElementById('high-score-display').textContent = 'Best: ' + state.highScore;
+    renderHistory();
+  }
+
+  function pickCategory() {
+    var available = CATEGORIES.filter(function(c) { return c !== state.category; });
+    return available[Math.floor(Math.random() * available.length)];
+  }
+
+  function startRound() {
+    state.category = pickCategory();
+    state.words = [];
+    state.timeLeft = 30;
+    state.active = true;
+
+    document.getElementById('start-btn').style.display = 'none';
+    document.getElementById('result-box').style.display = 'none';
+    document.getElementById('cat-input-group').style.display = 'flex';
+    document.getElementById('cat-phase').textContent = 'Category';
+    document.getElementById('cat-name').textContent = state.category;
+    document.getElementById('cat-timer').textContent = '30';
+    document.getElementById('cat-score').textContent = 'Words: 0';
+    document.getElementById('word-cloud').innerHTML = '';
+    document.getElementById('cat-input').value = '';
+    document.getElementById('cat-input').focus();
+
+    if (state.timer) clearInterval(state.timer);
+    state.timer = setInterval(function() {
+      state.timeLeft--;
+      document.getElementById('cat-timer').textContent = state.timeLeft;
+      if (state.timeLeft <= 0) endRound();
+    }, 1000);
+  }
+
+  function addWord() {
+    if (!state.active) return;
+    var input = document.getElementById('cat-input');
+    var word = input.value.trim().toLowerCase();
+    input.value = '';
+    if (!word) return;
+    if (state.words.indexOf(word) >= 0) return;
+    state.words.push(word);
+    document.getElementById('cat-score').textContent = 'Words: ' + state.words.length;
+    renderWordCloud();
+    input.focus();
+  }
+
+  function renderWordCloud() {
+    var cloud = document.getElementById('word-cloud');
+    cloud.innerHTML = state.words.map(function(w) {
+      return '<span class="word-pill">' + w + '</span>';
+    }).join('');
+  }
+
+  function endRound() {
+    state.active = false;
+    if (state.timer) clearInterval(state.timer);
+    document.getElementById('cat-input-group').style.display = 'none';
+    document.getElementById('cat-phase').textContent = 'Time!';
+
+    var score = state.words.length;
+    if (score > state.highScore) { state.highScore = score; }
+    state.history.unshift({ category: state.category, score: score, date: new Date().toLocaleDateString() });
+    if (state.history.length > 50) state.history.pop();
+    save();
+    updateDisplay();
+
+    document.getElementById('result-title').textContent = 'Category: ' + state.category;
+    document.getElementById('result-words').textContent = score + ' word' + (score !== 1 ? 's' : '');
+    document.getElementById('result-best').textContent = 'Best ever: ' + state.highScore;
+    document.getElementById('result-box').style.display = 'block';
+    document.getElementById('start-btn').style.display = 'inline-block';
+  }
+
+  function renderHistory() {
+    var list = document.getElementById('history-list');
+    if (!state.history.length) {
+      list.innerHTML = '<li style="color:var(--neutral-400);">No sessions yet.</li>';
+      return;
+    }
+    list.innerHTML = state.history.map(function(h) {
+      return '<li><span>' + h.category + ' &mdash; ' + h.date + '</span><span class="h-score">' + h.score + ' words</span></li>';
+    }).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    load();
+    updateDisplay();
+
+    document.getElementById('start-btn').addEventListener('click', startRound);
+    document.getElementById('play-again-result').addEventListener('click', startRound);
+    document.getElementById('cat-submit').addEventListener('click', addWord);
+    document.getElementById('cat-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') addWord(); });
+    document.getElementById('clear-history-btn').addEventListener('click', function() {
+      if (!confirm('Clear all history?')) return;
+      state.history = [];
+      save();
+      renderHistory();
+    });
+  });
+})();
+</script>
+</body>
+</html>

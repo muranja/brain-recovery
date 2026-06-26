@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleep Log — NeuroReboot Worklist</title>
+<meta name="description" content="Track sleep quality, duration, and consistency to support your recovery.">
+<meta property="og:title" content="Sleep Log — NeuroReboot Worklist">
+<meta property="og:description" content="Track sleep quality, duration, and consistency to support your recovery.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/sleep-log.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sleep Log — NeuroReboot Worklist">
+<meta name="twitter:description" content="Track sleep quality, duration, and consistency to support your recovery.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/sleep-log.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sleep Log — NeuroReboot Worklist",
+  "description": "Track sleep quality, duration, and consistency to support your recovery.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/sleep-log.html"
+}
+</script>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <section aria-labelledby="sleep-heading">
+      <h1 id="sleep-heading" class="section-title">Sleep Log</h1>
+      <p class="section-subtitle">Track your sleep patterns to support neurological repair and circadian health.</p>
+    </section>
+
+    <section aria-label="Sleep log form">
+      <form class="tracker-form" id="sleep-form" novalidate>
+        <div style="margin-bottom:1.5rem;">
+          <label for="sleep-date" style="font-weight:600;font-size:0.9rem;color:var(--neutral-700);">Date:</label>
+          <input type="date" id="sleep-date" name="date" style="border:1px solid var(--neutral-300);padding:0.4rem 0.75rem;font-family:var(--font);font-size:0.9rem;margin-left:0.75rem;">
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
+          <div>
+            <label for="bed-time" style="font-size:0.9rem;font-weight:600;color:var(--neutral-700);display:block;margin-bottom:0.3rem;">Bed time</label>
+            <input type="time" id="bed-time" name="bed_time" style="width:100%;padding:0.5rem 0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;">
+          </div>
+          <div>
+            <label for="wake-time" style="font-size:0.9rem;font-weight:600;color:var(--neutral-700);display:block;margin-bottom:0.3rem;">Wake time</label>
+            <input type="time" id="wake-time" name="wake_time" style="width:100%;padding:0.5rem 0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <div class="mood-row">
+            <label for="sleep-quality">Sleep Quality</label>
+            <input type="range" id="sleep-quality" name="sleep_quality" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <label for="fall-asleep" style="font-size:0.9rem;font-weight:600;color:var(--neutral-700);display:block;margin-bottom:0.3rem;">Time to fall asleep</label>
+          <select id="fall-asleep" name="fall_asleep" style="width:100%;padding:0.5rem 0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;background:white;color:var(--neutral-900);">
+            <option value="">Select...</option>
+            <option value="<15">&lt; 15 minutes</option>
+            <option value="15-30">15&ndash;30 minutes</option>
+            <option value="30-60">30&ndash;60 minutes</option>
+            <option value=">60">&gt; 60 minutes</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;">
+            <input type="checkbox" id="woke-up" name="woke_up" style="width:1.1rem;height:1.1rem;accent-color:var(--primary);">
+            Woke up during the night
+          </label>
+          <div id="wake-count-wrap" style="display:none;align-items:center;gap:0.5rem;">
+            <label for="wake-count" style="font-size:0.85rem;color:var(--neutral-600);">Times:</label>
+            <input type="number" id="wake-count" name="wake_count" min="1" max="20" value="1" style="width:4rem;padding:0.3rem 0.5rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.85rem;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;">
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;cursor:pointer;">
+            <input type="checkbox" id="dreams" name="dreams_remembered" style="width:1.1rem;height:1.1rem;accent-color:var(--primary);">
+            Dreams remembered
+          </label>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <label for="sleep-notes" class="form-section" style="display:block;margin-bottom:0.5rem;">Notes</label>
+          <textarea id="sleep-notes" name="notes" rows="4" style="width:100%;padding:0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;resize:vertical;" placeholder="Any observations about your sleep..."></textarea>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <button type="submit" class="btn btn-primary">Save Entry</button>
+          <span class="save-msg" style="font-size:0.85rem;color:var(--success);opacity:0;transition:opacity 0.3s;" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+
+    <section aria-labelledby="sleep-history-heading" style="margin-top:3rem;">
+      <h2 id="sleep-history-heading" class="section-title">Sleep History</h2>
+      <p class="section-subtitle">Your recent sleep logs.</p>
+      <div id="sleep-history" style="display:grid;gap:1rem;"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var form = document.getElementById('sleep-form');
+  var dateInput = document.getElementById('sleep-date');
+  var wokeUpCheck = document.getElementById('woke-up');
+  var wakeCountWrap = document.getElementById('wake-count-wrap');
+  var today = new Date().toISOString().split('T')[0];
+  dateInput.value = today;
+
+  wokeUpCheck.addEventListener('change', function() {
+    wakeCountWrap.style.display = this.checked ? 'flex' : 'none';
+  });
+
+  function getKey() {
+    return 'sleep-log-' + (dateInput.value || today);
+  }
+
+  function loadEntry() {
+    var saved = localStorage.getItem(getKey());
+    if (!saved) return;
+    try {
+      var data = JSON.parse(saved);
+      for (var key in data) {
+        if (!data.hasOwnProperty(key)) continue;
+        var el = form.querySelector('[name="' + key + '"]');
+        if (!el) continue;
+        if (el.type === 'checkbox') {
+          el.checked = data[key];
+          if (key === 'woke_up' && data[key]) {
+            wakeCountWrap.style.display = 'flex';
+          }
+        } else if (el.type === 'range') {
+          el.value = data[key];
+          var valDisplay = el.parentElement.querySelector('.slider-value');
+          if (valDisplay) valDisplay.textContent = data[key];
+        } else {
+          el.value = data[key];
+        }
+      }
+    } catch(e) {}
+  }
+
+  loadEntry();
+
+  dateInput.addEventListener('change', loadEntry);
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = {};
+    form.querySelectorAll('[name]').forEach(function(el) {
+      if (el.type === 'checkbox') {
+        data[el.name] = el.checked;
+      } else if (el.type === 'range') {
+        data[el.name] = el.value;
+      } else {
+        data[el.name] = el.value;
+      }
+    });
+    localStorage.setItem(getKey(), JSON.stringify(data));
+
+    var msg = form.querySelector('.save-msg');
+    msg.textContent = 'Saved for ' + (dateInput.value || today);
+    msg.style.opacity = '1';
+    setTimeout(function() { msg.style.opacity = '0'; }, 2000);
+
+    loadHistory();
+  });
+
+  function loadHistory() {
+    var container = document.getElementById('sleep-history');
+    container.innerHTML = '';
+    var keys = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      var key = localStorage.key(i);
+      if (key && key.indexOf('sleep-log-') === 0) {
+        keys.push(key);
+      }
+    }
+    keys.sort().reverse();
+    var count = 0;
+    keys.forEach(function(key) {
+      if (count >= 10) return;
+      try {
+        var data = JSON.parse(localStorage.getItem(key));
+        var dateStr = key.replace('sleep-log-', '');
+        var div = document.createElement('div');
+        div.className = 'card';
+        var h3 = document.createElement('h3');
+        h3.className = 'card-title';
+        h3.textContent = dateStr;
+        div.appendChild(h3);
+
+        var info = document.createElement('p');
+        info.className = 'card-text';
+        info.style.fontSize = '0.85rem';
+        var parts = [];
+        if (data.bed_time) parts.push('Bed: ' + data.bed_time);
+        if (data.wake_time) parts.push('Wake: ' + data.wake_time);
+        if (data.sleep_quality) parts.push('Quality: ' + data.sleep_quality + '/10');
+        info.textContent = parts.join(' \u2014 ');
+        div.appendChild(info);
+
+        if (data.notes && data.notes.trim()) {
+          var p = document.createElement('p');
+          p.className = 'card-text';
+          p.style.marginTop = '0.25rem';
+          p.textContent = data.notes;
+          div.appendChild(p);
+        }
+
+        container.appendChild(div);
+        count++;
+      } catch(e) {}
+    });
+    if (count === 0) {
+      container.innerHTML = '<p style="color:var(--neutral-500);text-align:center;padding:2rem;">No sleep entries yet.</p>';
+    }
+  }
+
+  loadHistory();
+})();
+</script>
+</body>
+</html>

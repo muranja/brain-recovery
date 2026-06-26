@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Lists — Memory Tools — NeuroReboot</title>
+<meta name="description" content="Build and practice categorized word lists. Timed recall mode for speed training and memory strengthening.">
+<meta property="og:title" content="Word Lists — Memory Tools — NeuroReboot">
+<meta property="og:description" content="Build and practice categorized word lists. Timed recall mode for speed training.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/remember/word-lists.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Word Lists — Memory Tools",
+  "description": "Build and practice categorized word lists.",
+  "url": "https://muranja.github.io/brain-recovery/remember/word-lists.html"
+}
+</script>
+<style>
+.list-tabs { display:flex;gap:0.5rem;flex-wrap:wrap;margin:1rem 0; }
+.list-tab { padding:0.5rem 1rem;border:1px solid var(--neutral-300);background:white;cursor:pointer;font-family:var(--font);font-size:0.85rem;transition:all 0.15s; }
+.list-tab:hover { border-color:var(--primary); }
+.list-tab.active { background:var(--primary);color:white;border-color:var(--primary); }
+.word-grid { display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin:1rem 0; }
+.word-tile { background:var(--primary-light);border:1px solid var(--primary);padding:0.5rem 1rem;font-size:1rem;font-weight:500;color:var(--primary-dark); }
+.practice-box { background:white;border:1px solid var(--neutral-200);padding:2rem;text-align:center;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center; }
+.practice-box .p-word { font-size:1.5rem;font-weight:600;color:var(--primary-dark);margin-bottom:1rem; }
+.practice-box .p-hint { font-size:0.85rem;color:var(--neutral-500);margin-bottom:1.5rem; }
+.input-row { display:flex;gap:0.5rem;max-width:400px;margin:0 auto;flex-wrap:wrap;justify-content:center; }
+.input-row input { flex:1;min-width:120px; }
+.result-grid { display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:500px;margin:1rem auto; }
+.result-col { text-align:center; }
+.result-col h4 { font-size:0.9rem;margin-bottom:0.5rem; }
+.result-col ul { list-style:none;padding:0;font-size:0.85rem; }
+.result-col ul li { padding:0.2rem 0; }
+.correct-list { color:var(--success); }
+.wrong-list { color:var(--danger);text-decoration:line-through; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <div class="hero-badge">Word Lists</div>
+    <h1>Categorized Word Lists</h1>
+    <p>Build, study, and test yourself on word lists organized by category. Includes timed mode for speed recall training.</p>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <h2 class="section-title">Select a List</h2>
+      <div id="list-tabs" class="list-tabs"></div>
+
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+        <input type="text" id="new-custom-name" placeholder="Custom list name..." style="flex:1;min-width:140px;">
+        <input type="text" id="new-custom-words" placeholder="Comma-separated words..." style="flex:2;min-width:200px;">
+        <button id="add-custom-btn" class="btn btn-primary">Add Custom List</button>
+      </div>
+
+      <div id="list-content" style="margin-top:1rem;"></div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Practice</h2>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <button id="start-practice-btn" class="btn btn-primary">Start Practice</button>
+        <button id="start-timed-btn" class="btn btn-ghost">Timed Mode (60s)</button>
+      </div>
+
+      <div id="practice-area" class="practice-box" style="display:none;">
+        <div class="p-word" id="p-word"></div>
+        <div class="p-hint" id="p-hint"></div>
+        <div class="input-row">
+          <input type="text" id="p-input" placeholder="Type the word..." autocomplete="off">
+          <button id="p-submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div id="p-progress" style="margin-top:0.75rem;font-size:0.85rem;color:var(--neutral-500);"></div>
+        <div id="p-timer" style="margin-top:0.25rem;font-size:1.2rem;font-weight:700;color:var(--primary-dark);"></div>
+        <button id="p-stop" class="btn btn-ghost" style="margin-top:0.75rem;">Stop</button>
+      </div>
+
+      <div id="practice-results" style="display:none;margin-top:1rem;">
+        <h3 style="color:var(--primary-dark);text-align:center;">Results</h3>
+        <div class="result-grid">
+          <div class="result-col">
+            <h4 style="color:var(--success);">Correct</h4>
+            <ul id="correct-list" class="correct-list"></ul>
+          </div>
+          <div class="result-col">
+            <h4 style="color:var(--danger);">Missed</h4>
+            <ul id="missed-list" class="wrong-list"></ul>
+          </div>
+        </div>
+        <div id="final-score" style="text-align:center;font-size:1.1rem;font-weight:600;color:var(--primary-dark);margin-top:0.5rem;"></div>
+        <div style="text-align:center;margin-top:1rem;">
+          <button id="p-close" class="btn btn-ghost">Close</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../phases.html">Phases</a>
+      <a href="../donate.html">Donate</a> &middot; <a href="https://github.com/sponsors/muranja">Sponsor</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'word-lists';
+  var DEFAULT_LISTS = {
+    'Animals': ['dog', 'cat', 'elephant', 'tiger', 'giraffe', 'dolphin', 'eagle', 'penguin', 'bear', 'wolf', 'fox', 'rabbit', 'horse', 'lion', 'monkey', 'zebra', 'whale', 'shark', 'owl', 'deer'],
+    'Foods': ['apple', 'banana', 'pasta', 'cheese', 'bread', 'chicken', 'rice', 'salad', 'soup', 'eggs', 'fish', 'yogurt', 'nuts', 'beans', 'carrot', 'potato', 'tomato', 'onion', 'mushroom', 'spinach'],
+    'Emotions': ['happy', 'sad', 'angry', 'calm', 'anxious', 'excited', 'tired', 'hopeful', 'grateful', 'lonely', 'peaceful', 'proud', 'scared', 'confused', 'loved', 'brave', 'gentle', 'joyful', 'worried', 'content'],
+    'Colors': ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'black', 'white', 'gray', 'gold', 'silver', 'teal', 'navy', 'coral', 'lime', 'indigo', 'violet', 'maroon'],
+    'Objects': ['chair', 'table', 'lamp', 'clock', 'mirror', 'window', 'door', 'book', 'pen', 'phone', 'key', 'cup', 'plate', 'bowl', 'bag', 'hat', 'shoe', 'ring', 'watch', 'wallet']
+  };
+  var lists = {};
+  var currentList = null;
+  var practiceState = null;
+
+  function load() {
+    try { var d = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (d) lists = d; } catch(e) {}
+    for (var key in DEFAULT_LISTS) {
+      if (!lists[key]) lists[key] = DEFAULT_LISTS[key].slice();
+    }
+  }
+  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(lists)); }
+
+  function renderTabs() {
+    var container = document.getElementById('list-tabs');
+    var names = Object.keys(lists);
+    container.innerHTML = names.map(function(name) {
+      return '<button class="list-tab' + (name === currentList ? ' active' : '') + '" data-list="' + name.replace(/"/g, '&quot;') + '">' + name + ' (' + lists[name].length + ')</button>';
+    }).join('');
+    container.querySelectorAll('.list-tab').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        currentList = this.getAttribute('data-list');
+        renderTabs();
+        renderListContent();
+      });
+    });
+  }
+
+  function renderListContent() {
+    var container = document.getElementById('list-content');
+    if (!currentList || !lists[currentList]) {
+      container.innerHTML = '<div class="empty-state"><p>Select a list above or create one.</p></div>';
+      return;
+    }
+    var words = lists[currentList];
+    var html = '<h3 style="color:var(--primary-dark);">' + currentList + '</h3>';
+    html += '<div class="word-grid">' + words.map(function(w) { return '<span class="word-tile">' + w + '</span>'; }).join('') + '</div>';
+    html += '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.75rem;">';
+    html += '<input type="text" id="add-word-input" placeholder="Add word..." style="flex:1;min-width:120px;">';
+    html += '<button id="add-word-btn" class="btn btn-primary">Add Word</button>';
+    html += '<button id="delete-list-btn" class="btn btn-ghost" style="color:var(--danger);">Delete List</button>';
+    html += '</div>';
+    container.innerHTML = html;
+
+    document.getElementById('add-word-btn').addEventListener('click', function() {
+      var input = document.getElementById('add-word-input');
+      var word = input.value.trim().toLowerCase();
+      if (!word) return;
+      lists[currentList].push(word);
+      save();
+      renderTabs();
+      renderListContent();
+    });
+    document.getElementById('add-word-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') document.getElementById('add-word-btn').click();
+    });
+    document.getElementById('delete-list-btn').addEventListener('click', function() {
+      if (!confirm('Delete list "' + currentList + '"?')) return;
+      delete lists[currentList];
+      currentList = Object.keys(lists)[0] || null;
+      save();
+      renderTabs();
+      renderListContent();
+    });
+  }
+
+  function startPractice(timed) {
+    if (!currentList || !lists[currentList] || !lists[currentList].length) {
+      alert('Select a list with words first.'); return;
+    }
+    var words = lists[currentList].slice();
+    words.sort(function() { return Math.random() - 0.5; });
+    var remaining = words.slice();
+    var correct = [];
+    var missed = [];
+
+    practiceState = {
+      words: words,
+      remaining: remaining,
+      correct: correct,
+      missed: missed,
+      timed: timed,
+      timeLeft: timed ? 60 : null,
+      index: 0,
+      active: true,
+      timerInterval: null
+    };
+
+    document.getElementById('practice-area').style.display = 'flex';
+    document.getElementById('practice-results').style.display = 'none';
+    document.getElementById('p-input').value = '';
+    document.getElementById('p-input').disabled = false;
+    document.getElementById('p-submit').disabled = false;
+    document.getElementById('p-input').focus();
+
+    if (timed && practiceState.timerInterval) clearInterval(practiceState.timerInterval);
+    if (timed) {
+      practiceState.timerInterval = setInterval(function() {
+        practiceState.timeLeft--;
+        document.getElementById('p-timer').textContent = practiceState.timeLeft + 's';
+        if (practiceState.timeLeft <= 0) endPractice();
+      }, 1000);
+    } else {
+      document.getElementById('p-timer').textContent = '';
+    }
+
+    showNextWord();
+  }
+
+  function showNextWord() {
+    if (!practiceState || !practiceState.active) return;
+    var remaining = practiceState.remaining;
+    if (!remaining.length) { endPractice(); return; }
+    var word = remaining[0];
+    document.getElementById('p-word').textContent = word;
+    document.getElementById('p-hint').textContent = 'Word ' + (practiceState.correct.length + practiceState.missed.length + 1) + ' of ' + practiceState.words.length;
+    document.getElementById('p-progress').textContent = practiceState.correct.length + ' correct, ' + practiceState.missed.length + ' missed';
+    document.getElementById('p-input').value = '';
+    document.getElementById('p-input').focus();
+  }
+
+  function submitWord() {
+    if (!practiceState || !practiceState.active) return;
+    var input = document.getElementById('p-input');
+    var typed = input.value.trim().toLowerCase();
+    input.value = '';
+    if (!typed) return;
+
+    var remaining = practiceState.remaining;
+    if (!remaining.length) { endPractice(); return; }
+    var target = remaining[0];
+    if (typed === target) {
+      practiceState.correct.push(target);
+    } else {
+      practiceState.missed.push(target);
+    }
+    remaining.shift();
+    showNextWord();
+  }
+
+  function endPractice() {
+    if (!practiceState) return;
+    practiceState.active = false;
+    if (practiceState.timerInterval) clearInterval(practiceState.timerInterval);
+
+    document.getElementById('practice-area').style.display = 'none';
+    document.getElementById('practice-results').style.display = 'block';
+
+    var correctUl = document.getElementById('correct-list');
+    var missedUl = document.getElementById('missed-list');
+    correctUl.innerHTML = practiceState.correct.map(function(w) { return '<li>' + w + '</li>'; }).join('');
+    missedUl.innerHTML = practiceState.missed.map(function(w) { return '<li>' + w + '</li>'; }).join('');
+
+    var total = practiceState.correct.length + practiceState.missed.length;
+    var pct = total ? Math.round((practiceState.correct.length / total) * 100) : 0;
+    document.getElementById('final-score').textContent = practiceState.correct.length + ' / ' + total + ' correct (' + pct + '%)';
+    practiceState = null;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    load();
+    if (Object.keys(lists).length) currentList = Object.keys(lists)[0];
+    renderTabs();
+    renderListContent();
+
+    document.getElementById('add-custom-btn').addEventListener('click', function() {
+      var name = document.getElementById('new-custom-name').value.trim();
+      var wordsStr = document.getElementById('new-custom-words').value.trim();
+      if (!name || !wordsStr) { alert('Enter a name and comma-separated words.'); return; }
+      var wordArr = wordsStr.split(',').map(function(w) { return w.trim().toLowerCase(); }).filter(Boolean);
+      if (!wordArr.length) { alert('Enter at least one word.'); return; }
+      lists[name] = wordArr;
+      currentList = name;
+      document.getElementById('new-custom-name').value = '';
+      document.getElementById('new-custom-words').value = '';
+      save();
+      renderTabs();
+      renderListContent();
+    });
+
+    document.getElementById('start-practice-btn').addEventListener('click', function() { startPractice(false); });
+    document.getElementById('start-timed-btn').addEventListener('click', function() { startPractice(true); });
+    document.getElementById('p-submit').addEventListener('click', submitWord);
+    document.getElementById('p-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') submitWord(); });
+    document.getElementById('p-stop').addEventListener('click', endPractice);
+    document.getElementById('p-close').addEventListener('click', function() {
+      document.getElementById('practice-results').style.display = 'none';
+    });
+  });
+})();
+</script>
+</body>
+</html>

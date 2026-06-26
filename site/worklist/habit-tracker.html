@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habit Tracker — NeuroReboot Worklist</title>
+<meta name="description" content="Track daily habits that support your recovery with a weekly habit tracker.">
+<meta property="og:title" content="Habit Tracker — NeuroReboot Worklist">
+<meta property="og:description" content="Track daily habits that support your recovery with a weekly habit tracker.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/habit-tracker.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Habit Tracker — NeuroReboot Worklist">
+<meta name="twitter:description" content="Track daily habits that support your recovery with a weekly habit tracker.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/habit-tracker.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Habit Tracker — NeuroReboot Worklist",
+  "description": "Track daily habits that support your recovery with a weekly habit tracker.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/habit-tracker.html"
+}
+</script>
+<style>
+.habit-grid { overflow-x: auto; }
+.habit-grid table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: white; }
+.habit-grid th, .habit-grid td { padding: 0.6rem 0.5rem; text-align: center; border-bottom: 1px solid var(--neutral-200); }
+.habit-grid th { background: var(--primary); color: white; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.habit-grid th:first-child { text-align: left; min-width: 180px; }
+.habit-grid td:first-child { text-align: left; font-weight: 500; color: var(--neutral-800); }
+.habit-grid tr:nth-child(even) td { background: var(--neutral-50); }
+.habit-grid input[type="checkbox"] { width: 1.1rem; height: 1.1rem; accent-color: var(--primary); cursor: pointer; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <section aria-labelledby="habit-heading">
+      <h1 id="habit-heading" class="section-title">Habit Tracker</h1>
+      <p class="section-subtitle">Track the daily habits that support your neurological recovery.</p>
+    </section>
+
+    <section aria-label="Week selector and progress">
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+        <div>
+          <label for="week-start" style="font-size:0.9rem;font-weight:600;color:var(--neutral-700);">Week of:</label>
+          <input type="date" id="week-start" style="border:1px solid var(--neutral-300);padding:0.4rem 0.75rem;font-family:var(--font);font-size:0.9rem;margin-left:0.5rem;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--neutral-500);margin-bottom:0.25rem;">
+            <span>Weekly progress</span>
+            <span class="progress-text">0%</span>
+          </div>
+          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-fill" style="width:0%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Habit checklist grid">
+      <div class="habit-grid">
+        <table id="habit-table">
+          <thead>
+            <tr>
+              <th>Habit</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+              <th>Sun</th>
+            </tr>
+          </thead>
+          <tbody id="habit-body">
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var habits = [
+    'Morning sunlight 10min',
+    'Hydration + salt',
+    'Cold shower',
+    'Supplements (AM)',
+    'Memory drill',
+    'Walk (no phone)',
+    'Supplements (PM)',
+    'Digital sunset',
+    'Grounding exercise',
+    'Bed by 10:30pm'
+  ];
+
+  var days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+  var weekInput = document.getElementById('week-start');
+  var tbody = document.getElementById('habit-body');
+  var progressFill = document.querySelector('.progress-fill');
+  var progressText = document.querySelector('.progress-text');
+
+  function getMonday(d) {
+    var date = new Date(d);
+    var day = date.getDay();
+    var diff = date.getDate() - day + (day === 0 ? -6 : 1);
+    date.setDate(diff);
+    return date.toISOString().split('T')[0];
+  }
+
+  var today = new Date().toISOString().split('T')[0];
+  weekInput.value = getMonday(today);
+
+  function getKey() {
+    return 'habits-' + weekInput.value;
+  }
+
+  function renderTable() {
+    tbody.innerHTML = '';
+    var saved = localStorage.getItem(getKey());
+    var data = {};
+    if (saved) {
+      try { data = JSON.parse(saved); } catch(e) {}
+    }
+
+    habits.forEach(function(habit, hi) {
+      var tr = document.createElement('tr');
+      var tdLabel = document.createElement('td');
+      tdLabel.textContent = habit;
+      tr.appendChild(tdLabel);
+
+      days.forEach(function(day) {
+        var td = document.createElement('td');
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        var id = 'h-' + hi + '-' + day;
+        cb.id = id;
+        var key = hi + '-' + day;
+        if (data[key]) cb.checked = true;
+
+        cb.addEventListener('change', function() {
+          data[key] = cb.checked;
+          localStorage.setItem(getKey(), JSON.stringify(data));
+          updateProgress();
+        });
+
+        td.appendChild(cb);
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    updateProgress();
+  }
+
+  function updateProgress() {
+    var allCbs = tbody.querySelectorAll('input[type="checkbox"]');
+    var checked = tbody.querySelectorAll('input[type="checkbox"]:checked');
+    var total = allCbs.length;
+    var done = checked.length;
+    var pct = total ? Math.round((done / total) * 100) : 0;
+
+    progressFill.style.width = pct + '%';
+    progressText.textContent = pct + '%';
+    progressFill.parentElement.setAttribute('aria-valuenow', String(pct));
+  }
+
+  renderTable();
+
+  weekInput.addEventListener('change', renderTable);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symptom Tracker — NeuroReboot Worklist</title>
+<meta name="description" content="Log symptoms and identify patterns over time with a simple symptom tracker.">
+<meta property="og:title" content="Symptom Tracker — NeuroReboot Worklist">
+<meta property="og:description" content="Log symptoms and identify patterns over time with a simple symptom tracker.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/symptom-tracker.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Symptom Tracker — NeuroReboot Worklist">
+<meta name="twitter:description" content="Log symptoms and identify patterns over time with a simple symptom tracker.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/symptom-tracker.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Symptom Tracker — NeuroReboot Worklist",
+  "description": "Log symptoms and identify patterns over time with a simple symptom tracker.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/symptom-tracker.html"
+}
+</script>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <section aria-labelledby="symptom-heading">
+      <h1 id="symptom-heading" class="section-title">Symptom Tracker</h1>
+      <p class="section-subtitle">Log your symptoms and identify patterns over time. All data stays in your browser.</p>
+    </section>
+
+    <section aria-label="Symptom log form">
+      <form class="tracker-form" id="symptom-tracker" novalidate>
+        <p style="font-size:0.85rem;color:var(--neutral-500);margin-bottom:1rem;">
+          <label for="tracker-date">Date:</label>
+          <input type="date" id="tracker-date" name="date" style="border:1px solid var(--neutral-300);padding:0.25rem 0.5rem;font-family:var(--font);font-size:0.85rem;margin-left:0.5rem;">
+        </p>
+
+        <fieldset style="border:none;padding:0;">
+          <legend class="form-section" style="font-size:0.95rem;font-weight:600;color:var(--primary-dark);margin:1.5rem 0 0.5rem;">Symptoms (1&ndash;10)</legend>
+
+          <div class="mood-row">
+            <label for="loop-intensity">Looping Intensity</label>
+            <input type="range" id="loop-intensity" name="loop_intensity" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+
+          <div class="mood-row">
+            <label for="memory-clarity">Memory Clarity</label>
+            <input type="range" id="memory-clarity" name="memory_clarity" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+
+          <div class="mood-row">
+            <label for="energy-level">Energy Level</label>
+            <input type="range" id="energy-level" name="energy_level" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+
+          <div class="mood-row">
+            <label for="anxiety-level">Anxiety</label>
+            <input type="range" id="anxiety-level" name="anxiety_level" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+
+          <div class="mood-row">
+            <label for="sleep-quality">Sleep Quality</label>
+            <input type="range" id="sleep-quality" name="sleep_quality" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+        </fieldset>
+
+        <div style="margin-top:1.5rem;">
+          <label for="tracker-notes" class="form-section" style="display:block;margin-bottom:0.5rem;">Notes</label>
+          <textarea id="tracker-notes" name="notes" rows="4" style="width:100%;padding:0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;resize:vertical;" placeholder="Any observations, triggers, or patterns..."></textarea>
+        </div>
+
+        <div style="margin-top:1.5rem;display:flex;align-items:center;gap:1rem;">
+          <button type="submit" class="btn btn-primary">Save Entry</button>
+          <span class="save-msg" style="font-size:0.85rem;color:var(--success);opacity:0;transition:opacity 0.3s;" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+
+    <section aria-labelledby="history-heading" style="margin-top:3rem;">
+      <h2 id="history-heading" class="section-title">Recent Entries</h2>
+      <p class="section-subtitle">View your recent symptom logs.</p>
+      <div id="entry-history" style="display:grid;gap:1rem;"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var form = document.getElementById('symptom-tracker');
+  var dateInput = document.getElementById('tracker-date');
+  var today = new Date().toISOString().split('T')[0];
+  dateInput.value = today;
+
+  function getKey() {
+    return 'symptom-tracker-' + (dateInput.value || today);
+  }
+
+  function loadEntry() {
+    var saved = localStorage.getItem(getKey());
+    if (!saved) return;
+    try {
+      var data = JSON.parse(saved);
+      for (var key in data) {
+        if (!data.hasOwnProperty(key)) continue;
+        var el = form.querySelector('[name="' + key + '"]');
+        if (!el) continue;
+        if (el.type === 'range') {
+          el.value = data[key];
+          var valDisplay = el.parentElement.querySelector('.slider-value');
+          if (valDisplay) valDisplay.textContent = data[key];
+        } else {
+          el.value = data[key];
+        }
+      }
+    } catch(e) {}
+  }
+
+  loadEntry();
+
+  dateInput.addEventListener('change', loadEntry);
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = {};
+    form.querySelectorAll('[name]').forEach(function(el) {
+      if (el.type === 'range') {
+        data[el.name] = el.value;
+      } else {
+        data[el.name] = el.value;
+      }
+    });
+    localStorage.setItem(getKey(), JSON.stringify(data));
+
+    var msg = form.querySelector('.save-msg');
+    msg.textContent = 'Saved for ' + (dateInput.value || today);
+    msg.style.opacity = '1';
+    setTimeout(function() { msg.style.opacity = '0'; }, 2000);
+
+    loadHistory();
+  });
+
+  function loadHistory() {
+    var container = document.getElementById('entry-history');
+    container.innerHTML = '';
+    var keys = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      var key = localStorage.key(i);
+      if (key && key.indexOf('symptom-tracker-') === 0) {
+        keys.push(key);
+      }
+    }
+    keys.sort().reverse();
+    var count = 0;
+    keys.forEach(function(key) {
+      if (count >= 10) return;
+      try {
+        var data = JSON.parse(localStorage.getItem(key));
+        var dateStr = key.replace('symptom-tracker-', '');
+        var div = document.createElement('div');
+        div.className = 'card';
+        var h3 = document.createElement('h3');
+        h3.className = 'card-title';
+        h3.textContent = dateStr;
+        div.appendChild(h3);
+
+        var symptoms = [
+          { key: 'loop_intensity', label: 'Looping' },
+          { key: 'memory_clarity', label: 'Memory' },
+          { key: 'energy_level', label: 'Energy' },
+          { key: 'anxiety_level', label: 'Anxiety' },
+          { key: 'sleep_quality', label: 'Sleep' }
+        ];
+
+        var row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.gap = '1rem';
+        row.style.flexWrap = 'wrap';
+        row.style.marginTop = '0.5rem';
+
+        symptoms.forEach(function(s) {
+          if (data[s.key]) {
+            var span = document.createElement('span');
+            span.style.fontSize = '0.8rem';
+            span.style.color = 'var(--neutral-600)';
+            span.textContent = s.label + ': ' + data[s.key] + '/10';
+            row.appendChild(span);
+          }
+        });
+        div.appendChild(row);
+
+        if (data.notes && data.notes.trim()) {
+          var p = document.createElement('p');
+          p.className = 'card-text';
+          p.style.marginTop = '0.5rem';
+          p.textContent = data.notes;
+          div.appendChild(p);
+        }
+
+        container.appendChild(div);
+        count++;
+      } catch(e) {}
+    });
+    if (count === 0) {
+      container.innerHTML = '<p style="color:var(--neutral-500);text-align:center;padding:2rem;">No entries yet.</p>';
+    }
+  }
+
+  loadHistory();
+})();
+</script>
+</body>
+</html>

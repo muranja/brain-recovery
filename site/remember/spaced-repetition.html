@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spaced Repetition — Memory Tools — NeuroReboot</title>
+<meta name="description" content="The most effective memory technique in neuroscience. Use our interactive spaced repetition trainer to move knowledge into long-term memory.">
+<meta property="og:title" content="Spaced Repetition — Memory Tools — NeuroReboot">
+<meta property="og:description" content="The most effective memory technique in neuroscience. Use our interactive spaced repetition trainer.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/remember/spaced-repetition.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Spaced Repetition — Memory Tools",
+  "description": "Interactive spaced repetition trainer for memory recovery.",
+  "url": "https://muranja.github.io/brain-recovery/remember/spaced-repetition.html"
+}
+</script>
+<style>
+.interval-display { display:flex;gap:1rem;flex-wrap:wrap;margin:1rem 0; }
+.interval-card { background:white;border:1px solid var(--neutral-200);padding:1rem;flex:1;min-width:120px;text-align:center; }
+.interval-card .label { font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--neutral-500);font-weight:600; }
+.interval-card .value { font-size:1.5rem;font-weight:700;color:var(--primary-dark);margin-top:0.25rem; }
+.item-list { list-style:none;padding:0; }
+.item-list li { display:flex;align-items:center;justify-content:space-between;padding:0.75rem;border-bottom:1px solid var(--neutral-200);font-size:0.9rem; }
+.item-list li:last-child { border-bottom:none; }
+.item-list .status { font-size:0.75rem;font-weight:600;padding:0.15rem 0.5rem; }
+.status-due { background:#fee2e2;color:#dc2626; }
+.status-ok { background:var(--success-bg);color:var(--success); }
+.status-wait { background:var(--warning-bg);color:#92400e; }
+.review-btn { margin-left:0.5rem;font-size:0.8rem;cursor:pointer; }
+.review-area { background:white;border:1px solid var(--neutral-200);padding:2rem;text-align:center;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center; }
+.review-area .item-text { font-size:1.5rem;font-weight:600;color:var(--primary-dark);margin-bottom:1rem; }
+.review-area .hint-text { font-size:0.85rem;color:var(--neutral-500);margin-bottom:1.5rem; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <div class="hero-badge">Memory Technique</div>
+    <h1>Spaced Repetition</h1>
+    <p>Review information at scientifically-optimized intervals. The single most effective technique for long-term retention.</p>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <h2 class="section-title">How It Works</h2>
+      <p>Spaced repetition exploits the <strong>spacing effect</strong>: we remember information better when reviews are spread out over time rather than crammed in one session. Each time you successfully recall an item, the interval until the next review increases. Your brain strengthens the neural pathway each time it successfully retrieves the memory.</p>
+      <p style="margin-top:1rem;">This tool uses a modified <strong>Leitner system</strong> with intervals of: 1 minute, 10 minutes, 1 hour, 4 hours, 1 day, 3 days, 1 week, 2 weeks, 1 month. Items automatically advance through the levels as you recall them.</p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Your Items</h2>
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+        <input type="text" id="new-item-input" placeholder="Enter something to remember..." style="flex:1;min-width:200px;">
+        <button id="add-item-btn" class="btn btn-primary">Add Item</button>
+        <button id="start-review-btn" class="btn btn-ghost">Start Review</button>
+        <button id="reset-items-btn" class="btn btn-ghost" style="color:var(--danger);">Reset All</button>
+      </div>
+
+      <div class="interval-display" id="interval-display"></div>
+
+      <div id="review-area" class="review-area" style="display:none;">
+        <div class="item-text" id="review-item-text"></div>
+        <div class="hint-text" id="review-hint">Think of the answer. Tap "Show Answer" when ready.</div>
+        <div id="review-answer" style="display:none;margin-bottom:1rem;font-size:1.1rem;font-weight:500;color:var(--primary);padding:1rem;background:var(--primary-light);width:100%;max-width:400px;"></div>
+        <div style="display:flex;gap:0.5rem;">
+          <button id="review-show-btn" class="btn btn-primary">Show Answer</button>
+          <button id="review-correct-btn" class="btn btn-primary" style="display:none;background:var(--success);">Correct</button>
+          <button id="review-wrong-btn" class="btn btn-ghost" style="display:none;color:var(--danger);border-color:var(--danger);">Wrong</button>
+          <button id="review-stop-btn" class="btn btn-ghost">Stop Review</button>
+        </div>
+        <div id="review-progress" style="margin-top:1rem;font-size:0.85rem;color:var(--neutral-500);"></div>
+      </div>
+
+      <div id="empty-items" class="empty-state">
+        <p>No items yet. Add something you want to remember.</p>
+      </div>
+      <ul class="item-list" id="item-list"></ul>
+    </section>
+
+    <section>
+      <h2 class="section-title">The Science</h2>
+      <p>Spaced repetition was pioneered by <strong>Hermann Ebbinghaus</strong> in 1885, who discovered the <strong>forgetting curve</strong>: we lose about 50% of new information within an hour, and 90% within a week — unless we review it. Each review flattens the forgetting curve, making the memory more durable.</p>
+      <p style="margin-top:1rem;">Modern research confirms that <strong>active recall</strong> (retrieving information from memory) is far more effective than passive review (re-reading). This is called the <strong>testing effect</strong>. Combining active recall with spaced intervals produces some of the largest effect sizes in all of cognitive psychology (d &gt; 1.0).</p>
+      <p style="margin-top:1rem;">For neurological recovery, spaced repetition is especially valuable because it works with impaired encoding. Even if initial encoding is weak, repeated retrieval attempts strengthen the trace over time. It builds confidence by showing tangible progress.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../blog/index.html">Blog</a> &middot; <a href="../phases.html">Phases</a>
+      <a href="../donate.html">Donate</a> &middot; <a href="https://github.com/sponsors/muranja">Sponsor</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'sr-items';
+  var INTERVALS = [
+    { name: '1 min', ms: 60000 },
+    { name: '10 min', ms: 600000 },
+    { name: '1 hour', ms: 3600000 },
+    { name: '4 hours', ms: 14400000 },
+    { name: '1 day', ms: 86400000 },
+    { name: '3 days', ms: 259200000 },
+    { name: '1 week', ms: 604800000 },
+    { name: '2 weeks', ms: 1209600000 },
+    { name: '1 month', ms: 2592000000 }
+  ];
+  var items = [];
+  var reviewQueue = [];
+  var reviewIndex = 0;
+  var reviewActive = false;
+
+  function load() {
+    try { var d = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (d) items = d; } catch(e) {}
+  }
+  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); }
+
+  function getLevel(level) { return level < INTERVALS.length ? level : INTERVALS.length - 1; }
+  function getInterval(level) { var idx = getLevel(level); return INTERVALS[idx] || INTERVALS[INTERVALS.length - 1]; }
+
+  function render() {
+    var list = document.getElementById('item-list');
+    var empty = document.getElementById('empty-items');
+    var intervalDisplay = document.getElementById('interval-display');
+
+    if (!items.length) {
+      list.innerHTML = '';
+      empty.style.display = 'block';
+      intervalDisplay.innerHTML = '';
+      return;
+    }
+    empty.style.display = 'none';
+
+    var now = Date.now();
+    var levels = {};
+    items.forEach(function(it) { levels[it.level] = (levels[it.level] || 0) + 1; });
+    var html = '';
+    for (var i = 0; i < INTERVALS.length; i++) {
+      var count = levels[i] || 0;
+      html += '<div class="interval-card"><div class="label">' + INTERVALS[i].name + '</div><div class="value">' + count + '</div></div>';
+    }
+    intervalDisplay.innerHTML = html;
+
+    list.innerHTML = items.map(function(it, idx) {
+      var due = it.nextReview <= now;
+      var statusClass = due ? 'status-due' : (it.level === 0 ? 'status-ok' : 'status-wait');
+      var statusText = due ? 'DUE' : (it.level === 0 ? 'New' : 'Review in');
+      var timeLeft = '';
+      if (!due && it.level > 0) {
+        var diff = it.nextReview - now;
+        if (diff < 3600000) timeLeft = Math.ceil(diff / 60000) + 'm';
+        else if (diff < 86400000) timeLeft = Math.ceil(diff / 3600000) + 'h';
+        else timeLeft = Math.ceil(diff / 86400000) + 'd';
+      }
+      return '<li>' +
+        '<span>' + it.text + ' <span class="status ' + statusClass + '">' + statusText + (timeLeft ? ' ' + timeLeft : '') + '</span></span>' +
+        '<span><button class="review-btn btn btn-ghost" data-index="' + idx + '" style="padding:0.25rem 0.5rem;font-size:0.75rem;">Review</button>' +
+        ' <button class="delete-btn btn btn-ghost" data-index="' + idx + '" style="padding:0.25rem 0.5rem;font-size:0.75rem;color:var(--danger);">&times;</button></span>' +
+        '</li>';
+    }).join('');
+
+    list.querySelectorAll('.review-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = parseInt(this.getAttribute('data-index'));
+        startSingleReview(idx);
+      });
+    });
+    list.querySelectorAll('.delete-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = parseInt(this.getAttribute('data-index'));
+        items.splice(idx, 1);
+        save();
+        render();
+      });
+    });
+  }
+
+  function addItem() {
+    var input = document.getElementById('new-item-input');
+    var text = input.value.trim();
+    if (!text) return;
+    items.push({ text: text, level: 0, nextReview: Date.now(), created: Date.now() });
+    input.value = '';
+    save();
+    render();
+  }
+
+  function startSingleReview(idx) {
+    if (reviewActive) return;
+    reviewQueue = [idx];
+    reviewIndex = 0;
+    beginReview();
+  }
+
+  function startReview() {
+    var now = Date.now();
+    reviewQueue = [];
+    items.forEach(function(it, idx) {
+      if (it.nextReview <= now) reviewQueue.push(idx);
+    });
+    if (!reviewQueue.length) { alert('No items due for review! Add more items or check back later.'); return; }
+    reviewIndex = 0;
+    beginReview();
+  }
+
+  function beginReview() {
+    reviewActive = true;
+    document.getElementById('review-area').style.display = 'flex';
+    document.getElementById('start-review-btn').disabled = true;
+    showCurrentReview();
+  }
+
+  function showCurrentReview() {
+    if (reviewIndex >= reviewQueue.length) {
+      endReview();
+      return;
+    }
+    var idx = reviewQueue[reviewIndex];
+    var item = items[idx];
+    if (!item) { reviewIndex++; showCurrentReview(); return; }
+    document.getElementById('review-item-text').textContent = item.text;
+    document.getElementById('review-hint').style.display = 'block';
+    document.getElementById('review-answer').style.display = 'none';
+    document.getElementById('review-answer').textContent = '';
+    document.getElementById('review-show-btn').style.display = 'inline-block';
+    document.getElementById('review-correct-btn').style.display = 'none';
+    document.getElementById('review-wrong-btn').style.display = 'none';
+    document.getElementById('review-progress').textContent = 'Item ' + (reviewIndex + 1) + ' of ' + reviewQueue.length;
+  }
+
+  function showAnswer() {
+    var idx = reviewQueue[reviewIndex];
+    var item = items[idx];
+    document.getElementById('review-hint').style.display = 'none';
+    document.getElementById('review-answer').textContent = item.text;
+    document.getElementById('review-answer').style.display = 'block';
+    document.getElementById('review-show-btn').style.display = 'none';
+    document.getElementById('review-correct-btn').style.display = 'inline-block';
+    document.getElementById('review-wrong-btn').style.display = 'inline-block';
+  }
+
+  function handleReview(correct) {
+    var idx = reviewQueue[reviewIndex];
+    var item = items[idx];
+    if (correct) {
+      item.level = Math.min(item.level + 1, INTERVALS.length - 1);
+    } else {
+      item.level = Math.max(0, item.level - 1);
+    }
+    var interval = getInterval(item.level);
+    item.nextReview = Date.now() + interval.ms;
+    save();
+    reviewIndex++;
+    showCurrentReview();
+  }
+
+  function endReview() {
+    reviewActive = false;
+    document.getElementById('review-area').style.display = 'none';
+    document.getElementById('start-review-btn').disabled = false;
+    render();
+  }
+
+  function resetAll() {
+    if (!confirm('Delete all items?')) return;
+    items = [];
+    save();
+    render();
+    if (reviewActive) endReview();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    load();
+    render();
+
+    document.getElementById('add-item-btn').addEventListener('click', addItem);
+    document.getElementById('new-item-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') addItem(); });
+    document.getElementById('start-review-btn').addEventListener('click', startReview);
+    document.getElementById('reset-items-btn').addEventListener('click', resetAll);
+    document.getElementById('review-show-btn').addEventListener('click', showAnswer);
+    document.getElementById('review-correct-btn').addEventListener('click', function() { handleReview(true); });
+    document.getElementById('review-wrong-btn').addEventListener('click', function() { handleReview(false); });
+    document.getElementById('review-stop-btn').addEventListener('click', function() { if (reviewActive) endReview(); });
+  });
+})();
+</script>
+</body>
+</html>

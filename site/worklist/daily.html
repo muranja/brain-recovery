@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Planner — NeuroReboot Worklist</title>
+<meta name="description" content="Plan your day hour by hour with a structured template for mental health recovery.">
+<meta property="og:title" content="Daily Planner — NeuroReboot Worklist">
+<meta property="og:description" content="Plan your day hour by hour with a structured template for mental health recovery.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/daily.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daily Planner — NeuroReboot Worklist">
+<meta name="twitter:description" content="Plan your day hour by hour with a structured template for mental health recovery.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/daily.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Daily Planner — NeuroReboot Worklist",
+  "description": "Plan your day hour by hour with a structured template for mental health recovery.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/daily.html"
+}
+</script>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <section aria-labelledby="daily-heading">
+      <h1 id="daily-heading" class="section-title">Daily Planner</h1>
+      <p class="section-subtitle">Structure your day to support nervous system stability and recovery.</p>
+    </section>
+
+    <section aria-label="Daily planning form">
+      <form class="tracker-form" id="daily-planner" novalidate>
+        <div style="margin-bottom:1.5rem;">
+          <label for="planner-date" style="font-weight:600;font-size:0.9rem;color:var(--neutral-700);">Date:</label>
+          <input type="date" id="planner-date" name="date" style="border:1px solid var(--neutral-300);padding:0.4rem 0.75rem;font-family:var(--font);font-size:0.9rem;margin-left:0.75rem;">
+        </div>
+
+        <fieldset style="border:none;padding:0;margin-bottom:1.5rem;">
+          <legend class="form-section">Morning</legend>
+          <div style="margin:0.75rem 0;">
+            <label for="wake-time" style="font-size:0.9rem;font-weight:500;color:var(--neutral-700);display:block;margin-bottom:0.25rem;">Wake time</label>
+            <input type="time" id="wake-time" name="wake_time" style="border:1px solid var(--neutral-300);padding:0.4rem 0.75rem;font-family:var(--font);font-size:0.9rem;">
+          </div>
+          <ul class="checklist" style="margin-top:0.5rem;">
+            <li>
+              <input type="checkbox" id="morning-sunlight" name="morning_sunlight">
+              <label for="morning-sunlight">Morning sunlight 10+ min</label>
+            </li>
+            <li>
+              <input type="checkbox" id="morning-meditation" name="morning_meditation">
+              <label for="morning-meditation">Meditation or stillness</label>
+            </li>
+            <li>
+              <input type="checkbox" id="morning-hydration" name="morning_hydration">
+              <label for="morning-hydration">Hydration + salt</label>
+            </li>
+          </ul>
+        </fieldset>
+
+        <fieldset style="border:none;padding:0;margin-bottom:1.5rem;">
+          <legend class="form-section">Priority Tasks</legend>
+          <p style="font-size:0.85rem;color:var(--neutral-500);margin-bottom:0.75rem;">Choose 3 priority tasks for today.</p>
+          <div style="display:grid;gap:0.75rem;">
+            <div>
+              <label for="task-1" style="font-size:0.85rem;font-weight:500;color:var(--neutral-600);display:block;margin-bottom:0.25rem;">Task 1 (most important)</label>
+              <input type="text" id="task-1" name="task_1" placeholder="What must get done today?" style="width:100%;padding:0.6rem 0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;">
+            </div>
+            <div>
+              <label for="task-2" style="font-size:0.85rem;font-weight:500;color:var(--neutral-600);display:block;margin-bottom:0.25rem;">Task 2</label>
+              <input type="text" id="task-2" name="task_2" placeholder="Second priority" style="width:100%;padding:0.6rem 0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;">
+            </div>
+            <div>
+              <label for="task-3" style="font-size:0.85rem;font-weight:500;color:var(--neutral-600);display:block;margin-bottom:0.25rem;">Task 3</label>
+              <input type="text" id="task-3" name="task_3" placeholder="Third priority" style="width:100%;padding:0.6rem 0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:none;padding:0;margin-bottom:1.5rem;">
+          <legend class="form-section">Midday</legend>
+          <ul class="checklist" style="margin-top:0.5rem;">
+            <li>
+              <input type="checkbox" id="midday-lunch" name="midday_lunch">
+              <label for="midday-lunch">Nutritious lunch (protein + healthy fats)</label>
+            </li>
+            <li>
+              <input type="checkbox" id="midday-walk" name="midday_walk">
+              <label for="midday-walk">Walk outdoors (no phone)</label>
+            </li>
+            <li>
+              <input type="checkbox" id="midday-supplements" name="midday_supplements">
+              <label for="midday-supplements">Supplements (PM dose)</label>
+            </li>
+          </ul>
+        </fieldset>
+
+        <fieldset style="border:none;padding:0;margin-bottom:1.5rem;">
+          <legend class="form-section">Evening</legend>
+          <ul class="checklist" style="margin-top:0.5rem;">
+            <li>
+              <input type="checkbox" id="evening-digital-sunset" name="evening_digital_sunset">
+              <label for="evening-digital-sunset">Digital sunset (screens off 1hr before bed)</label>
+            </li>
+            <li>
+              <input type="checkbox" id="evening-grounding" name="evening_grounding">
+              <label for="evening-grounding">Grounding exercise</label>
+            </li>
+            <li>
+              <input type="checkbox" id="evening-bedtime" name="evening_bedtime">
+              <label for="evening-bedtime">In bed by 10:30pm</label>
+            </li>
+          </ul>
+        </fieldset>
+
+        <div style="margin-bottom:1.5rem;">
+          <label for="planner-notes" class="form-section" style="display:block;margin-bottom:0.5rem;">Notes</label>
+          <textarea id="planner-notes" name="notes" rows="4" style="width:100%;padding:0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;resize:vertical;" placeholder="Reflections, observations, or anything on your mind..."></textarea>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <button type="submit" class="btn btn-primary">Save Day</button>
+          <span class="save-msg" style="font-size:0.85rem;color:var(--success);opacity:0;transition:opacity 0.3s;" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var form = document.getElementById('daily-planner');
+  var dateInput = document.getElementById('planner-date');
+  var today = new Date().toISOString().split('T')[0];
+  dateInput.value = today;
+
+  function getKey() {
+    return 'daily-plan-' + (dateInput.value || today);
+  }
+
+  function loadEntry() {
+    var key = getKey();
+    var saved = localStorage.getItem(key);
+    if (!saved) return;
+    try {
+      var data = JSON.parse(saved);
+      for (var key in data) {
+        if (!data.hasOwnProperty(key)) continue;
+        var el = form.querySelector('[name="' + key + '"]');
+        if (!el) continue;
+        if (el.type === 'checkbox') {
+          el.checked = data[key];
+        } else {
+          el.value = data[key];
+        }
+      }
+    } catch(e) {}
+  }
+
+  loadEntry();
+
+  dateInput.addEventListener('change', loadEntry);
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = {};
+    form.querySelectorAll('[name]').forEach(function(el) {
+      if (el.type === 'checkbox') {
+        data[el.name] = el.checked;
+      } else {
+        data[el.name] = el.value;
+      }
+    });
+    localStorage.setItem(getKey(), JSON.stringify(data));
+
+    var msg = form.querySelector('.save-msg');
+    var label = dateInput.value || today;
+    msg.textContent = 'Saved for ' + label;
+    msg.style.opacity = '1';
+    setTimeout(function() { msg.style.opacity = '0'; }, 2000);
+  });
+})();
+</script>
+</body>
+</html>

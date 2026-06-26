@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stroop Test &mdash; Brain Games &mdash; NeuroReboot</title>
+<meta name="description" content="Classic Stroop test measuring executive function and cognitive inhibition. Name the ink color, not the word.">
+<meta property="og:title" content="Stroop Test &mdash; Brain Games &mdash; NeuroReboot">
+<meta property="og:description" content="Classic Stroop test measuring executive function and cognitive inhibition.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/games/custom/stroop.html">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Stroop Test &mdash; Brain Games",
+  "description": "Classic Stroop test measuring executive function and cognitive inhibition.",
+  "url": "https://muranja.github.io/brain-recovery/games/custom/stroop.html"
+}
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Space Grotesk',sans-serif;background:#fafaf9;color:#1c1917;line-height:1.7}
+nav{background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:0 1.5rem;position:sticky;top:0;z-index:50}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{font-weight:700;font-size:1.125rem;color:#2d5557;text-decoration:none}
+.nav-links{display:flex;gap:.25rem}
+.nav-links a{color:#57534e;text-decoration:none;font-size:.875rem;padding:.5rem .75rem;transition:background .15s,color .15s;font-weight:500}
+.nav-links a:hover{background:#e8f0f0;color:#2d5557}
+.nav-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#1c1917;padding:.25rem}
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);z-index:20}
+.nav-links[aria-hidden="false"]{display:flex}
+.nav-toggle{display:block}
+}
+.hero{text-align:center;padding:3rem 1.5rem 2rem;background:#2d5557;color:white;margin-bottom:2rem}
+.hero h1{font-size:2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem}
+.hero p{font-size:1rem;opacity:.9;max-width:500px;margin:0 auto}
+.container{max-width:600px;margin:0 auto;padding:0 1.5rem 2rem}
+.stroop-word{text-align:center;padding:2rem;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;border:1px solid #e7e5e4;margin-bottom:1.5rem}
+.stroop-text{font-size:4rem;font-weight:700;margin-bottom:.5rem;transition:color .15s}
+.progress-bar{height:6px;background:#e7e5e4;margin-bottom:1rem}
+.progress-fill{height:100%;background:#4a7c7f;transition:width .3s;width:0%}
+.color-btns{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.color-btn{width:80px;height:80px;border:3px solid transparent;cursor:pointer;transition:transform .1s,border-color .15s}
+.color-btn:hover{transform:scale(1.08)}
+.color-btn:focus{outline:2px solid #4a7c7f;outline-offset:2px}
+.stats-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1rem 0}
+.stat-card{background:white;border:1px solid #e7e5e4;padding:.75rem 1.25rem;text-align:center;min-width:80px;flex:1}
+.stat-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#78716c;font-weight:600}
+.stat-value{font-size:1.3rem;font-weight:700;color:#2d5557;margin-top:.15rem}
+.btn{padding:.6rem 1.5rem;border:none;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.4}
+.btn-primary{background:#4a7c7f;color:white;transition:background .15s}
+.btn-primary:hover{background:#3d6b6e}
+footer{text-align:center;padding:2rem 1.5rem;color:#78716c;font-size:.85rem;border-top:1px solid #e7e5e4;margin-top:3rem}
+footer a{color:#4a7c7f}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:#2d5557;color:white;padding:.5rem 1rem;z-index:100;font-size:.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../../index.html">Home</a>
+      <a href="../../blog/index.html">Blog</a>
+      <a href="../../schedule.html">Schedule</a>
+      <a href="../../nutrients.html">Nutrients</a>
+      <a href="../../exercises.html">Exercises</a>
+      <a href="../../phases.html">Phases</a>
+      <a href="../../tracker.html">Tracker</a>
+      <a href="../index.html">Games</a>
+      <a href="../../worklist/index.html">Worklist</a>
+      <a href="../../remember/index.html">Remember</a>
+      <a href="../../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <h1>Stroop Test</h1>
+    <p>Name the ink color, not the word. Measures cognitive inhibition and executive function.</p>
+  </div>
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem">
+      <button id="start-btn" class="btn btn-primary">Start Game</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="stroop-word">
+      <div id="round-label" style="font-size:.85rem;color:#78716c;margin-bottom:.5rem">Press Start</div>
+      <div class="stroop-text" id="stroop-display">READY</div>
+      <div id="feedback-line" style="font-size:1.1rem;min-height:1.5rem;font-weight:600"></div>
+    </div>
+    <div class="color-btns" id="color-btns"></div>
+    <div id="results" style="display:none">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-label">Accuracy</div><div class="stat-value" id="acc-pct">0%</div></div>
+        <div class="stat-card"><div class="stat-label">Avg RT</div><div class="stat-value" id="avg-rt">0ms</div></div>
+        <div class="stat-card"><div class="stat-label">Fastest</div><div class="stat-value" id="fastest-rt">0ms</div></div>
+        <div class="stat-card"><div class="stat-label">Correct</div><div class="stat-value" id="correct-count">0/30</div></div>
+      </div>
+      <div style="padding:1.5rem;background:white;border:1px solid #e7e5e4;margin-top:1rem;font-size:.9rem;color:#57534e">
+        <h3 style="color:#2d5557;margin-bottom:.5rem;font-size:1rem">What the Stroop Test Measures</h3>
+        <p>The Stroop effect measures <strong>cognitive inhibition</strong> &mdash; your brain's ability to suppress an automatic response (reading the word) in favor of a controlled response (naming the ink color). This relies on the anterior cingulate cortex and dorsolateral prefrontal cortex. A larger Stroop effect (slower response on incongruent trials) is associated with cognitive fatigue, ADHD, and neurological conditions. Improvement over time indicates strengthening of executive control networks.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../../blog/index.html">Blog</a></p>
+</footer>
+
+<script>
+(function(){
+var COLORS = ['Red','Blue','Green','Yellow','Purple','Orange'];
+var COLOR_VALS = {Red:'#dc2626',Blue:'#2563eb',Green:'#16a34a',Yellow:'#ca8a04',Purple:'#9333ea',Orange:'#ea580c'};
+var colorNames = COLORS;
+var round = 0, totalRounds = 30, correct = 0, responseTimes = [];
+var active = false, startTime = 0, currentTrial = null;
+
+function shuffle(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
+function generateTrials(n) {
+  var trials = [];
+  var colors = ['Red','Blue','Green','Yellow','Purple','Orange'];
+  for (var i = 0; i < n; i++) {
+    var word = colors[Math.floor(Math.random() * colors.length)];
+    var ink = colors[Math.floor(Math.random() * colors.length)];
+    trials.push({ word: word, ink: ink, congruent: word === ink });
+  }
+  return trials;
+}
+
+var trials = [];
+
+function renderColorButtons() {
+  var container = document.getElementById('color-btns');
+  container.innerHTML = COLORS.map(function(c) {
+    return '<button class="color-btn" data-color="' + c + '" style="background:' + COLOR_VALS[c] + ';" aria-label="' + c + '"></button>';
+  }).join('');
+  container.querySelectorAll('.color-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { handleResponse(this.getAttribute('data-color')); });
+  });
+}
+
+function startGame() {
+  trials = generateTrials(totalRounds);
+  round = 0; correct = 0; responseTimes = [];
+  active = true;
+  document.getElementById('start-btn').disabled = true;
+  document.getElementById('results').style.display = 'none';
+  showTrial();
+}
+
+function showTrial() {
+  if (round >= totalRounds) { endGame(); return; }
+  var t = trials[round];
+  currentTrial = t;
+  document.getElementById('round-label').textContent = 'Round ' + (round + 1) + ' of ' + totalRounds;
+  document.getElementById('stroop-display').textContent = t.word;
+  document.getElementById('stroop-display').style.color = COLOR_VALS[t.ink];
+  document.getElementById('feedback-line').textContent = '';
+  document.getElementById('progress-fill').style.width = ((round / totalRounds) * 100) + '%';
+  startTime = Date.now();
+}
+
+function handleResponse(color) {
+  if (!active || !currentTrial) return;
+  var rt = Date.now() - startTime;
+  var t = currentTrial;
+  var isCorrect = color === t.ink;
+  if (isCorrect) { correct++; responseTimes.push(rt); }
+  document.getElementById('feedback-line').textContent = isCorrect ? '&#x2713; Correct' : '&#x2717; ' + t.ink;
+  document.getElementById('feedback-line').style.color = isCorrect ? '#16a34a' : '#dc2626';
+  round++;
+  setTimeout(showTrial, 500);
+}
+
+function endGame() {
+  active = false;
+  document.getElementById('start-btn').disabled = false;
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('stroop-display').textContent = 'DONE';
+  document.getElementById('stroop-display').style.color = '#1c1917';
+  document.getElementById('round-label').textContent = 'Game Over';
+
+  var pct = Math.round((correct / totalRounds) * 100);
+  var avg = responseTimes.length ? Math.round(responseTimes.reduce(function(a,b){return a+b;},0) / responseTimes.length) : 0;
+  var fastest = responseTimes.length ? Math.min.apply(null, responseTimes) : 0;
+
+  document.getElementById('acc-pct').textContent = pct + '%';
+  document.getElementById('avg-rt').textContent = avg + 'ms';
+  document.getElementById('fastest-rt').textContent = fastest + 'ms';
+  document.getElementById('correct-count').textContent = correct + '/30';
+  document.getElementById('results').style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderColorButtons();
+  document.getElementById('start-btn').addEventListener('click', startGame);
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brain Dump — NeuroReboot Worklist</title>
+<meta name="description" content="Get racing thoughts out of your head and onto the page. No structure, no judgment.">
+<meta property="og:title" content="Brain Dump — NeuroReboot Worklist">
+<meta property="og:description" content="Get racing thoughts out of your head and onto the page. No structure, no judgment.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/brain-dump.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Brain Dump — NeuroReboot Worklist">
+<meta name="twitter:description" content="Get racing thoughts out of your head and onto the page. No structure, no judgment.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/brain-dump.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Brain Dump — NeuroReboot Worklist",
+  "description": "Get racing thoughts out of your head and onto the page. No structure, no judgment.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/brain-dump.html"
+}
+</script>
+<style>
+#breath-animation {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--primary-dark);
+  z-index: 100;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+#breath-animation.active {
+  display: flex;
+}
+
+.breath-circle {
+  width: 120px;
+  height: 120px;
+  background: rgba(255,255,255,0.15);
+  transition: transform 4s ease-in-out;
+}
+
+.breath-circle.inhale {
+  transform: scale(1.6);
+}
+
+.breath-circle.exhale {
+  transform: scale(0.8);
+}
+
+.breath-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.breath-timer {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.breath-instruction {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container" style="max-width:720px;">
+    <section aria-labelledby="dump-heading">
+      <h1 id="dump-heading" class="section-title">Brain Dump</h1>
+      <p class="section-subtitle">Dump it all out here &mdash; no structure, no judgment. Get the racing thoughts out of your head and onto the page.</p>
+    </section>
+
+    <section aria-label="Brain dump text area">
+      <div class="tracker-form">
+        <div style="margin-bottom:0.75rem;">
+          <textarea id="dump-text" rows="16" style="width:100%;padding:1rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:1rem;resize:vertical;line-height:1.7;" placeholder="Whatever is in your head right now..."></textarea>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+          <span id="char-count" style="font-size:0.85rem;color:var(--neutral-500);">0 characters</span>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <button id="dump-save" class="btn btn-primary">Save</button>
+            <button id="dump-breathe" class="btn btn-primary" style="background:var(--success);">Dump &amp; Breathe</button>
+            <button id="dump-clear" class="btn btn-ghost">Clear</button>
+          </div>
+        </div>
+        <div style="margin-top:1rem;">
+          <span class="save-msg" style="font-size:0.85rem;color:var(--success);opacity:0;transition:opacity 0.3s;" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="past-dumps-heading" style="margin-top:2rem;">
+      <h2 id="past-dumps-heading" class="section-title">Past Dumps</h2>
+      <p class="section-subtitle">Your recent brain dump entries.</p>
+      <div id="past-dumps" style="display:grid;gap:1rem;"></div>
+    </section>
+  </div>
+</main>
+
+<div id="breath-animation" role="dialog" aria-modal="true" aria-label="Breathing exercise">
+  <div class="breath-circle" id="breath-circle"></div>
+  <div class="breath-label" id="breath-label">Breathe In</div>
+  <div class="breath-timer" id="breath-timer">30</div>
+  <div class="breath-instruction" id="breath-instruction">Follow the circle. Inhale as it grows, exhale as it shrinks.</div>
+</div>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var textarea = document.getElementById('dump-text');
+  var charCount = document.getElementById('char-count');
+  var saveBtn = document.getElementById('dump-save');
+  var clearBtn = document.getElementById('dump-clear');
+  var breatheBtn = document.getElementById('dump-breathe');
+  var msgEl = document.querySelector('.save-msg');
+  var pastContainer = document.getElementById('past-dumps');
+
+  var breathOverlay = document.getElementById('breath-animation');
+  var breathCircle = document.getElementById('breath-circle');
+  var breathLabel = document.getElementById('breath-label');
+  var breathTimer = document.getElementById('breath-timer');
+  var breathInstruction = document.getElementById('breath-instruction');
+
+  var storageKey = 'brain-dump-current';
+
+  function updateCharCount() {
+    var len = textarea.value.length;
+    charCount.textContent = len + ' character' + (len !== 1 ? 's' : '');
+  }
+
+  function loadCurrent() {
+    var saved = localStorage.getItem(storageKey);
+    if (saved) {
+      textarea.value = saved;
+      updateCharCount();
+    }
+  }
+
+  function saveCurrent() {
+    localStorage.setItem(storageKey, textarea.value);
+    var dateKey = 'brain-dump-' + new Date().toISOString().split('T')[0];
+    if (textarea.value.trim()) {
+      localStorage.setItem(dateKey, textarea.value);
+    }
+    msgEl.textContent = 'Saved!';
+    msgEl.style.opacity = '1';
+    setTimeout(function() { msgEl.style.opacity = '0'; }, 2000);
+    loadPastDumps();
+  }
+
+  textarea.addEventListener('input', updateCharCount);
+  loadCurrent();
+  updateCharCount();
+
+  saveBtn.addEventListener('click', function() {
+    saveCurrent();
+  });
+
+  clearBtn.addEventListener('click', function() {
+    if (confirm('Clear the current brain dump? This cannot be undone.')) {
+      textarea.value = '';
+      updateCharCount();
+      localStorage.removeItem(storageKey);
+      loadPastDumps();
+    }
+  });
+
+  breatheBtn.addEventListener('click', function() {
+    saveCurrent();
+    startBreathing();
+  });
+
+  function startBreathing() {
+    breathOverlay.classList.add('active');
+    breathCircle.className = 'breath-circle';
+    breathLabel.textContent = 'Get Ready';
+    breathTimer.textContent = '3';
+    breathInstruction.textContent = 'Follow the circle. Inhale as it grows, exhale as it shrinks.';
+
+    var totalTime = 30;
+    var cycleTime = 8;
+    var halfCycle = 4;
+
+    function doCycle(remaining) {
+      if (remaining <= 0) {
+        breathLabel.textContent = 'Done';
+        breathTimer.textContent = '0';
+        breathInstruction.textContent = 'You are grounded.';
+        breathCircle.className = 'breath-circle';
+        setTimeout(function() {
+          breathOverlay.classList.remove('active');
+        }, 2000);
+        return;
+      }
+
+      breathTimer.textContent = String(remaining);
+      breathCircle.className = 'breath-circle';
+
+      var inCycle = (totalTime - remaining) % cycleTime;
+      if (inCycle < halfCycle) {
+        breathLabel.textContent = 'Breathe In';
+        setTimeout(function() {
+          breathCircle.classList.add('inhale');
+        }, 50);
+      } else {
+        breathLabel.textContent = 'Breathe Out';
+        setTimeout(function() {
+          breathCircle.classList.add('exhale');
+        }, 50);
+      }
+
+      setTimeout(function() {
+        doCycle(remaining - 1);
+      }, 1000);
+    }
+
+    setTimeout(function() {
+      doCycle(totalTime);
+    }, 3000);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && breathOverlay.classList.contains('active')) {
+      breathOverlay.classList.remove('active');
+    }
+  });
+
+  function loadPastDumps() {
+    pastContainer.innerHTML = '';
+    var keys = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      var key = localStorage.key(i);
+      if (key && key.indexOf('brain-dump-') === 0 && key !== storageKey) {
+        keys.push(key);
+      }
+    }
+    keys.sort().reverse();
+    var count = 0;
+    keys.forEach(function(key) {
+      if (count >= 7) return;
+      try {
+        var content = localStorage.getItem(key);
+        var dateStr = key.replace('brain-dump-', '');
+        var div = document.createElement('div');
+        div.className = 'card';
+        var h3 = document.createElement('h3');
+        h3.className = 'card-title';
+        h3.textContent = dateStr;
+        div.appendChild(h3);
+        var p = document.createElement('p');
+        p.className = 'card-text';
+        p.textContent = content.length > 200 ? content.substring(0, 200) + '...' : content;
+        div.appendChild(p);
+        pastContainer.appendChild(div);
+        count++;
+      } catch(e) {}
+    });
+    if (count === 0) {
+      pastContainer.innerHTML = '<p style="color:var(--neutral-500);text-align:center;padding:2rem;">No past dumps yet.</p>';
+    }
+  }
+
+  loadPastDumps();
+})();
+</script>
+</body>
+</html>

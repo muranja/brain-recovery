@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gratitude Journal — NeuroReboot Worklist</title>
+<meta name="description" content="Three things you're grateful for, every day. A simple gratitude journaling tool.">
+<meta property="og:title" content="Gratitude Journal — NeuroReboot Worklist">
+<meta property="og:description" content="Three things you're grateful for, every day. A simple gratitude journaling tool.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/gratitude.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gratitude Journal — NeuroReboot Worklist">
+<meta name="twitter:description" content="Three things you're grateful for, every day. A simple gratitude journaling tool.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/gratitude.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Gratitude Journal — NeuroReboot Worklist",
+  "description": "Three things you're grateful for, every day. A simple gratitude journaling tool.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/gratitude.html"
+}
+</script>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <section aria-labelledby="gratitude-heading">
+      <h1 id="gratitude-heading" class="section-title">Gratitude Journal</h1>
+      <p class="section-subtitle">Three things you're grateful for, every day. Gratitude rewires the brain toward positivity.</p>
+    </section>
+
+    <section aria-label="Gratitude entry form">
+      <form class="tracker-form" id="gratitude-form" novalidate>
+        <div style="margin-bottom:1.5rem;">
+          <label for="gratitude-date" style="font-weight:600;font-size:0.9rem;color:var(--neutral-700);">Date:</label>
+          <input type="date" id="gratitude-date" name="date" style="border:1px solid var(--neutral-300);padding:0.4rem 0.75rem;font-family:var(--font);font-size:0.9rem;margin-left:0.75rem;">
+        </div>
+
+        <div style="margin-bottom:1.25rem;">
+          <label for="grateful-1" style="font-size:0.95rem;font-weight:600;color:var(--primary-dark);display:block;margin-bottom:0.4rem;">I am grateful for...</label>
+          <textarea id="grateful-1" name="grateful_1" rows="3" style="width:100%;padding:0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;resize:vertical;" placeholder="What are you grateful for today?"></textarea>
+        </div>
+
+        <div style="margin-bottom:1.25rem;">
+          <label for="grateful-2" style="font-size:0.95rem;font-weight:600;color:var(--primary-dark);display:block;margin-bottom:0.4rem;">Today was good because...</label>
+          <textarea id="grateful-2" name="grateful_2" rows="3" style="width:100%;padding:0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;resize:vertical;" placeholder="What went well today?"></textarea>
+        </div>
+
+        <div style="margin-bottom:1.25rem;">
+          <label for="grateful-3" style="font-size:0.95rem;font-weight:600;color:var(--primary-dark);display:block;margin-bottom:0.4rem;">Tomorrow I look forward to...</label>
+          <textarea id="grateful-3" name="grateful_3" rows="3" style="width:100%;padding:0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;resize:vertical;" placeholder="What are you excited about tomorrow?"></textarea>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <label for="grateful-bonus" style="font-size:0.95rem;font-weight:600;color:var(--primary-dark);display:block;margin-bottom:0.4rem;">One win I acknowledge today</label>
+          <textarea id="grateful-bonus" name="grateful_bonus" rows="2" style="width:100%;padding:0.75rem;border:1px solid var(--neutral-300);font-family:var(--font);font-size:0.9rem;resize:vertical;" placeholder="A win, no matter how small..."></textarea>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <button type="submit" class="btn btn-primary">Save Entry</button>
+          <span class="save-msg" style="font-size:0.85rem;color:var(--success);opacity:0;transition:opacity 0.3s;" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+
+    <section aria-labelledby="recent-entries-heading" style="margin-top:3rem;">
+      <h2 id="recent-entries-heading" class="section-title">Recent Entries</h2>
+      <p class="section-subtitle">Your recent gratitude journal entries.</p>
+      <div id="recent-entries" style="display:grid;gap:1rem;"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var form = document.getElementById('gratitude-form');
+  var dateInput = document.getElementById('gratitude-date');
+  var today = new Date().toISOString().split('T')[0];
+  dateInput.value = today;
+
+  function getKey() {
+    return 'gratitude-' + (dateInput.value || today);
+  }
+
+  function loadEntry() {
+    var saved = localStorage.getItem(getKey());
+    if (!saved) return;
+    try {
+      var data = JSON.parse(saved);
+      for (var key in data) {
+        if (!data.hasOwnProperty(key)) continue;
+        var el = form.querySelector('[name="' + key + '"]');
+        if (el) el.value = data[key];
+      }
+    } catch(e) {}
+  }
+
+  loadEntry();
+
+  dateInput.addEventListener('change', loadEntry);
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = {};
+    form.querySelectorAll('[name]').forEach(function(el) {
+      data[el.name] = el.value;
+    });
+    localStorage.setItem(getKey(), JSON.stringify(data));
+
+    var msg = form.querySelector('.save-msg');
+    msg.textContent = 'Saved for ' + (dateInput.value || today);
+    msg.style.opacity = '1';
+    setTimeout(function() { msg.style.opacity = '0'; }, 2000);
+
+    loadRecent();
+  });
+
+  function loadRecent() {
+    var container = document.getElementById('recent-entries');
+    container.innerHTML = '';
+    var keys = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      var key = localStorage.key(i);
+      if (key && key.indexOf('gratitude-') === 0) {
+        keys.push(key);
+      }
+    }
+    keys.sort().reverse();
+    var count = 0;
+    keys.forEach(function(key) {
+      if (count >= 7) return;
+      try {
+        var data = JSON.parse(localStorage.getItem(key));
+        var dateStr = key.replace('gratitude-', '');
+        var div = document.createElement('div');
+        div.className = 'card';
+        var h3 = document.createElement('h3');
+        h3.className = 'card-title';
+        h3.textContent = dateStr;
+        div.appendChild(h3);
+
+        var fields = [
+          { key: 'grateful_1', label: 'Grateful for' },
+          { key: 'grateful_2', label: 'Today was good because' },
+          { key: 'grateful_3', label: 'Looking forward to' },
+          { key: 'grateful_bonus', label: 'Win' }
+        ];
+
+        fields.forEach(function(f) {
+          if (data[f.key] && data[f.key].trim()) {
+            var p = document.createElement('p');
+            p.className = 'card-text';
+            p.style.marginTop = '0.25rem';
+            var strong = document.createElement('strong');
+            strong.style.fontSize = '0.8rem';
+            strong.style.color = 'var(--neutral-500)';
+            strong.textContent = f.label + ': ';
+            p.appendChild(strong);
+            p.append(data[f.key]);
+            div.appendChild(p);
+          }
+        });
+
+        container.appendChild(div);
+        count++;
+      } catch(e) {}
+    });
+    if (count === 0) {
+      container.innerHTML = '<p style="color:var(--neutral-500);text-align:center;padding:2rem;">No entries yet. Start writing!</p>';
+    }
+  }
+
+  loadRecent();
+})();
+</script>
+</body>
+</html>

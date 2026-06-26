@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N-Back &mdash; Brain Games &mdash; NeuroReboot</title>
+<meta name="description" content="Dual n-back working memory game. Train your working memory with spatial and auditory recall.">
+<meta property="og:title" content="N-Back &mdash; Brain Games &mdash; NeuroReboot">
+<meta property="og:description" content="Dual n-back working memory game. Train your working memory.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/games/custom/n-back.html">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "N-Back &mdash; Brain Games",
+  "description": "Dual n-back working memory game.",
+  "url": "https://muranja.github.io/brain-recovery/games/custom/n-back.html"
+}
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Space Grotesk',sans-serif;background:#fafaf9;color:#1c1917;line-height:1.7}
+nav{background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:0 1.5rem;position:sticky;top:0;z-index:50}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{font-weight:700;font-size:1.125rem;color:#2d5557;text-decoration:none}
+.nav-links{display:flex;gap:.25rem}
+.nav-links a{color:#57534e;text-decoration:none;font-size:.875rem;padding:.5rem .75rem;transition:background .15s,color .15s;font-weight:500}
+.nav-links a:hover{background:#e8f0f0;color:#2d5557}
+.nav-toggle{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#1c1917;padding:.25rem}
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:#fafaf9;border-bottom:1px solid #e7e5e4;padding:.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);z-index:20}
+.nav-links[aria-hidden="false"]{display:flex}
+.nav-toggle{display:block}
+}
+.hero{text-align:center;padding:3rem 1.5rem 2rem;background:#2d5557;color:white;margin-bottom:2rem}
+.hero h1{font-size:2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem}
+.hero p{font-size:1rem;opacity:.9;max-width:500px;margin:0 auto}
+.container{max-width:700px;margin:0 auto;padding:0 1.5rem 2rem}
+.controls{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;justify-content:center}
+.controls label{font-size:.9rem;font-weight:600;color:#44403c}
+.controls select{padding:.4rem;font-family:'Space Grotesk',sans-serif;font-size:.9rem;border:1px solid #d6d3d1;background:white}
+.stats-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.stat-card{background:white;border:1px solid #e7e5e4;padding:.75rem 1.25rem;text-align:center;min-width:80px;flex:1}
+.stat-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#78716c;font-weight:600}
+.stat-value{font-size:1.3rem;font-weight:700;color:#2d5557;margin-top:.15rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;max-width:300px;margin:0 auto 1.5rem}
+.cell{aspect-ratio:1;background:white;border:2px solid #e7e5e4;transition:background .1s}
+.cell.active{background:#4a7c7f;border-color:#2d5557}
+.response-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+.resp-btn{padding:.6rem 1.25rem;border:2px solid #d6d3d1;background:white;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;transition:all .15s}
+.resp-btn:hover{border-color:#4a7c7f}
+.resp-btn:disabled{opacity:.4;cursor:default}
+.resp-btn.pos{background:#dcfce7;border-color:#7fb686;color:#166534}
+.resp-btn.neg{background:#fee2e2;border-color:#fca5a5;color:#991b1b}
+.visual-feedback{text-align:center;font-size:1.5rem;margin:.5rem 0;min-height:2.5rem}
+.btn{padding:.6rem 1.5rem;border:none;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.4}
+.btn-primary{background:#4a7c7f;color:white;transition:background .15s}
+.btn-primary:hover{background:#3d6b6e}
+.btn-ghost{background:transparent;border:1px solid #d6d3d1;color:#44403c}
+footer{text-align:center;padding:2rem 1.5rem;color:#78716c;font-size:.85rem;border-top:1px solid #e7e5e4;margin-top:3rem}
+footer a{color:#4a7c7f}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:#2d5557;color:white;padding:.5rem 1rem;z-index:100;font-size:.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-brand">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../../index.html">Home</a>
+      <a href="../../blog/index.html">Blog</a>
+      <a href="../../schedule.html">Schedule</a>
+      <a href="../../nutrients.html">Nutrients</a>
+      <a href="../../exercises.html">Exercises</a>
+      <a href="../../phases.html">Phases</a>
+      <a href="../../tracker.html">Tracker</a>
+      <a href="../index.html">Games</a>
+      <a href="../../worklist/index.html">Worklist</a>
+      <a href="../../remember/index.html">Remember</a>
+      <a href="../../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <h1>Dual N-Back</h1>
+    <p>The gold-standard working memory training task. Track spatial positions and sounds simultaneously.</p>
+  </div>
+  <div class="container">
+    <div class="controls">
+      <label for="n-level">N =</label>
+      <select id="n-level"><option>1</option><option selected>2</option><option>3</option><option>4</option></select>
+      <button id="start-btn" class="btn btn-primary">Start</button>
+      <button id="stop-btn" class="btn btn-ghost" disabled>Stop</button>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-label">Correct</div><div class="stat-value" id="correct">0</div></div>
+      <div class="stat-card"><div class="stat-label">Incorrect</div><div class="stat-value" id="incorrect">0</div></div>
+      <div class="stat-card"><div class="stat-label">Streak</div><div class="stat-value" id="streak">0</div></div>
+      <div class="stat-card"><div class="stat-label">Round</div><div class="stat-value" id="round">0</div></div>
+    </div>
+    <div class="grid-3" id="grid">
+      <div class="cell" data-pos="0"></div><div class="cell" data-pos="1"></div><div class="cell" data-pos="2"></div>
+      <div class="cell" data-pos="3"></div><div class="cell" data-pos="4"></div><div class="cell" data-pos="5"></div>
+      <div class="cell" data-pos="6"></div><div class="cell" data-pos="7"></div><div class="cell" data-pos="8"></div>
+    </div>
+    <div class="visual-feedback" id="feedback"></div>
+    <div class="response-btns">
+      <button class="resp-btn" id="pos-btn" disabled>Match Position</button>
+      <button class="resp-btn" id="sound-btn" disabled>Match Sound</button>
+    </div>
+    <section style="margin-top:2rem;padding:1.5rem;background:white;border:1px solid #e7e5e4">
+      <h2 style="font-size:1.1rem;color:#2d5557;margin-bottom:.5rem">How N-Back Works</h2>
+      <p style="font-size:.9rem;color:#57534e">In dual n-back, you track two streams: a spatial position on a 3x3 grid and a spoken letter (A-H). For each trial, you must indicate whether the current position and/or letter matches the one from <strong>N</strong> steps ago. This forces your working memory to continuously update and maintain information. Research suggests dual n-back training can improve fluid intelligence and working memory capacity through strengthened prefrontal-parietal connectivity.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p><a href="https://github.com/muranja/brain-recovery">GitHub</a> &middot; <a href="../../blog/index.html">Blog</a></p>
+</footer>
+
+<script>
+(function(){
+var grid, nVal, history = [], round = 0, correct = 0, incorrect = 0, streak = 0, active = false, timer = null;
+var letters = ['A','B','C','D','E','F','G','H'];
+
+function updateStats() {
+  document.getElementById('correct').textContent = correct;
+  document.getElementById('incorrect').textContent = incorrect;
+  document.getElementById('streak').textContent = streak;
+  document.getElementById('round').textContent = round;
+}
+
+function randomPos() { return Math.floor(Math.random() * 9); }
+function randomLetter() { return letters[Math.floor(Math.random() * letters.length)]; }
+
+function playTone(letter) {
+  try {
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    var freq = 220 + letters.indexOf(letter) * 40;
+    osc.frequency.value = freq;
+    osc.type = 'sine';
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.5);
+  } catch(e) {}
+}
+
+function showTrial() {
+  if (!active) return;
+  var pos = randomPos();
+  var letter = randomLetter();
+  var trial = { pos: pos, letter: letter };
+  history.push(trial);
+  round++;
+  updateStats();
+
+  grid.querySelectorAll('.cell').forEach(function(c) { c.classList.remove('active'); });
+  var cell = grid.querySelector('.cell[data-pos="' + pos + '"]');
+  if (cell) cell.classList.add('active');
+  playTone(letter);
+
+  document.getElementById('pos-btn').disabled = false;
+  document.getElementById('sound-btn').disabled = false;
+  document.getElementById('feedback').textContent = '';
+
+  timer = setTimeout(function() {
+    if (active) {
+      grid.querySelectorAll('.cell').forEach(function(c) { c.classList.remove('active'); });
+      document.getElementById('pos-btn').disabled = true;
+      document.getElementById('sound-btn').disabled = true;
+    }
+  }, 2000);
+}
+
+function handleResponse(type) {
+  if (!active || round <= nVal) return;
+  document.getElementById('pos-btn').disabled = true;
+  document.getElementById('sound-btn').disabled = true;
+  if (timer) clearTimeout(timer);
+  grid.querySelectorAll('.cell').forEach(function(c) { c.classList.remove('active'); });
+
+  var prev = history[history.length - 1 - nVal];
+  var curr = history[history.length - 1];
+  var isMatch = false;
+  if (type === 'pos') isMatch = prev.pos === curr.pos;
+  else isMatch = prev.letter === curr.letter;
+
+  var fb = document.getElementById('feedback');
+  if (isMatch) { correct++; streak++; fb.textContent = '&#x2713; Correct'; fb.style.color = '#7fb686'; }
+  else { incorrect++; streak = 0; fb.textContent = '&#x2717; Wrong'; fb.style.color = '#dc2626'; }
+  updateStats();
+
+  setTimeout(function() { if (active) showTrial(); }, 800);
+}
+
+function startGame() {
+  nVal = parseInt(document.getElementById('n-level').value);
+  history = []; round = 0; correct = 0; incorrect = 0; streak = 0;
+  active = true;
+  document.getElementById('start-btn').disabled = true;
+  document.getElementById('stop-btn').disabled = false;
+  updateStats();
+  document.getElementById('feedback').textContent = '';
+
+  for (var i = 0; i < nVal; i++) {
+    history.push({ pos: randomPos(), letter: randomLetter() });
+    round++;
+  }
+  updateStats();
+  setTimeout(showTrial, 1000);
+}
+
+function stopGame() {
+  active = false;
+  if (timer) clearTimeout(timer);
+  document.getElementById('start-btn').disabled = false;
+  document.getElementById('stop-btn').disabled = true;
+  document.getElementById('pos-btn').disabled = true;
+  document.getElementById('sound-btn').disabled = true;
+  grid.querySelectorAll('.cell').forEach(function(c) { c.classList.remove('active'); });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  grid = document.getElementById('grid');
+  document.getElementById('start-btn').addEventListener('click', startGame);
+  document.getElementById('stop-btn').addEventListener('click', stopGame);
+  document.getElementById('pos-btn').addEventListener('click', function() { handleResponse('pos'); });
+  document.getElementById('sound-btn').addEventListener('click', function() { handleResponse('sound'); });
+});
+})();
+</script>
+</body>
+</html>
