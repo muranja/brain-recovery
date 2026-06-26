@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://muranja.github.io/brain-recovery/sitemap.xml
