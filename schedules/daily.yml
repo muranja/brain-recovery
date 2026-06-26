@@ -1,0 +1,52 @@
+# Daily Recovery Checklist — YAML format for trackers / habit apps
+date: "YYYY-MM-DD"
+tasks:
+  morning:
+    - name: sunlight
+      done: false
+      note: "10 mins direct, no sunglasses"
+    - name: hydration
+      done: false
+      note: "500ml water + salt"
+    - name: cold_shower
+      done: false
+      note: "10 mins cold"
+    - name: breakfast
+      done: false
+      note: "high protein + omega-3"
+    - name: morning_supplements
+      done: false
+      note: "Alpha-GPC, B-Complex, D3+K2, CoQ10, Creatine"
+  midday:
+    - name: memory_drill
+      done: false
+      note: "15 min — 5 words or names"
+    - name: lunch
+      done: false
+      note: "low glycemic"
+    - name: walk
+      done: false
+      note: "20 min, no phone"
+    - name: afternoon_supplement
+      done: false
+      note: "Alpha-GPC"
+  evening:
+    - name: digital_sunset
+      done: false
+      note: "dims/blue filter by 8pm"
+    - name: grounding
+      done: false
+      note: "5-4-3-2-1 exercise"
+    - name: evening_supplements
+      done: false
+      note: "Ashwagandha, Lecithin"
+    - name: night_supplements
+      done: false
+      note: "Magnesium Threonate"
+    - name: sleep
+      done: false
+      note: "by 10:30pm, dark room"
+  tracking:
+    looping_episodes: 0
+    energy_level: 0
+    notes: ""
