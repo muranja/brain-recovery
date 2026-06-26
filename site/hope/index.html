@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wall of Hope — NeuroReboot</title>
-<meta name="description" content="A dense wall of hope, healing, and inspiration. Scroll and hover to uncover messages that remind you why you keep going.">
+<meta name="description" content="Thousands of hope quotes, healing affirmations, and recovery messages hidden in plain sight. Scroll and hover to uncover what you need to hear.">
 <meta property="og:title" content="Wall of Hope — NeuroReboot">
-<meta property="og:description" content="Scroll and hover to uncover messages of hope, healing, and inspiration.">
+<meta property="og:description" content="Thousands of hope quotes, healing affirmations, and recovery messages hidden in plain sight. Scroll and hover to uncover what you need to hear.">
 <meta property="og:url" content="https://muranja.github.io/brain-recovery/hope/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
 <meta property="og:site_name" content="NeuroReboot">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Wall of Hope — NeuroReboot">
-<meta name="twitter:description" content="A dense wall of healing words. Scroll and hover to uncover what you need to hear.">
+<meta name="twitter:description" content="Thousands of hope quotes, healing affirmations, and recovery messages hidden in plain sight.">
 <meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
 <link rel="canonical" href="https://muranja.github.io/brain-recovery/hope/">
 <link rel="stylesheet" href="../css/style.css">
@@ -23,7 +23,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Wall of Hope — NeuroReboot",
-  "description": "A dense wall of hope, healing, and inspiration for mental health recovery.",
+  "description": "Thousands of hope quotes, healing affirmations, and recovery messages hidden in plain sight. Scroll and hover to uncover what you need to hear.",
   "url": "https://muranja.github.io/brain-recovery/hope/"
 }
 </script>
@@ -33,33 +33,41 @@ body { background:#0a0a0f; color:#c8c8d0; font-family:'Space Grotesk',sans-serif
 .skip-link { position:absolute;top:-100%;left:1rem;background:#2d5557;color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem; }
 .skip-link:focus { top:1rem; }
 
-.hope-header { text-align:center; padding:4rem 1.5rem 2rem; max-width:600px; margin:0 auto; }
+.hope-header { text-align:center; padding:4rem 1.5rem 1.5rem; max-width:600px; margin:0 auto; }
 .hope-header h1 { font-size:2.5rem; font-weight:300; color:#e8e8f0; letter-spacing:-0.02em; margin-bottom:0.75rem; }
 .hope-header p { font-size:0.95rem; color:#6a6a7a; line-height:1.7; }
 .hope-header .hint { font-size:0.8rem; color:#4a4a5a; margin-top:1.5rem; letter-spacing:0.05em; text-transform:uppercase; }
 
-.filter-bar { display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; padding:0 1rem 2rem; }
-.filter-btn { background:transparent; border:1px solid #2a2a3a; color:#6a6a7a; padding:0.4rem 0.9rem; font-family:'Space Grotesk',sans-serif; font-size:0.8rem; cursor:pointer; transition:all 0.3s; }
+.controls { display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; padding:0 1rem; margin-bottom:0.5rem; }
+.controls button, .controls .search-wrap { background:transparent; border:1px solid #2a2a3a; color:#6a6a7a; padding:0.4rem 0.9rem; font-family:'Space Grotesk',sans-serif; font-size:0.8rem; cursor:pointer; transition:all 0.3s; }
+.controls button:hover { border-color:#4a7c7f; color:#4a7c7f; }
+.controls .search-wrap { padding:0; display:flex; align-items:center; }
+.controls .search-wrap input { background:transparent; border:none; color:#c8c8d0; font-family:'Space Grotesk',sans-serif; font-size:0.8rem; padding:0.4rem 0.6rem; outline:none; width:140px; }
+.controls .search-wrap input::placeholder { color:#4a4a5a; }
+
+.filter-bar { display:flex; gap:0.4rem; justify-content:center; flex-wrap:wrap; padding:0 1rem 2rem; }
+.filter-btn { background:transparent; border:1px solid #2a2a3a; color:#6a6a7a; padding:0.3rem 0.7rem; font-family:'Space Grotesk',sans-serif; font-size:0.75rem; cursor:pointer; transition:all 0.3s; }
 .filter-btn:hover { border-color:#4a7c7f; color:#4a7c7f; }
 .filter-btn.active { background:#4a7c7f; border-color:#4a7c7f; color:white; }
 
+.loading { text-align:center; padding:4rem 1rem; color:#4a4a5a; font-size:0.9rem; }
+.loading span { animation:pulse 1.2s infinite; display:inline-block; }
+@keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
 .wall { columns:4; column-gap:1.25rem; padding:0 2rem 4rem; max-width:1200px; margin:0 auto; }
-.item { break-inside:avoid; margin-bottom:1.25rem; padding:1rem; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); cursor:default; transition:all 0.4s cubic-bezier(0.22,1,0.36,1); opacity:0.25; transform:scale(0.97); position:relative; }
+.item { break-inside:avoid; margin-bottom:1.25rem; padding:1rem; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); cursor:pointer; transition:all 0.4s cubic-bezier(0.22,1,0.36,1); opacity:0.2; transform:scale(0.97); }
 .item.visible { opacity:0.35; transform:scale(1); }
-.item:hover { opacity:1; transform:scale(1.03); background:rgba(74,124,127,0.08); border-color:rgba(74,124,127,0.3); box-shadow:0 0 30px rgba(74,124,127,0.1); }
+.item:hover { opacity:1; transform:scale(1.03); background:rgba(74,124,127,0.08); border-color:rgba(74,124,127,0.3); box-shadow:0 0 30px rgba(74,124,127,0.15); }
 .item:hover .item-text { color:#f0f0f8; }
-.item:hover .item-author { opacity:0.7; }
 .item-text { font-size:0.85rem; line-height:1.6; color:#9a9aa8; transition:color 0.4s; font-weight:400; }
-.item:hover .item-text { font-size:0.9rem; }
 .item-author { font-size:0.7rem; color:#5a5a6a; margin-top:0.5rem; opacity:0; transition:opacity 0.4s; }
-.item:hover .item-author { opacity:0.6; }
+.item:hover .item-author { opacity:0.7; }
 .item-tag { display:inline-block; font-size:0.6rem; color:#4a7c7f; border:1px solid rgba(74,124,127,0.2); padding:0.1rem 0.4rem; margin-top:0.4rem; opacity:0; transition:opacity 0.4s; }
 .item:hover .item-tag { opacity:0.5; }
+.item-hidden { font-size:0.8rem; color:#7a9a9a; line-height:1.5; max-height:0; overflow:hidden; transition:all 0.5s; border-top:1px solid rgba(74,124,127,0.15); padding-top:0; margin-top:0; }
+.item.expanded .item-hidden { max-height:300px; margin-top:0.75rem; padding-top:0.5rem; }
 
-.item.revealed .item-hidden { opacity:1; max-height:200px; margin-top:0.75rem; }
-.item-hidden { font-size:0.8rem; color:#7a9a9a; line-height:1.5; opacity:0; max-height:0; overflow:hidden; transition:all 0.5s; border-top:1px solid rgba(74,124,127,0.15); padding-top:0.5rem; }
-
-.floating-hope { position:fixed; bottom:2rem; right:2rem; max-width:300px; background:rgba(10,10,15,0.95); border:1px solid rgba(74,124,127,0.2); padding:1rem 1.25rem; z-index:50; transition:opacity 0.5s; cursor:pointer; }
+.floating-hope { position:fixed; bottom:2rem; right:2rem; max-width:300px; background:rgba(10,10,15,0.95); border:1px solid rgba(74,124,127,0.2); padding:1rem 1.25rem; z-index:50; transition:opacity 0.5s; }
 .floating-hope:hover { border-color:rgba(74,124,127,0.5); }
 .floating-hope p { font-size:0.85rem; color:#c8c8d0; line-height:1.5; }
 .floating-hope .float-label { font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color:#4a7c7f; margin-bottom:0.4rem; }
@@ -69,8 +77,6 @@ body { background:#0a0a0f; color:#c8c8d0; font-family:'Space Grotesk',sans-serif
 
 @media(max-width:900px){ .wall { columns:3; padding:0 1rem 3rem; } }
 @media(max-width:600px){ .wall { columns:2; padding:0 0.75rem 2rem; column-gap:0.75rem; } .item { margin-bottom:0.75rem; padding:0.75rem; } .hope-header h1 { font-size:1.8rem; } .floating-hope { right:1rem; bottom:1rem; max-width:240px; } }
-
-.glow { position:fixed; pointer-events:none; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(74,124,127,0.06),transparent 70%); z-index:1; transform:translate(-50%,-50%); transition:opacity 0.3s; }
 </style>
 </head>
 <body>
@@ -100,12 +106,23 @@ body { background:#0a0a0f; color:#c8c8d0; font-family:'Space Grotesk',sans-serif
 <main id="main-content">
   <div class="hope-header">
     <h1>The Wall of Hope</h1>
-    <p>Hundreds of messages, fragments, and reminders hidden in plain sight. Scroll. Hover. Let the ones you need find you.</p>
-    <p class="hint">&#8595; Scroll to reveal &middot; Hover to illuminate &middot; Click to go deeper</p>
+    <p>Thousands of messages, fragments, and reminders hidden in plain sight. Scroll. Hover. Let the ones you need find you.</p>
+    <p class="hint">&#8595; Scroll to reveal &middot; Hover to illuminate &middot; Click to go deeper &middot; <a href="iframe.html" style="color:#4a7c7f;text-decoration:none;">Browse Libraries</a></p>
+  </div>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="Search quotes or authors..." aria-label="Search quotes">
+    </div>
+    <button id="shuffle-btn" title="Shuffle visible quotes">Shuffle</button>
+    <button id="load-all-btn" title="Show all quotes">Load all</button>
+    <button id="random-web-btn" title="Fetch random quote from the web">Random from web &#127758;</button>
   </div>
 
   <div class="filter-bar" id="filter-bar"></div>
-  <div class="wall" id="wall"></div>
+  <div class="wall" id="wall">
+    <div class="loading" id="loading"><span>Loading quotes...</span></div>
+  </div>
 
   <div class="floating-hope" id="floating-hope">
     <span class="float-dismiss" id="float-dismiss">&times;</span>
@@ -123,391 +140,60 @@ body { background:#0a0a0f; color:#c8c8d0; font-family:'Space Grotesk',sans-serif
 <script>
 (function() {
 
-var quotes = [
-  { text: "Healing is not linear. It is a spiral. You will pass the same places twice, but you will be higher each time.", tag: "healing", author: "" },
-  { text: "The wound is the place where the Light enters you.", tag: "healing", author: "Rumi" },
-  { text: "You are not your thoughts. You are the one noticing them.", tag: "mindfulness", author: "" },
-  { text: "What feels like the end is often just a turn you didn't see coming.", tag: "hope", author: "" },
-  { text: "Rest is not idle. Rest is repair.", tag: "recovery", author: "" },
-  { text: "Your nervous system is not broken. It is protecting you the only way it knows how.", tag: "trauma", author: "" },
-  { text: "The fact that you are still here means you are winning a battle most people never see.", tag: "strength", author: "" },
-  { text: "Some days the only victory is getting out of bed. That counts.", tag: "survival", author: "" },
-  { text: "You can be both a masterpiece and a work in progress.", tag: "hope", author: "" },
-  { text: "Softness is not weakness. It takes courage to stay gentle in a hard world.", tag: "healing", author: "" },
-  { text: "Trauma is not your fault, but healing is your responsibility.", tag: "trauma", author: "" },
-  { text: "The brain can rewire. The body can repair. The soul remembers how to heal.", tag: "neuroplasticity", author: "" },
-  { text: "You are not behind. There is no race. Everyone's recovery path is different.", tag: "recovery", author: "" },
-  { text: "Allow yourself to be a beginner. No one starts healed.", tag: "healing", author: "" },
-  { text: "Growth is painful. Change is painful. But nothing is as painful as staying stuck.", tag: "strength", author: "" },
-  { text: "The only way out is through. But you don't have to go alone.", tag: "trauma", author: "" },
-  { text: "Your past is not your future unless you refuse to let it go.", tag: "hope", author: "" },
-  { text: "Small steps are still steps. Millimeter by millimeter, you move forward.", tag: "recovery", author: "" },
-  { text: "You are not damaged goods. You are a human being who has survived things.", tag: "healing", author: "" },
-  { text: "The voice in your head that says you can't is not the voice of truth. It is the voice of fear.", tag: "mindfulness", author: "" },
-  { text: "Breathe. You are safe right now in this moment. The past is memory. The future is imagination.", tag: "anxiety", author: "" },
-  { text: "Panic is a wave. It rises, peaks, and falls. You have ridden every single one so far.", tag: "anxiety", author: "" },
-  { text: "You don't have to fix everything today. Just this moment. Just this breath.", tag: "mindfulness", author: "" },
-  { text: "Healing happens in the quiet moments when no one is watching.", tag: "healing", author: "" },
-  { text: "The opposite of depression is not happiness. It is vitality. It is feeling alive.", tag: "depression", author: "" },
-  { text: "You are allowed to take up space. You are allowed to exist without apologizing.", tag: "healing", author: "" },
-  { text: "What if who you are becoming is better than who you were before?", tag: "hope", author: "" },
-  { text: "The night is darkest just before the dawn. Stay a little longer.", tag: "hope", author: "" },
-  { text: "You have survived 100% of your worst days so far. That is not nothing.", tag: "survival", author: "" },
-  { text: "Forgetting is not failure. It is your brain making space for what matters next.", tag: "memory", author: "" },
-  { text: "Brain fog is not laziness. It is your system prioritizing essential functions.", tag: "recovery", author: "" },
-  { text: "Cognitive recovery is not about getting back to who you were. It is about becoming who you are.", tag: "neuroplasticity", author: "" },
-  { text: "You are not your diagnosis. You are a person experiencing symptoms.", tag: "healing", author: "" },
-  { text: "The body keeps score. But it also knows how to heal when given the right conditions.", tag: "trauma", author: "" },
-  { text: "Grief is love with nowhere to go. It means you loved deeply.", tag: "healing", author: "" },
-  { text: "You don't have to earn rest. You deserve it simply because you exist.", tag: "recovery", author: "" },
-  { text: "Comparison is the thief of joy. Your recovery is yours alone.", tag: "mindfulness", author: "" },
-  { text: "The desire to heal is already healing beginning.", tag: "healing", author: "" },
-  { text: "Some people are forests. Give them space to grow back.", tag: "healing", author: "" },
-  { text: "You can't pour from an empty cup. Fill yourself first.", tag: "recovery", author: "" },
-  { text: "Not every storm comes to disrupt your life. Some come to clear your path.", tag: "hope", author: "" },
-  { text: "The bravest thing you can do is ask for help.", tag: "strength", author: "" },
-  { text: "Your only obligation in any lifetime is to be true to yourself.", tag: "hope", author: "Rumi" },
-  { text: "Almost everything will work again if you unplug it for a few minutes, including you.", tag: "recovery", author: "Anne Lamott" },
-  { text: "You are enough. You have always been enough. You will always be enough.", tag: "hope", author: "" },
-  { text: "Sometimes the bravest thing you can do is just keep breathing.", tag: "survival", author: "" },
-  { text: "The way you tell your story to yourself matters. Rewrite it with compassion.", tag: "healing", author: "" },
-  { text: "Your brain is not your enemy. It's trying to protect you. Thank it, then tell it you're safe now.", tag: "trauma", author: "" },
-  { text: "Healing is not a destination. It is a daily practice.", tag: "healing", author: "" },
-  { text: "You can be both strong and soft. Both serious and playful. Both broken and whole.", tag: "hope", author: "" },
-  { text: "The longest journey you will ever take is the 18 inches from your head to your heart.", tag: "mindfulness", author: "" },
-  { text: "Let yourself be drawn by the stronger pull of that which you truly love.", tag: "hope", author: "Rumi" },
-  { text: "You didn't come this far to only come this far.", tag: "strength", author: "" },
-  { text: "It's okay to not be okay. It's not okay to stay there forever. But right now, it's okay.", tag: "depression", author: "" },
-  { text: "Your nervous system is not broken. It is adapting. It is surviving. It is doing its job.", tag: "trauma", author: "" },
-  { text: "One day you will tell your story of how you overcame what you are going through now.", tag: "hope", author: "" },
-  { text: "Be patient with yourself. Nothing in nature blooms all year.", tag: "healing", author: "" },
-  { text: "The mind is everything. What you think you become.", tag: "mindfulness", author: "Buddha" },
-  { text: "You are the sky. Everything else is just weather.", tag: "mindfulness", author: "Pema Chodron" },
-  { text: "Stars cannot shine without darkness.", tag: "hope", author: "" },
-  { text: "The only person you are destined to become is the person you decide to be.", tag: "strength", author: "Ralph Waldo Emerson" },
-  { text: "What is grief but love persevering?", tag: "healing", author: "Vision (WandaVision)" },
-  { text: "Your track record for getting through hard days is 100%. That's a perfect record.", tag: "survival", author: "" },
-  { text: "When you feel like giving up, remember why you started.", tag: "strength", author: "" },
-  { text: "The greatest glory in living lies not in never falling, but in rising every time we fall.", tag: "strength", author: "Nelson Mandela" },
-  { text: "Recovery is not a race. You don't have to feel guilty about the pace of your progress.", tag: "recovery", author: "" },
-  { text: "You are allowed to change your mind. You are allowed to change your life.", tag: "hope", author: "" },
-  { text: "Healing doesn't mean the damage never existed. It means the damage no longer controls your life.", tag: "healing", author: "" },
-  { text: "Sometimes you have to accept that some people are part of your history, not your destiny.", tag: "healing", author: "" },
-  { text: "The pain you feel today is the strength you will feel tomorrow.", tag: "strength", author: "" },
-  { text: "There is no greater agony than bearing an untold story inside you.", tag: "healing", author: "Maya Angelou" },
-  { text: "You may have to fight a battle more than once to win it.", tag: "strength", author: "Margaret Thatcher" },
-  { text: "Out of suffering have emerged the strongest souls.", tag: "strength", author: "Khalil Gibran" },
-  { text: "In the middle of difficulty lies opportunity.", tag: "hope", author: "Albert Einstein" },
-  { text: "The human capacity for burden is like bamboo — far more flexible than you'd ever believe at first glance.", tag: "strength", author: "Jodi Picoult" },
-  { text: "Courage is not the absence of fear, but the triumph over it.", tag: "strength", author: "Nelson Mandela" },
-  { text: "Just when the caterpillar thought the world was over, it became a butterfly.", tag: "hope", author: "" },
-  { text: "You were given this life because you are strong enough to live it.", tag: "strength", author: "" },
-  { text: "No matter how slow you go, you are still lapping everyone on the couch.", tag: "recovery", author: "" },
-  { text: "Recovery is an acceptance that your life is in shambles and you have the courage to change it.", tag: "recovery", author: "" },
-  { text: "You don't have to see the whole staircase, just take the first step.", tag: "hope", author: "Martin Luther King Jr." },
-  { text: "Fall seven times, stand up eight.", tag: "strength", author: "Japanese Proverb" },
-  { text: "The best time to plant a tree was 20 years ago. The second best time is now.", tag: "hope", author: "Chinese Proverb" },
-  { text: "Whether you think you can or you think you can't, you're right.", tag: "mindfulness", author: "Henry Ford" },
-  { text: "It does not matter how slowly you go as long as you do not stop.", tag: "strength", author: "Confucius" },
-  { text: "The only impossible journey is the one you never begin.", tag: "hope", author: "Tony Robbins" },
-  { text: "You are braver than you believe, stronger than you seem, and smarter than you think.", tag: "strength", author: "A.A. Milne" },
-  { text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.", tag: "strength", author: "Ralph Waldo Emerson" },
-  { text: "Keep your face always toward the sunshine — and shadows will fall behind you.", tag: "hope", author: "Walt Whitman" },
-  { text: "The only way to do great work is to love what you do.", tag: "hope", author: "Steve Jobs" },
-  { text: "Life is what happens when you're busy making other plans.", tag: "mindfulness", author: "John Lennon" },
-  { text: "The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate.", tag: "hope", author: "Ralph Waldo Emerson" },
-  { text: "Get busy living or get busy dying.", tag: "strength", author: "Stephen King" },
-  { text: "You miss 100% of the shots you don't take.", tag: "strength", author: "Wayne Gretzky" },
-  { text: "I have not failed. I've just found 10,000 ways that won't work.", tag: "strength", author: "Thomas Edison" },
-  { text: "The secret of getting ahead is getting started.", tag: "strength", author: "Mark Twain" },
-  { text: "Your time is limited, don't waste it living someone else's life.", tag: "hope", author: "Steve Jobs" },
-  { text: "The only person you should try to be better than is the person you were yesterday.", tag: "healing", author: "" },
-  { text: "If you're going through hell, keep going.", tag: "strength", author: "Winston Churchill" },
-  { text: "When one door of happiness closes, another opens.", tag: "hope", author: "Helen Keller" },
-  { text: "Act as if what you do makes a difference. It does.", tag: "hope", author: "William James" },
-  { text: "What we achieve inwardly will change outer reality.", tag: "healing", author: "Plutarch" },
-  { text: "The soul usually knows what to do to heal itself. The challenge is to silence the mind.", tag: "healing", author: "Caroline Myss" },
-  { text: "Trauma is a fact of life. It does not, however, have to be a life sentence.", tag: "trauma", author: "Peter A. Levine" },
-  { text: "The body is the unconscious mind. We cannot heal what we cannot feel.", tag: "trauma", author: "Bessel van der Kolk" },
-  { text: "Healing is not about getting rid of the pain. It is about reclaiming your life from it.", tag: "trauma", author: "" },
-  { text: "Your symptoms are not the problem. They are your system's solution to an impossible situation.", tag: "trauma", author: "" },
-  { text: "Dissociation is not a disorder. It is a creative survival strategy.", tag: "trauma", author: "" },
-  { text: "You can't heal what you don't feel. But you don't have to feel it all at once.", tag: "trauma", author: "" },
-  { text: "The body keeps the score. But the body also knows how to release.", tag: "trauma", author: "" },
-  { text: "You are safe now. You may have to tell your body this a thousand times before it believes you.", tag: "trauma", author: "" },
-  { text: "ADHD is not a lack of attention. It is a dysregulation of the attention system.", tag: "adhd", author: "" },
-  { text: "Your brain is not broken. It is wired differently. That is not a flaw. It is a design.", tag: "adhd", author: "" },
-  { text: "Forgive yourself for the things your undiagnosed brain did.", tag: "adhd", author: "" },
-  { text: "You are not lazy. You are overwhelmed. There is a difference.", tag: "adhd", author: "" },
-  { text: "ADHD means you have a Ferrari engine with bicycle brakes. You don't need new brakes. You need to learn how to use them.", tag: "adhd", author: "" },
-  { text: "Your inability to start a task is not a character flaw. It is executive dysfunction. There is a difference.", tag: "adhd", author: "" },
-  { text: "Done is better than perfect.", tag: "adhd", author: "" },
-  { text: "You can't executive function your way out of a nervous system that is dysregulated.", tag: "trauma", author: "" },
-  { text: "Sleep is not a luxury. It is the foundation of every healing process.", tag: "sleep", author: "" },
-  { text: "Your brain washes itself while you sleep. Skimping on sleep is skipping your brain's cleaning shift.", tag: "sleep", author: "" },
-  { text: "The best thing you can do for your mental health tonight is to turn off the screen.", tag: "sleep", author: "" },
-  { text: "Blue light tells your brain it is daytime. Give your brain permission to rest.", tag: "sleep", author: "" },
-  { text: "You can't out-supplement a bad sleep schedule.", tag: "sleep", author: "" },
-  { text: "Depression lies. It tells you no one cares, nothing matters, nothing will ever change. None of that is true.", tag: "depression", author: "" },
-  { text: "You don't have to believe everything you think.", tag: "depression", author: "" },
-  { text: "Depression is not a sign of weakness. It is a sign that you have been strong for too long.", tag: "depression", author: "" },
-  { text: "Motivation does not come before action. Action comes before motivation.", tag: "depression", author: "" },
-  { text: "The opposite of addiction is not sobriety. It is connection.", tag: "healing", author: "Johann Hari" },
-  { text: "You cannot selectively numb emotions. When you numb the pain, you also numb the joy.", tag: "healing", author: "Brene Brown" },
-  { text: "Vulnerability is not winning or losing. It is having the courage to show up when you can't control the outcome.", tag: "healing", author: "Brene Brown" },
-  { text: "Shame cannot survive being spoken. It thrives in secrecy.", tag: "healing", author: "Brene Brown" },
-  { text: "You either walk inside your story and own it, or you stand outside your story and hustle for your worthiness.", tag: "healing", author: "Brene Brown" },
-  { text: "Connection is why we are here. It is what gives purpose and meaning to our lives.", tag: "healing", author: "Brene Brown" },
-  { text: "Neuroplasticity means your brain can change. It is not fixed. You are not stuck with the brain you have.", tag: "neuroplasticity", author: "" },
-  { text: "Every time you learn something new, your brain physically changes. That is hope in action.", tag: "neuroplasticity", author: "" },
-  { text: "The brain that can rewire itself is the brain that can heal itself.", tag: "neuroplasticity", author: "" },
-  { text: "Recovery is about creating new neural pathways, not about erasing the old ones.", tag: "neuroplasticity", author: "" },
-  { text: "You are not broken. You are not a problem to be solved. You are a person to be understood.", tag: "healing", author: "" },
-  { text: "Compassion is not a weakness. It is the highest form of human intelligence.", tag: "mindfulness", author: "" },
-  { text: "What if today you treated yourself with the same kindness you offer to others?", tag: "mindfulness", author: "" },
-  { text: "The curious paradox is that when I accept myself just as I am, then I can change.", tag: "healing", author: "Carl Rogers" },
-  { text: "Between stimulus and response there is a space. In that space is our power to choose.", tag: "mindfulness", author: "Viktor Frankl" },
-  { text: "When we are no longer able to change a situation, we are challenged to change ourselves.", tag: "strength", author: "Viktor Frankl" },
-  { text: "Those who have a 'why' to live can bear almost any 'how'.", tag: "strength", author: "Friedrich Nietzsche" },
-  { text: "Life is not about waiting for the storm to pass. It is about learning to dance in the rain.", tag: "hope", author: "" },
-  { text: "The greatest weapon against stress is our ability to choose one thought over another.", tag: "anxiety", author: "William James" },
-  { text: "Peace is not the absence of chaos. It is the ability to find calm within it.", tag: "anxiety", author: "" },
-  { text: "Anxiety is a thin stream of fear trickling through the mind. If encouraged, it cuts a channel into which all other thoughts are drained.", tag: "anxiety", author: "Arthur Somers Roche" },
-  { text: "Feelings come and go like clouds in a windy sky. Conscious breathing is my anchor.", tag: "mindfulness", author: "Thich Nhat Hanh" },
-  { text: "The present moment is filled with joy and happiness. If you are attentive, you will see it.", tag: "mindfulness", author: "Thich Nhat Hanh" },
-  { text: "Walk as if you are kissing the earth with your feet.", tag: "mindfulness", author: "Thich Nhat Hanh" },
-  { text: "No mud, no lotus.", tag: "healing", author: "Thich Nhat Hanh" },
-  { text: "Hope is not the conviction that something will turn out well, but the certainty that something makes sense regardless of how it turns out.", tag: "hope", author: "Vaclav Havel" },
-  { text: "Hope is the thing with feathers that perches in the soul.", tag: "hope", author: "Emily Dickinson" },
-  { text: "There is a crack in everything. That is how the light gets in.", tag: "hope", author: "Leonard Cohen" },
-  { text: "Ring the bells that still can ring. Forget your perfect offering. There is a crack in everything. That is how the light gets in.", tag: "hope", author: "Leonard Cohen" },
-  { text: "The sun will rise and we will try again.", tag: "hope", author: "" },
-  { text: "Every sunrise is an invitation to rise again.", tag: "hope", author: "" },
-  { text: "This is a good sign, having reason to believe that this will pass.", tag: "hope", author: "" },
-  { text: "You carry so much love in your heart. Give some to yourself.", tag: "healing", author: "" },
-  { text: "It's a slow process, but quitting won't speed it up.", tag: "recovery", author: "" },
-  { text: "Progress, not perfection.", tag: "recovery", author: "" },
-  { text: "The comeback is always stronger than the setback.", tag: "strength", author: "" },
-  { text: "What is coming is better than what is gone.", tag: "hope", author: "" },
-  { text: "Don't let your struggle become your identity.", tag: "healing", author: "" },
-  { text: "You don't drown by falling in the water. You drown by staying there.", tag: "strength", author: "" },
-  { text: "Sometimes the people around you won't understand your journey. That's okay. It's not for them.", tag: "healing", author: "" },
-  { text: "You are allowed to outgrow the people who knew you when you were smaller.", tag: "healing", author: "" },
-  { text: "The more you know yourself, the less you need others to understand you.", tag: "healing", author: "" },
-  { text: "What other people think of you is none of your business.", tag: "mindfulness", author: "Unknown" },
-  { text: "Boundaries are the distance at which I can love you and me simultaneously.", tag: "healing", author: "" },
-  { text: "No is a complete sentence.", tag: "healing", author: "Anne Lamott" },
-  { text: "You can't save people. You can only love them.", tag: "healing", author: "Anaïs Nin" },
-  { text: "Let go of the idea that things should be different than they are right now.", tag: "mindfulness", author: "" },
-  { text: "Surrender is not giving up. It is giving in to what is.", tag: "mindfulness", author: "" },
-  { text: "Pain is inevitable. Suffering is optional.", tag: "mindfulness", author: "" },
-  { text: "The only constant in life is change.", tag: "hope", author: "Heraclitus" },
-  { text: "This too shall pass.", tag: "hope", author: "" },
-  { text: "And still, I rise.", tag: "strength", author: "Maya Angelou" },
-  { text: "You may shoot me with your words, you may cut me with your eyes, you may kill me with your hatefulness, but still, like air, I'll rise.", tag: "strength", author: "Maya Angelou" },
-  { text: "I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.", tag: "healing", author: "Maya Angelou" },
-  { text: "If you don't like something, change it. If you can't change it, change your attitude.", tag: "mindfulness", author: "Maya Angelou" },
-  { text: "Nothing can dim the light that shines from within.", tag: "hope", author: "Maya Angelou" },
-  { text: "We delight in the beauty of the butterfly, but rarely admit the changes it has gone through to achieve that beauty.", tag: "healing", author: "Maya Angelou" },
-  { text: "Try to be a rainbow in someone's cloud.", tag: "hope", author: "Maya Angelou" },
-  { text: "Forgiveness is not something you do for someone else. It is something you do for yourself.", tag: "healing", author: "" },
-  { text: "Holding onto anger is like drinking poison and expecting the other person to die.", tag: "healing", author: "Buddha" },
-  { text: "The weak can never forgive. Forgiveness is the attribute of the strong.", tag: "healing", author: "Mahatma Gandhi" },
-  { text: "Forgiveness does not mean forgetting. It means letting go of the hope for a different past.", tag: "healing", author: "" },
-  { text: "Sometimes letting things go is an act of far greater power than defending or hanging on.", tag: "healing", author: "Eckhart Tolle" },
-  { text: "The power of finding beauty in the humblest things makes home happy and life lovely.", tag: "mindfulness", author: "Louisa May Alcott" },
-  { text: "Happiness is not something ready made. It comes from your own actions.", tag: "hope", author: "Dalai Lama" },
-  { text: "The purpose of our lives is to be happy.", tag: "hope", author: "Dalai Lama" },
-  { text: "Be kind whenever possible. It is always possible.", tag: "mindfulness", author: "Dalai Lama" },
-  { text: "If you want others to be happy, practice compassion. If you want to be happy, practice compassion.", tag: "mindfulness", author: "Dalai Lama" },
-  { text: "Happiness is not having a lot. It is appreciating what you have.", tag: "mindfulness", author: "" },
-  { text: "Gratitude turns what we have into enough.", tag: "mindfulness", author: "" },
-  { text: "When you focus on the good, the good gets better.", tag: "mindfulness", author: "" },
-  { text: "Gratitude is not what you say. It is how you live.", tag: "mindfulness", author: "" },
-  { text: "Start each day with a grateful heart.", tag: "mindfulness", author: "" },
-  { text: "The more you praise and celebrate your life, the more there is in life to celebrate.", tag: "mindfulness", author: "Oprah Winfrey" },
-  { text: "Be the change that you wish to see in the world.", tag: "hope", author: "Mahatma Gandhi" },
-  { text: "In a gentle way, you can shake the world.", tag: "strength", author: "Mahatma Gandhi" },
-  { text: "Live as if you were to die tomorrow. Learn as if you were to live forever.", tag: "hope", author: "Mahatma Gandhi" },
-  { text: "Happiness is when what you think, what you say, and what you do are in harmony.", tag: "mindfulness", author: "Mahatma Gandhi" },
-  { text: "The best way to find yourself is to lose yourself in the service of others.", tag: "hope", author: "Mahatma Gandhi" },
-  { text: "Do one thing every day that scares you.", tag: "strength", author: "Eleanor Roosevelt" },
-  { text: "No one can make you feel inferior without your consent.", tag: "strength", author: "Eleanor Roosevelt" },
-  { text: "The future belongs to those who believe in the beauty of their dreams.", tag: "hope", author: "Eleanor Roosevelt" },
-  { text: "Great minds discuss ideas; average minds discuss events; small minds discuss people.", tag: "mindfulness", author: "Eleanor Roosevelt" },
-  { text: "You must do the thing you think you cannot do.", tag: "strength", author: "Eleanor Roosevelt" },
-  { text: "Everything has beauty, but not everyone sees it.", tag: "mindfulness", author: "Confucius" },
-  { text: "Our greatest glory is not in never falling, but in rising every time we fall.", tag: "strength", author: "Confucius" },
-  { text: "It does not matter how slowly you go as long as you do not stop.", tag: "strength", author: "Confucius" },
-  { text: "The man who moves a mountain begins by carrying away small stones.", tag: "strength", author: "Confucius" },
-  { text: "Wherever you go, go with all your heart.", tag: "hope", author: "Confucius" },
-  { text: "Real change, enduring change, happens one step at a time.", tag: "recovery", author: "Ruth Bader Ginsburg" },
-  { text: "Fight for the things that you care about, but do it in a way that will lead others to join you.", tag: "strength", author: "Ruth Bader Ginsburg" },
-  { text: "You can disagree without being disagreeable.", tag: "mindfulness", author: "Ruth Bader Ginsburg" },
-  { text: "What can be unburdened by what has been.", tag: "healing", author: "" },
-  { text: "We do not need magic to change the world. We carry all the power we need inside ourselves already.", tag: "hope", author: "J.K. Rowling" },
-  { text: "Rock bottom became the solid foundation on which I rebuilt my life.", tag: "healing", author: "J.K. Rowling" },
-  { text: "It is impossible to live without failing at something, unless you live so cautiously that you might as well not have lived at all.", tag: "strength", author: "J.K. Rowling" },
-  { text: "Happiness can be found even in the darkest of times, if one only remembers to turn on the light.", tag: "hope", author: "J.K. Rowling" },
-  { text: "We are all in the gutter, but some of us are looking at the stars.", tag: "hope", author: "Oscar Wilde" },
-  { text: "Be yourself. Everyone else is already taken.", tag: "hope", author: "Oscar Wilde" },
-  { text: "To live is the rarest thing in the world. Most people exist, that is all.", tag: "hope", author: "Oscar Wilde" },
-  { text: "Experience is simply the name we give our mistakes.", tag: "healing", author: "Oscar Wilde" },
-  { text: "Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring.", tag: "hope", author: "Marilyn Monroe" },
-  { text: "Sometimes good things fall apart so better things can fall together.", tag: "hope", author: "Marilyn Monroe" },
-  { text: "The most beautiful people are those who have known defeat, known suffering, known struggle, known loss, and have found their way out of the depths.", tag: "healing", author: "Elisabeth Kubler-Ross" },
-  { text: "The beautiful thing about learning is that nobody can take it away from you.", tag: "hope", author: "B.B. King" },
-  { text: "We can't help everyone, but everyone can help someone.", tag: "hope", author: "Ronald Reagan" },
-  { text: "What we fear of doing most is usually what we most need to do.", tag: "strength", author: "Tim Ferriss" },
-  { text: "You can't go back and change the beginning, but you can start where you are and change the ending.", tag: "hope", author: "C.S. Lewis" },
-  { text: "There are far better things ahead than any we leave behind.", tag: "hope", author: "C.S. Lewis" },
-  { text: "Courage, dear heart.", tag: "strength", author: "C.S. Lewis" },
-  { text: "We are what we believe we are.", tag: "hope", author: "C.S. Lewis" },
-  { text: "The pain of parting is nothing to the joy of meeting again.", tag: "hope", author: "Charles Dickens" },
-  { text: "Have a heart that never hardens, and a temper that never tires, and a touch that never hurts.", tag: "healing", author: "Charles Dickens" },
-  { text: "It was the best of times, it was the worst of times.", tag: "hope", author: "Charles Dickens" },
-  { text: "No one is useless in this world who lightens the burdens of another.", tag: "hope", author: "Charles Dickens" },
-  { text: "Today you are you, that is truer than true. There is no one alive who is youer than you.", tag: "hope", author: "Dr. Seuss" },
-  { text: "Don't cry because it's over, smile because it happened.", tag: "hope", author: "Dr. Seuss" },
-  { text: "You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose.", tag: "strength", author: "Dr. Seuss" },
-  { text: "Sometimes you will never know the value of a moment until it becomes a memory.", tag: "mindfulness", author: "Dr. Seuss" },
-  { text: "The more that you read, the more things you will know. The more that you learn, the more places you'll go.", tag: "hope", author: "Dr. Seuss" },
-  { text: "Why fit in when you were born to stand out?", tag: "hope", author: "Dr. Seuss" },
-  { text: "Life is a journey, not a destination.", tag: "mindfulness", author: "Ralph Waldo Emerson" },
-  { text: "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.", tag: "strength", author: "Ralph Waldo Emerson" },
-  { text: "Write it on your heart that every day is the best day in the year.", tag: "mindfulness", author: "Ralph Waldo Emerson" },
-  { text: "Nothing external to you has any power over you.", tag: "mindfulness", author: "Ralph Waldo Emerson" },
-  { text: "The only gift is a portion of thyself.", tag: "healing", author: "Ralph Waldo Emerson" },
-  { text: "Peace begins with a smile.", tag: "mindfulness", author: "Mother Teresa" },
-  { text: "Spread love everywhere you go. Let no one ever come to you without leaving happier.", tag: "healing", author: "Mother Teresa" },
-  { text: "Not all of us can do great things. But we can do small things with great love.", tag: "hope", author: "Mother Teresa" },
-  { text: "If you judge people, you have no time to love them.", tag: "mindfulness", author: "Mother Teresa" },
-  { text: "Yesterday is gone. Tomorrow has not yet come. We have only today. Let us begin.", tag: "mindfulness", author: "Mother Teresa" },
-  { text: "Do not wait for leaders. Do it alone, person to person.", tag: "strength", author: "Mother Teresa" },
-  { text: "I can't change the direction of the wind, but I can adjust my sails to always reach my destination.", tag: "strength", author: "Jimmy Dean" },
-  { text: "We know what we are, but know not what we may be.", tag: "hope", author: "William Shakespeare" },
-  { text: "The fault, dear Brutus, is not in our stars, but in ourselves.", tag: "strength", author: "William Shakespeare" },
-  { text: "Give every man thy ear, but few thy voice.", tag: "mindfulness", author: "William Shakespeare" },
-  { text: "Love all, trust a few, do wrong to none.", tag: "healing", author: "William Shakespeare" },
-  { text: "Our doubts are traitors, and make us lose the good we oft might win by fearing to attempt.", tag: "strength", author: "William Shakespeare" },
-  { text: "It is not in the stars to hold our destiny but in ourselves.", tag: "strength", author: "William Shakespeare" },
-  { text: "To thine own self be true, and it must follow, as the night the day, thou canst not then be false to any man.", tag: "healing", author: "William Shakespeare" },
-  { text: "All that glitters is not gold.", tag: "mindfulness", author: "William Shakespeare" },
-  { text: "The course of true love never did run smooth.", tag: "hope", author: "William Shakespeare" },
-  { text: "A dream you dream alone is only a dream. A dream you dream together is reality.", tag: "hope", author: "Yoko Ono" },
-  { text: "Count your age by friends, not years. Count your life by smiles, not tears.", tag: "mindfulness", author: "John Lennon" },
-  { text: "Everything will be okay in the end. If it's not okay, it's not the end.", tag: "hope", author: "" },
-  { text: "The best is yet to come.", tag: "hope", author: "" },
-  { text: "You are loved. You are worthy. You matter.", tag: "hope", author: "" },
-  { text: "The simple act of caring is heroic.", tag: "healing", author: "Edward Albert" },
-  { text: "How wonderful it is that nobody need wait a single moment before starting to improve the world.", tag: "hope", author: "Anne Frank" },
-  { text: "Think of all the beauty still left around you and be happy.", tag: "mindfulness", author: "Anne Frank" },
-  { text: "In spite of everything, I still believe that people are really good at heart.", tag: "hope", author: "Anne Frank" },
-  { text: "Where there is hope, there is life.", tag: "hope", author: "Anne Frank" },
-  { text: "I don't think of all the misery, but of the beauty that still remains.", tag: "hope", author: "Anne Frank" },
-  { text: "Loneliness adds beauty to life. It puts a special burn on sunsets and night scents.", tag: "healing", author: "John Steinbeck" },
-  { text: "A sad soul can kill quicker than a germ.", tag: "healing", author: "John Steinbeck" },
-  { text: "All great and precious things are lonely.", tag: "healing", author: "John Steinbeck" },
-  { text: "Now that you don't have to be perfect, you can be good.", tag: "healing", author: "John Steinbeck" },
-  { text: "The free exploring mind of the individual human is the most valuable thing in the world.", tag: "hope", author: "John Steinbeck" },
-  { text: "What is better than wisdom? Woman. And what is better than a good woman? Nothing.", tag: "healing", author: "Geoffrey Chaucer" },
-  { text: "Patience is not the ability to wait, but the ability to keep a good attitude while waiting.", tag: "recovery", author: "" },
-  { text: "Healing is not a race. It is a journey with no finish line.", tag: "recovery", author: "" },
-  { text: "You are not your trauma. You are not your diagnosis. You are a person healing.", tag: "healing", author: "" },
-  { text: "Every day you fight is a day you win, even if you don't feel like it.", tag: "strength", author: "" },
-  { text: "The strongest people are not those who show strength in front of us, but those who win battles we know nothing about.", tag: "strength", author: "" },
-  { text: "Your mental health is more important than your grades, your job, your bank account, and other people's opinions.", tag: "healing", author: "" },
-  { text: "What mental health needs is more sunlight, more candor, and more unashamed conversation.", tag: "hope", author: "Glenn Close" },
-  { text: "There is hope, even when your brain tells you there isn't.", tag: "hope", author: "John Green" },
-  { text: "You are not alone. You are seen. You are valued. You are deserving of love and care.", tag: "hope", author: "" },
-  { text: "Even the darkest night will end and the sun will rise.", tag: "hope", author: "Victor Hugo" },
-  { text: "To love oneself is the beginning of a lifelong romance.", tag: "healing", author: "Oscar Wilde" },
-  { text: "Recovery is not a straight line. It's a spiral. You go through the same things, but at different levels.", tag: "recovery", author: "" },
-  { text: "You're not a mess. You're a person going through a hard time.", tag: "healing", author: "" },
-  { text: "Allow yourself to be a work in progress. Not everything needs to be figured out today.", tag: "healing", author: "" },
-  { text: "Your existence is not a mistake. You are here for a reason.", tag: "hope", author: "" },
-  { text: "The sun will rise again. It always does. And so will you.", tag: "hope", author: "" },
-  { text: "One day, this pain will be useful to you.", tag: "healing", author: "" },
-  { text: "Healing takes time, and that time is not wasted.", tag: "recovery", author: "" },
-  { text: "You can't reach what's in front of you until you let go of what's behind you.", tag: "healing", author: "" },
-  { text: "Be gentle with yourself. You're doing the best you can.", tag: "healing", author: "" },
-  { text: "The moment you accept yourself is the moment everything changes.", tag: "healing", author: "" },
-  { text: "You have the power to heal your life, and you need to know that.", tag: "healing", author: "Louise Hay" },
-  { text: "I am not what happened to me. I am what I choose to become.", tag: "healing", author: "Carl Jung" },
-  { text: "Your vision will become clear only when you can look into your own heart.", tag: "healing", author: "Carl Jung" },
-  { text: "I am not my illness. I am not my symptoms. I am me.", tag: "healing", author: "" },
-  { text: "Every day may not be good, but there is something good in every day.", tag: "mindfulness", author: "" },
-  { text: "Look for the light. It is always there, even when you cannot see it.", tag: "hope", author: "" },
-  { text: "The smallest act of kindness is worth more than the grandest intention.", tag: "healing", author: "Oscar Wilde" },
-  { text: "We must be willing to let go of the life we planned so as to have the life that is waiting for us.", tag: "hope", author: "Joseph Campbell" },
-  { text: "Follow your bliss and the universe will open doors where there were only walls.", tag: "hope", author: "Joseph Campbell" },
-  { text: "The cave you fear to enter holds the treasure you seek.", tag: "strength", author: "Joseph Campbell" },
-  { text: "Life has no meaning. Each of us gives it meaning. The meaning is love.", tag: "hope", author: "Joseph Campbell" },
-  { text: "You are not broken. You are breaking open.", tag: "healing", author: "" },
-  { text: "Let go of the person you used to be so you can become the person you are meant to be.", tag: "healing", author: "" },
-  { text: "The dark does not destroy the light. It defines it.", tag: "hope", author: "" },
-  { text: "You can't calm the storm. But you can calm yourself, and the storm will calm around you.", tag: "anxiety", author: "" },
-  { text: "The wave of panic will pass. It always passes. You have never been swallowed by one.", tag: "anxiety", author: "" },
-  { text: "Your body is not betraying you. It is responding to a perceived threat. Thank it, and let it know you are safe.", tag: "anxiety", author: "" },
-  { text: "Anxiety is not a flaw. It is a superpower that has not yet learned where to point.", tag: "anxiety", author: "" },
-  { text: "You are not at the mercy of your emotions. You are the sky. The emotions are the weather.", tag: "mindfulness", author: "" },
-  { text: "Breathe in courage. Breathe out fear.", tag: "anxiety", author: "" },
-  { text: "The only way to calm a dysregulated nervous system is through the body. Thought alone cannot reach it.", tag: "trauma", author: "" },
-  { text: "Your trauma is not your identity. Your healing is.", tag: "trauma", author: "" },
-  { text: "You survived the thing that tried to break you. That is not nothing.", tag: "trauma", author: "" },
-  { text: "The brain's ability to rewire itself is not a theory. It is a fact. You are living proof.", tag: "neuroplasticity", author: "" },
-  { text: "Every time you choose hope, you are rewiring your brain for resilience.", tag: "neuroplasticity", author: "" },
-  { text: "What fires together wires together. Choose what you fire carefully.", tag: "neuroplasticity", author: "" },
-  { text: "The most powerful medicine is the belief that you can heal.", tag: "healing", author: "" },
-  { text: "Your mind is a garden. Your thoughts are the seeds. You can grow flowers, or you can grow weeds.", tag: "mindfulness", author: "" },
-  { text: "If you can change your mind, you can change your life.", tag: "hope", author: "William James" },
-  { text: "The greatest discovery of my generation is that a human being can alter his life by altering his attitude.", tag: "hope", author: "William James" },
-  { text: "Act as if what you do makes a difference. It does.", tag: "hope", author: "William James" },
-  { text: "A chain is only as strong as its weakest link. Be kind to your weakest parts.", tag: "healing", author: "" },
-  { text: "You don't need to be fixed. You need to be seen.", tag: "healing", author: "" },
-  { text: "What you feel is valid. What you feel is temporary. What you feel is not all that you are.", tag: "healing", author: "" },
-  { text: "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", tag: "hope", author: "Alan Watts" },
-  { text: "You are under no obligation to be the same person you were five minutes ago.", tag: "healing", author: "Alan Watts" },
-  { text: "The only Zen you find on the tops of mountains is the Zen you bring up there.", tag: "mindfulness", author: "Robert M. Pirsig" },
-  { text: "The real you is not the one who is anxious. The real you is the one who is aware of being anxious.", tag: "mindfulness", author: "" },
-  { text: "You are not your anxiety. You are not your depression. You are the awareness that notices them both.", tag: "mindfulness", author: "" },
-  { text: "When you can't find the light, be the light.", tag: "hope", author: "" },
-  { text: "What if you stopped trying to be okay and just let yourself be?", tag: "healing", author: "" },
-  { text: "You are allowed to be both a masterpiece and a work in progress simultaneously.", tag: "healing", author: "" },
-  { text: "Hope is not a strategy. But it is the thing that makes strategy possible.", tag: "hope", author: "" },
-  { text: "Sometimes the most spiritual thing you can do is take a nap.", tag: "recovery", author: "" },
-  { text: "Healing is not about understanding. It is about releasing.", tag: "healing", author: "" },
-  { text: "You can't heal in the same environment that made you sick.", tag: "healing", author: "" },
-  { text: "Trauma creates change you didn't choose. Healing creates change you do.", tag: "trauma", author: "" },
-  { text: "The voice of depression is a liar. But it speaks in your voice, so you believe it.", tag: "depression", author: "" },
-  { text: "Depression is not a sign of weakness. It is a sign that you have been strong for too long.", tag: "depression", author: "" },
-  { text: "You don't have to carry the weight of the world. You just have to carry yourself.", tag: "healing", author: "" },
-  { text: "The body keeps the score. But the heart keeps the hope.", tag: "hope", author: "" }
-];
-
-var tags = {};
-quotes.forEach(function(q) { tags[q.tag] = (tags[q.tag] || 0) + 1; });
-var tagList = Object.keys(tags).sort();
+var allQuotes = [];
+var displayQuotes = [];
+var activeFilter = null;
+var searchQuery = '';
+var renderCount = 100;
+var loadStep = 50;
+var observer = null;
+var fetchedSet = new Set();
 
 var wall = document.getElementById('wall');
+var loading = document.getElementById('loading');
 var filterBar = document.getElementById('filter-bar');
-var activeFilter = null;
+var searchInput = document.getElementById('search-input');
+var shuffleBtn = document.getElementById('shuffle-btn');
+var loadAllBtn = document.getElementById('load-all-btn');
+var randomWebBtn = document.getElementById('random-web-btn');
 
-// Build filter bar
-var allBtn = document.createElement('button');
-allBtn.className = 'filter-btn active';
-allBtn.textContent = 'All (' + quotes.length + ')';
-allBtn.addEventListener('click', function() { setFilter(null); });
-filterBar.appendChild(allBtn);
+function fetchQuotes() {
+  fetch('quotes.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('Failed to load quotes');
+      return r.json();
+    })
+    .then(function(data) {
+      allQuotes = data;
+      loading.remove();
+      buildFilterBar();
+      setFilter(null);
+    })
+    .catch(function(err) {
+      loading.innerHTML = '<span>Could not load quotes. Try refreshing.</span>';
+    });
+}
 
-tagList.forEach(function(t) {
-  var btn = document.createElement('button');
-  btn.className = 'filter-btn';
-  btn.textContent = t.charAt(0).toUpperCase() + t.slice(1) + ' (' + tags[t] + ')';
-  btn.dataset.tag = t;
-  btn.addEventListener('click', function() { setFilter(t); });
-  filterBar.appendChild(btn);
-});
+function buildFilterBar() {
+  var tags = {};
+  allQuotes.forEach(function(q) { tags[q.tag] = (tags[q.tag] || 0) + 1; });
+  var tagList = Object.keys(tags).sort();
+
+  var allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.textContent = 'All (' + allQuotes.length + ')';
+  allBtn.addEventListener('click', function() { setFilter(null); });
+  filterBar.appendChild(allBtn);
+
+  tagList.forEach(function(t) {
+    var btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = t.charAt(0).toUpperCase() + t.slice(1) + ' (' + tags[t] + ')';
+    btn.dataset.tag = t;
+    btn.addEventListener('click', function() { setFilter(t); });
+    filterBar.appendChild(btn);
+  });
+}
 
 function setFilter(tag) {
   activeFilter = tag;
@@ -516,32 +202,63 @@ function setFilter(tag) {
     var match = Array.from(document.querySelectorAll('.filter-btn')).find(function(b) { return b.dataset.tag === tag; });
     if (match) match.classList.add('active');
   } else {
-    allBtn.classList.add('active');
+    filterBar.firstChild.classList.add('active');
   }
+  renderCount = 100;
   render();
 }
 
+function getFiltered() {
+  var list = activeFilter ? allQuotes.filter(function(q) { return q.tag === activeFilter; }) : allQuotes;
+  if (searchQuery) {
+    var q = searchQuery.toLowerCase();
+    list = list.filter(function(item) {
+      return item.text.toLowerCase().indexOf(q) !== -1 ||
+        (item.author && item.author.toLowerCase().indexOf(q) !== -1);
+    });
+  }
+  return list;
+}
+
+function shuffleArray(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
 function render() {
+  var filtered = getFiltered();
+  displayQuotes = filtered.slice(0, renderCount);
   wall.innerHTML = '';
-  var filtered = activeFilter ? quotes.filter(function(q) { return q.tag === activeFilter; }) : quotes;
-  filtered.forEach(function(q, i) {
+  displayQuotes.forEach(function(q, i) {
     var div = document.createElement('div');
     div.className = 'item';
     div.style.transitionDelay = (i % 20) * 20 + 'ms';
     div.innerHTML = '<div class="item-text">' + q.text + '</div>' +
       (q.author ? '<div class="item-author">&mdash; ' + q.author + '</div>' : '') +
-      '<span class="item-tag">' + q.tag + '</span>';
-    div.addEventListener('mouseenter', function() {
-      var existing = document.querySelector('.glow');
-      if (existing) existing.remove();
+      '<span class="item-tag">' + q.tag + '</span>' +
+      (q.hidden ? '<div class="item-hidden">' + q.hidden + '</div>' : '<div class="item-hidden"></div>');
+    div.addEventListener('click', function() {
+      this.classList.toggle('expanded');
     });
     wall.appendChild(div);
   });
   observeItems();
+  if (filtered.length > renderCount) {
+    var sentinel = document.createElement('div');
+    sentinel.id = 'infinite-sentinel';
+    sentinel.style.cssText = 'break-inside:avoid;height:1px;';
+    wall.appendChild(sentinel);
+    setupInfiniteScroll();
+  }
+  updateLoadAllBtn(filtered.length);
 }
 
 function observeItems() {
-  var observer = new IntersectionObserver(function(entries) {
+  if (observer) observer.disconnect();
+  observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -553,14 +270,87 @@ function observeItems() {
   document.querySelectorAll('.item').forEach(function(item) { observer.observe(item); });
 }
 
-// Scroll progress
+function setupInfiniteScroll() {
+  var sentinel = document.getElementById('infinite-sentinel');
+  if (!sentinel) return;
+  var scrollObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        scrollObserver.disconnect();
+        renderCount += loadStep;
+        render();
+      }
+    });
+  }, { rootMargin: '0px 0px 200px 0px' });
+  scrollObserver.observe(sentinel);
+}
+
+function updateLoadAllBtn(total) {
+  loadAllBtn.style.display = total > renderCount ? 'inline-block' : 'none';
+}
+
+loadAllBtn.addEventListener('click', function() {
+  renderCount = getFiltered().length;
+  render();
+});
+
+shuffleBtn.addEventListener('click', function() {
+  var filtered = getFiltered();
+  shuffleArray(filtered);
+  displayQuotes = filtered.slice(0, renderCount);
+  wall.innerHTML = '';
+  displayQuotes.forEach(function(q, i) {
+    var div = document.createElement('div');
+    div.className = 'item';
+    div.style.transitionDelay = (i % 20) * 20 + 'ms';
+    div.innerHTML = '<div class="item-text">' + q.text + '</div>' +
+      (q.author ? '<div class="item-author">&mdash; ' + q.author + '</div>' : '') +
+      '<span class="item-tag">' + q.tag + '</span>' +
+      (q.hidden ? '<div class="item-hidden">' + q.hidden + '</div>' : '<div class="item-hidden"></div>');
+    div.addEventListener('click', function() {
+      this.classList.toggle('expanded');
+    });
+    wall.appendChild(div);
+  });
+  observeItems();
+});
+
+randomWebBtn.addEventListener('click', function() {
+  fetch('https://api.quotable.io/random')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var text = data.content;
+      var author = data.author || '';
+      if (fetchedSet.has(text)) {
+        randomWebBtn.textContent = 'Already got that one!';
+        setTimeout(function() { randomWebBtn.textContent = 'Random from web &#127758;'; }, 2000);
+        return;
+      }
+      fetchedSet.add(text);
+      var q = { text: text, author: author, tag: 'web', hidden: 'Fetched from the web. Serendipity?' };
+      allQuotes.unshift(q);
+      setFilter(activeFilter);
+      randomWebBtn.textContent = 'Added!';
+      setTimeout(function() { randomWebBtn.textContent = 'Random from web &#127758;'; }, 2000);
+    })
+    .catch(function() {
+      randomWebBtn.textContent = 'Failed';
+      setTimeout(function() { randomWebBtn.textContent = 'Random from web &#127758;'; }, 2000);
+    });
+});
+
+searchInput.addEventListener('input', function() {
+  searchQuery = this.value;
+  renderCount = 100;
+  render();
+});
+
 window.addEventListener('scroll', function() {
   var h = document.documentElement.scrollHeight - window.innerHeight;
   var p = (window.scrollY / h) * 100;
   document.getElementById('scroll-progress').style.width = p + '%';
 });
 
-// Floating hope rotation
 var floatTexts = [
   'That already means something.',
   'You are still here. That is not small.',
@@ -576,10 +366,16 @@ var floatTexts = [
   'You are not behind schedule on your healing.',
   'Growth is not always visible. Sometimes it happens in the dark.',
   'You matter. Not because of what you do, but because of who you are.',
-  'One breath at a time. One step at a time.'
+  'One breath at a time. One step at a time.',
+  'Healing is not linear. Neither is today. Both are valid.',
+  'You have survived every hard day so far. This one is no different.',
+  'Be proud of yourself for the small wins. They add up.',
+  'Your presence here is enough. You don\'t need to prove anything.',
+  'Let hope be the thing that carries you through.'
 ];
 var floatEl = document.getElementById('float-text');
 var floatIdx = Math.floor(Math.random() * floatTexts.length);
+floatEl.style.transition = 'opacity 0.3s';
 setInterval(function() {
   floatIdx = (floatIdx + 1) % floatTexts.length;
   floatEl.style.opacity = '0';
@@ -588,14 +384,14 @@ setInterval(function() {
     floatEl.style.opacity = '1';
   }, 300);
 }, 8000);
-floatEl.style.transition = 'opacity 0.3s';
 
 document.getElementById('float-dismiss').addEventListener('click', function() {
   document.getElementById('floating-hope').style.opacity = '0';
   setTimeout(function() { document.getElementById('floating-hope').style.display = 'none'; }, 500);
 });
 
-render();
+fetchQuotes();
+
 })();
 </script>
 </body>
