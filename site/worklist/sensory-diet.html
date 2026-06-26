@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sensory Diet Planner — NeuroReboot Worklist</title>
+<meta name="description" content="Plan sensory input throughout the day for nervous system regulation. Proprioception, vestibular, tactile, auditory, visual, and olfactory activities.">
+<meta property="og:title" content="Sensory Diet Planner — NeuroReboot Worklist">
+<meta property="og:description" content="Plan sensory input throughout the day for nervous system regulation. Proprioception, vestibular, tactile, auditory, visual, and olfactory activities.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/sensory-diet.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sensory Diet Planner — NeuroReboot Worklist">
+<meta name="twitter:description" content="Plan sensory input throughout the day for nervous system regulation. Proprioception, vestibular, tactile, auditory, visual, and olfactory activities.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/sensory-diet.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sensory Diet Planner — NeuroReboot Worklist",
+  "description": "Plan sensory input throughout the day for nervous system regulation. Proprioception, vestibular, tactile, auditory, visual, and olfactory activities.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/sensory-diet.html"
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Space Grotesk', sans-serif; margin: 0; padding: 0; }
+.container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+h2 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; }
+h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+h4 { font-size: 1rem; margin: 0.75rem 0 0.25rem; }
+label { display: block; margin: 0.5rem 0 0.25rem; font-weight: 600; }
+.btn { font-family: inherit; font-size: 0.95rem; font-weight: 600; padding: 0.6rem 1.25rem; cursor: pointer; border: none; background: var(--primary-dark, #1e3a5f); color: white; transition: background 0.2s; }
+.btn:hover { background: var(--primary-darker, #0f2440); }
+.btn-secondary { background: var(--neutral-200, #e2e8f0); color: var(--text-dark, #1a202c); }
+.btn-secondary:hover { background: var(--neutral-300, #cbd5e1); }
+.btn-small { font-size: 0.85rem; padding: 0.3rem 0.75rem; }
+.category-card { background: var(--neutral-100, #f8fafc); padding: 1rem; margin-bottom: 1rem; border: 1px solid var(--neutral-200, #e2e8f0); }
+.category-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.25rem; }
+.category-desc { font-size: 0.9rem; color: var(--neutral-500, #64748b); margin-bottom: 0.5rem; }
+.sensory-option { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0; flex-wrap: wrap; }
+.sensory-option label { margin: 0; font-weight: 400; cursor: pointer; }
+.sensory-option select { font-family: inherit; font-size: 0.85rem; padding: 0.2rem; }
+.fav-star { cursor: pointer; background: none; border: none; font-size: 1rem; color: var(--neutral-400, #94a3b8); padding: 0; }
+.fav-star.active { color: #f59e0b; }
+.timeline-slot { padding: 0.5rem; margin-bottom: 0.5rem; background: var(--neutral-100, #f8fafc); border-left: 3px solid var(--primary-dark, #1e3a5f); }
+.timeline-slot .time-label { font-weight: 700; font-size: 0.9rem; }
+.timeline-slot .items { font-size: 0.9rem; color: var(--neutral-600, #475569); }
+.slider-group { margin: 1.5rem 0; }
+.slider-group label { font-weight: 600; margin-bottom: 0.25rem; }
+.slider-group input[type="range"] { width: 100%; max-width: 400px; }
+.slider-value { font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.psychoeduc { background: var(--neutral-100, #f8fafc); padding: 1.25rem; margin: 1.5rem 0; border: 1px solid var(--neutral-200, #e2e8f0); }
+.psychoeduc h3 { margin-top: 0; }
+.quick-pick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.75rem; }
+.quick-pick-item { background: var(--neutral-100, #f8fafc); padding: 0.75rem; border: 1px solid var(--neutral-200, #e2e8f0); }
+.quick-pick-item .cat-label { font-weight: 700; font-size: 0.85rem; }
+.quick-pick-item .act-label { font-size: 0.9rem; }
+.favorites-section { margin-top: 1.5rem; }
+.fav-category { margin-bottom: 0.75rem; }
+.fav-category .fav-cat-title { font-weight: 600; font-size: 0.9rem; }
+.fav-category .fav-items { font-size: 0.85rem; color: var(--neutral-500, #64748b); }
+.menu-timeline { margin: 1rem 0; }
+.tab-bar { display: flex; gap: 0; margin-bottom: 1rem; border-bottom: 2px solid var(--neutral-200, #e2e8f0); flex-wrap: wrap; }
+.tab-bar button { font-family: inherit; padding: 0.5rem 1rem; background: none; border: none; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--neutral-500, #64748b); border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.tab-bar button.active { color: var(--primary-dark, #1e3a5f); border-bottom-color: var(--primary-dark, #1e3a5f); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.today-menu { margin-top: 1.5rem; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <h1>Sensory Diet Planner</h1>
+    <p style="color:var(--neutral-500,#64748b);margin-bottom:1.5rem;">Plan sensory input throughout the day to help regulate your nervous system.</p>
+
+    <div class="tab-bar" role="tablist">
+      <button class="active" data-tab="plan" role="tab" aria-selected="true">Plan</button>
+      <button data-tab="menu" role="tab" aria-selected="false">My Sensory Menu</button>
+      <button data-tab="info" role="tab" aria-selected="false">What Is a Sensory Diet?</button>
+      <button data-tab="quick" role="tab" aria-selected="false">Overwhelmed? Quick Pick</button>
+    </div>
+
+    <div id="tab-plan" class="tab-content active">
+      <h2>Today's Sensory Plan</h2>
+      <div id="categories-container"></div>
+      <div class="slider-group">
+        <label for="feel-before">How I feel now (before sensory activities)</label>
+        <div>
+          <span style="font-size:0.85rem;color:var(--neutral-500,#64748b);">Stressed</span>
+          <input type="range" id="feel-before" min="0" max="10" value="5">
+          <span style="font-size:0.85rem;color:var(--neutral-500,#64748b);">Regulated</span>
+          <span class="slider-value" id="feel-before-val">5</span>
+        </div>
+      </div>
+      <div class="slider-group">
+        <label for="feel-after">How I feel now (after sensory activities)</label>
+        <div>
+          <span style="font-size:0.85rem;color:var(--neutral-500,#64748b);">Stressed</span>
+          <input type="range" id="feel-after" min="0" max="10" value="5">
+          <span style="font-size:0.85rem;color:var(--neutral-500,#64748b);">Regulated</span>
+          <span class="slider-value" id="feel-after-val">5</span>
+        </div>
+      </div>
+      <button class="btn" id="save-today-plan">Save Today's Plan</button>
+      <p id="save-plan-notice" style="font-size:0.85rem;color:var(--neutral-500,#64748b);margin-top:0.5rem;"></p>
+    </div>
+
+    <div id="tab-menu" class="tab-content">
+      <h2>My Sensory Menu</h2>
+      <div id="menu-timeline" class="menu-timeline"></div>
+      <div id="menu-favorites" class="favorites-section"></div>
+    </div>
+
+    <div id="tab-info" class="tab-content">
+      <div class="psychoeduc">
+        <h3>What Is a Sensory Diet?</h3>
+        <p>A sensory diet is a carefully designed set of sensory activities and inputs that your nervous system needs throughout the day to stay regulated. Like food nourishes your body, sensory input nourishes your nervous system.</p>
+        <p>When your nervous system is dysregulated (after brain injury, trauma, chronic stress, or sensory overload), intentional sensory input can help bring you back to a calm, focused state. Different types of sensory input affect different parts of the nervous system:</p>
+        <ul>
+          <li><strong>Proprioception</strong> (heavy work, joint compression) is grounding and organizing</li>
+          <li><strong>Vestibular</strong> (movement, balance) can be alerting or calming depending on rhythm</li>
+          <li><strong>Tactile</strong> (touch) provides comfort or alertness through texture</li>
+          <li><strong>Auditory</strong> (sound) filters stimulation and creates a calm environment</li>
+          <li><strong>Visual</strong> (sight) reduces visual overload and promotes calm</li>
+          <li><strong>Olfactory</strong> (smell) directly connects to the limbic system and emotional regulation</li>
+        </ul>
+        <p>Use this planner to experiment with what works for you. Everyone's sensory needs are different. Start small, notice how you feel, and adjust over time.</p>
+        <p style="font-style:italic;margin-top:0.75rem;">Always consult an occupational therapist for personalized sensory strategies.</p>
+      </div>
+    </div>
+
+    <div id="tab-quick" class="tab-content">
+      <h2>Overwhelmed? Quick Sensory Pick</h2>
+      <p style="color:var(--neutral-500,#64748b);margin-bottom:1rem;">One suggestion from each category to help you regulate right now.</p>
+      <div id="quick-pick-grid" class="quick-pick-grid"></div>
+      <button class="btn btn-secondary" id="refresh-quick-picks" style="margin-top:1rem;">Shuffle Suggestions</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script>
+(function() {
+  var CATEGORIES = [
+    {
+      id: 'proprioception',
+      name: 'Proprioception (Joint/Muscle)',
+      desc: 'Heavy work, joint compression, and resistance activities that ground and organize.',
+      examples: ['Weighted blanket', 'Push against wall', 'Carry heavy objects', 'Resistance bands', 'Yoga', 'Compression clothing']
+    },
+    {
+      id: 'vestibular',
+      name: 'Vestibular (Balance/Movement)',
+      desc: 'Movement and balance activities that can be alerting or calming.',
+      examples: ['Rocking chair', 'Swinging', 'Spinning', 'Walking', 'Dancing', 'Yoga flows']
+    },
+    {
+      id: 'tactile',
+      name: 'Tactile (Touch)',
+      desc: 'Texture-based input for comfort and sensory exploration.',
+      examples: ['Fidget toys', 'Textured objects', 'Warm bath', 'Cold shower', 'Pet an animal', 'Playdough/clay']
+    },
+    {
+      id: 'auditory',
+      name: 'Auditory (Sound)',
+      desc: 'Sound environments that filter stimulation or promote calm.',
+      examples: ['Brown noise', 'White noise', 'Nature sounds', 'Silence', 'Specific music', 'Noise-canceling headphones']
+    },
+    {
+      id: 'visual',
+      name: 'Visual (Sight)',
+      desc: 'Visual environments that reduce overload and promote calm.',
+      examples: ['Dim lighting', 'Salt lamp', 'Galaxy visualization', 'Nature view', 'Minimal decor', 'Patterned objects']
+    },
+    {
+      id: 'olfactory',
+      name: 'Olfactory (Smell)',
+      desc: 'Scents that directly connect to the limbic system for emotional regulation.',
+      examples: ['Lavender', 'Peppermint', 'Citrus', 'Cedar', 'Unscented', 'Grounding smell (dirt/soil)']
+    }
+  ];
+
+  var TIME_SLOTS = [
+    { value: 'morning', label: 'Morning' },
+    { value: 'midday', label: 'Midday' },
+    { value: 'afternoon', label: 'Afternoon' },
+    { value: 'evening', label: 'Evening' }
+  ];
+
+  var selectedItems = {};  // { categoryId: [{ activity, time }] }
+  var favorites = JSON.parse(localStorage.getItem('sensoryFavorites') || '{}'); // { categoryId: [activity strings] }
+
+  var categoriesContainer = document.getElementById('categories-container');
+  var menuTimeline = document.getElementById('menu-timeline');
+  var menuFavorites = document.getElementById('menu-favorites');
+  var saveTodayBtn = document.getElementById('save-today-plan');
+  var savePlanNotice = document.getElementById('save-plan-notice');
+  var feelBefore = document.getElementById('feel-before');
+  var feelAfter = document.getElementById('feel-after');
+  var feelBeforeVal = document.getElementById('feel-before-val');
+  var feelAfterVal = document.getElementById('feel-after-val');
+  var quickPickGrid = document.getElementById('quick-pick-grid');
+  var refreshQuickPicks = document.getElementById('refresh-quick-picks');
+  var tabBtns = document.querySelectorAll('[data-tab]');
+
+  function initSelectedItems() {
+    CATEGORIES.forEach(function(c) {
+      if (!selectedItems[c.id]) selectedItems[c.id] = [];
+    });
+  }
+  initSelectedItems();
+
+  function renderCategories() {
+    categoriesContainer.innerHTML = '';
+    CATEGORIES.forEach(function(c) {
+      var card = document.createElement('div');
+      card.className = 'category-card';
+
+      var title = document.createElement('div');
+      title.className = 'category-title';
+      title.textContent = c.name;
+      card.appendChild(title);
+
+      var desc = document.createElement('div');
+      desc.className = 'category-desc';
+      desc.textContent = c.desc;
+      card.appendChild(desc);
+
+      var items = selectedItems[c.id] || [];
+
+      c.examples.forEach(function(ex) {
+        var div = document.createElement('div');
+        div.className = 'sensory-option';
+
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.id = 'sensor-' + c.id + '-' + ex.replace(/\s+/g, '-');
+        var matched = items.some(function(i) { return i.activity === ex; });
+        cb.checked = matched;
+
+        var label = document.createElement('label');
+        label.htmlFor = cb.id;
+        label.textContent = ex;
+
+        var select = document.createElement('select');
+        select.setAttribute('aria-label', 'Time for ' + ex);
+        TIME_SLOTS.forEach(function(slot) {
+          var opt = document.createElement('option');
+          opt.value = slot.value;
+          opt.textContent = slot.label;
+          select.appendChild(opt);
+        });
+        var existingItem = items.find(function(i) { return i.activity === ex; });
+        if (existingItem) select.value = existingItem.time;
+
+        var favBtn = document.createElement('button');
+        favBtn.className = 'fav-star' + (isFavorite(c.id, ex) ? ' active' : '');
+        favBtn.textContent = '\u2605';
+        favBtn.setAttribute('aria-label', 'Toggle favorite');
+        favBtn.title = 'Add to favorites';
+        favBtn.addEventListener('click', function() {
+          toggleFavorite(c.id, ex);
+          favBtn.classList.toggle('active');
+        });
+
+        div.appendChild(cb);
+        div.appendChild(label);
+        div.appendChild(select);
+        div.appendChild(favBtn);
+
+        cb.addEventListener('change', function() {
+          if (cb.checked) {
+            if (!selectedItems[c.id]) selectedItems[c.id] = [];
+            if (!selectedItems[c.id].some(function(i) { return i.activity === ex; })) {
+              selectedItems[c.id].push({ activity: ex, time: select.value });
+            }
+          } else {
+            selectedItems[c.id] = (selectedItems[c.id] || []).filter(function(i) { return i.activity !== ex; });
+          }
+        });
+
+        select.addEventListener('change', function() {
+          if (cb.checked) {
+            var item = selectedItems[c.id].find(function(i) { return i.activity === ex; });
+            if (item) item.time = select.value;
+          }
+        });
+
+        card.appendChild(div);
+      });
+
+      categoriesContainer.appendChild(card);
+    });
+  }
+
+  function isFavorite(catId, activity) {
+    return favorites[catId] && favorites[catId].indexOf(activity) !== -1;
+  }
+
+  function toggleFavorite(catId, activity) {
+    if (!favorites[catId]) favorites[catId] = [];
+    var idx = favorites[catId].indexOf(activity);
+    if (idx === -1) {
+      favorites[catId].push(activity);
+    } else {
+      favorites[catId].splice(idx, 1);
+    }
+    localStorage.setItem('sensoryFavorites', JSON.stringify(favorites));
+  }
+
+  function renderMenuTimeline() {
+    menuTimeline.innerHTML = '';
+    var allItems = [];
+    CATEGORIES.forEach(function(c) {
+      (selectedItems[c.id] || []).forEach(function(item) {
+        allItems.push({ time: item.time, activity: item.activity, category: c.name });
+      });
+    });
+    if (allItems.length === 0) {
+      menuTimeline.innerHTML = '<p style="font-style:italic;color:var(--neutral-400,#94a3b8);">No sensory activities planned yet. Go to the Plan tab and select some.</p>';
+      return;
+    }
+    TIME_SLOTS.forEach(function(slot) {
+      var slotItems = allItems.filter(function(i) { return i.time === slot.value; });
+      if (slotItems.length === 0) return;
+      var div = document.createElement('div');
+      div.className = 'timeline-slot';
+      var timeLabel = document.createElement('div');
+      timeLabel.className = 'time-label';
+      timeLabel.textContent = slot.label;
+      div.appendChild(timeLabel);
+      slotItems.forEach(function(item) {
+        var p = document.createElement('div');
+        p.className = 'items';
+        p.textContent = item.activity + ' (' + item.category + ')';
+        div.appendChild(p);
+      });
+      menuTimeline.appendChild(div);
+    });
+  }
+
+  function renderFavorites() {
+    menuFavorites.innerHTML = '';
+    var hasFavs = false;
+    CATEGORIES.forEach(function(c) {
+      var favs = favorites[c.id];
+      if (!favs || favs.length === 0) return;
+      hasFavs = true;
+      var div = document.createElement('div');
+      div.className = 'fav-category';
+      var title = document.createElement('div');
+      title.className = 'fav-cat-title';
+      title.textContent = c.name;
+      div.appendChild(title);
+      var items = document.createElement('div');
+      items.className = 'fav-items';
+      items.textContent = favs.join(', ');
+      div.appendChild(items);
+      menuFavorites.appendChild(div);
+    });
+    if (!hasFavs) {
+      menuFavorites.innerHTML = '<p style="font-style:italic;color:var(--neutral-400,#94a3b8);">No favorites yet. Click the star next to activities to save them.</p>';
+    } else {
+      var heading = document.createElement('h3');
+      heading.textContent = 'Favorites';
+      menuFavorites.insertBefore(heading, menuFavorites.firstChild);
+    }
+  }
+
+  function loadTodayPlan() {
+    var saved = JSON.parse(localStorage.getItem('sensoryTodayPlan') || 'null');
+    if (saved) {
+      selectedItems = saved.items || {};
+      initSelectedItems();
+      feelBefore.value = saved.feelBefore || 5;
+      feelAfter.value = saved.feelAfter || 5;
+      feelBeforeVal.textContent = feelBefore.value;
+      feelAfterVal.textContent = feelAfter.value;
+    }
+  }
+
+  function saveTodayPlan() {
+    var data = {
+      items: selectedItems,
+      feelBefore: parseInt(feelBefore.value, 10),
+      feelAfter: parseInt(feelAfter.value, 10),
+      date: new Date().toISOString()
+    };
+    localStorage.setItem('sensoryTodayPlan', JSON.stringify(data));
+    savePlanNotice.textContent = 'Saved at ' + new Date().toLocaleTimeString();
+    renderMenuTimeline();
+    renderFavorites();
+  }
+
+  function renderQuickPicks() {
+    quickPickGrid.innerHTML = '';
+    CATEGORIES.forEach(function(c) {
+      var pick = c.examples[Math.floor(Math.random() * c.examples.length)];
+      var div = document.createElement('div');
+      div.className = 'quick-pick-item';
+      var catLabel = document.createElement('div');
+      catLabel.className = 'cat-label';
+      catLabel.textContent = c.name.split('(')[0].trim();
+      div.appendChild(catLabel);
+      var actLabel = document.createElement('div');
+      actLabel.className = 'act-label';
+      actLabel.textContent = pick;
+      div.appendChild(actLabel);
+      quickPickGrid.appendChild(div);
+    });
+  }
+
+  feelBefore.addEventListener('input', function() {
+    feelBeforeVal.textContent = feelBefore.value;
+  });
+  feelAfter.addEventListener('input', function() {
+    feelAfterVal.textContent = feelAfter.value;
+  });
+
+  saveTodayBtn.addEventListener('click', saveTodayPlan);
+
+  refreshQuickPicks.addEventListener('click', renderQuickPicks);
+
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      tabBtns.forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('active'); });
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      if (btn.dataset.tab === 'menu') {
+        renderMenuTimeline();
+        renderFavorites();
+      }
+      if (btn.dataset.tab === 'quick') {
+        renderQuickPicks();
+      }
+    });
+  });
+
+  loadTodayPlan();
+  renderCategories();
+  renderMenuTimeline();
+  renderFavorites();
+})();
+</script>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

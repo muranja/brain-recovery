@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Battery Meter — NeuroReboot Worklist</title>
+<meta name="description" content="Track your social energy levels. Visual battery meter, drain rate analysis, recharge activities, and 14-day history chart.">
+<meta property="og:title" content="Social Battery Meter — NeuroReboot Worklist">
+<meta property="og:description" content="Track your social energy levels. Visual battery meter, drain rate analysis, recharge activities, and 14-day history chart.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/social-battery.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Social Battery Meter — NeuroReboot Worklist">
+<meta name="twitter:description" content="Track your social energy levels. Visual battery meter, drain rate analysis, recharge activities, and 14-day history chart.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/social-battery.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Social Battery Meter — NeuroReboot Worklist",
+  "description": "Track your social energy levels. Visual battery meter, drain rate analysis, recharge activities, and 14-day history chart.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/social-battery.html"
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Space Grotesk', sans-serif; margin: 0; padding: 0; }
+.container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+h2 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; }
+h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+label { display: block; margin: 0.5rem 0 0.25rem; font-weight: 600; }
+.btn { font-family: inherit; font-size: 0.95rem; font-weight: 600; padding: 0.6rem 1.25rem; cursor: pointer; border: none; background: var(--primary-dark, #1e3a5f); color: white; transition: background 0.2s; }
+.btn:hover { background: var(--primary-darker, #0f2440); }
+.btn-secondary { background: var(--neutral-200, #e2e8f0); color: var(--text-dark, #1a202c); }
+.btn-secondary:hover { background: var(--neutral-300, #cbd5e1); }
+.btn-success { background: #16a34a; }
+.btn-success:hover { background: #15803d; }
+
+.battery-section { text-align: center; padding: 2rem 0; }
+.battery-icon { display: inline-block; position: relative; width: 120px; height: 200px; border: 4px solid #1a202c; padding: 6px; }
+.battery-fill { width: 100%; height: 100%; transition: background 0.3s, height 0.3s; position: absolute; bottom: 6px; left: 0; }
+.battery-cap { width: 40px; height: 12px; background: #1a202c; margin: 0 auto; }
+.battery-percent { font-size: 1.75rem; font-weight: 700; margin-top: 0.5rem; font-variant-numeric: tabular-nums; }
+.battery-label { font-size: 1rem; font-weight: 600; margin-top: 0.25rem; }
+
+.battery-green .battery-fill { background: #16a34a; }
+.battery-yellow .battery-fill { background: #ca8a04; }
+.battery-red .battery-fill { background: #dc2626; }
+
+.slider-section { text-align: center; margin: 1.5rem 0; }
+.slider-section input[type="range"] { width: 80%; max-width: 500px; }
+.suggestion-box { text-align: center; background: var(--neutral-100, #f8fafc); padding: 1.25rem; margin: 1rem 0; border: 1px solid var(--neutral-200, #e2e8f0); }
+.suggestion-box p { margin: 0; font-size: 1rem; line-height: 1.5; }
+
+.drain-item, .recharge-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid var(--neutral-200, #e2e8f0); }
+.drain-item .label, .recharge-item .label { min-width: 140px; font-weight: 500; }
+.drain-item .bar-wrap, .recharge-item .bar-wrap { flex: 1; height: 12px; background: var(--neutral-200, #e2e8f0); }
+.drain-item .bar-fill, .recharge-item .bar-fill { height: 100%; transition: width 0.3s; }
+.drain-item .bar-fill { background: #dc2626; }
+.recharge-item .bar-fill { background: #16a34a; }
+.drain-item .val, .recharge-item .val { font-size: 0.9rem; font-weight: 600; min-width: 2rem; text-align: right; font-variant-numeric: tabular-nums; }
+
+.drain-editor, .recharge-editor { margin: 1rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.drain-editor input, .recharge-editor input { font-family: inherit; font-size: 0.9rem; padding: 0.4rem; }
+.drain-editor select, .recharge-editor select { font-family: inherit; font-size: 0.9rem; padding: 0.4rem; }
+.drain-editor .btn, .recharge-editor .btn { font-size: 0.85rem; padding: 0.4rem 0.75rem; }
+
+.chart-container { position: relative; width: 100%; height: 200px; margin: 1rem 0; }
+.chart-canvas { width: 100%; height: 100%; display: flex; align-items: flex-end; gap: 4px; }
+.chart-bar { flex: 1; min-width: 12px; transition: height 0.3s; position: relative; }
+.chart-bar:hover .chart-tooltip { display: block; }
+.chart-tooltip { display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #1a202c; color: white; padding: 0.25rem 0.5rem; font-size: 0.75rem; white-space: nowrap; z-index: 10; }
+.chart-label { display: flex; justify-content: space-between; margin-top: 0.25rem; font-size: 0.75rem; color: var(--neutral-500, #64748b); }
+.chart-label span { flex: 1; text-align: center; }
+
+.forecast-box { background: var(--neutral-100, #f8fafc); padding: 1rem; margin: 1rem 0; border: 1px solid var(--neutral-200, #e2e8f0); }
+.forecast-box .forecast-row { display: flex; justify-content: space-between; padding: 0.25rem 0; font-size: 0.95rem; }
+.forecast-box .forecast-total { font-weight: 700; font-size: 1.1rem; border-top: 2px solid var(--neutral-300, #cbd5e1); padding-top: 0.5rem; margin-top: 0.5rem; }
+.log-entry { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid var(--neutral-200, #e2e8f0); font-size: 0.9rem; }
+.log-entry .log-time { color: var(--neutral-500, #64748b); }
+.log-entry .log-val { font-weight: 600; }
+
+.tab-bar { display: flex; gap: 0; margin-bottom: 1rem; border-bottom: 2px solid var(--neutral-200, #e2e8f0); flex-wrap: wrap; }
+.tab-bar button { font-family: inherit; padding: 0.5rem 1rem; background: none; border: none; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--neutral-500, #64748b); border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.tab-bar button.active { color: var(--primary-dark, #1e3a5f); border-bottom-color: var(--primary-dark, #1e3a5f); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <h1>Social Battery Meter</h1>
+    <p style="color:var(--neutral-500,#64748b);margin-bottom:1.5rem;">Track your social energy levels and plan your social interactions accordingly.</p>
+
+    <div class="tab-bar" role="tablist">
+      <button class="active" data-tab="meter" role="tab" aria-selected="true">Meter</button>
+      <button data-tab="drain" role="tab" aria-selected="false">Drain Rate</button>
+      <button data-tab="recharge" role="tab" aria-selected="false">Recharge</button>
+      <button data-tab="history" role="tab" aria-selected="false">History &amp; Forecast</button>
+    </div>
+
+    <div id="tab-meter" class="tab-content active">
+      <div class="battery-section" id="battery-section">
+        <div class="battery-icon" id="battery-icon">
+          <div class="battery-fill" id="battery-fill" style="height:75%;"></div>
+        </div>
+        <div class="battery-cap"></div>
+        <div class="battery-percent" id="battery-percent">75%</div>
+        <div class="battery-label" id="battery-label">Partially drained</div>
+      </div>
+
+      <div class="slider-section">
+        <label for="battery-slider">How much social energy do you have left?</label>
+        <div>
+          <input type="range" id="battery-slider" min="0" max="100" value="75" step="1">
+        </div>
+        <div style="display:flex;justify-content:space-between;max-width:500px;margin:0 auto;font-size:0.8rem;color:var(--neutral-500,#64748b);">
+          <span>0% — Empty</span>
+          <span>100% — Full</span>
+        </div>
+      </div>
+
+      <div class="suggestion-box" id="suggestion-box">
+        <p id="suggestion-text">You have decent energy. Low-stakes socializing is fine — coffee with a friend, a phone call.</p>
+      </div>
+
+      <div style="text-align:center;margin:1.5rem 0;">
+        <button class="btn btn-success" id="log-today-btn">Log Today</button>
+        <p style="font-size:0.85rem;color:var(--neutral-500,#64748b);margin-top:0.25rem;" id="log-status"></p>
+      </div>
+    </div>
+
+    <div id="tab-drain" class="tab-content">
+      <h2>Drain Rate</h2>
+      <p style="color:var(--neutral-500,#64748b);margin-bottom:0.75rem;">Activities that drain your social battery. Rate each from 1 (low drain) to 10 (high drain).</p>
+      <div id="drain-list"></div>
+      <div class="drain-editor">
+        <input type="text" id="new-drain-name" placeholder="Activity name">
+        <select id="new-drain-rate">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+        </select>
+        <button class="btn btn-secondary" id="add-drain-btn">Add</button>
+      </div>
+    </div>
+
+    <div id="tab-recharge" class="tab-content">
+      <h2>Recharge Activities</h2>
+      <p style="color:var(--neutral-500,#64748b);margin-bottom:0.75rem;">What fills your battery back up? Rate each from 1 (little recharge) to 10 (full recharge).</p>
+      <div id="recharge-list"></div>
+      <div class="recharge-editor">
+        <input type="text" id="new-recharge-name" placeholder="Activity name">
+        <select id="new-recharge-rate">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+        </select>
+        <button class="btn btn-secondary" id="add-recharge-btn">Add</button>
+      </div>
+    </div>
+
+    <div id="tab-history" class="tab-content">
+      <h2>14-Day History</h2>
+      <div id="history-chart" class="chart-container"></div>
+
+      <h2>Social Energy Forecast</h2>
+      <div class="forecast-box" id="forecast-box">
+        <div class="forecast-row"><span>Current Level</span><span id="forecast-current">75%</span></div>
+        <div class="forecast-row"><span>Recharge Today</span><span id="forecast-recharge">0</span></div>
+        <div class="forecast-row"><span>Planned Drain</span><span id="forecast-drain">0</span></div>
+        <div class="forecast-row forecast-total"><span>Forecast</span><span id="forecast-total">75%</span></div>
+      </div>
+
+      <h2>Log History</h2>
+      <div id="log-history"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script>
+(function() {
+  var DEFAULT_DRAINS = [
+    { name: 'Parties', rate: 8 },
+    { name: 'Crowds', rate: 7 },
+    { name: 'Phone calls', rate: 5 },
+    { name: 'Meetings', rate: 6 },
+    { name: 'Small talk', rate: 4 },
+    { name: 'Family gatherings', rate: 7 }
+  ];
+
+  var DEFAULT_RECHARGES = [
+    { name: 'Alone time', rate: 9 },
+    { name: 'Nature', rate: 8 },
+    { name: 'Reading', rate: 7 },
+    { name: 'Gaming', rate: 6 },
+    { name: 'Sleep', rate: 10 },
+    { name: 'Exercise', rate: 8 },
+    { name: 'Music', rate: 7 },
+    { name: 'Pet time', rate: 9 }
+  ];
+
+  var drains = JSON.parse(localStorage.getItem('socialDrains') || 'null') || DEFAULT_DRAINS.slice();
+  var recharges = JSON.parse(localStorage.getItem('socialRecharges') || 'null') || DEFAULT_RECHARGES.slice();
+  var logs = JSON.parse(localStorage.getItem('socialBatteryLogs') || '[]');
+
+  var slider = document.getElementById('battery-slider');
+  var batteryFill = document.getElementById('battery-fill');
+  var batteryIcon = document.getElementById('battery-icon');
+  var batteryPercent = document.getElementById('battery-percent');
+  var batteryLabel = document.getElementById('battery-label');
+  var suggestionText = document.getElementById('suggestion-text');
+  var logTodayBtn = document.getElementById('log-today-btn');
+  var logStatus = document.getElementById('log-status');
+  var drainList = document.getElementById('drain-list');
+  var rechargeList = document.getElementById('recharge-list');
+  var historyChart = document.getElementById('history-chart');
+  var forecastCurrent = document.getElementById('forecast-current');
+  var forecastRecharge = document.getElementById('forecast-recharge');
+  var forecastDrain = document.getElementById('forecast-drain');
+  var forecastTotal = document.getElementById('forecast-total');
+  var logHistory = document.getElementById('log-history');
+  var tabBtns = document.querySelectorAll('[data-tab]');
+
+  function getBatteryLevel() { return parseInt(slider.value, 10); }
+
+  function updateBattery() {
+    var level = getBatteryLevel();
+    batteryFill.style.height = level + '%';
+    batteryPercent.textContent = level + '%';
+    batteryIcon.className = 'battery-icon';
+    if (level >= 76) {
+      batteryIcon.classList.add('battery-green');
+      batteryLabel.textContent = 'Fully charged';
+    } else if (level >= 26) {
+      batteryIcon.classList.add('battery-yellow');
+      batteryLabel.textContent = 'Partially drained';
+    } else {
+      batteryIcon.classList.add('battery-red');
+      batteryLabel.textContent = 'Depleted';
+    }
+    updateSuggestion(level);
+  }
+
+  function updateSuggestion(level) {
+    var text = '';
+    if (level >= 76) {
+      text = "You're fully charged! Great time for social plans, group activities, or reaching out to someone.";
+    } else if (level >= 51) {
+      text = "You have decent energy. Low-stakes socializing is fine — coffee with a friend, a phone call.";
+    } else if (level >= 26) {
+      text = "You're running low. Prioritize solo activities. If you have social commitments, set a time limit.";
+    } else if (level >= 11) {
+      text = "Your battery is draining fast. Cancel non-essential plans. Rest is more important right now.";
+    } else {
+      text = "You're in social survival mode. Full permission to cancel everything. No explanations needed. Rest.";
+    }
+    suggestionText.textContent = text;
+  }
+
+  slider.addEventListener('input', updateBattery);
+
+  function saveDrains() {
+    localStorage.setItem('socialDrains', JSON.stringify(drains));
+  }
+
+  function saveRecharges() {
+    localStorage.setItem('socialRecharges', JSON.stringify(recharges));
+  }
+
+  function saveLogs() {
+    localStorage.setItem('socialBatteryLogs', JSON.stringify(logs));
+  }
+
+  function renderDrains() {
+    drainList.innerHTML = '';
+    drains.forEach(function(d, idx) {
+      var div = document.createElement('div');
+      div.className = 'drain-item';
+      var label = document.createElement('span');
+      label.className = 'label';
+      label.textContent = d.name;
+      var barWrap = document.createElement('div');
+      barWrap.className = 'bar-wrap';
+      var barFill = document.createElement('div');
+      barFill.className = 'bar-fill';
+      barFill.style.width = (d.rate * 10) + '%';
+      barWrap.appendChild(barFill);
+      var val = document.createElement('span');
+      val.className = 'val';
+      val.textContent = d.rate;
+      var delBtn = document.createElement('button');
+      delBtn.textContent = '\u00D7';
+      delBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--neutral-400,#94a3b8);';
+      delBtn.setAttribute('aria-label', 'Remove ' + d.name);
+      delBtn.addEventListener('click', function() {
+        drains.splice(idx, 1);
+        saveDrains();
+        renderDrains();
+        updateForecast();
+      });
+      div.appendChild(label);
+      div.appendChild(barWrap);
+      div.appendChild(val);
+      div.appendChild(delBtn);
+      drainList.appendChild(div);
+    });
+  }
+
+  function renderRecharges() {
+    rechargeList.innerHTML = '';
+    recharges.forEach(function(r, idx) {
+      var div = document.createElement('div');
+      div.className = 'recharge-item';
+      var label = document.createElement('span');
+      label.className = 'label';
+      label.textContent = r.name;
+      var barWrap = document.createElement('div');
+      barWrap.className = 'bar-wrap';
+      var barFill = document.createElement('div');
+      barFill.className = 'bar-fill';
+      barFill.style.width = (r.rate * 10) + '%';
+      barWrap.appendChild(barFill);
+      var val = document.createElement('span');
+      val.className = 'val';
+      val.textContent = r.rate;
+      var delBtn = document.createElement('button');
+      delBtn.textContent = '\u00D7';
+      delBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--neutral-400,#94a3b8);';
+      delBtn.setAttribute('aria-label', 'Remove ' + r.name);
+      delBtn.addEventListener('click', function() {
+        recharges.splice(idx, 1);
+        saveRecharges();
+        renderRecharges();
+        updateForecast();
+      });
+      div.appendChild(label);
+      div.appendChild(barWrap);
+      div.appendChild(val);
+      div.appendChild(delBtn);
+      rechargeList.appendChild(div);
+    });
+  }
+
+  function renderHistory() {
+    logHistory.innerHTML = '';
+    if (logs.length === 0) {
+      logHistory.innerHTML = '<p style="font-style:italic;color:var(--neutral-400,#94a3b8);">No logs yet. Use Log Today to start tracking.</p>';
+      return;
+    }
+    logs.slice().reverse().forEach(function(log) {
+      var div = document.createElement('div');
+      div.className = 'log-entry';
+      var timeSpan = document.createElement('span');
+      timeSpan.className = 'log-time';
+      timeSpan.textContent = new Date(log.timestamp).toLocaleString();
+      var valSpan = document.createElement('span');
+      valSpan.className = 'log-val';
+      valSpan.textContent = log.level + '%';
+      div.appendChild(timeSpan);
+      div.appendChild(valSpan);
+      logHistory.appendChild(div);
+    });
+  }
+
+  function renderChart() {
+    historyChart.innerHTML = '';
+    var recent = logs.slice(-14);
+    if (recent.length === 0) {
+      historyChart.innerHTML = '<p style="font-style:italic;color:var(--neutral-400,#94a3b8);text-align:center;">No data yet. Log your battery level to see the chart.</p>';
+      return;
+    }
+    var chartDiv = document.createElement('div');
+    chartDiv.className = 'chart-canvas';
+    recent.forEach(function(log) {
+      var bar = document.createElement('div');
+      bar.className = 'chart-bar';
+      if (log.level >= 76) bar.style.background = '#16a34a';
+      else if (log.level >= 26) bar.style.background = '#ca8a04';
+      else bar.style.background = '#dc2626';
+      bar.style.height = log.level + '%';
+      var tooltip = document.createElement('div');
+      tooltip.className = 'chart-tooltip';
+      tooltip.textContent = log.level + '%';
+      bar.appendChild(tooltip);
+      chartDiv.appendChild(bar);
+    });
+    historyChart.appendChild(chartDiv);
+    var labelDiv = document.createElement('div');
+    labelDiv.className = 'chart-label';
+    recent.forEach(function(log) {
+      var span = document.createElement('span');
+      var d = new Date(log.timestamp);
+      span.textContent = (d.getMonth() + 1) + '/' + d.getDate();
+      labelDiv.appendChild(span);
+    });
+    historyChart.appendChild(labelDiv);
+  }
+
+  function updateForecast() {
+    var level = getBatteryLevel();
+    forecastCurrent.textContent = level + '%';
+
+    var selectedDay = 'today';
+    var totalDrain = 0;
+    var totalRecharge = 0;
+
+    drains.forEach(function(d) { totalDrain += d.rate; });
+    recharges.forEach(function(r) { totalRecharge += r.rate; });
+
+    forecastRecharge.textContent = totalRecharge;
+    forecastDrain.textContent = totalDrain;
+
+    var forecast = Math.max(0, Math.min(100, level + totalRecharge - totalDrain));
+    forecastTotal.textContent = forecast + '%';
+  }
+
+  logTodayBtn.addEventListener('click', function() {
+    var level = getBatteryLevel();
+    logs.push({ level: level, timestamp: new Date().toISOString() });
+    saveLogs();
+    logStatus.textContent = 'Logged at ' + new Date().toLocaleTimeString() + ' — ' + level + '%';
+    renderHistory();
+    renderChart();
+  });
+
+  document.getElementById('add-drain-btn').addEventListener('click', function() {
+    var name = document.getElementById('new-drain-name').value.trim();
+    var rate = parseInt(document.getElementById('new-drain-rate').value, 10);
+    if (!name) return;
+    drains.push({ name: name, rate: rate });
+    saveDrains();
+    renderDrains();
+    updateForecast();
+    document.getElementById('new-drain-name').value = '';
+  });
+
+  document.getElementById('add-recharge-btn').addEventListener('click', function() {
+    var name = document.getElementById('new-recharge-name').value.trim();
+    var rate = parseInt(document.getElementById('new-recharge-rate').value, 10);
+    if (!name) return;
+    recharges.push({ name: name, rate: rate });
+    saveRecharges();
+    renderRecharges();
+    updateForecast();
+    document.getElementById('new-recharge-name').value = '';
+  });
+
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      tabBtns.forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('active'); });
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      if (btn.dataset.tab === 'history') {
+        renderChart();
+        renderHistory();
+        updateForecast();
+      }
+    });
+  });
+
+  updateBattery();
+  renderDrains();
+  renderRecharges();
+  renderHistory();
+  renderChart();
+  updateForecast();
+})();
+</script>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

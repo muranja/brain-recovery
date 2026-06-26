@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Window of Tolerance — NeuroReboot Worklist</title>
+<meta name="description" content="An interactive tool to visualize your Window of Tolerance — track arousal levels and learn grounding skills.">
+<meta property="og:title" content="Window of Tolerance — NeuroReboot Worklist">
+<meta property="og:description" content="An interactive tool to visualize your Window of Tolerance — track arousal levels and learn grounding skills.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/window-of-tolerance.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Window of Tolerance — NeuroReboot Worklist">
+<meta name="twitter:description" content="An interactive tool to visualize your Window of Tolerance — track arousal levels and learn grounding skills.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/window-of-tolerance.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Window of Tolerance — NeuroReboot Worklist",
+  "description": "An interactive tool to visualize your Window of Tolerance — track arousal levels and learn grounding skills.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/window-of-tolerance.html"
+}
+</script>
+<style>
+.wot-container {
+  text-align: center;
+  padding: 2rem 0;
+}
+.wot-bar-wrapper {
+  position: relative;
+  width: 64px;
+  height: 420px;
+  margin: 1.5rem auto;
+  border: 2px solid var(--neutral-300);
+  background: white;
+  overflow: hidden;
+}
+.wot-zone {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: background 0.3s;
+}
+.wot-hyper {
+  top: 0;
+  height: 33.33%;
+  background: #fee2e2;
+  color: #991b1b;
+}
+.wot-window {
+  top: 33.33%;
+  height: 33.34%;
+  background: #dcfce7;
+  color: #166534;
+}
+.wot-hypo {
+  top: 66.66%;
+  height: 33.33%;
+  background: #dbeafe;
+  color: #1e40af;
+}
+.wot-indicator {
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  height: 3px;
+  background: var(--neutral-900);
+  z-index: 5;
+  transition: top 0.15s;
+  pointer-events: none;
+}
+.wot-indicator::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  background: var(--neutral-900);
+  transform: translateX(-50%);
+}
+input[type="range"].wot-slider {
+  display: block;
+  width: 64px;
+  margin: -0.25rem auto 0;
+  accent-color: var(--primary);
+  writing-mode: vertical-lr;
+  direction: rtl;
+  height: 420px;
+  cursor: pointer;
+}
+.wot-state {
+  min-height: 100px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border: 1px solid var(--neutral-200);
+  background: white;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.wot-state.hyper {
+  border-left: 4px solid #dc2626;
+}
+.wot-state.window {
+  border-left: 4px solid #16a34a;
+}
+.wot-state.hypo {
+  border-left: 4px solid #2563eb;
+}
+.wot-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.checkin-history {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.25rem;
+  height: 120px;
+  padding: 0.5rem 0;
+}
+.checkin-bar {
+  flex: 1;
+  min-width: 8px;
+  background: var(--primary);
+  transition: height 0.3s;
+  position: relative;
+}
+.checkin-bar:hover {
+  opacity: 0.8;
+}
+.checkin-bar-label {
+  position: absolute;
+  bottom: -1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  color: var(--neutral-500);
+  white-space: nowrap;
+}
+.activity-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.activity-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  background: var(--primary-light);
+  border: 1px solid var(--primary);
+  color: var(--primary-dark);
+}
+.activity-tag .remove-activity {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--neutral-500);
+  padding: 0;
+}
+.activity-tag .remove-activity:hover {
+  color: var(--danger);
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <section aria-labelledby="wot-heading">
+      <h1 id="wot-heading" class="section-title">Window of Tolerance</h1>
+      <p class="section-subtitle">Visualize your nervous system's arousal level. The goal is to stay in your window &mdash; calm, regulated, and able to cope.</p>
+    </section>
+
+    <section aria-label="Window of Tolerance explanation">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;">
+        <div class="card" style="border-left:4px solid #dc2626;">
+          <h3 class="card-title">Hyperarousal</h3>
+          <p class="card-text">Anxiety, panic, hypervigilance, racing thoughts, agitation. The nervous system is over-activated.</p>
+        </div>
+        <div class="card" style="border-left:4px solid #16a34a;">
+          <h3 class="card-title">Window of Tolerance</h3>
+          <p class="card-text">Calm, focused, present, connected. You can think clearly and handle challenges here.</p>
+        </div>
+        <div class="card" style="border-left:4px solid #2563eb;">
+          <h3 class="card-title">Hypoarousal</h3>
+          <p class="card-text">Numbness, dissociation, shutdown, fatigue, disconnection. The nervous system is under-activated.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Arousal slider">
+      <div class="wot-container">
+        <div class="wot-bar-wrapper" id="wot-bar">
+          <div class="wot-zone wot-hyper" id="zone-hyper">Hyperarousal</div>
+          <div class="wot-zone wot-window" id="zone-window">Window of Tolerance</div>
+          <div class="wot-zone wot-hypo" id="zone-hypo">Hypoarousal</div>
+          <div class="wot-indicator" id="wot-indicator" style="top:50%;"></div>
+        </div>
+        <input type="range" class="wot-slider" id="wot-slider" min="0" max="100" value="50" aria-label="Arousal level slider">
+        <p style="margin-top:0.75rem;font-size:0.85rem;color:var(--neutral-500);">Drag to explore each zone</p>
+      </div>
+
+      <div class="wot-state" id="wot-state">
+        <div class="wot-value" id="wot-value">50</div>
+        <div id="wot-message">You're in your window of tolerance — calm and regulated. You can handle challenges here.</div>
+      </div>
+
+      <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+        <button id="checkin-btn" class="btn btn-primary">Check In — Save Current Level</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="history-heading">
+      <h2 id="history-heading" class="section-title">Last 14 Check-Ins</h2>
+      <div class="checkin-history" id="checkin-history">
+        <p style="color:var(--neutral-500);font-size:0.9rem;width:100%;text-align:center;">No check-ins yet. Use the button above to log your first one.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="grounding-heading">
+      <h2 id="grounding-heading" class="section-title">What Brings You Back?</h2>
+      <p class="section-subtitle">Activities that help you return to your window of tolerance.</p>
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+        <input type="text" id="new-activity" placeholder="e.g. cold water, 4-7-8 breathing, walking" style="flex:1;font-family:var(--font);font-size:0.9rem;padding:0.6rem 0.75rem;border:1px solid var(--neutral-300);">
+        <button id="add-activity" class="btn btn-primary">Add</button>
+      </div>
+      <div class="activity-list" id="activity-list"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var slider = document.getElementById('wot-slider');
+  var indicator = document.getElementById('wot-indicator');
+  var stateDiv = document.getElementById('wot-state');
+  var valueDisplay = document.getElementById('wot-value');
+  var messageDisplay = document.getElementById('wot-message');
+
+  var barHeight = 420;
+  var zoneHyper = document.getElementById('zone-hyper');
+  var zoneWindow = document.getElementById('zone-window');
+  var zoneHypo = document.getElementById('zone-hypo');
+
+  function getZone(val) {
+    if (val <= 33) return 'hypo';
+    if (val <= 66) return 'window';
+    return 'hyper';
+  }
+
+  function getMessage(val) {
+    if (val <= 33) {
+      return 'You\'re in hypoarousal — numbness, dissociation, shutdown. Try: gentle movement, strong sensations (ice, citrus), standing up, walking.';
+    }
+    if (val <= 66) {
+      return 'You\'re in your window of tolerance — calm and regulated. You can handle challenges here.';
+    }
+    return 'You\'re in hyperarousal — anxiety, panic, hypervigilance. Try: 4-7-8 breathing, cold water on wrists, 5-4-3-2-1 grounding.';
+  }
+
+  function updateSlider(val) {
+    var pct = (val / 100) * 100;
+    indicator.style.top = pct + '%';
+    valueDisplay.textContent = val;
+    var zone = getZone(val);
+    messageDisplay.textContent = getMessage(val);
+    stateDiv.className = 'wot-state ' + zone;
+  }
+
+  slider.addEventListener('input', function() {
+    updateSlider(parseInt(this.value, 10));
+  });
+
+  updateSlider(50);
+
+  var checkinKey = 'wot-checkins';
+  var activityKey = 'wot-activities';
+
+  function loadHistory() {
+    var container = document.getElementById('checkin-history');
+    var saved = localStorage.getItem(checkinKey);
+    var data = [];
+    if (saved) {
+      try { data = JSON.parse(saved); } catch(e) {}
+    }
+    if (data.length === 0) {
+      container.innerHTML = '<p style="color:var(--neutral-500);font-size:0.9rem;width:100%;text-align:center;">No check-ins yet. Use the button above to log your first one.</p>';
+      return;
+    }
+    container.innerHTML = '';
+    var recent = data.slice(-14);
+    recent.forEach(function(entry) {
+      var bar = document.createElement('div');
+      bar.className = 'checkin-bar';
+      var ht = Math.max(4, (entry.level / 100) * 110);
+      bar.style.height = ht + 'px';
+      bar.title = entry.level + '/100 on ' + entry.date;
+      var label = document.createElement('div');
+      label.className = 'checkin-bar-label';
+      var d = new Date(entry.date);
+      label.textContent = (d.getMonth()+1) + '/' + d.getDate();
+      bar.appendChild(label);
+      container.appendChild(bar);
+    });
+  }
+
+  document.getElementById('checkin-btn').addEventListener('click', function() {
+    var val = parseInt(slider.value, 10);
+    var saved = localStorage.getItem(checkinKey);
+    var data = [];
+    if (saved) {
+      try { data = JSON.parse(saved); } catch(e) {}
+    }
+    data.push({
+      date: new Date().toISOString().split('T')[0],
+      level: val,
+      zone: getZone(val)
+    });
+    localStorage.setItem(checkinKey, JSON.stringify(data));
+    loadHistory();
+  });
+
+  function loadActivities() {
+    var container = document.getElementById('activity-list');
+    var saved = localStorage.getItem(activityKey);
+    var data = [];
+    if (saved) {
+      try { data = JSON.parse(saved); } catch(e) {}
+    }
+    if (data.length === 0) {
+      container.innerHTML = '<p style="color:var(--neutral-500);font-size:0.9rem;width:100%;">No activities added yet.</p>';
+      return;
+    }
+    container.innerHTML = '';
+    data.forEach(function(activity, i) {
+      var tag = document.createElement('span');
+      tag.className = 'activity-tag';
+      tag.textContent = activity;
+      var removeBtn = document.createElement('button');
+      removeBtn.className = 'remove-activity';
+      removeBtn.textContent = '\u00d7';
+      removeBtn.setAttribute('aria-label', 'Remove ' + activity);
+      removeBtn.addEventListener('click', function() {
+        data.splice(i, 1);
+        localStorage.setItem(activityKey, JSON.stringify(data));
+        loadActivities();
+      });
+      tag.appendChild(removeBtn);
+      container.appendChild(tag);
+    });
+  }
+
+  document.getElementById('add-activity').addEventListener('click', function() {
+    var input = document.getElementById('new-activity');
+    var val = input.value.trim();
+    if (!val) return;
+    var saved = localStorage.getItem(activityKey);
+    var data = [];
+    if (saved) {
+      try { data = JSON.parse(saved); } catch(e) {}
+    }
+    data.push(val);
+    localStorage.setItem(activityKey, JSON.stringify(data));
+    input.value = '';
+    loadActivities();
+  });
+
+  document.getElementById('new-activity').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      document.getElementById('add-activity').click();
+    }
+  });
+
+  loadHistory();
+  loadActivities();
+})();
+</script>
+</body>
+</html>

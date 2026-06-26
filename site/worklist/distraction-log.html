@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distraction Log — NeuroReboot Worklist</title>
+<meta name="description" content="Log distractions, track patterns, and build focus awareness.">
+<meta property="og:title" content="Distraction Log — NeuroReboot Worklist">
+<meta property="og:description" content="Log distractions, track patterns, and build focus awareness.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/distraction-log.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Distraction Log — NeuroReboot Worklist">
+<meta name="twitter:description" content="Log distractions, track patterns, and build focus awareness.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/distraction-log.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Distraction Log — NeuroReboot Worklist",
+  "description": "Log distractions, track patterns, and build focus awareness.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/distraction-log.html"
+}
+</script>
+<style>
+*, *::before, *::after { border-radius: 0 !important; }
+
+.dl-hero-btn {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 1.5rem auto;
+  padding: 2rem 1.5rem;
+  background: var(--primary-dark);
+  color: white;
+  border: none;
+  font-family: var(--font);
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.dl-hero-btn:hover {
+  background: var(--primary);
+}
+
+.dl-hero-btn:active {
+  transform: scale(0.97);
+}
+
+.dl-hero-btn .dl-icon {
+  display: block;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dl-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.dl-overlay.open {
+  display: flex;
+}
+
+.dl-modal {
+  background: white;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  border: 1px solid var(--neutral-200);
+  box-shadow: var(--shadow-lg);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.dl-modal h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 1.25rem;
+}
+
+.dl-field {
+  margin-bottom: 1rem;
+}
+
+.dl-field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--neutral-700);
+  margin-bottom: 0.25rem;
+}
+
+.dl-field select, .dl-field textarea {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+  color: var(--neutral-900);
+}
+
+.dl-field select:focus, .dl-field textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 127, 0.15);
+}
+
+.dl-field textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.dl-modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.dl-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.dl-stat {
+  background: white;
+  border: 1px solid var(--neutral-200);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.dl-stat .dl-stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.1;
+}
+
+.dl-stat .dl-stat-label {
+  font-size: 0.8rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.dl-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  height: 150px;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+}
+
+.dl-bar-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.dl-bar {
+  width: 100%;
+  max-width: 45px;
+  background: var(--primary);
+  min-height: 3px;
+  transition: height 0.3s;
+}
+
+.dl-bar-label {
+  font-size: 0.65rem;
+  color: var(--neutral-500);
+  text-align: center;
+  margin-top: 0.35rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70px;
+}
+
+.dl-bar-count {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.dl-streak {
+  display: inline-block;
+  background: var(--success-bg);
+  border: 1px solid var(--success);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 600px) {
+  .dl-stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <h1>Distraction Log</h1>
+    <p>Awareness is the first step. Log distractions without judgment and start noticing patterns.</p>
+  </div>
+
+  <div class="container">
+    <section aria-label="Log a distraction">
+      <button class="dl-hero-btn" id="dl-log-btn">
+        <span class="dl-icon">&#9889;</span>
+        I got distracted
+      </button>
+
+      <div class="dl-overlay" id="dl-overlay" role="dialog" aria-modal="true" aria-labelledby="dl-modal-title">
+        <div class="dl-modal">
+          <h3 id="dl-modal-title">What happened?</h3>
+
+          <div class="dl-field">
+            <label for="dl-type">What pulled your focus?</label>
+            <select id="dl-type">
+              <option value="Phone notification">Phone notification</option>
+              <option value="Email">Email</option>
+              <option value="Social media">Social media</option>
+              <option value="Person interrupting">Person interrupting</option>
+              <option value="Wandering thoughts">Wandering thoughts</option>
+              <option value="Boredom">Boredom</option>
+              <option value="Overwhelm">Overwhelm</option>
+              <option value="Physical need (hungry/tired)">Physical need (hungry/tired)</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="dl-field">
+            <label for="dl-return">Were you able to return?</label>
+            <select id="dl-return">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="Partially">Partially</option>
+            </select>
+          </div>
+
+          <div class="dl-field">
+            <label for="dl-duration">How long were you distracted?</label>
+            <select id="dl-duration">
+              <option value="<1 min">&lt; 1 min</option>
+              <option value="1-5 min">1&ndash;5 min</option>
+              <option value="5-15 min">5&ndash;15 min</option>
+              <option value="15-30 min">15&ndash;30 min</option>
+              <option value="30+ min">30+ min</option>
+            </select>
+          </div>
+
+          <div class="dl-field">
+            <label for="dl-note">Note (optional)</label>
+            <textarea id="dl-note" placeholder="Anything else about what happened..."></textarea>
+          </div>
+
+          <div class="dl-modal-actions">
+            <button class="btn btn-primary" id="dl-save-btn">Log It &amp; Get Back</button>
+            <button class="btn btn-ghost" id="dl-cancel-btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="dl-stats-heading">
+      <h2 id="dl-stats-heading" class="section-title">Your Statistics</h2>
+      <p class="section-subtitle">Patterns emerge when you pay attention.</p>
+
+      <div class="dl-streak" id="dl-streak-display" aria-live="polite">Distraction-free streak: calculating...</div>
+
+      <div class="dl-stat-grid">
+        <div class="dl-stat">
+          <div class="dl-stat-number" id="dl-count-today">0</div>
+          <div class="dl-stat-label">Today</div>
+        </div>
+        <div class="dl-stat">
+          <div class="dl-stat-number" id="dl-common-type">-</div>
+          <div class="dl-stat-label">Most common (this week)</div>
+        </div>
+        <div class="dl-stat">
+          <div class="dl-stat-number" id="dl-avg-duration">-</div>
+          <div class="dl-stat-label">Avg duration</div>
+        </div>
+        <div class="dl-stat">
+          <div class="dl-stat-number" id="dl-return-rate">-</div>
+          <div class="dl-stat-label">Return rate</div>
+        </div>
+      </div>
+
+      <h3 class="section-title" style="font-size:1rem;margin-top:2rem;">Distraction Types (This Week)</h3>
+      <div class="dl-bar-chart" id="dl-bar-chart"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'neuroreboot_distractions';
+
+  function getData() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch(e) { return []; }
+  }
+
+  function saveData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // Modal controls
+  var overlay = document.getElementById('dl-overlay');
+  document.getElementById('dl-log-btn').addEventListener('click', function() {
+    overlay.classList.add('open');
+    document.getElementById('dl-type').focus();
+  });
+
+  document.getElementById('dl-cancel-btn').addEventListener('click', closeModal);
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.getElementById('dl-note').value = '';
+  }
+
+  function getDurationMinutes(val) {
+    switch (val) {
+      case '<1 min': return 0.5;
+      case '1-5 min': return 3;
+      case '5-15 min': return 10;
+      case '15-30 min': return 22.5;
+      case '30+ min': return 45;
+      default: return 0;
+    }
+  }
+
+  function getDurationLabel(val) {
+    var m = getDurationMinutes(val);
+    if (m < 1) return '<1 min';
+    if (m < 5) return '1-5 min';
+    if (m < 15) return '5-15 min';
+    if (m < 30) return '15-30 min';
+    return '30+ min';
+  }
+
+  // Save
+  document.getElementById('dl-save-btn').addEventListener('click', function() {
+    var type = document.getElementById('dl-type').value;
+    var ret = document.getElementById('dl-return').value;
+    var duration = document.getElementById('dl-duration').value;
+    var note = document.getElementById('dl-note').value.trim();
+
+    var data = getData();
+    data.push({
+      timestamp: new Date().toISOString(),
+      type: type,
+      returned: ret,
+      duration: duration,
+      note: note
+    });
+    saveData(data);
+    closeModal();
+    renderStats();
+
+    // Quick message
+    var msg = document.createElement('div');
+    msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--primary-dark);color:white;padding:1rem 2rem;font-weight:600;z-index:100;box-shadow:var(--shadow-lg);';
+    msg.textContent = 'Logged. Now take one breath and return to your task.';
+    document.body.appendChild(msg);
+    setTimeout(function() { msg.remove(); }, 4000);
+  });
+
+  // Stats
+  function renderStats() {
+    var data = getData();
+    var today = new Date().toISOString().split('T')[0];
+
+    // Today
+    var todayCount = data.filter(function(d) { return d.timestamp.slice(0, 10) === today; }).length;
+    document.getElementById('dl-count-today').textContent = todayCount;
+
+    // This week
+    var weekStart = new Date();
+    weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+    weekStart.setHours(0, 0, 0, 0);
+    var weekData = data.filter(function(d) { return new Date(d.timestamp) >= weekStart; });
+
+    // Most common type this week
+    var typeCounts = {};
+    weekData.forEach(function(d) {
+      typeCounts[d.type] = (typeCounts[d.type] || 0) + 1;
+    });
+    var maxCount = 0;
+    var mostCommon = '-';
+    Object.keys(typeCounts).forEach(function(t) {
+      if (typeCounts[t] > maxCount) { maxCount = typeCounts[t]; mostCommon = t; }
+    });
+    document.getElementById('dl-common-type').textContent = mostCommon;
+
+    // Avg duration
+    if (weekData.length > 0) {
+      var totalMin = 0;
+      weekData.forEach(function(d) { totalMin += getDurationMinutes(d.duration); });
+      var avg = totalMin / weekData.length;
+      document.getElementById('dl-avg-duration').textContent = getDurationLabel(avg);
+    } else {
+      document.getElementById('dl-avg-duration').textContent = '-';
+    }
+
+    // Return rate
+    var returnedCount = weekData.filter(function(d) { return d.returned === 'Yes' || d.returned === 'Partially'; }).length;
+    var rate = weekData.length > 0 ? Math.round((returnedCount / weekData.length) * 100) + '%' : '-';
+    document.getElementById('dl-return-rate').textContent = rate;
+
+    // Streak
+    computeStreak(data);
+
+    // Bar chart
+    var chart = document.getElementById('dl-bar-chart');
+    chart.innerHTML = '';
+    if (weekData.length === 0) {
+      chart.innerHTML = '<p style="color:var(--neutral-400);text-align:center;width:100%;padding:2rem 0;">No data this week.</p>';
+      return;
+    }
+    var typeKeys = Object.keys(typeCounts);
+    var maxCount2 = Math.max.apply(null, typeKeys.map(function(t) { return typeCounts[t]; }));
+    typeKeys.forEach(function(t) {
+      var pct = (typeCounts[t] / maxCount2) * 100;
+      var col = document.createElement('div');
+      col.className = 'dl-bar-column';
+      col.innerHTML = '<div class="dl-bar-count">' + typeCounts[t] + '</div><div class="dl-bar" style="height:' + pct + '%;" title="' + esc(t) + ': ' + typeCounts[t] + '"></div><div class="dl-bar-label">' + esc(t).slice(0, 12) + '</div>';
+      chart.appendChild(col);
+    });
+  }
+
+  function computeStreak(data) {
+    // Sort by timestamp descending
+    var sorted = data.slice().sort(function(a, b) { return b.timestamp.localeCompare(a.timestamp); });
+    var now = new Date();
+    var streakHours = 0;
+    // Check if most recent distraction is within the last hour
+    if (sorted.length > 0) {
+      var last = new Date(sorted[0].timestamp);
+      var diffHours = (now - last) / (1000 * 60 * 60);
+      if (diffHours < 1) {
+        document.getElementById('dl-streak-display').textContent = 'Distraction-free streak: 0 hours (just logged)';
+        return;
+      }
+    }
+
+    // Count consecutive hours without distraction going backwards
+    var current = new Date(now);
+    current.setMinutes(0, 0, 0);
+    // Build set of distraction hours
+    var distHours = {};
+    data.forEach(function(d) {
+      var dt = new Date(d.timestamp);
+      var key = dt.getFullYear() + '-' + (dt.getMonth()+1) + '-' + dt.getDate() + '-' + dt.getHours();
+      distHours[key] = true;
+    });
+
+    var streak = 0;
+    while (true) {
+      var key = current.getFullYear() + '-' + (current.getMonth()+1) + '-' + current.getDate() + '-' + current.getHours();
+      if (distHours[key]) break;
+      streak++;
+      current.setHours(current.getHours() - 1);
+      if (streak > 720) break; // 30 day safety limit
+    }
+
+    document.getElementById('dl-streak-display').textContent = 'Distraction-free streak: ' + streak + ' hour' + (streak !== 1 ? 's' : '');
+  }
+
+  renderStats();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dopamine Menu Builder — NeuroReboot Worklist</title>
+<meta name="description" content="Build a personalized dopamine menu of healthy activities organized by effort level.">
+<meta property="og:title" content="Dopamine Menu Builder — NeuroReboot Worklist">
+<meta property="og:description" content="Build a personalized dopamine menu of healthy activities organized by effort level.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/dopamine-menu.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dopamine Menu Builder — NeuroReboot Worklist">
+<meta name="twitter:description" content="Build a personalized dopamine menu of healthy activities organized by effort level.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/dopamine-menu.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Dopamine Menu Builder — NeuroReboot Worklist",
+  "description": "Build a personalized dopamine menu of healthy activities organized by effort level.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/dopamine-menu.html"
+}
+</script>
+<style>
+*, *::before, *::after { border-radius: 0 !important; }
+
+.dm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.dm-col {
+  background: white;
+  border: 1px solid var(--neutral-200);
+  padding: 1.5rem;
+}
+
+.dm-col h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 0.25rem;
+}
+
+.dm-col .subtitle {
+  font-size: 0.85rem;
+  color: var(--neutral-500);
+  margin-bottom: 1rem;
+}
+
+.dm-add-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dm-add-row input {
+  flex: 1;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+  color: var(--neutral-900);
+}
+
+.dm-add-row input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 127, 0.15);
+}
+
+.dm-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--neutral-100);
+  font-size: 0.9rem;
+}
+
+.dm-item:last-child {
+  border-bottom: none;
+}
+
+.dm-item .time-badge {
+  font-size: 0.75rem;
+  color: var(--neutral-400);
+  margin-left: 0.5rem;
+}
+
+.dm-del {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.1rem 0.3rem;
+  font-weight: 700;
+}
+
+.dm-del:hover {
+  color: #b91c1c;
+}
+
+.dm-pick-section {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background: var(--primary-light);
+  border: 1px solid var(--primary);
+}
+
+.dm-pick-section select {
+  font-family: var(--font);
+  font-size: 0.9rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+  color: var(--neutral-900);
+  margin-right: 0.75rem;
+}
+
+.dm-result {
+  margin-top: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  min-height: 2rem;
+}
+
+.quiz-section {
+  background: white;
+  border: 1px solid var(--neutral-200);
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.quiz-section h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.quiz-q {
+  margin-bottom: 1.25rem;
+}
+
+.quiz-q p {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: var(--neutral-800);
+}
+
+.quiz-q label {
+  display: inline-block;
+  margin-right: 1rem;
+  font-size: 0.85rem;
+  color: var(--neutral-600);
+  cursor: pointer;
+}
+
+.quiz-q input[type="radio"] {
+  accent-color: var(--primary);
+  margin-right: 0.25rem;
+}
+
+.quiz-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--success-bg);
+  border: 1px solid var(--success);
+  font-size: 0.95rem;
+  color: var(--neutral-800);
+}
+
+@media (max-width: 768px) {
+  .dm-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <h1>Dopamine Menu Builder</h1>
+    <p>Curate healthy activities that give you a natural dopamine boost, organized by how much effort they need.</p>
+  </div>
+
+  <div class="container">
+    <section aria-labelledby="menu-heading">
+      <h2 id="menu-heading" class="section-title">Your Dopamine Menu</h2>
+      <p class="section-subtitle">Add activities to each category. The more you add, the more options you have when you need a boost.</p>
+
+      <div class="dm-grid">
+        <div class="dm-col" data-category="appetizers">
+          <h3>Appetizers</h3>
+          <p class="subtitle">5&ndash;10 minutes &middot; quick wins that build momentum</p>
+          <div class="dm-add-row">
+            <input type="text" class="dm-input" placeholder="e.g. make tea" aria-label="Activity name">
+            <button class="btn btn-primary dm-add-btn" style="padding:0.5rem 1rem;font-size:0.85rem;">Add</button>
+          </div>
+          <div class="dm-list" role="list" aria-label="Appetizer activities"></div>
+        </div>
+
+        <div class="dm-col" data-category="mains">
+          <h3>Main Courses</h3>
+          <p class="subtitle">20&ndash;60 minutes &middot; engaging activities with more focus</p>
+          <div class="dm-add-row">
+            <input type="text" class="dm-input" placeholder="e.g. walk outside" aria-label="Activity name">
+            <button class="btn btn-primary dm-add-btn" style="padding:0.5rem 1rem;font-size:0.85rem;">Add</button>
+          </div>
+          <div class="dm-list" role="list" aria-label="Main course activities"></div>
+        </div>
+
+        <div class="dm-col" data-category="desserts">
+          <h3>Desserts</h3>
+          <p class="subtitle">2&ndash;5 minutes &middot; instant tiny rewards</p>
+          <div class="dm-add-row">
+            <input type="text" class="dm-input" placeholder="e.g. 3 deep breaths" aria-label="Activity name">
+            <button class="btn btn-primary dm-add-btn" style="padding:0.5rem 1rem;font-size:0.85rem;">Add</button>
+          </div>
+          <div class="dm-list" role="list" aria-label="Dessert activities"></div>
+        </div>
+      </div>
+
+      <div class="dm-pick-section">
+        <label for="pick-category" style="font-weight:600;font-size:0.9rem;color:var(--neutral-700);margin-right:0.5rem;">Pick from:</label>
+        <select id="pick-category">
+          <option value="appetizers">Appetizers</option>
+          <option value="mains">Main Courses</option>
+          <option value="desserts">Desserts</option>
+        </select>
+        <button class="btn btn-primary" id="random-pick-btn">Random Pick</button>
+        <button class="btn btn-ghost" id="reset-defaults-btn" style="margin-left:0.5rem;">Reset to Defaults</button>
+        <div class="dm-result" id="random-result" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="quiz-heading" class="quiz-section">
+      <h3 id="quiz-heading">What's Your Dopamine Type?</h3>
+      <p class="text-sm text-light mb-1">Answer a few questions to discover which activities might work best for you.</p>
+
+      <div class="quiz-q">
+        <p>1. When you're feeling low, what do you usually crave?</p>
+        <label><input type="radio" name="q1" value="movement"> Movement &amp; physical activity</label>
+        <label><input type="radio" name="q1" value="social"> Social connection</label>
+        <label><input type="radio" name="q1" value="creative"> Creative expression</label>
+        <label><input type="radio" name="q1" value="rest"> Rest &amp; calm</label>
+      </div>
+
+      <div class="quiz-q">
+        <p>2. How much time do you typically have for yourself?</p>
+        <label><input type="radio" name="q2" value="tiny"> Just a few minutes</label>
+        <label><input type="radio" name="q2" value="medium"> 15&ndash;30 minutes</label>
+        <label><input type="radio" name="q2" value="long"> An hour or more</label>
+      </div>
+
+      <div class="quiz-q">
+        <p>3. What's your energy level like right now?</p>
+        <label><input type="radio" name="q3" value="low"> Very low &mdash; need something easy</label>
+        <label><input type="radio" name="q3" value="medium"> Moderate &mdash; can do something light</label>
+        <label><input type="radio" name="q3" value="high"> Good &mdash; ready for a challenge</label>
+      </div>
+
+      <div class="quiz-q">
+        <p>4. Which reward feels most satisfying to you?</p>
+        <label><input type="radio" name="q4" value="accomplishment"> Checking something off a list</label>
+        <label><input type="radio" name="q4" value="sensory"> A sensory experience (music, taste, touch)</label>
+        <label><input type="radio" name="q4" value="connection"> Laughing or talking with someone</label>
+        <label><input type="radio" name="q4" value="novelty"> Trying something new</label>
+      </div>
+
+      <button class="btn btn-primary" id="quiz-submit">Discover My Type</button>
+      <div class="quiz-result" id="quiz-result" style="display:none;" aria-live="polite"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'neuroreboot_dopamine_menu';
+  var DEFAULTS = {
+    appetizers: [
+      { name: 'make tea', time: '5 min' },
+      { name: 'stretch 5 min', time: '5 min' },
+      { name: 'wash face', time: '5 min' },
+      { name: 'open blinds', time: '2 min' },
+      { name: 'write one sentence', time: '3 min' }
+    ],
+    mains: [
+      { name: 'walk outside', time: '30 min' },
+      { name: 'cook a meal', time: '45 min' },
+      { name: '30-min game', time: '30 min' },
+      { name: 'call a friend', time: '20 min' },
+      { name: 'clean one room', time: '30 min' }
+    ],
+    desserts: [
+      { name: '3 deep breaths', time: '2 min' },
+      { name: 'eat a piece of fruit', time: '3 min' },
+      { name: 'listen to one song', time: '3 min' },
+      { name: 'step outside', time: '2 min' },
+      { name: 'hug someone', time: '1 min' }
+    ]
+  };
+
+  function loadData() {
+    try {
+      var d = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (d && d.appetizers && d.mains && d.desserts) return d;
+    } catch(e) {}
+    return null;
+  }
+
+  function saveData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function getData() {
+    return loadData() || JSON.parse(JSON.stringify(DEFAULTS));
+  }
+
+  function renderList(category, items) {
+    var list = document.querySelector('.dm-col[data-category="' + category + '"] .dm-list');
+    if (!list) return;
+    list.innerHTML = '';
+    items.forEach(function(item, index) {
+      var div = document.createElement('div');
+      div.className = 'dm-item';
+      div.innerHTML = '<span>' + escHtml(item.name) + ' <span class="time-badge">' + escHtml(item.time || '') + '</span></span><button class="dm-del" data-category="' + category + '" data-index="' + index + '" aria-label="Remove ' + escHtml(item.name) + '">&times;</button>';
+      list.appendChild(div);
+    });
+  }
+
+  function escHtml(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function renderAll() {
+    var data = getData();
+    Object.keys(data).forEach(function(cat) {
+      renderList(cat, data[cat]);
+    });
+  }
+
+  function addItem(category, name) {
+    if (!name.trim()) return;
+    var data = getData();
+    data[category] = data[category] || [];
+    data[category].push({ name: name.trim(), time: '' });
+    saveData(data);
+    renderList(category, data[category]);
+  }
+
+  function removeItem(category, index) {
+    var data = getData();
+    data[category].splice(index, 1);
+    saveData(data);
+    renderList(category, data[category]);
+  }
+
+  // Add buttons
+  document.querySelectorAll('.dm-add-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var col = this.closest('.dm-col');
+      var input = col.querySelector('.dm-input');
+      var category = col.getAttribute('data-category');
+      addItem(category, input.value);
+      input.value = '';
+    });
+  });
+
+  // Enter key on inputs
+  document.querySelectorAll('.dm-input').forEach(function(inp) {
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        var col = this.closest('.dm-col');
+        var category = col.getAttribute('data-category');
+        addItem(category, this.value);
+        this.value = '';
+      }
+    });
+  });
+
+  // Delete buttons (delegated)
+  document.addEventListener('click', function(e) {
+    var del = e.target.closest('.dm-del');
+    if (!del) return;
+    var category = del.getAttribute('data-category');
+    var index = parseInt(del.getAttribute('data-index'), 10);
+    removeItem(category, index);
+  });
+
+  // Random pick
+  document.getElementById('random-pick-btn').addEventListener('click', function() {
+    var category = document.getElementById('pick-category').value;
+    var data = getData();
+    var items = data[category] || [];
+    if (items.length === 0) {
+      document.getElementById('random-result').textContent = 'No activities in this category. Add some first!';
+      return;
+    }
+    var pick = items[Math.floor(Math.random() * items.length)];
+    document.getElementById('random-result').textContent = pick.name + (pick.time ? ' (' + pick.time + ')' : '');
+  });
+
+  // Reset to defaults
+  document.getElementById('reset-defaults-btn').addEventListener('click', function() {
+    if (confirm('Reset all categories to the default activities?')) {
+      saveData(JSON.parse(JSON.stringify(DEFAULTS)));
+      renderAll();
+    }
+  });
+
+  // Quiz
+  document.getElementById('quiz-submit').addEventListener('click', function() {
+    var q1 = document.querySelector('input[name="q1"]:checked');
+    var q2 = document.querySelector('input[name="q2"]:checked');
+    var q3 = document.querySelector('input[name="q3"]:checked');
+    var q4 = document.querySelector('input[name="q4"]:checked');
+    if (!q1 || !q2 || !q3 || !q4) {
+      document.getElementById('quiz-result').style.display = 'block';
+      document.getElementById('quiz-result').textContent = 'Please answer all questions first.';
+      return;
+    }
+    var suggestions = [];
+    if (q1.value === 'movement' || q3.value === 'high') {
+      suggestions.push('Physical activities like walking, stretching, or dancing');
+    }
+    if (q1.value === 'social' || q4.value === 'connection') {
+      suggestions.push('Social activities like calling a friend or joining a group');
+    }
+    if (q1.value === 'creative' || q4.value === 'novelty') {
+      suggestions.push('Creative outlets like writing, drawing, or playing music');
+    }
+    if (q1.value === 'rest' || q3.value === 'low') {
+      suggestions.push('Calming activities like deep breathing, tea, or sitting outside');
+    }
+    if (q2.value === 'tiny') {
+      suggestions.push('Quick 2&ndash;5 minute activities (check Desserts)');
+    }
+    if (q2.value === 'long') {
+      suggestions.push('Longer activities you can sink into (check Main Courses)');
+    }
+    if (q4.value === 'accomplishment') {
+      suggestions.push('Task-based activities where you can check something off');
+    }
+    if (q4.value === 'sensory') {
+      suggestions.push('Sensory activities like listening to music, tasting something good, or touching textures');
+    }
+    var html = '<strong>Your dopamine profile:</strong><br>Try these types of activities:<br>' + suggestions.map(function(s) { return '&bull; ' + s; }).join('<br>');
+    document.getElementById('quiz-result').style.display = 'block';
+    document.getElementById('quiz-result').innerHTML = html;
+  });
+
+  renderAll();
+})();
+</script>
+</body>
+</html>

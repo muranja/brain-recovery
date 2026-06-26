@@ -357,6 +357,14 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/activity-scheduling.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/body-scan.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://muranja.github.io/brain-recovery/worklist/brain-dump.html</loc>
     <priority>0.7</priority>
   </url>
@@ -365,7 +373,23 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/cognitive-load.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/crisis.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://muranja.github.io/brain-recovery/worklist/daily.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/distraction-log.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/dopamine-menu.html</loc>
     <priority>0.7</priority>
   </url>
   <url>
@@ -385,11 +409,39 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/panic-button.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/sensory-diet.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://muranja.github.io/brain-recovery/worklist/sleep-log.html</loc>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/sleep-routine.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/social-battery.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://muranja.github.io/brain-recovery/worklist/symptom-tracker.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/trigger-tracker.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/void-notes.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muranja.github.io/brain-recovery/worklist/window-of-tolerance.html</loc>
     <priority>0.7</priority>
   </url>
 </urlset>

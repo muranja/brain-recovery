@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigger Tracker & Safety Plan — NeuroReboot Worklist</title>
+<meta name="description" content="Log trauma triggers, track intensity and reactions, and build a personalized safety plan.">
+<meta property="og:title" content="Trigger Tracker & Safety Plan — NeuroReboot Worklist">
+<meta property="og:description" content="Log trauma triggers, track intensity and reactions, and build a personalized safety plan.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/trigger-tracker.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trigger Tracker & Safety Plan — NeuroReboot Worklist">
+<meta name="twitter:description" content="Log trauma triggers, track intensity and reactions, and build a personalized safety plan.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/trigger-tracker.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Trigger Tracker & Safety Plan — NeuroReboot Worklist",
+  "description": "Log trauma triggers, track intensity and reactions, and build a personalized safety plan.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/trigger-tracker.html"
+}
+</script>
+<style>
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+  user-select: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.checkbox-group label:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.checkbox-group input[type="checkbox"] {
+  accent-color: var(--primary);
+}
+.safety-card {
+  background: white;
+  border: 1px solid var(--neutral-200);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+.safety-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.safety-card textarea {
+  width: 100%;
+  min-height: 80px;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--neutral-300);
+  resize: vertical;
+  line-height: 1.6;
+}
+.safety-card textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 127, 0.15);
+}
+.safety-display {
+  font-size: 0.9rem;
+  color: var(--neutral-700);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.safety-display.empty {
+  color: var(--neutral-400);
+  font-style: italic;
+}
+.intensity-value {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--primary-dark);
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <section aria-labelledby="trigger-heading">
+      <h1 id="trigger-heading" class="section-title">Trigger Tracker + Safety Plan</h1>
+      <p class="section-subtitle">Identify your triggers, track reactions, and build a personalized safety plan you can rely on.</p>
+    </section>
+
+    <section aria-labelledby="log-heading">
+      <h2 id="log-heading" class="section-title">Log a Trigger</h2>
+      <form id="trigger-form" class="tracker-form" style="margin-bottom:2rem;" autocomplete="off">
+        <div style="margin-bottom:1rem;">
+          <label for="trigger-date" style="font-weight:600;font-size:0.9rem;color:var(--neutral-700);display:block;margin-bottom:0.25rem;">Date</label>
+          <input type="date" id="trigger-date" style="border:1px solid var(--neutral-300);padding:0.6rem 0.75rem;font-family:var(--font);font-size:0.9rem;">
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="trigger-desc" style="font-weight:600;font-size:0.9rem;color:var(--neutral-700);display:block;margin-bottom:0.25rem;">Trigger Description</label>
+          <textarea id="trigger-desc" rows="3" style="width:100%;font-family:var(--font);font-size:0.9rem;padding:0.6rem 0.75rem;border:1px solid var(--neutral-300);resize:vertical;line-height:1.6;" placeholder="What happened? What triggered you?"></textarea>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label style="font-weight:600;font-size:0.9rem;color:var(--neutral-700);display:block;margin-bottom:0.5rem;">Intensity</label>
+          <div class="mood-row">
+            <span style="font-size:0.85rem;color:var(--neutral-500);min-width:auto;">Mild</span>
+            <input type="range" id="trigger-intensity" min="1" max="10" value="5">
+            <span style="font-size:0.85rem;color:var(--neutral-500);min-width:auto;">Severe</span>
+            <span class="slider-value" id="intensity-display" style="min-width:2rem;text-align:center;font-weight:700;font-size:0.9rem;color:var(--neutral-600);">5</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <span style="font-weight:600;font-size:0.9rem;color:var(--neutral-700);display:block;margin-bottom:0.5rem;">Reaction</span>
+          <div class="checkbox-group" id="reaction-group">
+            <label><input type="checkbox" value="flashback">Flashback</label>
+            <label><input type="checkbox" value="dissociation">Dissociation</label>
+            <label><input type="checkbox" value="panic">Panic</label>
+            <label><input type="checkbox" value="anger">Anger</label>
+            <label><input type="checkbox" value="crying">Crying</label>
+            <label><input type="checkbox" value="freezing">Freezing</label>
+            <label><input type="checkbox" value="other">Other</label>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="trigger-help" style="font-weight:600;font-size:0.9rem;color:var(--neutral-700);display:block;margin-bottom:0.25rem;">What helped?</label>
+          <textarea id="trigger-help" rows="2" style="width:100%;font-family:var(--font);font-size:0.9rem;padding:0.6rem 0.75rem;border:1px solid var(--neutral-300);resize:vertical;line-height:1.6;" placeholder="Any coping strategies that helped in this moment?"></textarea>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <button type="submit" class="btn btn-primary">Save Trigger</button>
+        </div>
+      </form>
+
+      <h3 style="font-size:1.1rem;font-weight:600;color:var(--primary-dark);margin-bottom:0.75rem;">Recent Triggers</h3>
+      <div id="log-controls" style="margin-bottom:0.75rem;display:flex;justify-content:flex-end;">
+        <button id="clear-log" class="btn btn-ghost" style="font-size:0.85rem;">Clear Log</button>
+      </div>
+      <div class="table-wrap">
+        <table id="trigger-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Intensity</th>
+              <th>Reaction</th>
+            </tr>
+          </thead>
+          <tbody id="trigger-body"></tbody>
+        </table>
+      </div>
+      <div id="no-triggers" class="empty-state" style="display:none;">
+        <p>No triggers logged yet. Your log will appear here.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="safety-heading">
+      <h2 id="safety-heading" class="section-title">My Safety Plan</h2>
+      <p class="section-subtitle">A personalized plan for when you're triggered. Each step helps you stay grounded and safe.</p>
+
+      <div id="safety-steps"></div>
+
+      <div style="margin-top:1.5rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button id="print-safety" class="btn btn-primary">Print Safety Plan</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var triggerKey = 'trigger-tracker-log';
+  var safetyKey = 'safety-plan';
+
+  var triggerForm = document.getElementById('trigger-form');
+  var dateInput = document.getElementById('trigger-date');
+  var descInput = document.getElementById('trigger-desc');
+  var intensitySlider = document.getElementById('trigger-intensity');
+  var intensityDisplay = document.getElementById('intensity-display');
+  var reactionGroup = document.getElementById('reaction-group');
+  var helpInput = document.getElementById('trigger-help');
+  var triggerBody = document.getElementById('trigger-body');
+  var noTriggers = document.getElementById('no-triggers');
+  var clearLogBtn = document.getElementById('clear-log');
+
+  dateInput.value = new Date().toISOString().split('T')[0];
+
+  intensitySlider.addEventListener('input', function() {
+    intensityDisplay.textContent = intensitySlider.value;
+  });
+
+  var safetySteps = [
+    { id: 'signs', title: '1. Warning Signs', question: 'How do I know I\'m triggered?' },
+    { id: 'coping', title: '2. Internal Coping', question: 'What can I do to calm myself?' },
+    { id: 'people', title: '3. People to Call', question: 'Who can help?' },
+    { id: 'places', title: '4. Safe Places', question: 'Where can I go?' },
+    { id: 'make-safe', title: '5. Make It Safe', question: 'What can I remove or hide?' }
+  ];
+
+  function renderSafetySteps() {
+    var container = document.getElementById('safety-steps');
+    container.innerHTML = '';
+    var saved = localStorage.getItem(safetyKey);
+    var data = {};
+    if (saved) {
+      try { data = JSON.parse(saved); } catch(e) {}
+    }
+    safetySteps.forEach(function(step) {
+      var card = document.createElement('div');
+      card.className = 'safety-card';
+
+      var header = document.createElement('h3');
+      header.innerHTML = step.title + ' <span style="font-size:0.8rem;font-weight:400;color:var(--neutral-500);">' + step.question + '</span>';
+
+      var editBtn = document.createElement('button');
+      editBtn.className = 'btn btn-ghost';
+      editBtn.textContent = 'Edit';
+      editBtn.style.fontSize = '0.8rem';
+      editBtn.style.padding = '0.25rem 0.75rem';
+      editBtn.addEventListener('click', function() {
+        toggleStep(step.id, true);
+      });
+      header.appendChild(editBtn);
+
+      card.appendChild(header);
+
+      var displayDiv = document.createElement('div');
+      displayDiv.className = 'safety-display';
+      displayDiv.id = 'display-' + step.id;
+      if (data[step.id] && data[step.id].trim()) {
+        displayDiv.textContent = data[step.id];
+      } else {
+        displayDiv.textContent = 'Not filled in yet. Click "Edit" to add your answer.';
+        displayDiv.classList.add('empty');
+      }
+
+      var editDiv = document.createElement('div');
+      editDiv.id = 'edit-' + step.id;
+      editDiv.style.display = 'none';
+
+      var textarea = document.createElement('textarea');
+      textarea.id = 'textarea-' + step.id;
+      textarea.placeholder = step.question;
+      if (data[step.id]) textarea.value = data[step.id];
+
+      var btnRow = document.createElement('div');
+      btnRow.style.marginTop = '0.5rem';
+      btnRow.style.display = 'flex';
+      btnRow.style.gap = '0.5rem';
+
+      var saveBtn = document.createElement('button');
+      saveBtn.className = 'btn btn-primary';
+      saveBtn.textContent = 'Save';
+      saveBtn.style.fontSize = '0.85rem';
+      saveBtn.style.padding = '0.4rem 1rem';
+      saveBtn.addEventListener('click', function() {
+        data[step.id] = textarea.value;
+        localStorage.setItem(safetyKey, JSON.stringify(data));
+        toggleStep(step.id, false);
+        renderSafetySteps();
+      });
+
+      var cancelBtn = document.createElement('button');
+      cancelBtn.className = 'btn btn-ghost';
+      cancelBtn.textContent = 'Cancel';
+      cancelBtn.style.fontSize = '0.85rem';
+      cancelBtn.style.padding = '0.4rem 1rem';
+      cancelBtn.addEventListener('click', function() {
+        toggleStep(step.id, false);
+      });
+
+      btnRow.appendChild(saveBtn);
+      btnRow.appendChild(cancelBtn);
+
+      editDiv.appendChild(textarea);
+      editDiv.appendChild(btnRow);
+
+      card.appendChild(displayDiv);
+      card.appendChild(editDiv);
+      container.appendChild(card);
+    });
+  }
+
+  function toggleStep(id, showEdit) {
+    var display = document.getElementById('display-' + id);
+    var edit = document.getElementById('edit-' + id);
+    if (display && edit) {
+      display.style.display = showEdit ? 'none' : 'block';
+      edit.style.display = showEdit ? 'block' : 'none';
+    }
+  }
+
+  function getReactions() {
+    var checks = reactionGroup.querySelectorAll('input[type="checkbox"]:checked');
+    return Array.from(checks).map(function(cb) { return cb.value; });
+  }
+
+  function loadTriggers() {
+    var saved = localStorage.getItem(triggerKey);
+    var data = [];
+    if (saved) {
+      try { data = JSON.parse(saved); } catch(e) {}
+    }
+    if (data.length === 0) {
+      triggerBody.innerHTML = '';
+      noTriggers.style.display = 'block';
+      return;
+    }
+    noTriggers.style.display = 'none';
+    triggerBody.innerHTML = '';
+    data.slice().reverse().forEach(function(entry) {
+      var tr = document.createElement('tr');
+      var tdDate = document.createElement('td');
+      tdDate.textContent = entry.date;
+      tr.appendChild(tdDate);
+      var tdIntensity = document.createElement('td');
+      tdIntensity.textContent = entry.intensity + '/10';
+      tr.appendChild(tdIntensity);
+      var tdReaction = document.createElement('td');
+      tdReaction.textContent = (entry.reaction || []).join(', ') || '—';
+      tr.appendChild(tdReaction);
+      triggerBody.appendChild(tr);
+    });
+  }
+
+  triggerForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var desc = descInput.value.trim();
+    if (!desc) {
+      alert('Please describe the trigger.');
+      return;
+    }
+    var saved = localStorage.getItem(triggerKey);
+    var data = [];
+    if (saved) {
+      try { data = JSON.parse(saved); } catch(e) {}
+    }
+    data.push({
+      date: dateInput.value,
+      description: desc,
+      intensity: parseInt(intensitySlider.value, 10),
+      reaction: getReactions(),
+      help: helpInput.value.trim()
+    });
+    localStorage.setItem(triggerKey, JSON.stringify(data));
+    triggerForm.reset();
+    dateInput.value = new Date().toISOString().split('T')[0];
+    intensitySlider.value = 5;
+    intensityDisplay.textContent = '5';
+    loadTriggers();
+  });
+
+  clearLogBtn.addEventListener('click', function() {
+    if (confirm('Are you sure you want to clear all trigger logs? This cannot be undone.')) {
+      localStorage.removeItem(triggerKey);
+      loadTriggers();
+    }
+  });
+
+  document.getElementById('print-safety').addEventListener('click', function() {
+    window.print();
+  });
+
+  renderSafetySteps();
+  loadTriggers();
+})();
+</script>
+</body>
+</html>

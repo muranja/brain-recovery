@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Scan Meditation — NeuroReboot Worklist</title>
+<meta name="description" content="Interactive body scan meditation tool with guided awareness prompts, timers, and progress tracking for anxiety, trauma, and sleep support.">
+<meta property="og:title" content="Body Scan Meditation — NeuroReboot Worklist">
+<meta property="og:description" content="Interactive body scan meditation tool with guided awareness prompts, timers, and progress tracking for anxiety, trauma, and sleep support.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/body-scan.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Body Scan Meditation — NeuroReboot Worklist">
+<meta name="twitter:description" content="Interactive body scan meditation tool with guided awareness prompts, timers, and progress tracking for anxiety, trauma, and sleep support.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/body-scan.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Body Scan Meditation — NeuroReboot Worklist",
+  "description": "Interactive body scan meditation tool with guided awareness prompts, timers, and progress tracking for anxiety, trauma, and sleep support.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/body-scan.html"
+}
+</script>
+<style>
+#body-figure { position: relative; width: 200px; height: 480px; margin: 2rem auto; }
+.body-part { position: absolute; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: transparent; border: 2px solid var(--neutral-400); background: var(--neutral-100); }
+.body-part:hover { background: var(--primary); border-color: var(--primary); color: white; }
+.body-part.active { background: var(--primary); border-color: var(--primary); color: white; }
+.body-part.done { background: var(--success); border-color: var(--success); color: white; }
+#body-head { top: 0; left: 50px; width: 100px; height: 90px; }
+#body-shoulders { top: 90px; left: 20px; width: 160px; height: 40px; }
+#body-chest { top: 130px; left: 40px; width: 120px; height: 70px; }
+#body-stomach { top: 200px; left: 50px; width: 100px; height: 60px; }
+#body-hands { top: 270px; left: 0; width: 60px; height: 80px; }
+#body-hands::after { content: ''; position: absolute; top: 0; right: -70px; width: 60px; height: 80px; background: inherit; border: 2px solid var(--neutral-400); }
+#body-hands:hover::after { background: var(--primary); border-color: var(--primary); }
+#body-hands.active::after { background: var(--primary); border-color: var(--primary); }
+#body-hands.done::after { background: var(--success); border-color: var(--success); }
+#body-legs { top: 270px; left: 100px; width: 100px; height: 120px; }
+#body-feet { top: 390px; left: 40px; width: 120px; height: 90px; }
+#scan-prompt { min-height: 4rem; font-size: 1.125rem; line-height: 1.6; padding: 1rem; background: var(--neutral-100); border: 1px solid var(--neutral-300); }
+#progress-bar { height: 8px; background: var(--neutral-300); overflow: hidden; }
+#progress-fill { height: 100%; width: 0%; background: var(--primary); transition: width 0.3s; }
+#timer-display { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; }
+.controls { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+.sound-option { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.5rem; border: 1px solid var(--neutral-300); cursor: pointer; font-size: 0.85rem; }
+.sound-option.selected { border-color: var(--primary); background: var(--primary); color: white; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="../worklist/index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container" style="max-width:720px;">
+    <section aria-labelledby="scan-heading">
+      <h1 id="scan-heading" class="section-title">Body Scan Meditation</h1>
+      <p class="section-subtitle">Bring awareness to each part of your body. Notice sensations without judgment.</p>
+    </section>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+      <div>
+        <div id="body-figure" role="img" aria-label="Human body diagram with clickable zones">
+          <div id="body-head" class="body-part" data-part="head" title="Head">Head</div>
+          <div id="body-shoulders" class="body-part" data-part="shoulders" title="Shoulders">Shoulders</div>
+          <div id="body-chest" class="body-part" data-part="chest" title="Chest">Chest</div>
+          <div id="body-stomach" class="body-part" data-part="stomach" title="Stomach">Stomach</div>
+          <div id="body-hands" class="body-part" data-part="hands" title="Hands">Hands</div>
+          <div id="body-legs" class="body-part" data-part="legs" title="Legs">Legs</div>
+          <div id="body-feet" class="body-part" data-part="feet" title="Feet">Feet</div>
+        </div>
+      </div>
+
+      <div>
+        <section aria-labelledby="prompt-heading">
+          <h2 id="prompt-heading" style="font-size:1rem;margin-bottom:0.5rem;">Guided Prompt</h2>
+          <div id="scan-prompt" aria-live="polite">Click a body part on the diagram to begin. Or choose an option below.</div>
+        </section>
+
+        <div style="margin-top:1rem;">
+          <div id="timer-display">0:30</div>
+          <div id="progress-bar" style="margin-top:0.5rem;"><div id="progress-fill"></div></div>
+        </div>
+
+        <div class="controls">
+          <button id="btn-start" class="btn btn-primary">Start</button>
+          <button id="btn-pause" class="btn btn-ghost" disabled>Pause</button>
+          <button id="btn-stop" class="btn btn-ghost" disabled>Stop</button>
+          <button id="btn-full" class="btn btn-primary">Full Body Scan</button>
+          <button id="btn-tension" class="btn btn-ghost">Where Do You Feel Tension?</button>
+        </div>
+
+        <div style="margin-top:1rem;">
+          <p style="font-size:0.85rem;margin-bottom:0.25rem;">Completion sound:</p>
+          <div style="display:flex;gap:0.5rem;">
+            <label class="sound-option selected" data-sound="bell"><input type="radio" name="sound" value="bell" checked style="display:none;"> Bell</label>
+            <label class="sound-option" data-sound="chime"><input type="radio" name="sound" value="chime" style="display:none;"> Chime</label>
+            <label class="sound-option" data-sound="tone"><input type="radio" name="sound" value="tone" style="display:none;"> Tone</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section aria-labelledby="benefits-heading" style="margin-top:3rem;">
+      <h2 id="benefits-heading" class="section-title">Benefits of Body Scan Meditation</h2>
+      <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+        <div class="card">
+          <h3 class="card-title">For Anxiety</h3>
+          <p class="card-text">Body scans shift focus from racing thoughts to physical sensations, activating the parasympathetic nervous system and reducing the fight-or-flight response.</p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">For Trauma</h3>
+          <p class="card-text">Gentle body awareness helps rebuild a sense of safety in the body. It supports nervous system regulation and can reduce hypervigilance over time.</p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">For Sleep</h3>
+          <p class="card-text">Systematic relaxation of each body part signals to your brain that it is safe to rest. Many people use body scans as a sleep induction technique.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var parts = document.querySelectorAll('.body-part');
+  var prompt = document.getElementById('scan-prompt');
+  var progressFill = document.getElementById('progress-fill');
+  var timerDisplay = document.getElementById('timer-display');
+  var btnStart = document.getElementById('btn-start');
+  var btnPause = document.getElementById('btn-pause');
+  var btnStop = document.getElementById('btn-stop');
+  var btnFull = document.getElementById('btn-full');
+  var btnTension = document.getElementById('btn-tension');
+  var soundOptions = document.querySelectorAll('.sound-option');
+
+  var DURATION = 30;
+  var allParts = ['head', 'shoulders', 'chest', 'stomach', 'hands', 'legs', 'feet'];
+  var currentPart = null;
+  var timer = null;
+  var timeLeft = 0;
+  var isRunning = false;
+  var isPaused = false;
+  var isFullScan = false;
+  var fullScanIndex = 0;
+  var selectedSound = 'bell';
+
+  var prompts = {
+    head: 'Bring your awareness to your head. Notice any sensations in your scalp, face, jaw, or neck. Soften your forehead. Relax your jaw. No judgment, just noticing.',
+    shoulders: 'Bring your awareness to your shoulders. Notice any tightness, tension, or holding. Imagine your shoulder blades sliding down your back. Let them soften.',
+    chest: 'Bring your awareness to your chest. Notice the rise and fall of your breath. Feel your heartbeat if you can. No need to change anything, just observe.',
+    stomach: 'Bring your awareness to your stomach. Notice any sensations in your abdomen. With each exhale, imagine your belly softening a little more.',
+    hands: 'Bring your awareness to your hands. Notice the temperature of your palms. Feel your fingertips. Any tingling, pressure, or nothing at all is fine.',
+    legs: 'Bring your awareness to your legs. Feel your thighs against the surface beneath you. Notice your calves, your knees. Let your legs be heavy and relaxed.',
+    feet: 'Bring your awareness to your feet. Feel your heels, the balls of your feet, your toes. Notice the texture beneath you. You are grounded and supported.'
+  };
+
+  function playSound(type) {
+    try {
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if (type === 'bell') {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 880;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 2);
+        setTimeout(function() {
+          var osc2 = ctx.createOscillator();
+          var gain2 = ctx.createGain();
+          osc2.connect(gain2);
+          gain2.connect(ctx.destination);
+          osc2.frequency.value = 1320;
+          osc2.type = 'sine';
+          gain2.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.5);
+          osc2.start(ctx.currentTime);
+          osc2.stop(ctx.currentTime + 2.5);
+        }, 400);
+      } else if (type === 'chime') {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 1047;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 3);
+        setTimeout(function() {
+          var osc2 = ctx.createOscillator();
+          var gain2 = ctx.createGain();
+          osc2.connect(gain2);
+          gain2.connect(ctx.destination);
+          osc2.frequency.value = 1319;
+          osc2.type = 'sine';
+          gain2.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3);
+          osc2.start(ctx.currentTime);
+          osc2.stop(ctx.currentTime + 3);
+        }, 200);
+      } else {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 440;
+        osc.type = 'triangle';
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.5);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 1.5);
+      }
+    } catch(e) {}
+  }
+
+  function softBeep() {
+    try {
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = 660;
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.3);
+    } catch(e) {}
+  }
+
+  function clearActive() {
+    parts.forEach(function(p) { p.classList.remove('active'); });
+  }
+
+  function setActive(part) {
+    clearActive();
+    parts.forEach(function(p) {
+      if (p.dataset.part === part) p.classList.add('active');
+    });
+  }
+
+  function setDone(part) {
+    parts.forEach(function(p) {
+      if (p.dataset.part === part) {
+        p.classList.remove('active');
+        p.classList.add('done');
+      }
+    });
+  }
+
+  function resetParts() {
+    parts.forEach(function(p) {
+      p.classList.remove('active', 'done');
+    });
+  }
+
+  function startTimer(part, duration, callback) {
+    if (timer) clearInterval(timer);
+    currentPart = part;
+    timeLeft = duration;
+    isRunning = true;
+    isPaused = false;
+    setActive(part);
+    prompt.textContent = prompts[part];
+    updateDisplay();
+    btnStart.disabled = true;
+    btnPause.disabled = false;
+    btnStop.disabled = false;
+
+    timer = setInterval(function() {
+      if (!isPaused) {
+        timeLeft--;
+        updateDisplay();
+        if (timeLeft <= 3 && timeLeft > 0) {
+          softBeep();
+        }
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          timer = null;
+          isRunning = false;
+          playSound(selectedSound);
+          setDone(part);
+          prompt.textContent = part.charAt(0).toUpperCase() + part.slice(1) + ' scan complete.';
+          btnStart.disabled = false;
+          btnPause.disabled = true;
+          btnStop.disabled = true;
+          if (callback) callback();
+        }
+      }
+    }, 1000);
+  }
+
+  function updateDisplay() {
+    var mins = Math.floor(timeLeft / 60);
+    var secs = timeLeft % 60;
+    timerDisplay.textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
+    var pct = ((DURATION - timeLeft) / DURATION) * 100;
+    progressFill.style.width = pct + '%';
+  }
+
+  function stopTimer() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    isRunning = false;
+    isPaused = false;
+    isFullScan = false;
+    clearActive();
+    progressFill.style.width = '0%';
+    timerDisplay.textContent = '0:30';
+    btnStart.disabled = false;
+    btnPause.disabled = true;
+    btnStop.disabled = true;
+    btnPause.textContent = 'Pause';
+  }
+
+  parts.forEach(function(el) {
+    el.addEventListener('click', function() {
+      if (isRunning) return;
+      var part = el.dataset.part;
+      startTimer(part, DURATION, null);
+    });
+  });
+
+  btnStart.addEventListener('click', function() {
+    if (currentPart && isPaused) {
+      isPaused = false;
+      btnPause.textContent = 'Pause';
+      btnPause.disabled = false;
+      return;
+    }
+  });
+
+  btnPause.addEventListener('click', function() {
+    if (isRunning) {
+      isPaused = !isPaused;
+      btnPause.textContent = isPaused ? 'Resume' : 'Pause';
+    }
+  });
+
+  btnStop.addEventListener('click', function() {
+    stopTimer();
+    resetParts();
+    prompt.textContent = 'Scan stopped. Click a body part to begin again.';
+  });
+
+  btnFull.addEventListener('click', function() {
+    if (isRunning) return;
+    resetParts();
+    isFullScan = true;
+    fullScanIndex = 0;
+    prompt.textContent = 'Starting full body scan...';
+    runNextFullScan();
+  });
+
+  function runNextFullScan() {
+    if (fullScanIndex >= allParts.length) {
+      isFullScan = false;
+      prompt.textContent = 'Full body scan complete. You covered every part of your body.';
+      playSound(selectedSound);
+      return;
+    }
+    var part = allParts[fullScanIndex];
+    startTimer(part, DURATION, function() {
+      fullScanIndex++;
+      runNextFullScan();
+    });
+  }
+
+  btnTension.addEventListener('click', function() {
+    if (isRunning) return;
+    resetParts();
+    var tensionParts = ['shoulders', 'jaw', 'neck', 'lower back', 'hands'];
+    var chosen = tensionParts[Math.floor(Math.random() * tensionParts.length)];
+    if (chosen === 'jaw') {
+      prompt.textContent = 'Bring your awareness to your jaw. Notice if you are clenching. Let your teeth part slightly. Soften your jaw muscles.';
+    } else if (chosen === 'neck') {
+      prompt.textContent = 'Bring your awareness to your neck. Gently tilt your head side to side. Notice any tightness. Breathe into the tension.';
+    } else if (chosen === 'lower back') {
+      prompt.textContent = 'Bring your awareness to your lower back. Imagine your breath flowing into that area. Soften with each exhale.';
+    } else {
+      prompt.textContent = prompts[chosen];
+    }
+    var realParts = ['shoulders', 'hands'];
+    if (realParts.indexOf(chosen) !== -1) {
+      startTimer(chosen, DURATION, null);
+    } else {
+      if (timer) clearInterval(timer);
+      isRunning = false;
+    }
+  });
+
+  soundOptions.forEach(function(el) {
+    el.addEventListener('click', function() {
+      soundOptions.forEach(function(s) { s.classList.remove('selected'); });
+      el.classList.add('selected');
+      selectedSound = el.dataset.sound;
+      var radio = el.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+    });
+  });
+})();
+</script>
+</body>
+</html>

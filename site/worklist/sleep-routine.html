@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wind-Down Routine Builder — NeuroReboot Worklist</title>
+<meta name="description" content="Build and follow a personalized evening wind-down routine to improve sleep quality and support brain recovery.">
+<meta property="og:title" content="Wind-Down Routine Builder — NeuroReboot Worklist">
+<meta property="og:description" content="Build and follow a personalized evening wind-down routine to improve sleep quality and support brain recovery.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/sleep-routine.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wind-Down Routine Builder — NeuroReboot Worklist">
+<meta name="twitter:description" content="Build and follow a personalized evening wind-down routine to improve sleep quality and support brain recovery.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/sleep-routine.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Wind-Down Routine Builder — NeuroReboot Worklist",
+  "description": "Build and follow a personalized evening wind-down routine to improve sleep quality and support brain recovery.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/sleep-routine.html"
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Space Grotesk', sans-serif; margin: 0; padding: 0; }
+.container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+h2 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; }
+h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+label { display: block; margin: 0.5rem 0 0.25rem; font-weight: 600; }
+input[type="time"] { font-family: inherit; font-size: 1rem; padding: 0.5rem; width: 120px; }
+.btn { font-family: inherit; font-size: 0.95rem; font-weight: 600; padding: 0.6rem 1.25rem; cursor: pointer; border: none; background: var(--primary-dark, #1e3a5f); color: white; transition: background 0.2s; }
+.btn:hover { background: var(--primary-darker, #0f2440); }
+.btn-secondary { background: var(--neutral-200, #e2e8f0); color: var(--text-dark, #1a202c); }
+.btn-secondary:hover { background: var(--neutral-300, #cbd5e1); }
+.btn-success { background: #16a34a; }
+.btn-success:hover { background: #15803d; }
+.btn-danger { background: #dc2626; }
+.btn-danger:hover { background: #b91c1c; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0; border-bottom: 1px solid var(--neutral-200, #e2e8f0); }
+.checklist li label { margin: 0; font-weight: 400; cursor: pointer; flex: 1; }
+.checklist input[type="checkbox"] { width: 1.125rem; height: 1.125rem; cursor: pointer; }
+.move-btns { display: flex; gap: 0.25rem; }
+.move-btns button { font-family: inherit; background: var(--neutral-100, #f1f5f9); border: 1px solid var(--neutral-300, #cbd5e1); cursor: pointer; padding: 0.2rem 0.5rem; font-size: 0.85rem; }
+.timeline { list-style: none; padding: 0; }
+.timeline li { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--neutral-200, #e2e8f0); font-size: 0.95rem; }
+.timeline .time { font-weight: 700; min-width: 4.5rem; font-variant-numeric: tabular-nums; }
+.timeline .activity { flex: 1; }
+.routine-select { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin: 1rem 0; }
+.routine-select select { font-family: inherit; font-size: 0.95rem; padding: 0.4rem; }
+.guide-overlay { display: none; position: fixed; inset: 0; background: #0f172a; z-index: 1000; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 2rem; text-align: center; }
+.guide-overlay.active { display: flex; }
+.guide-step { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+.guide-time { font-size: 1rem; opacity: 0.7; margin-bottom: 0.5rem; font-variant-numeric: tabular-nums; }
+.guide-timer { font-size: 3rem; font-weight: 700; margin: 1rem 0; font-variant-numeric: tabular-nums; }
+.guide-progress { font-size: 0.9rem; opacity: 0.6; margin-bottom: 1.5rem; }
+.guide-btn { font-family: inherit; font-size: 1.125rem; font-weight: 600; padding: 0.75rem 2rem; cursor: pointer; border: none; background: white; color: #0f172a; }
+.guide-btn:hover { background: #e2e8f0; }
+.guide-goodnight { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+.guide-sub { font-size: 1.125rem; opacity: 0.8; }
+.save-notice { font-size: 0.85rem; color: var(--neutral-500, #64748b); margin-top: 0.5rem; }
+.routine-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 1rem 0; }
+.tab-bar { display: flex; gap: 0; margin-bottom: 1rem; border-bottom: 2px solid var(--neutral-200, #e2e8f0); }
+.tab-bar button { font-family: inherit; padding: 0.5rem 1rem; background: none; border: none; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--neutral-500, #64748b); border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.tab-bar button.active { color: var(--primary-dark, #1e3a5f); border-bottom-color: var(--primary-dark, #1e3a5f); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.routine-name-input { font-family: inherit; font-size: 1rem; padding: 0.4rem; width: 200px; }
+.delete-routine { font-family: inherit; color: #dc2626; background: none; border: none; cursor: pointer; font-size: 0.85rem; text-decoration: underline; }
+.saved-routines { margin-top: 1rem; }
+.saved-routine-item { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem; background: var(--neutral-100, #f1f5f9); margin-bottom: 0.5rem; }
+.saved-routine-item span { font-weight: 600; }
+.bedtime-display { font-size: 1rem; color: var(--neutral-500, #64748b); margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <h1>Wind-Down Routine Builder</h1>
+    <p style="color:var(--neutral-500,#64748b);margin-bottom:1.5rem;">Create a personalized evening wind-down routine. Choose your activities, set your bedtime, and follow along each night.</p>
+
+    <div class="tab-bar" role="tablist">
+      <button class="active" data-tab="builder" role="tab" aria-selected="true">Builder</button>
+      <button data-tab="routines" role="tab" aria-selected="false">My Routines</button>
+      <button data-tab="tonight" role="tab" aria-selected="false">Tonight's Routine</button>
+    </div>
+
+    <div id="tab-builder" class="tab-content active">
+      <h2>Build Your Routine</h2>
+      <label for="bedtime">Desired Bedtime</label>
+      <input type="time" id="bedtime" value="22:00">
+
+      <h3>Wind-Down Activities</h3>
+      <p style="font-size:0.9rem;color:var(--neutral-500,#64748b);margin-bottom:0.5rem;">Check the activities you want in your routine. Use the arrows to reorder.</p>
+      <ul class="checklist" id="activity-list"></ul>
+
+      <div class="routine-actions">
+        <button class="btn" id="generate-timeline">Generate Timeline</button>
+        <button class="btn btn-secondary" id="save-routine-btn">Save as Routine</button>
+      </div>
+
+      <div id="timeline-output" style="display:none;">
+        <h3>Your Timeline</h3>
+        <p class="bedtime-display">Bedtime: <span id="display-bedtime">22:00</span></p>
+        <ul class="timeline" id="timeline-list"></ul>
+        <button class="btn btn-success" id="start-guided">Start Routine</button>
+      </div>
+    </div>
+
+    <div id="tab-routines" class="tab-content">
+      <h2>Saved Routines</h2>
+      <div class="routine-select">
+        <label for="routine-name">Routine Name</label>
+        <input type="text" id="routine-name" class="routine-name-input" placeholder="e.g. Weekday" value="Weekday">
+        <button class="btn" id="save-as-routine">Save Current as Routine</button>
+      </div>
+      <div id="saved-routines-list" class="saved-routines"></div>
+    </div>
+
+    <div id="tab-tonight" class="tab-content">
+      <h2>Tonight's Routine</h2>
+      <p style="color:var(--neutral-500,#64748b);margin-bottom:1rem;">Quick reference for the current routine.</p>
+      <div id="tonight-content">
+        <p style="font-style:italic;color:var(--neutral-400,#94a3b8);">Generate a timeline first to see it here.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="guide-overlay" class="guide-overlay" role="dialog" aria-modal="true" aria-label="Guided routine">
+  <div class="guide-progress" id="guide-progress">Step 1 of 1</div>
+  <div class="guide-time" id="guide-time">22:00</div>
+  <div class="guide-step" id="guide-step">Ready</div>
+  <div class="guide-timer" id="guide-timer">0:00</div>
+  <button class="guide-btn" id="guide-next">Begin</button>
+</div>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script>
+(function() {
+  var DEFAULT_ACTIVITIES = [
+    "Dim lights / switch to red light",
+    "Put phone on Do Not Disturb",
+    "No screens 1 hour before bed",
+    "Herbal tea (caffeine-free)",
+    "10-min stretching or gentle yoga",
+    "Read a physical book (5+ pages)",
+    "Journal / brain dump",
+    "Magnesium supplement",
+    "Warm bath or shower",
+    "Listen to calm music / brown noise",
+    "4-7-8 breathing (3 cycles)",
+    "Gratitude: write 3 things"
+  ];
+
+  var activities = DEFAULT_ACTIVITIES.slice().map(function(a) { return { name: a, checked: true }; });
+  var currentTimeline = [];
+  var currentBedtime = "22:00";
+
+  var activityListEl = document.getElementById('activity-list');
+  var bedtimeInput = document.getElementById('bedtime');
+  var generateBtn = document.getElementById('generate-timeline');
+  var timelineOutput = document.getElementById('timeline-output');
+  var timelineList = document.getElementById('timeline-list');
+  var displayBedtime = document.getElementById('display-bedtime');
+  var startGuidedBtn = document.getElementById('start-guided');
+  var guideOverlay = document.getElementById('guide-overlay');
+  var guideStep = document.getElementById('guide-step');
+  var guideTime = document.getElementById('guide-time');
+  var guideTimer = document.getElementById('guide-timer');
+  var guideProgress = document.getElementById('guide-progress');
+  var guideNext = document.getElementById('guide-next');
+  var saveRoutineBtn = document.getElementById('save-routine-btn');
+  var routineNameInput = document.getElementById('routine-name');
+  var saveAsRoutine = document.getElementById('save-as-routine');
+  var savedRoutinesList = document.getElementById('saved-routines-list');
+  var tonightContent = document.getElementById('tonight-content');
+  var tabBtns = document.querySelectorAll('[data-tab]');
+
+  var guideInterval = null;
+  var guideStepIndex = 0;
+  var guideTotalSteps = 0;
+  var guideRemaining = 0;
+  var audioCtx = null;
+
+  function initAudio() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  }
+
+  function playChime() {
+    try {
+      initAudio();
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.frequency.value = 880;
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.8);
+    } catch(e) {}
+  }
+
+  function renderChecklist() {
+    activityListEl.innerHTML = '';
+    activities.forEach(function(a, idx) {
+      var li = document.createElement('li');
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = a.checked;
+      cb.id = 'act-' + idx;
+      cb.addEventListener('change', function() {
+        a.checked = cb.checked;
+      });
+      var label = document.createElement('label');
+      label.htmlFor = 'act-' + idx;
+      label.textContent = a.name;
+      var moveDiv = document.createElement('div');
+      moveDiv.className = 'move-btns';
+      var upBtn = document.createElement('button');
+      upBtn.textContent = '\u25B2';
+      upBtn.setAttribute('aria-label', 'Move up');
+      upBtn.addEventListener('click', function() {
+        if (idx > 0) {
+          var temp = activities[idx];
+          activities[idx] = activities[idx - 1];
+          activities[idx - 1] = temp;
+          renderChecklist();
+        }
+      });
+      var downBtn = document.createElement('button');
+      downBtn.textContent = '\u25BC';
+      downBtn.setAttribute('aria-label', 'Move down');
+      downBtn.addEventListener('click', function() {
+        if (idx < activities.length - 1) {
+          var temp = activities[idx];
+          activities[idx] = activities[idx + 1];
+          activities[idx + 1] = temp;
+          renderChecklist();
+        }
+      });
+      moveDiv.appendChild(upBtn);
+      moveDiv.appendChild(downBtn);
+      li.appendChild(cb);
+      li.appendChild(label);
+      li.appendChild(moveDiv);
+      activityListEl.appendChild(li);
+    });
+  }
+
+  function timeToMinutes(t) {
+    var parts = t.split(':');
+    return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+  }
+
+  function minutesToTime(m) {
+    m = m % 1440;
+    if (m < 0) m += 1440;
+    var h = Math.floor(m / 60);
+    var min = m % 60;
+    return String(h).padStart(2, '0') + ':' + String(min).padStart(2, '0');
+  }
+
+  function generateTimeline(bedtime) {
+    var checked = activities.filter(function(a) { return a.checked; });
+    if (checked.length === 0) return [];
+    var bed = timeToMinutes(bedtime);
+    var total = checked.length;
+    var totalMinutes = 90;
+    var interval = Math.floor(totalMinutes / total);
+    var timeline = [];
+    for (var i = total - 1; i >= 0; i--) {
+      var mins = bed - (total - 1 - i) * interval - interval;
+      timeline.push({ time: minutesToTime(mins), activity: checked[i].name });
+    }
+    return timeline;
+  }
+
+  function renderTimeline(timeline, bedtime) {
+    timelineList.innerHTML = '';
+    timeline.forEach(function(item) {
+      var li = document.createElement('li');
+      var timeSpan = document.createElement('span');
+      timeSpan.className = 'time';
+      timeSpan.textContent = item.time;
+      var actSpan = document.createElement('span');
+      actSpan.className = 'activity';
+      actSpan.textContent = item.activity;
+      li.appendChild(timeSpan);
+      li.appendChild(actSpan);
+      timelineList.appendChild(li);
+    });
+    displayBedtime.textContent = bedtime;
+    timelineOutput.style.display = 'block';
+  }
+
+  function renderTonight(timeline, bedtime) {
+    tonightContent.innerHTML = '';
+    if (!timeline || timeline.length === 0) {
+      tonightContent.innerHTML = '<p style="font-style:italic;color:var(--neutral-400,#94a3b8);">Generate a timeline first to see it here.</p>';
+      return;
+    }
+    var h3 = document.createElement('h3');
+    h3.textContent = 'Tonight\'s Schedule';
+    tonightContent.appendChild(h3);
+    var p = document.createElement('p');
+    p.style.cssText = 'color:var(--neutral-500,#64748b);margin-bottom:0.75rem;';
+    p.textContent = 'Bedtime: ' + bedtime;
+    tonightContent.appendChild(p);
+    var ul = document.createElement('ul');
+    ul.className = 'timeline';
+    timeline.forEach(function(item) {
+      var li = document.createElement('li');
+      var ts = document.createElement('span');
+      ts.className = 'time';
+      ts.textContent = item.time;
+      var as = document.createElement('span');
+      as.className = 'activity';
+      as.textContent = item.activity;
+      li.appendChild(ts);
+      li.appendChild(as);
+      ul.appendChild(li);
+    });
+    tonightContent.appendChild(ul);
+    var startBtn = document.createElement('button');
+    startBtn.className = 'btn btn-success';
+    startBtn.textContent = 'Start Routine';
+    startBtn.addEventListener('click', function() { startGuidedMode(timeline); });
+    tonightContent.appendChild(startBtn);
+  }
+
+  function saveRoutineToLS(name, bedtime, acts) {
+    var routines = JSON.parse(localStorage.getItem('sleepRoutines') || '{}');
+    routines[name] = { bedtime: bedtime, activities: acts };
+    localStorage.setItem('sleepRoutines', JSON.stringify(routines));
+    renderSavedRoutines();
+  }
+
+  function loadRoutinesFromLS() {
+    return JSON.parse(localStorage.getItem('sleepRoutines') || '{}');
+  }
+
+  function renderSavedRoutines() {
+    var routines = loadRoutinesFromLS();
+    savedRoutinesList.innerHTML = '';
+    var names = Object.keys(routines);
+    if (names.length === 0) {
+      savedRoutinesList.innerHTML = '<p style="font-style:italic;color:var(--neutral-400,#94a3b8);">No saved routines yet.</p>';
+      return;
+    }
+    names.forEach(function(name) {
+      var div = document.createElement('div');
+      div.className = 'saved-routine-item';
+      var span = document.createElement('span');
+      span.textContent = name + ' (' + routines[name].bedtime + ')';
+      var loadBtn = document.createElement('button');
+      loadBtn.className = 'btn btn-secondary';
+      loadBtn.textContent = 'Load';
+      loadBtn.style.marginRight = '0.5rem';
+      loadBtn.addEventListener('click', function() {
+        var r = routines[name];
+        bedtimeInput.value = r.bedtime;
+        activities = r.activities.slice().map(function(a) {
+          return { name: typeof a === 'string' ? a : a.name, checked: typeof a === 'string' ? true : a.checked };
+        });
+        renderChecklist();
+      });
+      var delBtn = document.createElement('button');
+      delBtn.className = 'delete-routine';
+      delBtn.textContent = 'Delete';
+      delBtn.addEventListener('click', function() {
+        delete routines[name];
+        localStorage.setItem('sleepRoutines', JSON.stringify(routines));
+        renderSavedRoutines();
+      });
+      var btnWrap = document.createElement('div');
+      btnWrap.appendChild(loadBtn);
+      btnWrap.appendChild(delBtn);
+      div.appendChild(span);
+      div.appendChild(btnWrap);
+      savedRoutinesList.appendChild(div);
+    });
+  }
+
+  function startGuidedMode(timeline) {
+    if (!timeline || timeline.length === 0) return;
+    guideStepIndex = 0;
+    guideTotalSteps = timeline.length;
+    guideOverlay.classList.add('active');
+    guideNext.style.display = 'inline-block';
+    guideNext.textContent = 'Start';
+    guideStep.textContent = timeline[0].activity;
+    guideTime.textContent = timeline[0].time;
+    guideProgress.textContent = 'Step 1 of ' + guideTotalSteps;
+    guideTimer.textContent = 'Ready';
+
+    if (guideInterval) clearInterval(guideInterval);
+    guideRemaining = 0;
+
+    guideNext.onclick = function() {
+      if (guideStepIndex >= guideTotalSteps) {
+        guideOverlay.classList.remove('active');
+        return;
+      }
+      var stepDuration = 5 * 60;
+      if (guideStepIndex < guideTotalSteps - 1) {
+        var currentTime = timeToMinutes(timeline[guideStepIndex].time);
+        var nextTime = timeToMinutes(timeline[guideStepIndex + 1].time);
+        stepDuration = nextTime - currentTime;
+        if (stepDuration <= 0) stepDuration = 5 * 60;
+      }
+      guideRemaining = stepDuration * 60;
+      playChime();
+      showGuideStep(guideStepIndex, timeline);
+      if (guideInterval) clearInterval(guideInterval);
+      guideInterval = setInterval(function() {
+        guideRemaining--;
+        if (guideRemaining <= 0) {
+          clearInterval(guideInterval);
+          guideInterval = null;
+          guideTimer.textContent = 'Time\'s up!';
+          guideNext.textContent = 'Done, Next Step';
+          guideNext.style.display = 'inline-block';
+          guideNext.onclick = function() {
+            guideStepIndex++;
+            if (guideStepIndex >= guideTotalSteps) {
+              showGoodnight();
+            } else {
+              playChime();
+              showGuideStep(guideStepIndex, timeline);
+              guideNext.textContent = 'Done, Next Step';
+              guideNext.onclick = function() {
+                guideNext.textContent = '';
+                guideNext.style.display = 'none';
+                startGuidedMode(timeline);
+              };
+              guideNext.click();
+            }
+          };
+        } else {
+          var mins = Math.floor(guideRemaining / 60);
+          var secs = guideRemaining % 60;
+          guideTimer.textContent = mins + ':' + String(secs).padStart(2, '0');
+        }
+      }, 1000);
+      guideNext.style.display = 'none';
+    };
+  }
+
+  function showGuideStep(idx, timeline) {
+    var step = timeline[idx];
+    guideStep.textContent = step.activity;
+    guideTime.textContent = step.time;
+    guideProgress.textContent = 'Step ' + (idx + 1) + ' of ' + guideTotalSteps;
+    guideNext.textContent = 'Done, Next Step';
+    guideNext.style.display = 'inline-block';
+  }
+
+  function showGoodnight() {
+    if (guideInterval) clearInterval(guideInterval);
+    guideStep.textContent = 'Goodnight';
+    guideTime.textContent = '';
+    guideProgress.textContent = 'All steps complete';
+    guideTimer.textContent = 'Sleep well';
+    guideNext.textContent = 'End';
+    guideNext.style.display = 'inline-block';
+    guideNext.onclick = function() {
+      guideOverlay.classList.remove('active');
+    };
+    playChime();
+    setTimeout(playChime, 500);
+  }
+
+  generateBtn.addEventListener('click', function() {
+    currentBedtime = bedtimeInput.value || '22:00';
+    currentTimeline = generateTimeline(currentBedtime);
+    renderTimeline(currentTimeline, currentBedtime);
+    renderTonight(currentTimeline, currentBedtime);
+  });
+
+  startGuidedBtn.addEventListener('click', function() {
+    startGuidedMode(currentTimeline);
+  });
+
+  saveRoutineBtn.addEventListener('click', function() {
+    var name = prompt('Routine name (e.g. Weekday, Weekend):', 'Weekday');
+    if (name) {
+      var acts = activities.map(function(a) { return { name: a.name, checked: a.checked }; });
+      saveRoutineToLS(name, bedtimeInput.value, acts);
+    }
+  });
+
+  saveAsRoutine.addEventListener('click', function() {
+    var name = routineNameInput.value.trim() || 'My Routine';
+    var acts = activities.map(function(a) { return { name: a.name, checked: a.checked }; });
+    saveRoutineToLS(name, bedtimeInput.value, acts);
+  });
+
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      tabBtns.forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('active'); });
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  renderChecklist();
+  renderSavedRoutines();
+})();
+</script>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

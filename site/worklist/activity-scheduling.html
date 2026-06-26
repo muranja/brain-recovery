@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behavioral Activation — NeuroReboot Worklist</title>
+<meta name="description" content="Schedule mood-boosting activities and track before and after mood to fight depression.">
+<meta property="og:title" content="Behavioral Activation — NeuroReboot Worklist">
+<meta property="og:description" content="Schedule mood-boosting activities and track before and after mood to fight depression.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/activity-scheduling.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Behavioral Activation — NeuroReboot Worklist">
+<meta name="twitter:description" content="Schedule mood-boosting activities and track before and after mood to fight depression.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/activity-scheduling.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Behavioral Activation — NeuroReboot Worklist",
+  "description": "Schedule mood-boosting activities and track before and after mood to fight depression.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/activity-scheduling.html"
+}
+</script>
+<style>
+*, *::before, *::after { border-radius: 0 !important; }
+
+.ba-form {
+  background: white;
+  padding: 1.5rem;
+  border: 1px solid var(--neutral-200);
+  margin-bottom: 1.5rem;
+}
+
+.ba-form .form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ba-form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--neutral-700);
+  margin-bottom: 0.25rem;
+}
+
+.ba-form input, .ba-form select {
+  font-family: var(--font);
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+  color: var(--neutral-900);
+  width: 100%;
+}
+
+.ba-form input:focus, .ba-form select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 127, 0.15);
+}
+
+.ba-card {
+  background: white;
+  border: 1px solid var(--neutral-200);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.ba-card .ba-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--primary-dark);
+}
+
+.ba-card .ba-meta {
+  font-size: 0.85rem;
+  color: var(--neutral-500);
+  margin: 0.25rem 0;
+}
+
+.ba-card .ba-done-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ba-card .ba-done-row select {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--neutral-300);
+  background: white;
+}
+
+.ba-card.completed {
+  border-left: 3px solid var(--success);
+}
+
+.delta-pos { color: var(--success); font-weight: 600; }
+.delta-neg { color: var(--danger); font-weight: 600; }
+.delta-zero { color: var(--neutral-400); }
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 120px;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--neutral-300);
+}
+
+.chart-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.chart-bar {
+  width: 100%;
+  max-width: 40px;
+  background: var(--success);
+  min-height: 2px;
+  transition: height 0.3s;
+}
+
+.chart-bar.improved {
+  background: var(--success);
+}
+
+.chart-bar-label {
+  font-size: 0.6rem;
+  color: var(--neutral-500);
+  text-align: center;
+  margin-top: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60px;
+}
+
+.ba-insight {
+  background: var(--primary-light);
+  border: 1px solid var(--primary);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.ba-insight h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.example-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.example-pill {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--neutral-300);
+  background: var(--neutral-50);
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--neutral-700);
+  font-family: var(--font);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.example-pill:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+
+@media (max-width: 600px) {
+  .ba-form .form-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="../schedule.html">Schedule</a>
+      <a href="../nutrients.html">Nutrients</a>
+      <a href="../exercises.html">Exercises</a>
+      <a href="../phases.html">Phases</a>
+      <a href="../tracker.html">Tracker</a>
+      <a href="../games/">Games</a>
+      <a href="index.html">Worklist</a>
+      <a href="../remember/index.html">Remember</a>
+      <a href="../donate.html">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <h1>Behavioral Activation</h1>
+    <p>Schedule mood-boosting activities and track how they actually make you feel.</p>
+  </div>
+
+  <div class="container">
+    <section aria-labelledby="schedule-heading">
+      <h2 id="schedule-heading" class="section-title">Schedule an Activity</h2>
+      <p class="section-subtitle">Plan something that might improve your mood, then rate how you expect to feel.</p>
+
+      <div class="ba-form">
+        <p class="text-sm text-light mb-1" style="margin-bottom:0.75rem;">Quick add:</p>
+        <div class="example-pills" id="example-pills">
+          <button class="example-pill" data-activity="Walk outside">Walk outside</button>
+          <button class="example-pill" data-activity="Call a friend">Call a friend</button>
+          <button class="example-pill" data-activity="Cook a meal">Cook a meal</button>
+          <button class="example-pill" data-activity="Exercise">Exercise</button>
+          <button class="example-pill" data-activity="Creative project">Creative project</button>
+          <button class="example-pill" data-activity="Self-care">Self-care</button>
+          <button class="example-pill" data-activity="Social event">Social event</button>
+          <button class="example-pill" data-activity="Outdoor time">Outdoor time</button>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label for="ba-date">Date</label>
+            <input type="date" id="ba-date">
+          </div>
+          <div>
+            <label for="ba-slot">Time slot</label>
+            <select id="ba-slot">
+              <option value="Morning">Morning</option>
+              <option value="Midday">Midday</option>
+              <option value="Afternoon">Afternoon</option>
+              <option value="Evening">Evening</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="ba-activity">Activity</label>
+          <input type="text" id="ba-activity" placeholder="What will you do?">
+        </div>
+        <div class="mood-row" style="margin-bottom:1rem;">
+          <label for="ba-expected">Expected mood (1&ndash;10)</label>
+          <input type="range" id="ba-expected" min="1" max="10" value="5">
+          <span class="slider-value" aria-live="polite">5</span>
+        </div>
+        <button class="btn btn-primary" id="ba-schedule-btn">Schedule</button>
+        <span id="ba-save-msg" class="save-msg" style="font-size:0.85rem;color:var(--success);opacity:0;transition:opacity 0.3s;margin-left:1rem;" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <section aria-labelledby="checkin-heading">
+      <h2 id="checkin-heading" class="section-title">Today's Check-In</h2>
+      <p class="section-subtitle">Rate your actual mood after completing an activity.</p>
+      <div id="ba-today-list"></div>
+      <div id="ba-today-empty" class="empty-state">
+        <p>No activities scheduled for today yet.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="history-heading">
+      <h2 id="history-heading" class="section-title">History &amp; Trends</h2>
+      <p class="section-subtitle">Past 30 days of mood tracking.</p>
+
+      <div id="ba-insight" class="ba-insight" style="display:none;"></div>
+
+      <div class="table-wrap" id="ba-history-wrap" style="display:none;">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Activity</th>
+              <th>Time</th>
+              <th>Expected</th>
+              <th>Actual</th>
+              <th>Delta</th>
+            </tr>
+          </thead>
+          <tbody id="ba-history-body"></tbody>
+        </table>
+      </div>
+
+      <div id="ba-chart-section" style="display:none;">
+        <h3 class="section-title" style="font-size:1.1rem;margin-top:2rem;">Mood Improvement</h3>
+        <p class="text-sm text-light">Activities where actual mood exceeded expectation (green bars).</p>
+        <div class="chart-bars" id="ba-chart"></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'neuroreboot_ba_activities';
+  var today = new Date().toISOString().split('T')[0];
+
+  document.getElementById('ba-date').value = today;
+
+  function getData() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch(e) { return []; }
+  }
+
+  function saveData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // Example pills
+  document.querySelectorAll('.example-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      document.getElementById('ba-activity').value = this.getAttribute('data-activity');
+    });
+  });
+
+  // Slider display
+  document.getElementById('ba-expected').addEventListener('input', function() {
+    this.parentElement.querySelector('.slider-value').textContent = this.value;
+  });
+
+  // Schedule
+  document.getElementById('ba-schedule-btn').addEventListener('click', function() {
+    var date = document.getElementById('ba-date').value;
+    var slot = document.getElementById('ba-slot').value;
+    var activity = document.getElementById('ba-activity').value.trim();
+    var expected = parseInt(document.getElementById('ba-expected').value, 10);
+
+    if (!activity) { alert('Please enter an activity.'); return; }
+
+    var data = getData();
+    data.push({
+      id: Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+      date: date,
+      slot: slot,
+      activity: activity,
+      expected: expected,
+      actual: null,
+      completed: false
+    });
+    saveData(data);
+    document.getElementById('ba-activity').value = '';
+    document.getElementById('ba-expected').value = '5';
+    document.getElementById('ba-expected').parentElement.querySelector('.slider-value').textContent = '5';
+
+    var msg = document.getElementById('ba-save-msg');
+    msg.textContent = 'Scheduled!';
+    msg.style.opacity = '1';
+    setTimeout(function() { msg.style.opacity = '0'; }, 2000);
+
+    renderToday();
+    renderHistory();
+  });
+
+  // Render today
+  function renderToday() {
+    var data = getData();
+    var todayItems = data.filter(function(item) { return item.date === today; });
+    var list = document.getElementById('ba-today-list');
+    var empty = document.getElementById('ba-today-empty');
+    list.innerHTML = '';
+
+    if (todayItems.length === 0) {
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+
+    todayItems.forEach(function(item, idx) {
+      var div = document.createElement('div');
+      div.className = 'ba-card' + (item.completed ? ' completed' : '');
+      div.innerHTML = '<div class="ba-title">' + esc(item.activity) + '</div>'
+        + '<div class="ba-meta">' + esc(item.slot) + ' &middot; Expected: ' + item.expected + '/10</div>';
+
+      if (!item.completed) {
+        var doneRow = document.createElement('div');
+        doneRow.className = 'ba-done-row';
+        doneRow.innerHTML = '<label for="actual-' + idx + '" style="font-size:0.85rem;font-weight:600;">Actual mood:</label>'
+          + '<select id="actual-' + idx + '" class="ba-actual-select">'
+          + Array.from({length: 10}, function(_, i) { return '<option value="' + (i+1) + '">' + (i+1) + '</option>'; }).join('')
+          + '</select>'
+          + '<button class="btn btn-primary ba-complete-btn" style="padding:0.4rem 1rem;font-size:0.8rem;" data-idx="' + idx + '">Complete &amp; Log</button>';
+        div.appendChild(doneRow);
+      } else {
+        var delta = item.actual - item.expected;
+        var deltaClass = delta > 0 ? 'delta-pos' : (delta < 0 ? 'delta-neg' : 'delta-zero');
+        var deltaSign = delta > 0 ? '+' : '';
+        div.innerHTML += '<div class="ba-meta" style="margin-top:0.25rem;">Actual: <strong>' + item.actual + '/10</strong> <span class="' + deltaClass + '">(' + deltaSign + delta + ')</span></div>';
+      }
+
+      // Find global index for this item
+      var globalIdx = data.indexOf(item);
+      if (globalIdx !== -1) {
+        var delBtn = document.createElement('button');
+        delBtn.className = 'btn btn-ghost';
+        delBtn.style.cssText = 'padding:0.3rem 0.75rem;font-size:0.75rem;margin-top:0.5rem;';
+        delBtn.textContent = 'Delete';
+        delBtn.addEventListener('click', function() {
+          var d = getData();
+          d.splice(globalIdx, 1);
+          saveData(d);
+          renderToday();
+          renderHistory();
+        });
+        div.appendChild(delBtn);
+      }
+
+      list.appendChild(div);
+    });
+
+    // Bind complete buttons
+    document.querySelectorAll('.ba-complete-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = parseInt(this.getAttribute('data-idx'), 10);
+        var select = document.getElementById('actual-' + idx);
+        var actual = parseInt(select.value, 10);
+        var data = getData();
+        var todayItems2 = data.filter(function(item) { return item.date === today; });
+        if (todayItems2[idx]) {
+          todayItems2[idx].actual = actual;
+          todayItems2[idx].completed = true;
+          saveData(data);
+          renderToday();
+          renderHistory();
+        }
+      });
+    });
+  }
+
+  // History
+  function renderHistory() {
+    var data = getData();
+    var cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 30);
+    var cutoffStr = cutoff.toISOString().split('T')[0];
+
+    var recent = data.filter(function(item) { return item.date >= cutoffStr; });
+    recent.sort(function(a, b) { return a.date.localeCompare(b.date) || a.slot.localeCompare(b.slot); });
+
+    var tbody = document.getElementById('ba-history-body');
+    tbody.innerHTML = '';
+    var wrap = document.getElementById('ba-history-wrap');
+
+    var completed = recent.filter(function(item) { return item.completed; });
+
+    if (completed.length === 0) {
+      wrap.style.display = 'none';
+      document.getElementById('ba-chart-section').style.display = 'none';
+      document.getElementById('ba-insight').style.display = 'none';
+      return;
+    }
+    wrap.style.display = 'block';
+
+    completed.forEach(function(item) {
+      var delta = item.actual - item.expected;
+      var deltaClass = delta > 0 ? 'delta-pos' : (delta < 0 ? 'delta-neg' : 'delta-zero');
+      var deltaSign = delta > 0 ? '+' : '';
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + esc(item.date) + '</td><td>' + esc(item.activity) + '</td><td>' + esc(item.slot) + '</td><td>' + item.expected + '/10</td><td>' + item.actual + '/10</td><td class="' + deltaClass + '">' + deltaSign + delta + '</td>';
+      tbody.appendChild(tr);
+    });
+
+    // Chart
+    var improved = completed.filter(function(item) { return item.actual > item.expected; });
+    var chartSection = document.getElementById('ba-chart-section');
+    var chart = document.getElementById('ba-chart');
+    chart.innerHTML = '';
+
+    if (improved.length === 0) {
+      chartSection.style.display = 'none';
+    } else {
+      chartSection.style.display = 'block';
+      var maxDelta = Math.max.apply(null, improved.map(function(item) { return item.actual - item.expected; }));
+      var latest = improved.slice(-10);
+      latest.forEach(function(item) {
+        var delta = item.actual - item.expected;
+        var pct = maxDelta > 0 ? (delta / maxDelta) * 100 : 50;
+        var wrap2 = document.createElement('div');
+        wrap2.className = 'chart-bar-wrap';
+        wrap2.innerHTML = '<div class="chart-bar improved" style="height:' + pct + '%;" title="' + esc(item.activity) + ': +' + delta + '"></div><div class="chart-bar-label">' + esc(item.activity).slice(0, 12) + '</div>';
+        chart.appendChild(wrap2);
+      });
+    }
+
+    // Insight
+    var insight = document.getElementById('ba-insight');
+    var activityDeltas = {};
+    completed.forEach(function(item) {
+      if (!activityDeltas[item.activity]) {
+        activityDeltas[item.activity] = { count: 0, totalDelta: 0, improved: 0 };
+      }
+      activityDeltas[item.activity].count++;
+      activityDeltas[item.activity].totalDelta += (item.actual - item.expected);
+      if (item.actual > item.expected) activityDeltas[item.activity].improved++;
+    });
+
+    var best = null;
+    var bestScore = -Infinity;
+    Object.keys(activityDeltas).forEach(function(name) {
+      var info = activityDeltas[name];
+      if (info.count >= 1 && info.totalDelta > bestScore) {
+        bestScore = info.totalDelta;
+        best = name;
+      }
+    });
+
+    if (best) {
+      insight.style.display = 'block';
+      var info2 = activityDeltas[best];
+      insight.innerHTML = '<h4>What\'s Working</h4><p>Based on your data, <strong>' + esc(best) + '</strong> consistently improves your mood. You did it ' + info2.count + ' time(s) and it improved your mood by ' + (info2.totalDelta / info2.count).toFixed(1) + ' points on average.</p>';
+    } else {
+      insight.style.display = 'none';
+    }
+  }
+
+  renderToday();
+  renderHistory();
+})();
+</script>
+</body>
+</html>

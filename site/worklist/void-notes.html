@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Void Notes — Release to the Void — NeuroReboot Worklist</title>
+<meta name="description" content="A trauma release tool. Write what you need to let go of, then release it into the void forever.">
+<meta property="og:title" content="Void Notes — Release to the Void — NeuroReboot Worklist">
+<meta property="og:description" content="A trauma release tool. Write what you need to let go of, then release it into the void forever.">
+<meta property="og:url" content="https://muranja.github.io/brain-recovery/worklist/void-notes.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<meta property="og:site_name" content="NeuroReboot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Void Notes — Release to the Void — NeuroReboot Worklist">
+<meta name="twitter:description" content="A trauma release tool. Write what you need to let go of, then release it into the void forever.">
+<meta name="twitter:image" content="https://muranja.github.io/brain-recovery/og-image.png">
+<link rel="canonical" href="https://muranja.github.io/brain-recovery/worklist/void-notes.html">
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Void Notes — Release to the Void — NeuroReboot Worklist",
+  "description": "A trauma release tool. Write what you need to let go of, then release it into the void forever.",
+  "url": "https://muranja.github.io/brain-recovery/worklist/void-notes.html"
+}
+</script>
+<style>
+body.void-mode {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+.void-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+.void-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  color: #e0e0e0;
+}
+.void-subtitle {
+  color: #888;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+.void-textarea {
+  width: 100%;
+  min-height: 220px;
+  padding: 1.25rem;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.8;
+  background: #222;
+  border: 1px solid #444;
+  color: #e0e0e0;
+  resize: vertical;
+}
+.void-textarea:focus {
+  outline: none;
+  border-color: #666;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+}
+.void-textarea::placeholder {
+  color: #666;
+}
+.void-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  background: #222;
+  border: 1px solid #444;
+  color: #e0e0e0;
+}
+.void-input:focus {
+  outline: none;
+  border-color: #666;
+}
+.void-btn {
+  display: inline-block;
+  padding: 0.8rem 2.5rem;
+  border: none;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  line-height: 1.4;
+}
+.void-btn-primary {
+  background: #555;
+  color: white;
+}
+.void-btn-primary:hover {
+  background: #777;
+}
+.void-btn-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.void-release-stage {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: #0a0a0a;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.void-release-stage.active {
+  display: flex;
+}
+.void-release-text {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: #ddd;
+  max-width: 600px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.void-particle {
+  position: absolute;
+  font-size: 0.75rem;
+  color: #888;
+  pointer-events: none;
+  z-index: 1;
+  animation: voidFall linear forwards;
+}
+@keyframes voidFall {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(80vh) rotate(720deg); }
+}
+.void-void-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, #000 100%);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+.void-void-overlay.active {
+  opacity: 1;
+}
+.void-released-msg {
+  display: none;
+  text-align: center;
+  position: relative;
+  z-index: 4;
+}
+.void-released-msg.active {
+  display: block;
+}
+.void-released-msg h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ddd;
+  margin-bottom: 0.75rem;
+}
+.void-released-msg p {
+  color: #888;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.void-counter {
+  font-size: 6rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0.5rem 0;
+}
+.void-affirmation {
+  color: #555;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+.candle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10;
+  text-align: center;
+  user-select: none;
+}
+.candle-flame {
+  width: 16px;
+  height: 24px;
+  margin: 0 auto;
+  background: linear-gradient(to top, #ffa500 0%, #ffd700 40%, #fff 70%, transparent 100%);
+  animation: flicker 0.3s infinite alternate;
+}
+@keyframes flicker {
+  0% { transform: scaleY(1) translateY(0); opacity: 0.9; }
+  50% { transform: scaleY(1.08) translateY(-2px); opacity: 1; }
+  100% { transform: scaleY(0.95) translateY(1px); opacity: 0.8; }
+}
+.candle-flame.extinguished {
+  animation: none;
+  background: #333;
+  width: 8px;
+  height: 4px;
+  transition: all 0.5s;
+}
+.candle-body {
+  width: 12px;
+  height: 30px;
+  background: #e8d5c4;
+  margin: 0 auto;
+}
+.candle-warning {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.85);
+  color: #888;
+  text-align: center;
+  padding: 0.6rem;
+  font-size: 0.8rem;
+  z-index: 50;
+}
+.sound-toggle {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 10;
+  background: none;
+  border: 1px solid #444;
+  color: #888;
+  padding: 0.4rem 0.8rem;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.sound-toggle:hover {
+  border-color: #888;
+  color: #ccc;
+}
+.daily-limit-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #888;
+}
+.daily-limit-row input {
+  width: 60px;
+  padding: 0.35rem 0.5rem;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  background: #222;
+  border: 1px solid #444;
+  color: #e0e0e0;
+  text-align: center;
+}
+.limit-msg {
+  font-size: 0.85rem;
+  color: #b91c1c;
+  margin-top: 0.5rem;
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:#333;color:white;padding:0.5rem 1rem;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation" style="background:#1a1a1a;border-bottom-color:#333;">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="NeuroReboot home" style="color:#ccc;">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links" style="color:#ccc;">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="../index.html" style="color:#888;">Home</a>
+      <a href="../blog/index.html" style="color:#888;">Blog</a>
+      <a href="../schedule.html" style="color:#888;">Schedule</a>
+      <a href="../nutrients.html" style="color:#888;">Nutrients</a>
+      <a href="../exercises.html" style="color:#888;">Exercises</a>
+      <a href="../phases.html" style="color:#888;">Phases</a>
+      <a href="../tracker.html" style="color:#888;">Tracker</a>
+      <a href="../games/" style="color:#888;">Games</a>
+      <a href="../worklist/index.html" style="color:#888;">Worklist</a>
+      <a href="../remember/index.html" style="color:#888;">Remember</a>
+      <a href="../donate.html" style="color:#888;">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="void-container" id="writing-phase">
+    <h1 class="void-title">Void Notes — Release What No Longer Serves You</h1>
+    <p class="void-subtitle">Write it down. Let it go. It's safe now.</p>
+
+    <div class="daily-limit-row">
+      <label for="daily-limit">Daily release limit:</label>
+      <input type="number" id="daily-limit" min="0" max="10" value="0" title="0 = no limit">
+      <span style="font-size:0.85rem;">(0 = unlimited)</span>
+    </div>
+    <div id="limit-msg" class="limit-msg" style="display:none;"></div>
+
+    <textarea class="void-textarea" id="void-textarea" placeholder="Write what you need to release. A memory. A feeling. A name. An incident. No one will ever read this. When you release it, it's gone forever."></textarea>
+
+    <div style="margin:1rem 0;">
+      <label for="void-desired" style="font-size:0.9rem;color:#888;display:block;margin-bottom:0.3rem;">What I want to feel instead (optional)</label>
+      <input class="void-input" id="void-desired" type="text" placeholder="e.g. peace, lightness, freedom, calm">
+    </div>
+
+    <div style="text-align:center;margin-top:1.5rem;">
+      <button class="void-btn void-btn-primary" id="release-btn" disabled>Release to the Void</button>
+    </div>
+
+    <p class="void-affirmation">What I release stays in the void.</p>
+  </div>
+
+  <div class="void-release-stage" id="release-stage">
+    <div class="void-void-overlay" id="void-overlay"></div>
+    <div class="void-release-text" id="release-text"></div>
+    <div id="particle-container" style="position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:1;"></div>
+
+    <div class="void-released-msg" id="released-msg">
+      <h2>Released. You are safe.</h2>
+      <p>That memory no longer lives here.</p>
+      <div class="void-counter" id="release-counter">0</div>
+      <p style="color:#888;font-size:0.9rem;">total releases</p>
+      <button class="void-btn void-btn-primary" id="release-another">Release Another</button>
+    </div>
+  </div>
+</main>
+
+<div class="candle" id="candle">
+  <div class="candle-flame" id="candle-flame"></div>
+  <div class="candle-body"></div>
+</div>
+
+<button class="sound-toggle" id="sound-toggle">Enable Sounds</button>
+
+<div class="candle-warning" id="nav-warning" style="display:none;">
+  Warning: Leaving this page will permanently lose any unsaved writing.
+</div>
+
+<footer style="border-top-color:#333;background:#1a1a1a;">
+  <p style="color:#666;">Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener" style="color:#888;">GitHub</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function() {
+  var textarea = document.getElementById('void-textarea');
+  var releaseBtn = document.getElementById('release-btn');
+  var releaseStage = document.getElementById('release-stage');
+  var releaseText = document.getElementById('release-text');
+  var releasedMsg = document.getElementById('released-msg');
+  var releaseCounter = document.getElementById('release-counter');
+  var releaseAnotherBtn = document.getElementById('release-another');
+  var particleContainer = document.getElementById('particle-container');
+  var voidOverlay = document.getElementById('void-overlay');
+  var candleFlame = document.getElementById('candle-flame');
+  var writingPhase = document.getElementById('writing-phase');
+  var dailyLimitInput = document.getElementById('daily-limit');
+  var limitMsg = document.getElementById('limit-msg');
+  var navWarning = document.getElementById('nav-warning');
+
+  var soundEnabled = false;
+  var audioCtx = null;
+  var counterKey = 'void-release-count';
+  var limitKey = 'void-daily-limit';
+  var lastDateKey = 'void-last-release-date';
+  var soundToggle = document.getElementById('sound-toggle');
+
+  var currentText = '';
+
+  function getDailyCount() {
+    var lastDate = localStorage.getItem(lastDateKey);
+    var today = new Date().toISOString().split('T')[0];
+    if (lastDate !== today) {
+      localStorage.setItem(lastDateKey, today);
+      localStorage.setItem(counterKey, '0');
+      return 0;
+    }
+    var c = localStorage.getItem(counterKey);
+    return c ? parseInt(c, 10) : 0;
+  }
+
+  function incrementCounter() {
+    var today = new Date().toISOString().split('T')[0];
+    localStorage.setItem(lastDateKey, today);
+    var c = parseInt(localStorage.getItem(counterKey) || '0', 10);
+    c++;
+    localStorage.setItem(counterKey, String(c));
+    releaseCounter.textContent = c;
+  }
+
+  function loadTotalReleases() {
+    var lastDate = localStorage.getItem(lastDateKey);
+    var today = new Date().toISOString().split('T')[0];
+    if (lastDate === today) {
+      var c = localStorage.getItem(counterKey);
+      releaseCounter.textContent = c || '0';
+    } else {
+      releaseCounter.textContent = '0';
+    }
+  }
+
+  var savedLimit = localStorage.getItem(limitKey);
+  if (savedLimit) {
+    dailyLimitInput.value = savedLimit;
+  }
+
+  dailyLimitInput.addEventListener('change', function() {
+    var val = parseInt(this.value, 10);
+    if (isNaN(val) || val < 0) this.value = 0;
+    if (val > 10) this.value = 10;
+    localStorage.setItem(limitKey, this.value);
+  });
+
+  function checkDailyLimit() {
+    var limit = parseInt(dailyLimitInput.value, 10);
+    if (limit <= 0) return true;
+    var count = getDailyCount();
+    if (count >= limit) {
+      limitMsg.textContent = 'Daily limit reached (' + limit + '). Come back tomorrow.';
+      limitMsg.style.display = 'block';
+      releaseBtn.disabled = true;
+      return false;
+    }
+    limitMsg.style.display = 'none';
+    return true;
+  }
+
+  textarea.addEventListener('input', function() {
+    var hasText = textarea.value.trim().length > 0;
+    releaseBtn.disabled = !hasText;
+    if (hasText) {
+      checkDailyLimit();
+    }
+  });
+
+  soundToggle.addEventListener('click', function() {
+    if (!soundEnabled) {
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        soundEnabled = true;
+        soundToggle.textContent = 'Sounds On';
+        soundToggle.style.borderColor = '#4a7c7f';
+        soundToggle.style.color = '#4a7c7f';
+      } catch(e) {
+        soundToggle.textContent = 'Sound Unavailable';
+      }
+    }
+  });
+
+  function playReleaseSound() {
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 1);
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 3);
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 3);
+    } catch(e) {}
+  }
+
+  function createParticles(text) {
+    particleContainer.innerHTML = '';
+    var chars = text.split('');
+    var containerRect = particleContainer.getBoundingClientRect();
+    var centerX = containerRect.width / 2;
+    var centerY = containerRect.height / 2;
+
+    chars.forEach(function(ch, i) {
+      var span = document.createElement('span');
+      span.className = 'void-particle';
+      span.textContent = ch === ' ' ? '\u00a0' : ch;
+      var angle = Math.random() * Math.PI * 2;
+      var radius = 80 + Math.random() * 120;
+      var startX = centerX + Math.cos(angle) * radius * 0.1;
+      var startY = centerY + Math.sin(angle) * radius * 0.1;
+      span.style.left = startX + 'px';
+      span.style.top = startY + 'px';
+      span.style.fontSize = (0.6 + Math.random() * 0.8) + 'rem';
+      span.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+      span.style.animationDelay = (Math.random() * 0.8) + 's';
+      particleContainer.appendChild(span);
+    });
+  }
+
+  function startRelease(text) {
+    releaseStage.classList.add('active');
+    releaseText.textContent = text;
+    releaseText.style.display = 'block';
+    releasedMsg.classList.remove('active');
+
+    candleFlame.classList.add('extinguished');
+
+    setTimeout(function() {
+      releaseText.style.display = 'none';
+      createParticles(text);
+      voidOverlay.classList.add('active');
+
+      setTimeout(function() {
+        var particles = particleContainer.querySelectorAll('.void-particle');
+        particles.forEach(function(p) { p.remove(); });
+        releasedMsg.classList.add('active');
+        releaseText.textContent = '';
+      }, 2500);
+    }, 3000);
+  }
+
+  releaseBtn.addEventListener('click', function() {
+    var text = textarea.value.trim();
+    if (!text) return;
+
+    if (!confirm('Are you sure? Once released, this cannot be recovered.')) return;
+
+    if (!checkDailyLimit()) return;
+
+    currentText = text;
+
+    playReleaseSound();
+
+    textarea.value = '';
+    releaseBtn.disabled = true;
+
+    incrementCounter();
+
+    startRelease(currentText);
+
+    currentText = '';
+  });
+
+  releaseAnotherBtn.addEventListener('click', function() {
+    releaseStage.classList.remove('active');
+    voidOverlay.classList.remove('active');
+    particleContainer.innerHTML = '';
+    releaseText.style.display = 'block';
+    releasedMsg.classList.remove('active');
+    candleFlame.classList.remove('extinguished');
+    checkDailyLimit();
+  });
+
+  window.addEventListener('beforeunload', function(e) {
+    if (textarea.value.trim()) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+
+  textarea.addEventListener('focus', function() {
+    navWarning.style.display = textarea.value.trim() ? 'block' : 'none';
+  });
+
+  textarea.addEventListener('input', function() {
+    navWarning.style.display = textarea.value.trim() ? 'block' : 'none';
+  });
+
+  loadTotalReleases();
+  checkDailyLimit();
+})();
+</script>
+</body>
+</html>
