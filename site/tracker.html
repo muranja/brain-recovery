@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Tracker — NeuroReboot Recovery Log</title>
+<meta name="description" content="Interactive daily tracker for supplements, symptoms, and notes. Data stays in your browser. No server, no accounts.">
+<meta property="og:title" content="Daily Tracker — NeuroReboot">
+<meta property="og:description" content="Interactive daily tracker for supplements, symptoms, and notes. No server, no accounts.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://github.com/muranja/brain-recovery">
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;border-radius:0 0 6px 6px;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="nutrients.html">Nutrients</a>
+      <a href="phases.html">Phases</a>
+      <a href="exercises.html">Exercises</a>
+      <a href="tracker.html" aria-current="page">Tracker</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+
+    <section aria-labelledby="tracker-heading">
+      <h1 id="tracker-heading" class="section-title">Daily Tracker</h1>
+      <p class="section-subtitle">Log your supplements, symptoms, and notes. Data stays in your browser &mdash; no server, no accounts.</p>
+    </section>
+
+    <section aria-label="Daily log form">
+      <form class="tracker-form" id="daily-tracker" novalidate>
+        <h3 id="form-heading">Today&rsquo;s Log</h3>
+        <p style="font-size:0.85rem;color:var(--neutral-500);margin-bottom:1rem;">
+          <label for="tracker-date">Date:</label>
+          <input type="date" id="tracker-date" name="date" style="border:1px solid var(--neutral-300);border-radius:4px;padding:0.25rem 0.5rem;font-family:var(--font);font-size:0.85rem;margin-left:0.5rem;">
+        </p>
+
+        <fieldset style="border:none;padding:0;">
+          <legend class="form-section">Supplements Taken</legend>
+          <div class="supplement-grid">
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_alpha_gpc_am"> Alpha-GPC (AM)
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_alpha_gpc_pm"> Alpha-GPC (PM)
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_lethicin"> Lecithin
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_dha"> Omega-3 DHA
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_bcomplex"> B-Complex
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_magnesium"> Magnesium Threonate
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_ashwagandha"> Ashwagandha
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_theanine"> L-Theanine
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_coq10"> CoQ10
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_creatine"> Creatine
+            </label>
+            <label class="supplement-label">
+              <input type="checkbox" name="sup_d3"> Vitamin D3+K2
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:none;padding:0;margin-top:1.5rem;">
+          <legend class="form-section">Symptoms (1&ndash;10)</legend>
+
+          <div class="mood-row">
+            <label for="loop-intensity">Looping Intensity</label>
+            <input type="range" id="loop-intensity" name="loop_intensity" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+
+          <div class="mood-row">
+            <label for="memory-clarity">Memory Clarity</label>
+            <input type="range" id="memory-clarity" name="memory_clarity" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+
+          <div class="mood-row">
+            <label for="energy-level">Energy Level</label>
+            <input type="range" id="energy-level" name="energy_level" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+
+          <div class="mood-row">
+            <label for="anxiety-level">Anxiety</label>
+            <input type="range" id="anxiety-level" name="anxiety_level" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+
+          <div class="mood-row">
+            <label for="sleep-quality">Sleep Quality</label>
+            <input type="range" id="sleep-quality" name="sleep_quality" min="1" max="10" value="5">
+            <span class="slider-value" aria-live="polite">5</span>
+          </div>
+        </fieldset>
+
+        <div style="margin-top:1.5rem;">
+          <label for="tracker-notes" class="form-section" style="display:block;margin-bottom:0.5rem;">Notes</label>
+          <textarea id="tracker-notes" name="notes" rows="4" style="width:100%;padding:0.75rem;border:1px solid var(--neutral-300);border-radius:8px;font-family:var(--font);font-size:0.9rem;resize:vertical;" placeholder="Any observations, triggers, or wins today..."></textarea>
+        </div>
+
+        <div style="margin-top:1.5rem;display:flex;align-items:center;gap:1rem;">
+          <button type="submit" class="btn btn-primary">Save Entry</button>
+          <span class="save-msg" style="font-size:0.85rem;color:var(--success);opacity:0;transition:opacity 0.3s;" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+
+    <section aria-labelledby="review-heading">
+      <h2 id="review-heading" class="section-title">Weekly Review</h2>
+      <p class="section-subtitle">At the end of each week, reflect on these questions.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3 class="card-title">Trends</h3>
+          <p class="card-text">Compare this week&rsquo;s averages to last. Is looping decreasing? Is energy stable?</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Timing</h3>
+          <p class="card-text">Did you take supplements at consistent times? Which timing worked best?</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Sleep</h3>
+          <p class="card-text">Did you hit 10pm bedtime at least 5 out of 7 nights?</p>
+        </article>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

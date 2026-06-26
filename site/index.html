@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroReboot — Post-Cholinergic Brain Recovery Protocol</title>
+<meta name="description" content="A structured 90-day protocol for repairing memory, emotional stability, and energy after neurological disruption. Evidence-informed supplement stack, daily schedule, and grounding exercises.">
+<meta property="og:title" content="NeuroReboot — Brain Recovery Protocol">
+<meta property="og:description" content="A structured 90-day protocol for repairing memory, emotional stability, and energy after neurological disruption.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://github.com/muranja/brain-recovery">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://github.com/muranja/brain-recovery">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:1rem;background:var(--primary-dark);color:white;padding:0.5rem 1rem;border-radius:0 0 6px 6px;z-index:100;font-size:0.875rem;">Skip to main content</a>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="NeuroReboot home">NeuroReboot</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="nutrients.html">Nutrients</a>
+      <a href="phases.html">Phases</a>
+      <a href="exercises.html">Exercises</a>
+      <a href="tracker.html">Tracker</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="hero">
+    <span class="hero-badge">Post-Cholinergic Recovery Framework</span>
+    <h1>Rebuild your mind, one day at a time.</h1>
+    <p>A structured 90-day protocol for repairing memory, emotional stability, and energy after neurological disruption.</p>
+    <a href="schedule.html" class="btn btn-white" style="margin-right:0.5rem;">Start Today</a>
+    <a href="phases.html" class="btn btn-outline-light">View Roadmap</a>
+  </div>
+
+  <div class="container">
+
+    <section aria-labelledby="core-systems-heading">
+      <h2 id="core-systems-heading" class="section-title">Core Systems</h2>
+      <p class="section-subtitle">Three repair targets that form the foundation of recovery.</p>
+      <div class="card-grid">
+        <article class="card">
+          <div aria-hidden="true" style="font-size:1.75rem;margin-bottom:0.75rem;">&#x1f9e0;</div>
+          <h3 class="card-title">Cholinergic</h3>
+          <p class="card-text">Memory, learning, attention. Repaired with Alpha-GPC, Lecithin, and Omega-3 DHA.</p>
+        </article>
+        <article class="card">
+          <div aria-hidden="true" style="font-size:1.75rem;margin-bottom:0.75rem;">&#x1f9a0;</div>
+          <h3 class="card-title">GABAergic</h3>
+          <p class="card-text">Calm, sleep, anti-anxiety. Supported by Magnesium Threonate and Ashwagandha.</p>
+        </article>
+        <article class="card">
+          <div aria-hidden="true" style="font-size:1.75rem;margin-bottom:0.75rem;">&#x26a1;</div>
+          <h3 class="card-title">Mitochondrial</h3>
+          <p class="card-text">Energy, mental stamina. Fueled by CoQ10, Creatine, and B-Complex.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="daily-min-heading">
+      <h2 id="daily-min-heading" class="section-title">Daily Minimum</h2>
+      <p class="section-subtitle">The essentials for your first 7 days.</p>
+      <div class="card">
+        <ul class="checklist" id="daily-minimum" aria-label="Daily minimum checklist">
+          <li><input type="checkbox" id="min-1"><label for="min-1">10 mins sunlight immediately after waking</label></li>
+          <li><input type="checkbox" id="min-2"><label for="min-2">500ml water + pinch of salt</label></li>
+          <li><input type="checkbox" id="min-3"><label for="min-3">Alpha-GPC 300mg (x2 daily)</label></li>
+          <li><input type="checkbox" id="min-4"><label for="min-4">20 min walk, no phone</label></li>
+          <li><input type="checkbox" id="min-5"><label for="min-5">Magnesium Threonate 200mg before bed</label></li>
+          <li><input type="checkbox" id="min-6"><label for="min-6">5-4-3-2-1 grounding when looping starts</label></li>
+        </ul>
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="progress-fill"></div></div>
+        <div class="progress-text" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="grounding-heading">
+      <h2 id="grounding-heading" class="section-title">Grounding Tool</h2>
+      <p class="section-subtitle">Use the 5-4-3-2-1 technique when looping or anxiety spikes.</p>
+      <div class="grounding-tool" aria-label="Interactive 5-4-3-2-1 grounding exercise">
+        <div class="sense-label" id="sense-label">SEE</div>
+        <div class="sense-prompt" id="sense-prompt">Name 5 things you can see</div>
+        <div class="sense-items" role="group" aria-labelledby="sense-label" id="sense-items"></div>
+        <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-primary" id="grounding-next" aria-label="Next sense">Next</button>
+          <button class="btn btn-ghost" id="grounding-reset" aria-label="Restart grounding exercise">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="help-heading">
+      <h2 id="help-heading" class="section-title">When to Seek Help</h2>
+      <p class="section-subtitle">After 3 months on this protocol, if looping or memory gaps persist.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3 class="card-title">Neurofeedback</h3>
+          <p class="card-text">EEG training to normalize brainwave patterns. Effective for chronic anticholinergic states.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">EMDR Therapy</h3>
+          <p class="card-text">Releases the emotional charge of the original experience and resets fear circuits.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Medical Consultation</h3>
+          <p class="card-text">Always consult a qualified practitioner before starting any supplement regimen.</p>
+        </article>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Not medical advice. Consult a healthcare professional before starting any protocol.</p>
+  <p style="margin-top:0.25rem;"><a href="https://github.com/muranja/brain-recovery" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
