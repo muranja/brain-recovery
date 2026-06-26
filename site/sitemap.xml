@@ -353,6 +353,10 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://muranja.github.io/brain-recovery/terms.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://muranja.github.io/brain-recovery/tracker.html</loc>
     <priority>0.8</priority>
   </url>
