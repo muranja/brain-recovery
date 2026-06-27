@@ -143,6 +143,7 @@ body { font-family: 'Space Grotesk', sans-serif; display: flex; flex-direction: 
       if (cycle >= maxCycles) {
         overlay.classList.remove('active');
         resultsOverlay.classList.add('active');
+        try { neuroSound('gong'); } catch(e) {}
         return;
       }
 
@@ -202,7 +203,10 @@ body { font-family: 'Space Grotesk', sans-serif; display: flex; flex-direction: 
     }, 3000);
   }
 
-  btn.addEventListener('click', startBreathing);
+  btn.addEventListener('click', function() {
+    try { neuroSound('beep'); } catch(e) {}
+    startBreathing();
+  });
 
   endBtn.addEventListener('click', function() {
     resultsOverlay.classList.remove('active');

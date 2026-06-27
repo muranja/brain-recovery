@@ -352,6 +352,7 @@ body {
       runPhase();
     } else if (currentPhase === 'exhale') {
       completedCycles++;
+      try { neuroSound('chime'); } catch(e) {}
       if (completedCycles >= totalCycles) {
         finishSession();
       } else {
@@ -384,6 +385,8 @@ body {
     cycleSelect.disabled = false;
     currentPhase = 'idle';
     saveStats();
+    try { neuroNotify('Breathing Complete', 'Your session is finished. Notice how you feel.'); } catch(e) {}
+    try { neuroSound('gong'); } catch(e) {}
   }
 
   function pauseBreathing() {

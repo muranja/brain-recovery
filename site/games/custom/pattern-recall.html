@@ -98,6 +98,7 @@ footer a{color:#4a7c7f}
     </div>
     <div style="text-align:center;margin-bottom:.5rem">
       <button id="start-btn" class="btn btn-primary">Start Game</button>
+      <button id="sound-toggle" class="btn btn-ghost" aria-label="Toggle sound" style="font-size:1.2rem;padding:0.4rem 0.6rem;line-height:1;vertical-align:middle">&#x1f514;</button>
     </div>
     <div id="sequence-info">Press Start to begin</div>
     <div class="pad-grid" id="pad-grid">
@@ -129,6 +130,11 @@ footer a{color:#4a7c7f}
 var STORAGE_KEY = 'pattern-recall';
 var sequence = [], playerIdx = 0, level = 0, longest = 0, highScore = 0;
 var showing = false, active = false;
+
+var soundEnabled = true;
+try { soundEnabled = localStorage.getItem('pattern-sound') !== 'off'; } catch(e) {}
+function playSound(type) { if (soundEnabled && typeof neuroSound === 'function') { try { neuroSound(type); } catch(e) {} } }
+function toggleSound() { soundEnabled = !soundEnabled; try { localStorage.setItem('pattern-sound', soundEnabled ? 'on' : 'off'); } catch(e) {} var btn = document.getElementById('sound-toggle'); if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;'; }
 
 function load() {
   try { var d = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (d) highScore = d.highScore || 0; } catch(e) {}
@@ -168,6 +174,7 @@ function startGame() {
 
 function nextRound() {
   level++;
+  playSound('chime');
   sequence.push(Math.floor(Math.random() * 4));
   playerIdx = 0;
   if (level > longest) { longest = level; if (longest > highScore) { highScore = longest; save(); } }
@@ -204,6 +211,7 @@ function showSequence() {
 function handlePadClick(pad) {
   if (showing || !active) return;
   if (pad !== sequence[playerIdx]) {
+    playSound('beep');
     gameOver();
     return;
   }
@@ -213,6 +221,7 @@ function handlePadClick(pad) {
   setTimeout(function() { el.classList.remove('lit'); }, 200);
   playerIdx++;
   if (playerIdx >= sequence.length) {
+    playSound('success');
     document.getElementById('pad-grid').querySelectorAll('.pad').forEach(function(p) { p.disabled = true; });
     setTimeout(nextRound, 600);
   }
@@ -234,6 +243,9 @@ document.addEventListener('DOMContentLoaded', function() {
   updateDisplay();
   document.getElementById('start-btn').addEventListener('click', startGame);
   document.getElementById('play-again-btn').addEventListener('click', startGame);
+  document.getElementById('sound-toggle').addEventListener('click', toggleSound);
+  var btn = document.getElementById('sound-toggle');
+  if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;';
   document.getElementById('pad-grid').querySelectorAll('.pad').forEach(function(el) {
     el.addEventListener('click', function() {
       handlePadClick(parseInt(this.getAttribute('data-pad')));

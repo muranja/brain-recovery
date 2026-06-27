@@ -453,6 +453,8 @@ input[type="time"] { font-family: inherit; font-size: 1rem; padding: 0.5rem; wid
       }
       guideRemaining = stepDuration * 60;
       playChime();
+      try { neuroSound('chime'); } catch(e) {}
+      try { neuroNotify('Next Step', 'Time for: ' + timeline[guideStepIndex].activity); } catch(e) {}
       showGuideStep(guideStepIndex, timeline);
       if (guideInterval) clearInterval(guideInterval);
       guideInterval = setInterval(function() {
@@ -469,6 +471,8 @@ input[type="time"] { font-family: inherit; font-size: 1rem; padding: 0.5rem; wid
               showGoodnight();
             } else {
               playChime();
+              try { neuroSound('chime'); } catch(e) {}
+              try { neuroNotify('Next Step', 'Time for: ' + timeline[guideStepIndex].activity); } catch(e) {}
               showGuideStep(guideStepIndex, timeline);
               guideNext.textContent = 'Done, Next Step';
               guideNext.onclick = function() {
@@ -511,6 +515,8 @@ input[type="time"] { font-family: inherit; font-size: 1rem; padding: 0.5rem; wid
     };
     playChime();
     setTimeout(playChime, 500);
+    try { neuroSound('gong'); } catch(e) {}
+    try { neuroNotify('Goodnight', 'Your wind-down routine is complete. Sweet dreams.'); } catch(e) {}
   }
 
   generateBtn.addEventListener('click', function() {

@@ -117,6 +117,9 @@
           <button id="btn-full" class="btn btn-primary">Full Body Scan</button>
           <button id="btn-tension" class="btn btn-ghost">Where Do You Feel Tension?</button>
         </div>
+        <div style="display:flex;justify-content:center;margin-top:0.5rem;">
+          <button id="body-sound-toggle" style="background:none;border:none;font-size:1.25rem;cursor:pointer;" aria-label="Toggle notifications">🔔</button>
+        </div>
 
         <div style="margin-top:1rem;">
           <p style="font-size:0.85rem;margin-bottom:0.25rem;">Completion sound:</p>
@@ -322,6 +325,7 @@
           timer = null;
           isRunning = false;
           playSound(selectedSound);
+          try { if (localStorage.getItem('bodyscan-enabled') !== 'false') neuroSound('chime'); } catch(e) {}
           setDone(part);
           prompt.textContent = part.charAt(0).toUpperCase() + part.slice(1) + ' scan complete.';
           try { var S = parseInt(localStorage.getItem('bodyscan-sessions') || '0', 10); localStorage.setItem('bodyscan-sessions', String(S + 1)); localStorage.setItem('bodyscan-lastpart', part); } catch(e) {}
@@ -401,6 +405,7 @@
       isFullScan = false;
       prompt.textContent = 'Full body scan complete. You covered every part of your body.';
       playSound(selectedSound);
+      try { if (localStorage.getItem('bodyscan-enabled') !== 'false') { neuroNotify('Body Scan Complete', 'You have completed a full body scan.'); neuroSound('gong'); } } catch(e) {}
       return;
     }
     var part = allParts[fullScanIndex];
@@ -443,6 +448,15 @@
       try { localStorage.setItem('bodyscan-sound', selectedSound); } catch(e) {}
     });
   });
+
+  var bodySoundToggle = document.getElementById('body-sound-toggle');
+  if (bodySoundToggle) {
+    bodySoundToggle.addEventListener('click', function() {
+      var on = bodySoundToggle.textContent === '🔔';
+      bodySoundToggle.textContent = on ? '🔇' : '🔔';
+      try { localStorage.setItem('bodyscan-enabled', on ? 'false' : 'true'); } catch(e) {}
+    });
+  }
 
   try { var st = document.getElementById('body-scan-status'); if (st) { var ts = parseInt(localStorage.getItem('bodyscan-sessions') || '0', 10); var lv = localStorage.getItem('bodyscan-last-visit'); var sp = []; if (ts > 0) sp.push('Completed ' + ts + ' body scan' + (ts !== 1 ? 's' : '')); if (lv) sp.push('Last visit: ' + lv); if (sp.length) st.textContent = sp.join(' \u00b7 '); } } catch(e) {}
   try { localStorage.setItem('bodyscan-last-visit', new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })); } catch(e) {}

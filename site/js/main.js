@@ -229,3 +229,95 @@ document.addEventListener('DOMContentLoaded', function() {
   gc.src = '//gc.zgo.at/count.js';
   document.head.appendChild(gc);
 });
+
+// Global notification utility — request permission on first call
+var neuroNotify = (function() {
+  var permitted = null;
+  return function(title, body) {
+    if (permitted === false) return;
+    if (!('Notification' in window)) return;
+    if (permitted === null) {
+      if (Notification.permission === 'granted') permitted = true;
+      else if (Notification.permission === 'denied') { permitted = false; return; }
+      else {
+        Notification.requestPermission().then(function(p) {
+          permitted = p === 'granted';
+          if (permitted) new Notification(title, { body: body, icon: 'https://muranja.github.io/brain-recovery/og-image.png' });
+        });
+        return;
+      }
+    }
+    try { new Notification(title, { body: body, icon: 'https://muranja.github.io/brain-recovery/og-image.png' }); } catch(e) {}
+  };
+})();
+
+// Global sound utility — plays tones via Web Audio API
+var neuroSound = (function() {
+  var ctx = null;
+  function getCtx() {
+    if (!ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (C) ctx = new C();
+    }
+    return ctx;
+  }
+  return function(type) {
+    var c = getCtx();
+    if (!c) return;
+    try {
+      var osc = c.createOscillator();
+      var gain = c.createGain();
+      osc.connect(gain);
+      gain.connect(c.destination);
+      var now = c.currentTime;
+      switch(type) {
+        case 'chime':
+          osc.frequency.setValueAtTime(880, now);
+          osc.frequency.exponentialRampToValueAtTime(1760, now + 0.1);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+          osc.start(now); osc.stop(now + 0.6);
+          break;
+        case 'gong':
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(110, now + 1.5);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 2);
+          osc.type = 'sine';
+          osc.start(now); osc.stop(now + 2);
+          break;
+        case 'beep':
+          osc.frequency.setValueAtTime(660, now);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+          osc.start(now); osc.stop(now + 0.15);
+          break;
+        case 'click':
+          osc.frequency.setValueAtTime(1200, now);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+          osc.start(now); osc.stop(now + 0.06);
+          break;
+        case 'success':
+          osc.frequency.setValueAtTime(523, now);
+          osc.frequency.setValueAtTime(659, now + 0.1);
+          osc.frequency.setValueAtTime(784, now + 0.2);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+          osc.start(now); osc.stop(now + 0.5);
+          break;
+        case 'tick':
+          osc.frequency.setValueAtTime(600, now);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+          osc.start(now); osc.stop(now + 0.04);
+          break;
+        default:
+          osc.frequency.setValueAtTime(440, now);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+          osc.start(now); osc.stop(now + 0.2);
+      }
+    } catch(e) {}
+  };
+})();

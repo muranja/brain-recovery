@@ -96,6 +96,7 @@ footer a{color:#4a7c7f}
     <p id="stroop-stats" style="font-size:0.85rem;color:#78716c;margin-bottom:0.5rem;text-align:center;"></p>
     <div style="text-align:center;margin-bottom:1rem">
       <button id="start-btn" class="btn btn-primary">Start Game</button>
+      <button id="sound-toggle" class="btn btn-ghost" aria-label="Toggle sound" style="font-size:1.2rem;padding:0.4rem 0.6rem;line-height:1;vertical-align:middle">&#x1f514;</button>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
     <div class="stroop-word">
@@ -132,6 +133,11 @@ var COLOR_VALS = {Red:'#dc2626',Blue:'#2563eb',Green:'#16a34a',Yellow:'#ca8a04',
 var colorNames = COLORS;
 var round = 0, totalRounds = 30, correct = 0, responseTimes = [];
 var active = false, startTime = 0, currentTrial = null;
+
+var soundEnabled = true;
+try { soundEnabled = localStorage.getItem('stroop-sound') !== 'off'; } catch(e) {}
+function playSound(type) { if (soundEnabled && typeof neuroSound === 'function') { try { neuroSound(type); } catch(e) {} } }
+function toggleSound() { soundEnabled = !soundEnabled; try { localStorage.setItem('stroop-sound', soundEnabled ? 'on' : 'off'); } catch(e) {} var btn = document.getElementById('sound-toggle'); if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;'; }
 
 function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('stroop-' + k)); localStorage.setItem('stroop-' + k, JSON.stringify(v)); } catch(e) {} }
 
@@ -215,7 +221,7 @@ function handleResponse(color) {
   var rt = Date.now() - startTime;
   var t = currentTrial;
   var isCorrect = color === t.ink;
-  if (isCorrect) { correct++; responseTimes.push(rt); }
+  if (isCorrect) { correct++; responseTimes.push(rt); playSound('click'); } else { playSound('beep'); }
   document.getElementById('feedback-line').textContent = isCorrect ? '&#x2713; Correct' : '&#x2717; ' + t.ink;
   document.getElementById('feedback-line').style.color = isCorrect ? '#16a34a' : '#dc2626';
   round++;
@@ -238,6 +244,8 @@ function endGame() {
   document.getElementById('avg-rt').textContent = avg + 'ms';
   document.getElementById('fastest-rt').textContent = fastest + 'ms';
   document.getElementById('correct-count').textContent = correct + '/30';
+  playSound('success');
+  if (typeof neuroNotify === 'function') { try { neuroNotify('Stroop Complete', 'Your results: ' + pct + '% accuracy'); } catch(e) {} }
   document.getElementById('results').style.display = 'block';
   saveStroopStats();
 }
@@ -245,6 +253,9 @@ function endGame() {
 document.addEventListener('DOMContentLoaded', function() {
   renderColorButtons();
   document.getElementById('start-btn').addEventListener('click', startGame);
+  document.getElementById('sound-toggle').addEventListener('click', toggleSound);
+  var btn = document.getElementById('sound-toggle');
+  if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;';
   updateStroopStats();
   ls('last-visit', new Date().toISOString());
 });

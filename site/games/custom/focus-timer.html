@@ -222,6 +222,7 @@ body {
     </div>
 
     <div class="session-count" id="session-count">Focus sessions completed: 0</div>
+    <button id="sound-toggle" style="background:none;border:none;font-size:1.25rem;cursor:pointer;margin-top:0.5rem;" aria-label="Toggle notifications">🔔</button>
   </div>
 
   <div class="science-section">
@@ -385,10 +386,18 @@ body {
         totalDuration = BREAK;
         remaining = BREAK;
       }
+      if (ls('sound') !== false) {
+        try { neuroNotify('Focus Complete', 'Great job! Time for a break.'); } catch(e) {}
+        try { neuroSound('success'); } catch(e) {}
+      }
     } else {
       phase = 'focus';
       totalDuration = FOCUS;
       remaining = FOCUS;
+      if (ls('sound') !== false) {
+        try { neuroNotify('Break Over', 'Time to focus again.'); } catch(e) {}
+        try { neuroSound('beep'); } catch(e) {}
+      }
     }
 
     updateDisplay();
@@ -416,6 +425,16 @@ body {
   pauseBtn.addEventListener('click', pauseTimer);
 
   resetBtn.addEventListener('click', resetTimer);
+
+  var soundToggle = document.getElementById('sound-toggle');
+  if (soundToggle) {
+    if (ls('sound') === false) soundToggle.textContent = '🔇';
+    soundToggle.addEventListener('click', function() {
+      var on = ls('sound') !== false;
+      ls('sound', on ? false : true);
+      soundToggle.textContent = on ? '🔇' : '🔔';
+    });
+  }
 
   updateDisplay();
   updateSessionCount();

@@ -105,6 +105,7 @@ footer a{color:#4a7c7f}
       <select id="n-level"><option>1</option><option selected>2</option><option>3</option><option>4</option></select>
       <button id="start-btn" class="btn btn-primary">Start</button>
       <button id="stop-btn" class="btn btn-ghost" disabled>Stop</button>
+      <button id="sound-toggle" class="btn btn-ghost" aria-label="Toggle sound" style="font-size:1.2rem;padding:0.4rem 0.6rem;line-height:1">&#x1f514;</button>
     </div>
     <div class="stats-row">
       <div class="stat-card"><div class="stat-label">Correct</div><div class="stat-value" id="correct">0</div></div>
@@ -139,6 +140,11 @@ footer a{color:#4a7c7f}
 (function(){
 var grid, nVal, history = [], round = 0, correct = 0, incorrect = 0, streak = 0, active = false, timer = null;
 var letters = ['A','B','C','D','E','F','G','H'];
+
+var soundEnabled = true;
+try { soundEnabled = localStorage.getItem('nback-sound') !== 'off'; } catch(e) {}
+function playSound(type) { if (soundEnabled && typeof neuroSound === 'function') { try { neuroSound(type); } catch(e) {} } }
+function toggleSound() { soundEnabled = !soundEnabled; try { localStorage.setItem('nback-sound', soundEnabled ? 'on' : 'off'); } catch(e) {} var btn = document.getElementById('sound-toggle'); if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;'; }
 
 function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('nback-' + k)); localStorage.setItem('nback-' + k, JSON.stringify(v)); } catch(e) {} }
 
@@ -233,8 +239,8 @@ function handleResponse(type) {
   else isMatch = prev.letter === curr.letter;
 
   var fb = document.getElementById('feedback');
-  if (isMatch) { correct++; streak++; fb.textContent = '&#x2713; Correct'; fb.style.color = '#7fb686'; }
-  else { incorrect++; streak = 0; fb.textContent = '&#x2717; Wrong'; fb.style.color = '#dc2626'; }
+  if (isMatch) { correct++; streak++; fb.textContent = '&#x2713; Correct'; fb.style.color = '#7fb686'; playSound('click'); }
+  else { incorrect++; streak = 0; fb.textContent = '&#x2717; Wrong'; fb.style.color = '#dc2626'; playSound('beep'); }
   updateStats();
 
   setTimeout(function() { if (active) showTrial(); }, 800);
@@ -274,6 +280,9 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('stop-btn').addEventListener('click', stopGame);
   document.getElementById('pos-btn').addEventListener('click', function() { handleResponse('pos'); });
   document.getElementById('sound-btn').addEventListener('click', function() { handleResponse('sound'); });
+  document.getElementById('sound-toggle').addEventListener('click', toggleSound);
+  var btn = document.getElementById('sound-toggle');
+  if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;';
   updateNbackStats();
   ls('last-visit', new Date().toISOString());
 });

@@ -100,6 +100,7 @@ footer a{color:#4a7c7f}
   <div class="container">
     <div style="text-align:center;margin-bottom:1rem">
       <button id="start-btn" class="btn btn-primary">Start Session</button>
+      <button id="sound-toggle" class="btn btn-ghost" aria-label="Toggle sound" style="font-size:1.2rem;padding:0.4rem 0.6rem;line-height:1;vertical-align:middle">&#x1f514;</button>
     </div>
     <div class="prompt-area" id="prompt-area">
       <div class="prompt-category" id="prompt-cat">Ready</div>
@@ -147,6 +148,11 @@ var WORDS = [
   { word: 'Fire', cat: 'Sensations' }, { word: 'Whisper', cat: 'Sensations' }, { word: 'Laughter', cat: 'Emotions' }
 ];
 var currentSession = [], currentIndex = 0, shuffled = [], active = false;
+
+var soundEnabled = true;
+try { soundEnabled = localStorage.getItem('word-assoc-sound') !== 'off'; } catch(e) {}
+function playSound(type) { if (soundEnabled && typeof neuroSound === 'function') { try { neuroSound(type); } catch(e) {} } }
+function toggleSound() { soundEnabled = !soundEnabled; try { localStorage.setItem('word-assoc-sound', soundEnabled ? 'on' : 'off'); } catch(e) {} var btn = document.getElementById('sound-toggle'); if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;'; }
 
 function loadSessions() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch(e) { return []; }
@@ -198,6 +204,7 @@ function submitAssociation() {
   var response = input.value.trim();
   if (!response) return;
   var item = shuffled[currentIndex];
+  playSound('click');
   currentSession.push({ prompt: item.word, category: item.cat, response: response });
   currentIndex++;
   showPrompt();
@@ -205,6 +212,7 @@ function submitAssociation() {
 
 function endSession() {
   active = false;
+  playSound('gong');
   document.getElementById('input-row').style.display = 'none';
   document.getElementById('results-area').style.display = 'block';
   document.getElementById('prompt-word').textContent = 'Done!';
@@ -229,6 +237,9 @@ function saveSession() {
 document.addEventListener('DOMContentLoaded', function() {
   renderPastSessions();
   document.getElementById('start-btn').addEventListener('click', startSession);
+  document.getElementById('sound-toggle').addEventListener('click', toggleSound);
+  var btn = document.getElementById('sound-toggle');
+  if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;';
   document.getElementById('new-session-btn').addEventListener('click', function() {
     document.getElementById('results-area').style.display = 'none';
     document.getElementById('start-btn').style.display = 'inline-block';

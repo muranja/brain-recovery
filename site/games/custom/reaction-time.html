@@ -96,6 +96,7 @@ footer a{color:#4a7c7f}
     <p id="rt-stats" style="font-size:0.85rem;color:#78716c;margin-bottom:0.5rem;text-align:center;"></p>
     <div style="text-align:center;margin-bottom:1rem">
       <button id="start-btn" class="btn btn-primary">Start Test</button>
+      <button id="sound-toggle" class="btn btn-ghost" aria-label="Toggle sound" style="font-size:1.2rem;padding:0.4rem 0.6rem;line-height:1;vertical-align:middle">&#x1f514;</button>
     </div>
     <div class="reaction-screen waiting" id="screen">
       <div class="rt-text" id="screen-text">Wait for green...</div>
@@ -127,6 +128,12 @@ footer a{color:#4a7c7f}
 var trials = [], currentTrial = -1, maxTrials = 10;
 var phase = 'idle', timeoutId = null, startTime = 0;
 var active = false;
+
+var soundEnabled = true;
+try { soundEnabled = localStorage.getItem('reaction-sound') !== 'off'; } catch(e) {}
+function playSound(type) { if (soundEnabled && typeof neuroSound === 'function') { try { neuroSound(type); } catch(e) {} } }
+function stopSound() { if (typeof neuroSoundStop === 'function') { try { neuroSoundStop(); } catch(e) {} } }
+function toggleSound() { soundEnabled = !soundEnabled; try { localStorage.setItem('reaction-sound', soundEnabled ? 'on' : 'off'); } catch(e) {} var btn = document.getElementById('sound-toggle'); if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;'; }
 
 function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem('rt-' + k)); localStorage.setItem('rt-' + k, JSON.stringify(v)); } catch(e) {} }
 
@@ -186,12 +193,14 @@ function beginTrial() {
   timeoutId = setTimeout(function() {
     if (active) {
       setPhase('ready');
+      playSound('click');
       startTime = Date.now();
     }
   }, delay);
 }
 
 function handleClick() {
+  stopSound();
   if (phase === 'waiting') {
     if (timeoutId) clearTimeout(timeoutId);
     setPhase('hold');
@@ -202,7 +211,7 @@ function handleClick() {
     renderTrials();
     currentTrial++;
     if (currentTrial >= maxTrials) { endTest(); }
-    else { setTimeout(beginTrial, 500); }
+    else { playSound('chime'); setTimeout(beginTrial, 500); }
   }
 }
 
@@ -225,6 +234,8 @@ function endTest() {
   document.getElementById('fastest-rt').textContent = fastest + 'ms';
   document.getElementById('slowest-rt').textContent = slowest + 'ms';
   document.getElementById('std-rt').textContent = std + 'ms';
+  playSound('success');
+  if (typeof neuroNotify === 'function') { try { neuroNotify('Reaction Test Complete', 'Your average time: ' + avg + 'ms'); } catch(e) {} }
   document.getElementById('results').style.display = 'block';
   saveRtStats();
 }
@@ -232,6 +243,9 @@ function endTest() {
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('start-btn').addEventListener('click', startTest);
   document.getElementById('screen').addEventListener('click', handleClick);
+  document.getElementById('sound-toggle').addEventListener('click', toggleSound);
+  var btn = document.getElementById('sound-toggle');
+  if (btn) btn.innerHTML = soundEnabled ? '&#x1f514;' : '&#x1f507;';
   updateRtStats();
   ls('last-visit', new Date().toISOString());
 });
